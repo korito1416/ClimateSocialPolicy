@@ -113,9 +113,6 @@ websockets==10.3
 # xppy==0.7.0
 zipp==3.8.0
 sphinx_material
-sphinx.ext.mathjax
-sphinx.ext.autodoc
-sphinx.ext.napoleon
+sphinx
 sphinxcontrib.bibtex
-sphinx.ext.intersphinx
 sphinx_togglebutton
