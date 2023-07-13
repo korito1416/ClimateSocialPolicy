@@ -31,10 +31,10 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
    :caption: Contents:
 
 
-   .. sec1_Introduction
-   .. sec2_UncertainClimateDynamics
-   .. sec3_UncertainDamage
-   .. sec4_IllustrativeEconI
+   sec1_introduction
+   sec2_uncertainty
+   sec3_climatedynamics
+   sec4_damagedynamics
    .. sec5_IllustrativeEconII
    .. sec6_IllustrativeEconIII
    .. sec7_IllustrativeEconIV
