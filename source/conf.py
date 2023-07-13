@@ -40,7 +40,7 @@ html_theme_options = {
     'nav_title': 'UncertaintySocialPolicy',
     'color_primary': 'blue-grey',
     'color_accent': 'indigo',
-    'repo_url': 'https://github.com/binchengecon/TwoCapital_Shrink',
+    'repo_url': 'https://https://github.com/binchengecon/ClimateSocialPolicy',
     'repo_name': 'Uncertainty Social Policy',
     'repo_type': 'github',
     'globaltoc_depth': 3,
