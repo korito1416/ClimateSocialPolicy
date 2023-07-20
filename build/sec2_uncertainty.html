@@ -52,10 +52,8 @@
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -243,6 +241,8 @@
         <li class="md-nav__item"><a href="#sec2-uncertainty--page-root" class="md-nav__link">2 Confronting Uncertainty</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#brownian-motion" class="md-nav__link">2.1: Brownian Motion</a>
+        </li>
+        <li class="md-nav__item"><a href="#jump-misspecification" class="md-nav__link">2.2: Jump misspecification</a>
         </li></ul>
             </nav>
         </li>
@@ -253,6 +253,13 @@
     
     
       <a href="#brownian-motion" class="md-nav__link">2.1: Brownian Motion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#jump-misspecification" class="md-nav__link">2.2: Jump misspecification</a>
       
     
     </li></ul>
@@ -282,6 +289,20 @@
     <li class="md-nav__item">
     
     
+      <a href="sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Appendix.html" class="md-nav__link">Appendix A. Computation Method</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
       <a href="bib_file.html" class="md-nav__link">References</a>
       
     
@@ -303,6 +324,8 @@
         <li class="md-nav__item"><a href="#sec2-uncertainty--page-root" class="md-nav__link">2 Confronting Uncertainty</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#brownian-motion" class="md-nav__link">2.1: Brownian Motion</a>
+        </li>
+        <li class="md-nav__item"><a href="#jump-misspecification" class="md-nav__link">2.2: Jump misspecification</a>
         </li></ul>
             </nav>
         </li>
@@ -329,6 +352,57 @@ follows:</p>
 <p>where the first component consists of the technology shocks, the second
 component consists of the R&amp;D shocks and the third component contains
 the climate change shocks.</p>
+</section>
+<section id="jump-misspecification">
+<h2 id="jump-misspecification">2.2: Jump misspecification<a class="headerlink" href="#jump-misspecification" title="Permalink to this heading">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\({\mathfrak I}\)</span> denote a state dependent jump intensity and
+let <span class="math notranslate nohighlight">\(\pi(\ell \mid x )\)</span>,
+<span class="math notranslate nohighlight">\(\ell =1,2,…,L`\)</span> give the jump distribution conditioned on
+a jump when <span class="math notranslate nohighlight">\(X_t = x\)</span>. While our application will have multiple
+jumps, for pedagogical simplicity, we suppose that there is a single
+jump that shifts a value function from <span class="math notranslate nohighlight">\({\widehat V}(x)\)</span> to
+<span class="math notranslate nohighlight">\({\widetilde V}[\tilde x(\ell), \ell ]\)</span> with baseline
+probability <span class="math notranslate nohighlight">\(\pi(\ell \mid x)\)</span> for <span class="math notranslate nohighlight">\(\ell=0,1,...L\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\sum_{\ell = 0}^L \pi(\ell \mid  x) = 1.
+\end{equation}\]</div>
+<p>Following a jump, <span class="math notranslate nohighlight">\(x\)</span> changes as does the value function. For
+each choice of <span class="math notranslate nohighlight">\(\ell\)</span>, <span class="math notranslate nohighlight">\(x\)</span> jumps to the
+<span class="math notranslate nohighlight">\({\tilde x}(\ell)\)</span> where <span class="math notranslate nohighlight">\(\ell\)</span> is uncertain prior to the
+jump.
+| The jump process contributes the following term to the drift of
+<span class="math notranslate nohighlight">\({\widehat V} (X)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+{\mathfrak I}(x) \sum_{\ell=0}^L  \left[ {\widetilde  V} [\tilde x(\ell),\ell] - {\widehat V} (x) \right] \pi(\ell \mid x)  .
+\end{equation}\]</div>
+<p>To capture potential misspecification, we introduce a nonnegative
+function <span class="math notranslate nohighlight">\(f\)</span> where the altered jump distribution is:</p>
+<div class="math notranslate nohighlight">
+\[\frac {f( \ell  \mid x) \pi(\ell, x) }{ {\bar f}( x) },\]</div>
+<p>and intensity <span class="math notranslate nohighlight">\(\mathfrak I(x) {\bar f}( x )\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[{\bar f}( x ) = \sum_{{m} = 0}^M  f ( \ell  \mid x ) \pi({\ell} \mid x)\]</div>
+<p>To restrain the exploration of potential misspecification, we introduce
+a convex cost:</p>
+<div class="math notranslate nohighlight">
+\[\xi_r {\mathfrak I}(x) \sum_{\ell = 0}^L \left[ 1 - f( \ell \mid x )  + f( \ell  \mid x )  \log f( \ell  \mid x )\right]   \pi(\ell \mid x).\]</div>
+<p>The term multiplying <span class="math notranslate nohighlight">\(\xi_r\)</span> is a local (in time) measure of
+relative entropy applicable to jump
+processes[#]_.</p>
+<p>To confront misspecification, we solve:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+\min_{f \ge 0} \hspace{.3cm}  &amp; {\mathfrak I}(x)  \sum_{\ell = 0}^L   \left[ {\widetilde  V} [\tilde x(\ell),\ell] - {\widehat V} (x) \right] f( \ell  \mid x) \pi( \ell \mid x)\cr
+&amp; +  \xi_r {\mathfrak I}(x) \sum_{\ell=0}^L \left[ 1 - f( \ell \mid x )  + f( \ell \mid x )  \log f( \ell \mid x )\right]   \pi(\ell \mid x)
+\end{align*}\]</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>See, for instance,  <span id="id2">Anderson <em>et al.</em> [<a class="reference internal" href="bib_file.html#id59" title="Evan W Anderson, Lars Peter Hansen, and Thomas J Sargent. A quartet of semigroups for model specification, robustness, prices of risk, and model detection. Journal of the European Economic Association, 1(1):68–123, 2003.">3</a>]</span>.</p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -379,7 +453,7 @@ the climate change shocks.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

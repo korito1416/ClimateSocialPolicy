@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Appendix A. Computation Method &#8212; ClimateSocialPolicy 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="bib_file.html" />
+    <link rel="prev" title="6 Complete Model and HJB" href="sec6_completemodel.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=indigo>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#Appendix" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="ClimateSocialPolicy 0.0.1 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">&#xe55d</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">UncertaintySocialPolicy</span>
+          <span class="md-header-nav__topic"> Appendix A. Computation Method </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">ClimateSocialPolicy 0.0.1 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="ClimateSocialPolicy 0.0.1 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">&#xe55d</i>
+      
+    </a>
+    <a href="index.html"
+       title="ClimateSocialPolicy 0.0.1 documentation">UncertaintySocialPolicy</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Contents:</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec1_introduction.html" class="md-nav__link">1 Introduction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec2_uncertainty.html" class="md-nav__link">2 Confronting Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_climatedynamics.html" class="md-nav__link">3 Climate dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec4_damagedynamics.html" class="md-nav__link">4 Climate Damages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec5_illustrativeeconomy.html" class="md-nav__link">5 Economic Framework</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Appendix A. Computation Method </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Appendix A. Computation Method</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#appendix--page-root" class="md-nav__link">Appendix A. Computation Method</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-1-upwind-scheme" class="md-nav__link">Appendix A.1 Upwind Scheme</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-1-1-discretized-state-space" class="md-nav__link">Appendix A.1.1 Discretized State Space</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-1-2-control-and-approximation-to-value-function" class="md-nav__link">Appendix A.1.2 Control and Approximation to Value Function</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" class="md-nav__link">Appendix A.1.3 Viscosity in False Transient Algorithm</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-1-4-intuition" class="md-nav__link">Appendix A.1.4 Intuition</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-1-upwind-scheme" class="md-nav__link">Appendix A.1 Upwind Scheme</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-1-1-discretized-state-space" class="md-nav__link">Appendix A.1.1 Discretized State Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-1-2-control-and-approximation-to-value-function" class="md-nav__link">Appendix A.1.2 Control and Approximation to Value Function</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" class="md-nav__link">Appendix A.1.3 Viscosity in False Transient Algorithm</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-1-4-intuition" class="md-nav__link">Appendix A.1.4 Intuition</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="bib_file.html" class="md-nav__link">References</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#appendix--page-root" class="md-nav__link">Appendix A. Computation Method</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-1-upwind-scheme" class="md-nav__link">Appendix A.1 Upwind Scheme</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-1-1-discretized-state-space" class="md-nav__link">Appendix A.1.1 Discretized State Space</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-1-2-control-and-approximation-to-value-function" class="md-nav__link">Appendix A.1.2 Control and Approximation to Value Function</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" class="md-nav__link">Appendix A.1.3 Viscosity in False Transient Algorithm</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-1-4-intuition" class="md-nav__link">Appendix A.1.4 Intuition</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="appendix-a-computation-method">
+<h1 id="appendix--page-root">Appendix A. Computation Method<a class="headerlink" href="#appendix--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="appendix-a-1-upwind-scheme">
+<h2 id="appendix-a-1-upwind-scheme">Appendix A.1 Upwind Scheme<a class="headerlink" href="#appendix-a-1-upwind-scheme" title="Permalink to this heading">¶</a></h2>
+<section id="appendix-a-1-1-discretized-state-space">
+<h3 id="appendix-a-1-1-discretized-state-space">Appendix A.1.1 Discretized State Space<a class="headerlink" href="#appendix-a-1-1-discretized-state-space" title="Permalink to this heading">¶</a></h3>
+<p>Suppose we have three controled stochastic process <span class="math notranslate nohighlight">\(x_t, y_t, z_t\)</span>
+as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+d x_t &amp;= \mu^x(x,y,z,\alpha) dt + \sigma^{x}(x,y,z,\alpha) dB^1_t \\
+d y_t &amp;= \mu^y(x,y,z,\alpha) dt + \sigma^{y}(x,y,z,\alpha) dB^2_t \\
+d z_t &amp;= \mu^z(x,y,z,\alpha) dt + \sigma^{z}(x,y,z,\alpha) dB^3_t
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(B^1_t, B^2_t, B^3_t\)</span> are three independent standard
+Brownian process.</p>
+<p>Let’s consider a generalized three-dimensional HJB equation for a
+stationary equilibirum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0= &amp; \max_{\alpha} -\delta v(x,y,z) + u(x,y,z,\alpha)\\
+    &amp; + \mu^x(x,y,z,\alpha) \partial_x v(x,y,z) + \frac{{\sigma^x}(x,y,z,\alpha)^2}{2}\partial_{xx} v(x,y,z) \\
+    &amp;+ \mu^y(x,y,z,\alpha) \partial_y v(x,y,z) + \frac{{\sigma^y}(x,y,z,\alpha)^2}{2}\partial_{yy} v(x,y,z) \\
+    &amp; + \mu^z(x,y,z,\alpha) \partial_z v(x,y,z) + \frac{{\sigma^z}(x,y,z,\alpha)^2}{2}\partial_{zz} v(x,y,z)
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the set of controls in the HJB equation,
+<span class="math notranslate nohighlight">\(x,y,z\)</span> are the state variables of value function <span class="math notranslate nohighlight">\(v\)</span> and
+<span class="math notranslate nohighlight">\(u\)</span> is the utility function.</p>
+<p>Accordingly, we construct equispaced grids for these three state
+variable <span class="math notranslate nohighlight">\(x,y,z\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+X &amp;= \{x_1,\ldots,x_N\} \\
+Y &amp;= \{y_1,\ldots,y_N\} \\
+Z &amp;= \{z_1,\ldots,z_N\}
+\end{aligned}\end{split}\]</div>
+<p>where we set the upper and lower bound as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+x_1 &amp;= \underline{X}, x_N=\bar{X} \\
+y_1 &amp;= \underline{Y}, y_N=\bar{Y} \\
+z_1 &amp;= \underline{Z}, z_N=\bar{Z} \\
+\end{aligned}\end{split}\]</div>
+<p>and the distance between two grid points are as
+<span class="math notranslate nohighlight">\(\Delta x, \Delta y, \Delta z\)</span></p>
+</section>
+<section id="appendix-a-1-2-control-and-approximation-to-value-function">
+<h3 id="appendix-a-1-2-control-and-approximation-to-value-function">Appendix A.1.2 Control and Approximation to Value Function<a class="headerlink" href="#appendix-a-1-2-control-and-approximation-to-value-function" title="Permalink to this heading">¶</a></h3>
+<p>Now that we have discretized the state space, we can approximate value
+function on grid points and use short-hand notation
+<span class="math notranslate nohighlight">\(v(x_i,y_j,z_k) \doteq v_{i,j,k}\)</span> and so on.</p>
+<p>The partial derivatives <span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> can be approximated
+with either a forward or backward difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\partial_{x,F} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k}-v_{i,j,k}}{\Delta x} \\
+\partial_{x,B} v_{i,j,k} &amp;=  \frac{v_{i,j,k}-v_{i-1,j,k}}{\Delta x}
+\end{aligned}\end{split}\]</div>
+<p>For accuracy, we decide to approximate the partial derivatives
+<span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> via central difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_{x,C} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} - v_{i-1,j,k}}{2\Delta x}
+\end{aligned}\]</div>
+<p>which can be viewed as an average of forward and backward difference
+approximation.</p>
+<p>And we also approximate the second-order partial derivatives
+<span class="math notranslate nohighlight">\(\partial_{xx} v(x,y,z)\)</span> with a central difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_{xx} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} + v_{i-1,j,k}- 2v_{i,j,k}}{\Delta x^2}
+\end{aligned}\]</div>
+<p>Suppose we have a initial guess for value function, we can employ the
+first-order-condition to express our control <span class="math notranslate nohighlight">\(\alpha\)</span> on a grid
+point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear function of value function
+approximations $:raw-latex:<cite>partial</cite><em>{x,C} v</em>{i,j,k},
+<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\partial`</span></a><em>{xx} v</em>{i,j,k} $.</p>
+<p>In other words, we write our control, drift and diffusion term as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\alpha(x_i,y_j,z_k) &amp;= \alpha_{i,j,k} \\
+u(x_i,y_j,z_k,\alpha_{i,j,k}) &amp;= u_{i,j,k} \\
+\mu^w(x_i,y_j,z_k,\alpha_{i,j,k}) &amp;= \mu^w_{i,j,k}, \quad w=x,y,z\\
+\sigma^w(x_i,y_j,z_k,\alpha_{i,j,k}) &amp;= \sigma^w_{i,j,k}, \quad w=x,y,z\\
+\end{aligned}\end{split}\]</div>
+</section>
+<section id="appendix-a-1-3-viscosity-in-false-transient-algorithm">
+<h3 id="appendix-a-1-3-viscosity-in-false-transient-algorithm">Appendix A.1.3 Viscosity in False Transient Algorithm<a class="headerlink" href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" title="Permalink to this heading">¶</a></h3>
+<p>To improve the stability of our algorithm, we add an extra term
+<span class="math notranslate nohighlight">\(\partial_t v(x,y,z)\)</span> in our HJB equation, which can be
+approximated as</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_t v(x,y,z) = \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}
+\end{aligned}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta t\)</span> is the time step.</p>
+<p>Suppose we start with a initial guess <span class="math notranslate nohighlight">\(v^{0}_{i,j,k}\)</span> and then
+update <span class="math notranslate nohighlight">\(v^{n}_{i,j,k}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t} = &amp;  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n}\\
+    &amp; + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
+    &amp; + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
+    &amp; + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
+\end{aligned}\end{split}\]</div>
+<p>which can be written in matrix notation as</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\frac{1}{\Delta t} (v^{n+1}-v^{n}) + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
+\end{aligned}\]</div>
+<p>This system can in turn be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+B^{n} v^{n+1} = b^{n}
+\end{aligned}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+B^{n} &amp;= \left(\frac{1}{\Delta t} + \delta\right) I - A^{n} \\
+b^n &amp;= u^n + \frac{1}{\Delta t} v^{n}
+\end{aligned}\end{split}\]</div>
+</section>
+<section id="appendix-a-1-4-intuition">
+<h3 id="appendix-a-1-4-intuition">Appendix A.1.4 Intuition<a class="headerlink" href="#appendix-a-1-4-intuition" title="Permalink to this heading">¶</a></h3>
+<p>Finally, it’s instructive to consider the case with an infinitely large
+time step <span class="math notranslate nohighlight">\(\Delta t\)</span>, which leads to a vanishing
+<span class="math notranslate nohighlight">\(\frac{1}{\Delta t}\)</span>. In other words, the aforementioned system
+can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+ \delta v^{n+1} = u^{n} + A^{n} v^{n+1}.
+\end{aligned}\]</div>
+<p>which is immediately another way of writing our HJB equation in matrix
+form. In particula, <span class="math notranslate nohighlight">\(A^n\)</span> encodes the evolution of the stochastic
+process <span class="math notranslate nohighlight">\(x_t,y_t,z_t\)</span>.</p>
+</section>
+</section>
+<section id="appendix-a-2-cobweb-relaxation">
+<h2 id="appendix-a-2-cobweb-relaxation">Appendix A.2 Cobweb Relaxation<a class="headerlink" href="#appendix-a-2-cobweb-relaxation" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="sec6_completemodel.html" title="6 Complete Model and HJB"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> 6 Complete Model and HJB </span>
+              </div>
+            </a>
+          
+          
+            <a href="bib_file.html" title="References"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> References </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Bin Cheng.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>
