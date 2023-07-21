@@ -9,7 +9,9 @@ Controls:
 -  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
 -  :math:`h_k` is the distortion to capital accumulation.
 
-State: - :math:`k` is a realization of :math:`\log K`.
+State: 
+
+- :math:`k` is a realization of :math:`\log K`.
 
 We have HJB for post technology jump as follows
 
