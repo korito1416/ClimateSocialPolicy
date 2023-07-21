@@ -103,7 +103,7 @@ Suppose we have a initial guess for value function, we can employ the
 first-order-condition to express our control :math:`\alpha` on a grid
 point :math:`x_i, y_j, z_k` as a nonlinear function of value function
 approximations :math:`\partial_{x,C} v_{i,j,k}`,
-:math:`\partial_{xx} v_{i,j,k}`.
+$:raw-latex:`\partial`\ *{xx} v*\ {i,j,k} $.
 
 In other words, we write our control, drift and diffusion term as
 
@@ -168,6 +168,17 @@ where
    b^n &= u^n + \frac{1}{\Delta t} v^{n}
    \end{aligned}
 
+Now, to decide when to stop, we hope to see the difference between two
+subsequent iterations very tiny, meaning we have obtained a convergent
+solution to the equation. In other words, we wish to see
+
+.. math::
+
+
+   |v^{n+1}-v^{n}| < \epsilon
+
+where :math:`\epsilon` is set to be :math:`10^{-7}`.
+
 Appendix A.1.4 Intuition
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -188,5 +199,141 @@ process :math:`x_t,y_t,z_t`.
 
 Appendix A.2 Cobweb Relaxation
 ------------------------------
+
+Appendix A.2.1 A Deep Look into First Order Condition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are HJB equations with simple control dynamics. For example, this
+HJB equation, describing heterogenous agents model in
+Aiyagari-Bewley-Huggett Economy,
+
+.. math::
+
+
+   \rho v(a, z)=\max _c u(c)+\partial_a v(a, z)(z+r a-c)+\mu(z) \partial_z v(a, z)+\frac{\sigma^2(z)}{2} \partial_{z z} v(a, z)
+
+has a very straight-forward optimal consumption choice as
+
+.. math::
+
+
+   c^* = u^{\prime-1}\left(\partial_a v(a, z)\right)
+
+However, our HJB equations doesn’t contain such simple dynamics. To
+solve a very complex system, we resort to a special algorithm called
+Cobweb algorithm. As it will show, the key idea is to reduce the
+non-linearity of the first order condition by progressively solving it
+in multiple steps.
+
+Appendix A.2.2 Progressive Algorithm against Strong Non-linearity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We take the HJB equation for post technology jump as an example.
+
+.. math::
+
+   \begin{aligned}
+   0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
+   & +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\xi_k \frac{\left|h_k\right|^2}{2}
+   \end{aligned}
+
+First order condition for :math:`i_k` writes
+
+.. math::
+
+
+   \delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa i_k\right)
+
+which is a highly nonlinear equation of :math:`i_k`.
+
+To get around the nonlinearity, the Cobweb algorithm states that we
+define a new term :math:`mu` as
+
+.. math::
+
+
+   m u=\frac{d v}{dk}\left(1-\kappa i_k\right)
+
+Then we solve the equation in multiple steps. Starting with a initial
+guess of :math:`i_k` as :math:`i_k^0`, we update :math:`i_k^n`,
+:math:`n=1,2,\ldots,N` according to
+
+.. math::
+
+
+   mu^{n}= \frac{d v}{dk}\left(1-\kappa i_k^{n+1}\right)
+
+where
+
+.. math::
+
+
+   mu^{n} = \delta\left(\frac{\alpha-i_k^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}
+
+Now, to decide when to stop, we hope to see the difference between two
+subsequent iterations very tiny, meaning we have obtained a convergent
+solution to the equation. In other words, we wish to see
+
+.. math::
+
+
+   |i_k^n-i_k^{n-1}| < \epsilon
+
+where :math:`\epsilon` is set to be :math:`10^{-7}`.
+
+Appendix A.2.3 Further Improvement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While the Cobweb algorithm can alleviate our computational burden of
+dealing with complex first order conditions a lot, there is still much
+room for further improvement on efficiency of our algorithm. For
+example, as we notice that the main purpose is to deliver a convergent
+solution to the value function in the HJB equation, we can alternate the
+Cobweb algorithm in a way that it’s iterating not over control, such as
+:math:`i_k`, but directly over value function.
+
+In other words, we start with initial guess of :math:`v`, :math:`i_k` as
+:math:`v^0`, :math:`i_k^0` and complete a inner iteration over
+:math:`i_k` and an outer iteration over :math:`v`.
+
+In the inner iteration, we take value function :math:`v^n` as given and
+update :math:`i_k^n` to :math:`i_k^{n+1}` according to
+
+.. math::
+
+
+   mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa i_k^{n+1}\right)
+
+where
+
+.. math::
+
+
+   mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}
+
+Once we have updated :math:`i_k^{n+1}`, we can turn to outer iteration
+that updating :math:`v^{n+1}` according to
+
+.. math::
+
+   \begin{aligned}
+   0= &  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
+   & +\frac{d v^{n+1}}{dk}\left[\mu_k+{i_k^{n+1}}-\frac{\kappa}{2} {i_k^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h_k^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\xi_k \frac{\left|{h_k^{n+1}}\right|^2}{2}
+   \end{aligned}
+
+To sum up, this alternated Cobweb algorithm aims at achieving a very
+tiny difference between two subsequent iterations over value function
+:math:`v` more directly,
+
+.. math::
+
+
+   |v^{n+1}-v^{n}| < \epsilon
+
+which improved the efficiency and stability gallantly.
+
+
 
 

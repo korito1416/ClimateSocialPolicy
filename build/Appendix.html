@@ -287,7 +287,15 @@
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
+        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-2-1-a-deep-look-into-first-order-condition" class="md-nav__link">Appendix A.2.1 A Deep Look into First Order Condition</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" class="md-nav__link">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-3-further-improvement" class="md-nav__link">Appendix A.2.3 Further Improvement</a>
+        </li></ul>
+            </nav>
         </li></ul>
             </nav>
         </li>
@@ -333,7 +341,28 @@
     
     
       <a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-1-a-deep-look-into-first-order-condition" class="md-nav__link">Appendix A.2.1 A Deep Look into First Order Condition</a>
       
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" class="md-nav__link">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-3-further-improvement" class="md-nav__link">Appendix A.2.3 Further Improvement</a>
+      
+    
+    </li></ul>
     
     </li></ul>
     
@@ -373,7 +402,15 @@
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
+        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-2-1-a-deep-look-into-first-order-condition" class="md-nav__link">Appendix A.2.1 A Deep Look into First Order Condition</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" class="md-nav__link">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-3-further-improvement" class="md-nav__link">Appendix A.2.3 Further Improvement</a>
+        </li></ul>
+            </nav>
         </li></ul>
             </nav>
         </li>
@@ -462,7 +499,7 @@ approximation.</p>
 first-order-condition to express our control <span class="math notranslate nohighlight">\(\alpha\)</span> on a grid
 point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear function of value function
 approximations <span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span>,
-<span class="math notranslate nohighlight">\(\partial_{xx} v_{i,j,k}\)</span>.</p>
+$:raw-latex:<cite>partial</cite><em>{xx} v</em>{i,j,k} $.</p>
 <p>In other words, we write our control, drift and diffusion term as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -507,6 +544,12 @@ B^{n} v^{n+1} = b^{n}
 B^{n} &amp;= \left(\frac{1}{\Delta t} + \delta\right) I - A^{n} \\
 b^n &amp;= u^n + \frac{1}{\Delta t} v^{n}
 \end{aligned}\end{split}\]</div>
+<p>Now, to decide when to stop, we hope to see the difference between two
+subsequent iterations very tiny, meaning we have obtained a convergent
+solution to the equation. In other words, we wish to see</p>
+<div class="math notranslate nohighlight">
+\[|v^{n+1}-v^{n}| &lt; \epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is set to be <span class="math notranslate nohighlight">\(10^{-7}\)</span>.</p>
 </section>
 <section id="appendix-a-1-4-intuition">
 <h3 id="appendix-a-1-4-intuition">Appendix A.1.4 Intuition<a class="headerlink" href="#appendix-a-1-4-intuition" title="Permalink to this heading">¶</a></h3>
@@ -525,6 +568,88 @@ process <span class="math notranslate nohighlight">\(x_t,y_t,z_t\)</span>.</p>
 </section>
 <section id="appendix-a-2-cobweb-relaxation">
 <h2 id="appendix-a-2-cobweb-relaxation">Appendix A.2 Cobweb Relaxation<a class="headerlink" href="#appendix-a-2-cobweb-relaxation" title="Permalink to this heading">¶</a></h2>
+<section id="appendix-a-2-1-a-deep-look-into-first-order-condition">
+<h3 id="appendix-a-2-1-a-deep-look-into-first-order-condition">Appendix A.2.1 A Deep Look into First Order Condition<a class="headerlink" href="#appendix-a-2-1-a-deep-look-into-first-order-condition" title="Permalink to this heading">¶</a></h3>
+<p>There are HJB equations with simple control dynamics. For example, this
+HJB equation, describing heterogenous agents model in
+Aiyagari-Bewley-Huggett Economy,</p>
+<div class="math notranslate nohighlight">
+\[\rho v(a, z)=\max _c u(c)+\partial_a v(a, z)(z+r a-c)+\mu(z) \partial_z v(a, z)+\frac{\sigma^2(z)}{2} \partial_{z z} v(a, z)\]</div>
+<p>has a very straight-forward optimal consumption choice as</p>
+<div class="math notranslate nohighlight">
+\[c^* = u^{\prime-1}\left(\partial_a v(a, z)\right)\]</div>
+<p>However, our HJB equations doesn’t contain such simple dynamics. To
+solve a very complex system, we resort to a special algorithm called
+Cobweb algorithm. As it will show, the key idea is to reduce the
+non-linearity of the first order condition by progressively solving it
+in multiple steps.</p>
+</section>
+<section id="appendix-a-2-2-progressive-algorithm-against-strong-non-linearity">
+<h3 id="appendix-a-2-2-progressive-algorithm-against-strong-non-linearity">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity<a class="headerlink" href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" title="Permalink to this heading">¶</a></h3>
+<p>We take the HJB equation for post technology jump as an example.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0= &amp; \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
+&amp; +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+&amp; +\xi_k \frac{\left|h_k\right|^2}{2}
+\end{aligned}\end{split}\]</div>
+<p>First order condition for <span class="math notranslate nohighlight">\(i_k\)</span> writes</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa i_k\right)\]</div>
+<p>which is a highly nonlinear equation of <span class="math notranslate nohighlight">\(i_k\)</span>.</p>
+<p>To get around the nonlinearity, the Cobweb algorithm states that we
+define a new term <span class="math notranslate nohighlight">\(mu\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[m u=\frac{d v}{dk}\left(1-\kappa i_k\right)\]</div>
+<p>Then we solve the equation in multiple steps. Starting with a initial
+guess of <span class="math notranslate nohighlight">\(i_k\)</span> as <span class="math notranslate nohighlight">\(i_k^0\)</span>, we update <span class="math notranslate nohighlight">\(i_k^n\)</span>,
+<span class="math notranslate nohighlight">\(n=1,2,\ldots,N\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[mu^{n}= \frac{d v}{dk}\left(1-\kappa i_k^{n+1}\right)\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[mu^{n} = \delta\left(\frac{\alpha-i_k^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}\]</div>
+<p>Now, to decide when to stop, we hope to see the difference between two
+subsequent iterations very tiny, meaning we have obtained a convergent
+solution to the equation. In other words, we wish to see</p>
+<div class="math notranslate nohighlight">
+\[|i_k^n-i_k^{n-1}| &lt; \epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is set to be <span class="math notranslate nohighlight">\(10^{-7}\)</span>.</p>
+</section>
+<section id="appendix-a-2-3-further-improvement">
+<h3 id="appendix-a-2-3-further-improvement">Appendix A.2.3 Further Improvement<a class="headerlink" href="#appendix-a-2-3-further-improvement" title="Permalink to this heading">¶</a></h3>
+<p>While the Cobweb algorithm can alleviate our computational burden of
+dealing with complex first order conditions a lot, there is still much
+room for further improvement on efficiency of our algorithm. For
+example, as we notice that the main purpose is to deliver a convergent
+solution to the value function in the HJB equation, we can alternate the
+Cobweb algorithm in a way that it’s iterating not over control, such as
+<span class="math notranslate nohighlight">\(i_k\)</span>, but directly over value function.</p>
+<p>In other words, we start with initial guess of <span class="math notranslate nohighlight">\(v\)</span>, <span class="math notranslate nohighlight">\(i_k\)</span> as
+<span class="math notranslate nohighlight">\(v^0\)</span>, <span class="math notranslate nohighlight">\(i_k^0\)</span> and complete a inner iteration over
+<span class="math notranslate nohighlight">\(i_k\)</span> and an outer iteration over <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<p>In the inner iteration, we take value function <span class="math notranslate nohighlight">\(v^n\)</span> as given and
+update <span class="math notranslate nohighlight">\(i_k^n\)</span> to <span class="math notranslate nohighlight">\(i_k^{n+1}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa i_k^{n+1}\right)\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}\]</div>
+<p>Once we have updated <span class="math notranslate nohighlight">\(i_k^{n+1}\)</span>, we can turn to outer iteration
+that updating <span class="math notranslate nohighlight">\(v^{n+1}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0= &amp;  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
+&amp; +\frac{d v^{n+1}}{dk}\left[\mu_k+{i_k^{n+1}}-\frac{\kappa}{2} {i_k^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h_k^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+&amp; +\xi_k \frac{\left|{h_k^{n+1}}\right|^2}{2}
+\end{aligned}\end{split}\]</div>
+<p>To sum up, this alternated Cobweb algorithm aims at achieving a very
+tiny difference between two subsequent iterations over value function
+<span class="math notranslate nohighlight">\(v\)</span> more directly,</p>
+<div class="math notranslate nohighlight">
+\[|v^{n+1}-v^{n}| &lt; \epsilon\]</div>
+<p>which improved the efficiency and stability gallantly.</p>
+</section>
 </section>
 </section>
 

@@ -9,9 +9,9 @@ Controls:
 -  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
 -  :math:`h_k` is the distortion to capital accumulation.
 
-State: 
+State:
 
-- :math:`k` is a realization of :math:`\log K`.
+-  :math:`k` is a realization of :math:`\log K`.
 
 We have HJB for post technology jump as follows
 
@@ -26,30 +26,6 @@ We have HJB for post technology jump as follows
 In case of post damage jump, we call obtained solution as
 :math:`v \doteq \Phi^{\ell,II}`. And in case of pre damage jump, we call
 obtained solution as :math:`v \doteq\Phi^{II}`.
-
-First order condition
-~~~~~~~~~~~~~~~~~~~~~
-
-Let
-
-.. math::
-
-
-   m u \doteq \delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi^{m,II})}
-
-Then first order condition for :math:`i_k` is
-
-.. math::
-
-
-   m u=\frac{d \Phi^{\ell,II}}{dk}\left(1-\kappa i_k\right)
-
-while first order condition for :math:`h_k` is
-
-.. math::
-
-
-   \frac{d \Phi^{m,II}}{dk} \sigma_k=-\xi_k h_k
 
 6.2 Pre technology Jump
 -----------------------
@@ -131,3 +107,5 @@ We attempt to solve a value function of the form
    & +\xi_d I_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+I_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
    & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_j \frac{\left|h_j\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
    \end{aligned}
+
+
