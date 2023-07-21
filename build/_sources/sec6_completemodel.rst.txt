@@ -55,16 +55,21 @@ while first order condition for :math:`h_k` is
 6.2.1 Pre Technology and Post Damage Jump
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Controls: - :math:`i_k` is a potential value for
-:math:`\frac{I_t^k}{K_t}` - :math:`i_j` is a potential value for
-:math:`\frac{I_t^j}{K_t}` - :math:`\mathcal{E}` is a potential value for
-:math:`\mathcal{E}_t` - :math:`h_k` is the distortion to capital
-accumulation. - :math:`h_y` is the distortion to temperature anomaly
-accumulation. - :math:`h_j` is the distortion to R&D accumulation.
+Controls:
 
-State: - :math:`k` is a realization of :math:`\log K`. - :math:`y` is a
-realization of :math:`Y`. - :math:`j` is a realization of
-:math:`\log J`. - :math:`n` is a realization of :math:`\log N`.
+-  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
+-  :math:`i_j` is a potential value for :math:`\frac{I_t^j}{K_t}`
+-  :math:`\mathcal{E}` is a potential value for :math:`\mathcal{E}_t`
+-  :math:`h_k` is the distortion to capital accumulation.
+-  :math:`h_y` is the distortion to temperature anomaly accumulation.
+-  :math:`h_j` is the distortion to R&D accumulation.
+
+State:
+
+-  :math:`k` is a realization of :math:`\log K`.
+-  :math:`y` is a realization of :math:`Y`.
+-  :math:`j` is a realization of :math:`\log J`.
+-  :math:`n` is a realization of :math:`\log N`.
 
 We attempt to solve a value function of the form
 
@@ -89,16 +94,21 @@ We attempt to solve a value function of the form
 6.2.1 Pre Technology and Pre Damage Jump
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Controls: - :math:`i_k` is a potential value for
-:math:`\frac{I_t^k}{K_t}` - :math:`i_j` is a potential value for
-:math:`\frac{I_t^j}{K_t}` - :math:`\mathcal{E}` is a potential value for
-:math:`\mathcal{E}_t` - :math:`h_k` is the distortion to capital
-accumulation. - :math:`h_y` is the distortion to temperature anomaly
-accumulation. - :math:`h_j` is the distortion to R&D accumulation.
+Controls:
 
-State: - :math:`k` is a realization of :math:`\log K`. - :math:`y` is a
-realization of :math:`Y`. - :math:`j` is a realization of
-:math:`\log J`. - :math:`n` is a realization of :math:`\log N`.
+-  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
+-  :math:`i_j` is a potential value for :math:`\frac{I_t^j}{K_t}`
+-  :math:`\mathcal{E}` is a potential value for :math:`\mathcal{E}_t`
+-  :math:`h_k` is the distortion to capital accumulation.
+-  :math:`h_y` is the distortion to temperature anomaly accumulation.
+-  :math:`h_j` is the distortion to R&D accumulation.
+
+State:
+
+-  :math:`k` is a realization of :math:`\log K`.
+-  :math:`y` is a realization of :math:`Y`.
+-  :math:`j` is a realization of :math:`\log J`.
+-  :math:`n` is a realization of :math:`\log N`.
 
 We attempt to solve a value function of the form
 
@@ -107,9 +117,7 @@ We attempt to solve a value function of the form
 
    V(k,y,j,n) =  \frac{\partial V}{\partial n} n + \Phi(k, y, j)
 
-
 .. math::
-
 
    \begin{aligned}
    0 & = \max_{i_k, i_j, \mathcal{E}} \min_{h_k, h_y, h_j}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha K}\right]^{\phi_1}}{\exp (\Phi)} K\right)^{1-\rho}-1\right] \\
