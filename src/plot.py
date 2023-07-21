@@ -185,182 +185,182 @@ def plot_damage(graph_title):
 
 
 
-def plot_simulatedpath_full(graph_type, graph_title, yaxis_label, graph_range, before15, abatement_cost, rho):
+# def plot_simulatedpath_full(graph_type, graph_title, yaxis_label, graph_range, before15, abatement_cost, rho):
     
-    xi_base = 100000.
-    psi_0 = 0.10583
-    psi_1 = 0.5
-    varrho = 1120.0
-    delta=0.01
-    # fig = make_subplots(1, 2)
-    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+#     xi_base = 100000.
+#     psi_0 = 0.10583
+#     psi_1 = 0.5
+#     varrho = 1120.0
+#     delta=0.01
+#     # fig = make_subplots(1, 2)
+#     color = ["#d62728", "darkgreen", "navy", "darkorange"]
 
-    fig = go.Figure()
-    if abatement_cost==0.1:
+#     fig = go.Figure()
+#     if abatement_cost==0.1:
         
-        xi_list_fullaversion = [0.025, 0.050, 100000.]
-        xi_list_uncertaintydecomp = [0.050]
+#         xi_list_fullaversion = [0.025, 0.050, 100000.]
+#         xi_list_uncertaintydecomp = [0.050]
 
-    if abatement_cost == 0.5:
+#     if abatement_cost == 0.5:
 
-        xi_list_fullaversion = [0.075, 0.150, 100000.]
-        xi_list_uncertaintydecomp = [0.150]
+#         xi_list_fullaversion = [0.075, 0.150, 100000.]
+#         xi_list_uncertaintydecomp = [0.150]
 
-    folder = "./data_simul2/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
-        abatement_cost)
-    i=0
-    for xi in xi_list_fullaversion:
-        filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
-            xi_base, xi, xi, xi, xi,xi, psi_0, psi_1, varrho, rho, delta)
+#     folder = "./data_simul2/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+#         abatement_cost)
+#     i=0
+#     for xi in xi_list_fullaversion:
+#         filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+#             xi_base, xi, xi, xi, xi,xi, psi_0, psi_1, varrho, rho, delta)
         
-        with open(folder + filename + "model_tech1_pre_damage_UD_simul_40direct_direct", "rb") as f:
-            model_tech1_pre_damage = pickle.load(f)
-        # print(model_tech1_pre_damage.keys())
-        # print(filename)
-        # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
-        if xi == 100000.:
-            label = "Baseline"
-        if xi == 0.050 or xi==0.150:
-            label = "Less Aversion"
-        if xi == 0.025 or xi==0.075:
-            label = "More Aversion"
-        # print(model_tech1_pre_damage[graph_type])
-        if before15==False:
-            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
-                                    y=model_tech1_pre_damage[graph_type],
-                                    name=label,
-                                    showlegend=True,
-                                    line=dict(color=color[i]),
-                                    #  visible=False
-                                    ))
-        elif before15==True:
-            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1]<1.5],
-                        y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1]<1.5],
-                        name=label,
-                        showlegend=True,
-                        line=dict(color=color[i]),
-                        #  visible=False
-                        ))
-        i=i+1
+#         with open(folder + filename + "model_tech1_pre_damage_UD_simul_40direct_direct", "rb") as f:
+#             model_tech1_pre_damage = pickle.load(f)
+#         # print(model_tech1_pre_damage.keys())
+#         # print(filename)
+#         # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
+#         if xi == 100000.:
+#             label = "Baseline"
+#         if xi == 0.050 or xi==0.150:
+#             label = "Less Aversion"
+#         if xi == 0.025 or xi==0.075:
+#             label = "More Aversion"
+#         # print(model_tech1_pre_damage[graph_type])
+#         if before15==False:
+#             fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+#                                     y=model_tech1_pre_damage[graph_type],
+#                                     name=label,
+#                                     showlegend=True,
+#                                     line=dict(color=color[i]),
+#                                     #  visible=False
+#                                     ))
+#         elif before15==True:
+#             fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1]<1.5],
+#                         y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1]<1.5],
+#                         name=label,
+#                         showlegend=True,
+#                         line=dict(color=color[i]),
+#                         #  visible=False
+#                         ))
+#         i=i+1
 
-    fig.update_xaxes(showgrid=False, showline=True,
-                     title="Years", range=[0, 40])
-    fig.update_yaxes(showgrid=False,
-                     showline=True,
-                     range=graph_range,
-                     title_text=yaxis_label,
-                     tickformat=".2f")
-    # fig.update_yaxes(showgrid=False, showline=True,
-    #                  range=[1., 2.1], col=2, row=1)
-    # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
-    #                  tickformat=".1f",
-    #                  col=2,
-    #                  row=1)
-    # fig.update_layout(height=400, width=1280)
-    fig.update_layout(
-        title=graph_title,
-        barmode="overlay",
-        plot_bgcolor="white",
-        width=800,
-        height=600,
-        margin=dict(l=50, r=0))
+#     fig.update_xaxes(showgrid=False, showline=True,
+#                      title="Years", range=[0, 40])
+#     fig.update_yaxes(showgrid=False,
+#                      showline=True,
+#                      range=graph_range,
+#                      title_text=yaxis_label,
+#                      tickformat=".2f")
+#     # fig.update_yaxes(showgrid=False, showline=True,
+#     #                  range=[1., 2.1], col=2, row=1)
+#     # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
+#     #                  tickformat=".1f",
+#     #                  col=2,
+#     #                  row=1)
+#     # fig.update_layout(height=400, width=1280)
+#     fig.update_layout(
+#         title=graph_title,
+#         barmode="overlay",
+#         plot_bgcolor="white",
+#         width=800,
+#         height=600,
+#         margin=dict(l=50, r=0))
 
-    return fig
+#     return fig
 
 
-def plot_simulatedpath_uncer_decomp(graph_type, graph_title, yaxis_label, graph_range, before15, abatement_cost, rho):
+# def plot_simulatedpath_uncer_decomp(graph_type, graph_title, yaxis_label, graph_range, before15, abatement_cost, rho):
     
-    xi_base = 100000.
-    psi_0 = 0.10583
-    psi_1 = 0.5
-    varrho = 1120.0
-    delta=0.01
-    # fig = make_subplots(1, 2)
-    fig = go.Figure()
+#     xi_base = 100000.
+#     psi_0 = 0.10583
+#     psi_1 = 0.5
+#     varrho = 1120.0
+#     delta=0.01
+#     # fig = make_subplots(1, 2)
+#     fig = go.Figure()
 
-    color = ["#d62728", "darkgreen", "darkorange", "navy"]
+#     color = ["#d62728", "darkgreen", "darkorange", "navy"]
 
 
 
-    folder = "./data_simul2/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
-        abatement_cost)
+#     folder = "./data_simul2/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+#         abatement_cost)
     
-    for xi_num in range(4):
+#     for xi_num in range(4):
 
-        xi_list_uncertaintydecomp = 100000.0 * np.ones((5))
+#         xi_list_uncertaintydecomp = 100000.0 * np.ones((5))
 
-        if abatement_cost==0.1:
+#         if abatement_cost==0.1:
             
-            xi_list_uncertaintydecomp[xi_num] = 0.050
+#             xi_list_uncertaintydecomp[xi_num] = 0.050
 
-            if xi_num==2: 
-                xi_list_uncertaintydecomp[4] = 0.050
-        if abatement_cost == 0.5:
+#             if xi_num==2: 
+#                 xi_list_uncertaintydecomp[4] = 0.050
+#         if abatement_cost == 0.5:
 
-            xi_list_uncertaintydecomp[xi_num] = 0.150
-            if xi_num==2: 
-                xi_list_uncertaintydecomp[4] = 0.150
-        # print(xi_list_uncertaintydecomp)
-        # filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
-        #     xi_base, xi_list_uncertaintydecomp[0], xi_list_uncertaintydecomp[1], xi_list_uncertaintydecomp[2], xi_list_uncertaintydecomp[3],xi_list_uncertaintydecomp[4], psi_0, psi_1, varrho, rho, delta)
-        filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
-            xi_base, xi_list_uncertaintydecomp[3], xi_list_uncertaintydecomp[0], xi_list_uncertaintydecomp[2], xi_list_uncertaintydecomp[1],xi_list_uncertaintydecomp[4], psi_0, psi_1, varrho, rho, delta)
+#             xi_list_uncertaintydecomp[xi_num] = 0.150
+#             if xi_num==2: 
+#                 xi_list_uncertaintydecomp[4] = 0.150
+#         # print(xi_list_uncertaintydecomp)
+#         # filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+#         #     xi_base, xi_list_uncertaintydecomp[0], xi_list_uncertaintydecomp[1], xi_list_uncertaintydecomp[2], xi_list_uncertaintydecomp[3],xi_list_uncertaintydecomp[4], psi_0, psi_1, varrho, rho, delta)
+#         filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+#             xi_base, xi_list_uncertaintydecomp[3], xi_list_uncertaintydecomp[0], xi_list_uncertaintydecomp[2], xi_list_uncertaintydecomp[1],xi_list_uncertaintydecomp[4], psi_0, psi_1, varrho, rho, delta)
         
-        with open(folder + filename + "model_tech1_pre_damage_UD_simul_40direct_direct", "rb") as f:
-            model_tech1_pre_damage = pickle.load(f)
-        # print(model_tech1_pre_damage.keys())
-        # print(filename)
-        # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
-        if xi_num == 0:
-            label = "Climate Uncertainty"
-        if xi_num == 1:
-            label = "Damage Uncertainty"
-        if xi_num == 2:
-            label = "Technology Uncertainty"
-        if xi_num == 3:
-            label = "Producticity Uncertainty"
-        # print(model_tech1_pre_damage[graph_type])
-        if before15==False:
-            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
-                                    y=model_tech1_pre_damage[graph_type],
-                                    name=label,
-                                    showlegend=True,
-                                    line=dict(color=color[xi_num]),
-                                    #  visible=False
-                                    ))
-        elif before15==True:
-            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1]<1.5],
-                        y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1]<1.5],
-                        name=label,
-                        showlegend=True,
-                        line=dict(color=color[xi_num]),
+#         with open(folder + filename + "model_tech1_pre_damage_UD_simul_40direct_direct", "rb") as f:
+#             model_tech1_pre_damage = pickle.load(f)
+#         # print(model_tech1_pre_damage.keys())
+#         # print(filename)
+#         # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
+#         if xi_num == 0:
+#             label = "Climate Uncertainty"
+#         if xi_num == 1:
+#             label = "Damage Uncertainty"
+#         if xi_num == 2:
+#             label = "Technology Uncertainty"
+#         if xi_num == 3:
+#             label = "Producticity Uncertainty"
+#         # print(model_tech1_pre_damage[graph_type])
+#         if before15==False:
+#             fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+#                                     y=model_tech1_pre_damage[graph_type],
+#                                     name=label,
+#                                     showlegend=True,
+#                                     line=dict(color=color[xi_num]),
+#                                     #  visible=False
+#                                     ))
+#         elif before15==True:
+#             fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1]<1.5],
+#                         y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1]<1.5],
+#                         name=label,
+#                         showlegend=True,
+#                         line=dict(color=color[xi_num]),
 
-                        #  visible=False
-                        ))
+#                         #  visible=False
+#                         ))
 
-    fig.update_xaxes(showgrid=False, showline=True,
-                     title="Years", range=[0, 40])
-    fig.update_yaxes(showgrid=False,
-                     showline=True,
-                     range=graph_range,
-                     title_text= yaxis_label,
-                     tickformat=".2f")
-    # fig.update_yaxes(showgrid=False, showline=True,
-    #                  range=[1., 2.1], col=2, row=1)
-    # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
-    #                  tickformat=".1f",
-    #                  col=2,
-    #                  row=1)
-    # fig.update_layout(height=400, width=1280)
-    fig.update_layout(
-        title=graph_title,
-        barmode="overlay",
-        plot_bgcolor="white",
-        width=800,
-        height=600,
-        margin=dict(l=50, r=0))
+#     fig.update_xaxes(showgrid=False, showline=True,
+#                      title="Years", range=[0, 40])
+#     fig.update_yaxes(showgrid=False,
+#                      showline=True,
+#                      range=graph_range,
+#                      title_text= yaxis_label,
+#                      tickformat=".2f")
+#     # fig.update_yaxes(showgrid=False, showline=True,
+#     #                  range=[1., 2.1], col=2, row=1)
+#     # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
+#     #                  tickformat=".1f",
+#     #                  col=2,
+#     #                  row=1)
+#     # fig.update_layout(height=400, width=1280)
+#     fig.update_layout(
+#         title=graph_title,
+#         barmode="overlay",
+#         plot_bgcolor="white",
+#         width=800,
+#         height=600,
+#         margin=dict(l=50, r=0))
 
-    return fig
+#     return fig
 
 
 def plot_intensity(graph_title):

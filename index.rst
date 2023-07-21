@@ -20,7 +20,9 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
    sec4_damagedynamics.rst
    sec5_illustrativeeconomy.rst
    sec6_completemodel.rst
-
+   sec7_uncertinaty_adjust_prob.rst
+   sec8_robust_action.rst
+   sec9_social_valuation.rst
    Appendix.rst
    .. sec1_introduction.ipynb
 
