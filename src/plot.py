@@ -414,11 +414,11 @@ def plot_climatehist(graph_title):
             if abatement_cost ==0.1:
                 
                 xi_list = [0.025, 0.050]
-                cost_label="Low Cost"
+                cost_label="φ₀=0.1"
             if abatement_cost ==0.5:
                 
                 xi_list = [0.075, 0.150]
-                cost_label="High Cost"
+                cost_label="φ₀=0.5"
             xi_label_list = ["More Aversion", "Less Aversion"]
 
             for xi_num in range(len(xi_list)):
@@ -456,11 +456,11 @@ def plot_climatehist(graph_title):
             if abatement_cost ==0.1:
                 
                 xi_list = [0.025, 0.050]
-                cost_label="Low Cost"
+                cost_label="φ₀=0.1"
             if abatement_cost ==0.5:
                 
                 xi_list = [0.075, 0.150]
-                cost_label="High Cost"
+                cost_label="φ₀=0.5"
             xi_label_list = ["More Aversion", "Less Aversion"]
 
             for xi_num in range(len(xi_list)):
@@ -501,11 +501,11 @@ def plot_climatehist(graph_title):
             if abatement_cost ==0.1:
                 
                 xi_list = [0.025, 0.050]
-                cost_label="Low Cost"
+                cost_label="φ₀=0.1"
             if abatement_cost ==0.5:
                 
                 xi_list = [0.075, 0.150]
-                cost_label="High Cost"
+                cost_label="φ₀=0.5"
 
             # Hide all traces
             label = cost_label+r', ρ' +'= {:.2f}'.format(rho)
@@ -614,11 +614,11 @@ def plot_gammahist(graph_title):
             if abatement_cost == 0.1:
 
                 xi_list = [0.025, 0.050]
-                cost_label = "Low Cost"
+                cost_label = "φ₀=0.1"
             if abatement_cost == 0.5:
 
                 xi_list = [0.075, 0.150]
-                cost_label = "High Cost"
+                cost_label = "φ₀=0.5"
             xi_label_list = ["More Aversion", "Less Aversion"]
 
             for xi_num in range(len(xi_list)):
@@ -658,11 +658,11 @@ def plot_gammahist(graph_title):
             if abatement_cost == 0.1:
 
                 xi_list = [0.025, 0.050]
-                cost_label = "Low Cost"
+                cost_label = "φ₀=0.1"
             if abatement_cost == 0.5:
 
                 xi_list = [0.075, 0.150]
-                cost_label = "High Cost"
+                cost_label = "φ₀=0.5"
             xi_label_list = ["More Aversion", "Less Aversion"]
 
             for xi_num in range(len(xi_list)):
@@ -705,11 +705,11 @@ def plot_gammahist(graph_title):
             if abatement_cost == 0.1:
 
                 xi_list = [0.025, 0.050]
-                cost_label = "Low Cost"
+                cost_label = "φ₀=0.1"
             if abatement_cost == 0.5:
 
                 xi_list = [0.075, 0.150]
-                cost_label = "High Cost"
+                cost_label = "φ₀=0.5"
 
             # Hide all traces
             label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
@@ -874,11 +874,11 @@ def plot_simulatedpath_full2(graph_type, graph_title, yaxis_label, graph_range, 
             if abatement_cost == 0.1:
 
                 xi_list = [0.025, 0.050]
-                cost_label = "Low Cost"
+                cost_label = "φ₀=0.1"
             if abatement_cost == 0.5:
 
                 xi_list = [0.075, 0.150]
-                cost_label = "High Cost"
+                cost_label = "φ₀=0.5"
 
             # Hide all traces
             label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
@@ -1036,11 +1036,11 @@ def plot_simulatedpath_uncer_decomp2(graph_type, graph_title, yaxis_label, graph
             if abatement_cost == 0.1:
 
                 xi_list = [0.025, 0.050]
-                cost_label = "Low Cost"
+                cost_label = "φ₀=0.1"
             if abatement_cost == 0.5:
 
                 xi_list = [0.075, 0.150]
-                cost_label = "High Cost"
+                cost_label = "φ₀=0.5"
 
             # Hide all traces
             label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
