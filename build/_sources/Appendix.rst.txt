@@ -102,8 +102,8 @@ And we also approximate the second-order partial derivatives
 Suppose we have a initial guess for value function, we can employ the
 first-order-condition to express our control :math:`\alpha` on a grid
 point :math:`x_i, y_j, z_k` as a nonlinear function of value function
-approximations :math:`\partial_{x,C} v_{i,j,k}`,
-$:raw-latex:`\partial`\ *{xx} v*\ {i,j,k} $.
+approximations :math:`\partial_{x,C} v_{i,j,k}` and
+:math:`\partial_{xx} v_{i,j,k}`.
 
 In other words, we write our control, drift and diffusion term as
 
