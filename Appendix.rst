@@ -298,12 +298,12 @@ In other words, we start with initial guess of :math:`v`, :math:`i_k` as
 :math:`i_k` and an outer iteration over :math:`v`.
 
 In the inner iteration, we take value function :math:`v^n` as given and
-update :math:`i_k^n` to :math:`i_k^{n+1}` according to
+attempt to update :math:`i_k^n` according to
 
 .. math::
 
 
-   mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa i_k^{n+1}\right)
+   mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa {i_k^{n+1}}'\right)
 
 where
 
@@ -311,6 +311,15 @@ where
 
 
    mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}
+
+Here we progressively update :math:`i_k^n` to :math:`i_k^{n+1}` by a
+convex combination of :math:`i_k^n` and :math:`{i_k^{n+1}}'` with a
+relaxation parameter :math:`\chi` as
+
+.. math::
+
+
+   i_k^{n+1}= \chi i_k^n + (1-\chi) {i_k^{n+1}}'.
 
 Once we have updated :math:`i_k^{n+1}`, we can turn to outer iteration
 that updating :math:`v^{n+1}` according to
@@ -334,6 +343,23 @@ tiny difference between two subsequent iterations over value function
 
 which improved the efficiency and stability gallantly.
 
+Appendix A.3 List of Parameters Chosen in Algorithm
+---------------------------------------------------
 
+========================== ======
+Parameter                  Value
+========================== ======
+:math:`\chi`               0.0025
+:math:`\Delta t`           0.0025
+:math:`\underline{\log K}` 4.0
+:math:`\overline{\log K}`  9.0
+:math:`\underline{Y}`      0.0
+:math:`\overline{Y}`       4.0
+:math:`\underline{\log J}` 1.0
+:math:`\overline{\log J}`  6.0
+:math:`\Delta \log K`      0.2
+:math:`\Delta Y`           0.1
+:math:`\Delta \log J`      0.1
+========================== ======
 
 
