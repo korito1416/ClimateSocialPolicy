@@ -37,18 +37,18 @@ resursively according to
       :math:`h_k^n, h_y^n, h_j^n, g^n, f_\ell^n` and solve optimal
       distortion and jump misspecification in two sub-steps.
 
-      1.1. Take value function :math:`\Phi^n` and current distortion and
-      jump misspecification $h_k^n, h_y^n, h_j^n, g^n,
-      f\_:raw-latex:`\ell`^n $ as given, we update optimal actions from
-      :math:`i_k^{n}, i_j^{n}, \mathcal{E}^{n}` to
-      :math:`i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}` in a maximization
-      problem.
+      1. Take value function :math:`\Phi^n` and current distortion and
+         jump misspecification
+         :math:`h_k^n, h_y^n, h_j^n, g^n, f_\ell^n` as given, we update
+         optimal actions from :math:`i_k^{n}, i_j^{n}, \mathcal{E}^{n}`
+         to :math:`i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}` in a
+         maximization problem.
 
-      1.2. With updated robustly optimal actions
-      :math:`i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}` in hand, we update
-      optimal distortion
-      :math:`h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}` by
-      solving a minimization problem.
+      2. With updated robustly optimal actions
+         :math:`i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}` in hand, we
+         update optimal distortion
+         :math:`h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}`
+         by solving a minimization problem.
 
    2. With updated robustly optimal actions and probability distortion,
       we finally can update value function :math:`\Phi^{n+1}` via upwind
@@ -221,8 +221,7 @@ Then, we approximate the second-order partial derivatives
 We can employ the first-order-condition to express our control
 :math:`\alpha` on a grid point :math:`x_i, y_j, z_k` as a nonlinear
 function of value function approximations
-:math:`\partial_{x,C} v_{i,j,k}` and $:raw-latex:`\partial`\ *{xx}
-v*\ {i,j,k} $. Therefore, we use short-hand notations for our control,
+:math:`\partial_{x,C} v_{i,j,k}` and :math:`\partial_{xx} v_{i,j,k}`. Therefore, we use short-hand notations for our control,
 drift and diffusion term as
 
 .. math::

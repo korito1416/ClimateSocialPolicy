@@ -474,28 +474,30 @@ example</p>
 <p>Then, after exchanging the order of max and min operator, we deliver the
 solution, i.e. value function <span class="math notranslate nohighlight">\(\Phi\)</span>, to this HJB equation
 resursively according to</p>
-<ul>
+<ul class="simple">
 <li><p>Start with current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> where
 <span class="math notranslate nohighlight">\(n \{0,1, 2,\ldots\}\)</span> is called iteration step. Specifically,
 <span class="math notranslate nohighlight">\(\Phi^0\)</span> is the initial guess of value function, which can be
 vital to success of algorithm. We solve the HJB equation and update
 value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> to <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> in two steps.</p>
-<ol class="arabic">
+<ol class="arabic simple">
 <li><p>Take current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> as given, let’s start
 with current distortion and jump misspecification
 <span class="math notranslate nohighlight">\(h_k^n, h_y^n, h_j^n, g^n, f_\ell^n\)</span> and solve optimal
 distortion and jump misspecification in two sub-steps.</p>
-<p>1.1. Take value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> and current distortion and
-jump misspecification $h_k^n, h_y^n, h_j^n, g^n,
-f_:raw-latex:<cite>ell`^n $ as given, we update optimal actions from
-:math:`i_k^{n}, i_j^{n}, mathcal{E}^{n}</cite> to
-<span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in a maximization
-problem.</p>
-<p>1.2. With updated robustly optimal actions
-<span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in hand, we update
-optimal distortion
-<span class="math notranslate nohighlight">\(h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}\)</span> by
-solving a minimization problem.</p>
+<ol class="arabic simple">
+<li><p>Take value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> and current distortion and
+jump misspecification
+<span class="math notranslate nohighlight">\(h_k^n, h_y^n, h_j^n, g^n, f_\ell^n\)</span> as given, we update
+optimal actions from <span class="math notranslate nohighlight">\(i_k^{n}, i_j^{n}, \mathcal{E}^{n}\)</span>
+to <span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in a
+maximization problem.</p></li>
+<li><p>With updated robustly optimal actions
+<span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in hand, we
+update optimal distortion
+<span class="math notranslate nohighlight">\(h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}\)</span>
+by solving a minimization problem.</p></li>
+</ol>
 </li>
 <li><p>With updated robustly optimal actions and probability distortion,
 we finally can update value function <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> via upwind
@@ -614,8 +616,7 @@ with either a forward or backward difference approximation</p>
 <p>We can employ the first-order-condition to express our control
 <span class="math notranslate nohighlight">\(\alpha\)</span> on a grid point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear
 function of value function approximations
-<span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span> and $:raw-latex:<cite>partial</cite><em>{xx}
-v</em>{i,j,k} $. Therefore, we use short-hand notations for our control,
+<span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span> and <span class="math notranslate nohighlight">\(\partial_{xx} v_{i,j,k}\)</span>. Therefore, we use short-hand notations for our control,
 drift and diffusion term as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
