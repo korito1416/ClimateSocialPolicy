@@ -27,7 +27,7 @@ solution, i.e. value function :math:`\Phi`, to this HJB equation
 resursively according to
 
 -  Start with current value function :math:`\Phi^n` where
-   :math:`n \{0,1, 2,\ldots\}` is called iteration step. Specifically,
+   :math:`n \in \{0,1, 2,\ldots\}` is called iteration step. Specifically,
    :math:`\Phi^0` is the initial guess of value function, which can be
    vital to success of algorithm. We solve the HJB equation and update
    value function :math:`\Phi^n` to :math:`\Phi^{n+1}` in two steps.
