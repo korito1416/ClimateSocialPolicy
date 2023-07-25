@@ -24,7 +24,8 @@ which satisfies conditions to switch the order of max and min operator.
 
 Then, after exchanging the order of max and min operator, we deliver the
 solution, i.e. value function :math:`\Phi`, to this HJB equation
-resursively according to
+recursively with the false transient approach described in `Appendix A.3.1`.
+The procedure in each iteration is provided below.
 
 -  Start with current value function :math:`\Phi^n` where
    :math:`n \in \{0,1, 2,\ldots\}` is called iteration step.
@@ -36,7 +37,8 @@ resursively according to
    1. Take current value function :math:`\Phi^n` as given, let’s start
       with current distortion and jump misspecification
       :math:`h_k^n, h_y^n, h_j^n, g^n, f_\ell^n` and solve optimal
-      distortion and jump misspecification in two sub-steps.
+      distortion and jump misspecification in two sub-steps, which are detailed
+      in `Appendix A.2`. 
 
       1. Take value function :math:`\Phi^n` and current distortion and
          jump misspecification
@@ -52,8 +54,8 @@ resursively according to
          by solving a minimization problem.
 
    2. With updated robustly optimal actions and probability distortion,
-      we finally can update value function :math:`\Phi^{n+1}` via upwind
-      scheme.
+      we finally can update value function :math:`\Phi^{n+1}` by solving the
+      algebraic system depicted in `Appendix A.3`.
 
 -  We obtain a convergent solution to the HJB equation when the
    difference between two subsequent iterations is very tiny as
@@ -133,7 +135,7 @@ With given value function :math:`\Phi^n`, we can update
 Appendix A.3 Solving the Algebraic System
 -----------------------------------------
 
-Suppose we have three controled stochastic process :math:`x_t, y_t, z_t`
+Suppose we have three controlled stochastic process :math:`x_t, y_t, z_t`
 as
 
 .. math::
@@ -167,8 +169,8 @@ Appendix A.3.1 False Transient Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To mitigate the inherent instability of the non-linear HJB, we add a
-false transcient (time) dimension and solve it until convergence. And
-the new HJB equation is as
+false transient (time) dimension and solve it until convergence. And
+the new HJB equation is
 
 .. math::
 
@@ -181,12 +183,12 @@ the new HJB equation is as
 
 Appendix A.3.2 Finite-Difference Scheme
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In this section, we introduce an upwind finite-difference scheme for discretizing the state variables of the HJB.
 
 Appendix A.3.2.1 Upwind Scheme
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accordingly, we construct equispaced grids for these three state
-variable :math:`x,y,z` as
+We construct equally spaced grids for these three state variables :math:`x,y,z` as
 
 .. math::
 
@@ -199,7 +201,7 @@ variable :math:`x,y,z` as
 where the distance between two grid points are
 :math:`\Delta x, \Delta y, \Delta z`
 
-We now approximate value function on grid points and use short-hand
+We approximate value function on grid points and use short-hand
 notation :math:`v(x_i,y_j,z_k) \doteq v_{i,j,k}` and so on.
 
 The partial derivatives :math:`\partial_x v(x,y,z)` can be approximated
@@ -212,7 +214,7 @@ with either a forward or backward difference approximation
    \partial_{x,B} v_{i,j,k} &=  \frac{v_{i,j,k}-v_{i-1,j,k}}{\Delta x} 
    \end{aligned}
 
-For accuracy, we decide to approximate the partial derivatives
+For accuracy, we approximate the partial derivatives
 :math:`\partial_x v(x,y,z)` via central difference approximation
 
 .. math::
@@ -232,7 +234,7 @@ Then, we approximate the second-order partial derivatives
    \partial_{xx} v_{i,j,k} &=  \frac{v_{i+1,j,k} + v_{i-1,j,k}- 2v_{i,j,k}}{\Delta x^2} 
    \end{aligned}
 
-We can employ the first-order-condition to express our control
+We employ the first-order-condition to express our control
 :math:`\alpha` on a grid point :math:`x_i, y_j, z_k` as a nonlinear
 function of value function approximations
 :math:`\partial_{x,C} v_{i,j,k}` and :math:`\partial_{xx} v_{i,j,k}`. Therefore, we use short-hand notations for our control,
@@ -247,20 +249,9 @@ drift and diffusion term as
    \sigma^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &= \sigma^w_{i,j,k}, \quad w=x,y,z\\
    \end{aligned}
 
-We use upwind scheme and construct backward approximation with negative
+In the upwind scheme, we construct backward approximation with negative
 drift and forward approximation with positive drift.
 
-To sum up, starting with current value function :math:`v^{n}`, we update
-:math:`v^{n+1}` according to
-
-.. math::
-
-   \begin{aligned}
-   0  = &  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} + \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}\\
-       & + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
-       & + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
-       & + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
-   \end{aligned}
 
 A.3.2.2 Natural Boundary Condition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -276,16 +267,39 @@ function to be the same as that of closet inner point.
    \partial_{xx} v^{n+1}_{N,j,k} &=  \partial_{xx} v^{n+1}_{N-1,j,k} = \frac{v^{n+1}_{N,j,k} + v^{n+1}_{N-2,j,k}- 2v^{n+1}_{N-1,j,k}}{\Delta x^2} 
    \end{aligned}
 
-Now the matrix notation of HJB equation can be written as
+
+A.3.2.3 Implicit Euler
+^^^^^^^^^^^^^^^^^^^^^^
+
+To solve the "transient" system, we use the implicit Euler algorithm, which
+updates :math:`v^{n+1}` from current value function :math:`v^{n}` recursively.
+At each time step, we solve the following linear system for
+:math:`v^{n+1}`:
 
 .. math::
 
    \begin{aligned}
-   \frac{1}{\Delta t} (v^{n+1}-v^{n}) + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
+   0  = &  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} + \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}\\
+       & + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
+       & + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
+       & + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
    \end{aligned}
 
-A.3.2.3 Implicit Euler
-^^^^^^^^^^^^^^^^^^^^^^
+This system can be written in the matrix form
+
+.. math::
+
+   \begin{aligned}
+   \frac{(v^{n+1}-v^{n})}{\Delta t}  + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
+   \end{aligned}
+
+where :math:`A^{n}` is a sparse matrix. The linear system thus can be solved by
+an iterative method such as conjugate gradient. For efficiency, we use the PETSc
+linear solver library :cite:t:`petsc` which includes a long list of linear
+solvers and preconditioners. Based on our empirical experiences, the Stablized
+Biconjugate Gradient (BiCGStab) method paired with the incomplete factorization
+(ILU)preconditioner gives the best performance.
+
 
 Appendix A.4 List of Parameters Chosen in Algorithm
 ---------------------------------------------------
