@@ -27,10 +27,11 @@ solution, i.e. value function :math:`\Phi`, to this HJB equation
 resursively according to
 
 -  Start with current value function :math:`\Phi^n` where
-   :math:`n \in \{0,1, 2,\ldots\}` is called iteration step. Specifically,
-   :math:`\Phi^0` is the initial guess of value function, which can be
-   vital to success of algorithm. We solve the HJB equation and update
-   value function :math:`\Phi^n` to :math:`\Phi^{n+1}` in two steps.
+   :math:`n \in \{0,1, 2,\ldots\}` is called iteration step.
+   Specifically, :math:`\Phi^0` is the initial guess of value function,
+   which can be vital to success of algorithm. We solve the HJB equation
+   and update value function :math:`\Phi^n` to :math:`\Phi^{n+1}` in two
+   steps.
 
    1. Take current value function :math:`\Phi^n` as given, let’s start
       with current distortion and jump misspecification
@@ -60,12 +61,12 @@ resursively according to
 .. math::
 
 
-   |v^{n+1}-v^{n}| < \epsilon
+   |\Phi^{n+1}-\Phi^{n}| < \epsilon
 
 where :math:`\epsilon` is set to be :math:`10^{-7}`.
 
-Appendix A.2 Optimzation
-------------------------
+Appendix A.2 Solving the Optimization Problem
+---------------------------------------------
 
 Appendix A.2.1 Maximization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,17 +130,8 @@ With given value function :math:`\Phi^n`, we can update
 
    h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial \Phi^n}{\partial k} \sigma_k 
 
-Appendix A.3 Upwind Scheme
---------------------------
-
-The structure is arranged as follows
-
-1. Discretization and Approximation
-2. False Transient Algorithm and Upwind Scheme
-3. Natural Boundary Condition
-
-Appendix A.3.1 Discretization and Approximation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Appendix A.3 Solving the Algebraic System
+-----------------------------------------
 
 Suppose we have three controled stochastic process :math:`x_t, y_t, z_t`
 as
@@ -170,6 +162,28 @@ equation:
 where :math:`\alpha` is the set of controls in the HJB equation,
 :math:`x,y,z` are the state variables of value function :math:`v` and
 :math:`u` is the utility function.
+
+Appendix A.3.1 False Transient Algorithm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To mitigate the inherent instability of the non-linear HJB, we add a
+false transcient (time) dimension and solve it until convergence. And
+the new HJB equation is as
+
+.. math::
+
+   \begin{aligned}
+   0= & \max_{\alpha} -\delta v(x,y,z, t) + u(x,y,z,\alpha) + \partial_t v(x,y,z,t)\\
+       & + \mu^x(x,y,z,\alpha) \partial_x v(x,y,z, t) + \frac{{\sigma^x}(x,y,z,\alpha)^2}{2}\partial_{xx} v(x,y,z, t) \\
+       &+ \mu^y(x,y,z,\alpha) \partial_y v(x,y,z, t) + \frac{{\sigma^y}(x,y,z,\alpha)^2}{2}\partial_{yy} v(x,y,z, t) \\
+       & + \mu^z(x,y,z,\alpha) \partial_z v(x,y,z, t) + \frac{{\sigma^z}(x,y,z,\alpha)^2}{2}\partial_{zz} v(x,y,z, t)
+   \end{aligned}
+
+Appendix A.3.2 Finite-Difference Scheme
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Appendix A.3.2.1 Upwind Scheme
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Accordingly, we construct equispaced grids for these three state
 variable :math:`x,y,z` as
@@ -233,24 +247,8 @@ drift and diffusion term as
    \sigma^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &= \sigma^w_{i,j,k}, \quad w=x,y,z\\
    \end{aligned}
 
-Appendix A.3.2 False Transient Algorithm and Upwind Scheme
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To improve the stability of our algorithm,
-
-1. we use false transient algorithm and add an extra term
-   :math:`\partial_t v(x,y,z)` in the HJB equation as
-
-.. math::
-
-   \begin{aligned}
-   \partial_t v(x,y,z) = \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}
-   \end{aligned}
-
-where :math:`\Delta t` is the time step.
-
-2. we use upwind scheme and construct backward approximation with
-   negative drift and forward approximation with positive drift.
+We use upwind scheme and construct backward approximation with negative
+drift and forward approximation with positive drift.
 
 To sum up, starting with current value function :math:`v^{n}`, we update
 :math:`v^{n+1}` according to
@@ -264,8 +262,8 @@ To sum up, starting with current value function :math:`v^{n}`, we update
        & + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
    \end{aligned}
 
-Appendix A.3.3 Natural Boundary Condition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+A.3.2.2 Natural Boundary Condition
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We approximate second order derivative at boundaries with natural
 boundary condition. More specifically, suppose state variable :math:`x`
@@ -285,6 +283,9 @@ Now the matrix notation of HJB equation can be written as
    \begin{aligned}
    \frac{1}{\Delta t} (v^{n+1}-v^{n}) + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
    \end{aligned}
+
+A.3.2.3 Implicit Euler
+^^^^^^^^^^^^^^^^^^^^^^
 
 Appendix A.4 List of Parameters Chosen in Algorithm
 ---------------------------------------------------
