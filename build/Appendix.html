@@ -52,8 +52,10 @@
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -303,29 +305,25 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#appendix--page-root" class="md-nav__link">Appendix A. Computation Method</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#appendix-a-1-upwind-scheme" class="md-nav__link">Appendix A.1 Upwind Scheme</a><nav class="md-nav">
+        <li class="md-nav__item"><a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-upwind-scheme" class="md-nav__link">Appendix A.3 Upwind Scheme</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#appendix-a-1-1-discretized-state-space" class="md-nav__link">Appendix A.1.1 Discretized State Space</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-1-discretization-and-approximation" class="md-nav__link">Appendix A.3.1 Discretization and Approximation</a>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-1-2-control-and-approximation-to-value-function" class="md-nav__link">Appendix A.1.2 Control and Approximation to Value Function</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-false-transient-algorithm-and-upwind-scheme" class="md-nav__link">Appendix A.3.2 False Transient Algorithm and Upwind Scheme</a>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" class="md-nav__link">Appendix A.1.3 Viscosity in False Transient Algorithm</a>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-1-4-intuition" class="md-nav__link">Appendix A.1.4 Intuition</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-3-natural-boundary-condition" class="md-nav__link">Appendix A.3.3 Natural Boundary Condition</a>
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a><nav class="md-nav">
-              <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#appendix-a-2-1-a-deep-look-into-first-order-condition" class="md-nav__link">Appendix A.2.1 A Deep Look into First Order Condition</a>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" class="md-nav__link">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity</a>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-3-further-improvement" class="md-nav__link">Appendix A.2.3 Further Improvement</a>
-        </li></ul>
-            </nav>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-3-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.3 List of Parameters Chosen in Algorithm</a>
+        <li class="md-nav__item"><a href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.4 List of Parameters Chosen in Algorithm</a>
         </li></ul>
             </nav>
         </li>
@@ -335,33 +333,54 @@
     <li class="md-nav__item">
     
     
-      <a href="#appendix-a-1-upwind-scheme" class="md-nav__link">Appendix A.1 Upwind Scheme</a>
+      <a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-3-upwind-scheme" class="md-nav__link">Appendix A.3 Upwind Scheme</a>
       <ul class="md-nav__list"> 
     <li class="md-nav__item">
     
     
-      <a href="#appendix-a-1-1-discretized-state-space" class="md-nav__link">Appendix A.1.1 Discretized State Space</a>
+      <a href="#appendix-a-3-1-discretization-and-approximation" class="md-nav__link">Appendix A.3.1 Discretization and Approximation</a>
       
     
     </li>
     <li class="md-nav__item">
     
     
-      <a href="#appendix-a-1-2-control-and-approximation-to-value-function" class="md-nav__link">Appendix A.1.2 Control and Approximation to Value Function</a>
+      <a href="#appendix-a-3-2-false-transient-algorithm-and-upwind-scheme" class="md-nav__link">Appendix A.3.2 False Transient Algorithm and Upwind Scheme</a>
       
     
     </li>
     <li class="md-nav__item">
     
     
-      <a href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" class="md-nav__link">Appendix A.1.3 Viscosity in False Transient Algorithm</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="#appendix-a-1-4-intuition" class="md-nav__link">Appendix A.1.4 Intuition</a>
+      <a href="#appendix-a-3-3-natural-boundary-condition" class="md-nav__link">Appendix A.3.3 Natural Boundary Condition</a>
       
     
     </li></ul>
@@ -370,35 +389,7 @@
     <li class="md-nav__item">
     
     
-      <a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="#appendix-a-2-1-a-deep-look-into-first-order-condition" class="md-nav__link">Appendix A.2.1 A Deep Look into First Order Condition</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" class="md-nav__link">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="#appendix-a-2-3-further-improvement" class="md-nav__link">Appendix A.2.3 Further Improvement</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="#appendix-a-3-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.3 List of Parameters Chosen in Algorithm</a>
+      <a href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.4 List of Parameters Chosen in Algorithm</a>
       
     
     </li></ul>
@@ -427,29 +418,25 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#appendix--page-root" class="md-nav__link">Appendix A. Computation Method</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#appendix-a-1-upwind-scheme" class="md-nav__link">Appendix A.1 Upwind Scheme</a><nav class="md-nav">
+        <li class="md-nav__item"><a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-upwind-scheme" class="md-nav__link">Appendix A.3 Upwind Scheme</a><nav class="md-nav">
               <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#appendix-a-1-1-discretized-state-space" class="md-nav__link">Appendix A.1.1 Discretized State Space</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-1-discretization-and-approximation" class="md-nav__link">Appendix A.3.1 Discretization and Approximation</a>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-1-2-control-and-approximation-to-value-function" class="md-nav__link">Appendix A.1.2 Control and Approximation to Value Function</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-false-transient-algorithm-and-upwind-scheme" class="md-nav__link">Appendix A.3.2 False Transient Algorithm and Upwind Scheme</a>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" class="md-nav__link">Appendix A.1.3 Viscosity in False Transient Algorithm</a>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-1-4-intuition" class="md-nav__link">Appendix A.1.4 Intuition</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-3-natural-boundary-condition" class="md-nav__link">Appendix A.3.3 Natural Boundary Condition</a>
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-cobweb-relaxation" class="md-nav__link">Appendix A.2 Cobweb Relaxation</a><nav class="md-nav">
-              <ul class="md-nav__list">
-        <li class="md-nav__item"><a href="#appendix-a-2-1-a-deep-look-into-first-order-condition" class="md-nav__link">Appendix A.2.1 A Deep Look into First Order Condition</a>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" class="md-nav__link">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity</a>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-3-further-improvement" class="md-nav__link">Appendix A.2.3 Further Improvement</a>
-        </li></ul>
-            </nav>
-        </li>
-        <li class="md-nav__item"><a href="#appendix-a-3-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.3 List of Parameters Chosen in Algorithm</a>
+        <li class="md-nav__item"><a href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.4 List of Parameters Chosen in Algorithm</a>
         </li></ul>
             </nav>
         </li>
@@ -464,10 +451,108 @@
             
   <section id="appendix-a-computation-method">
 <h1 id="appendix--page-root">Appendix A. Computation Method<a class="headerlink" href="#appendix--page-root" title="Permalink to this heading">¶</a></h1>
-<section id="appendix-a-1-upwind-scheme">
-<h2 id="appendix-a-1-upwind-scheme">Appendix A.1 Upwind Scheme<a class="headerlink" href="#appendix-a-1-upwind-scheme" title="Permalink to this heading">¶</a></h2>
-<section id="appendix-a-1-1-discretized-state-space">
-<h3 id="appendix-a-1-1-discretized-state-space">Appendix A.1.1 Discretized State Space<a class="headerlink" href="#appendix-a-1-1-discretized-state-space" title="Permalink to this heading">¶</a></h3>
+<section id="appendix-a-1-overview">
+<h2 id="appendix-a-1-overview">Appendix A.1 Overview<a class="headerlink" href="#appendix-a-1-overview" title="Permalink to this heading">¶</a></h2>
+<p>Let’s take the HJB equation for pre technology and pre damage jump as an
+example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0 &amp; = \max_{i_k, i_j, \mathcal{E}} \min_{h_k, h_y, h_j, g, f_\ell}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{1-\rho}-1\right] \\
+&amp; +\frac{\partial \Phi}{\partial k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \Phi}{\partial k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+&amp; +\frac{\partial \Phi}{\partial y}\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\frac{\partial^2 \Phi}{\partial y^2} \frac{|\varsigma|^2}{2} \mathcal{E}^2 \\
+&amp; -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\lambda_2 \frac{|\varsigma|^2}{2} \mathcal{E}^2\right) \\
+&amp; +\frac{\partial \Phi}{\partial j}\left(-\zeta+\psi_0\left(i_j\right)^{\psi_1} \exp \left(\psi_1 \log K-\psi_1 \log J\right)-\frac{\left|\sigma_j\right|^2}{2}+\sigma_j h_j\right)+\frac{\partial^2 \Phi}{\partial j^2} \frac{\left|\sigma_j\right|^2}{2} \\
+&amp; +\xi_g I_g(J)(1-g+g \log g)+I_g(J) g\left(\Phi^{II}-\Phi\right) \\
+&amp; +\xi_d I_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+I_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
+&amp; +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_j \frac{\left|h_j\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
+\end{aligned}\end{split}\]</div>
+<p>which satisfies conditions to switch the order of max and min operator.</p>
+<p>Then, after exchanging the order of max and min operator, we deliver the
+solution, i.e. value function <span class="math notranslate nohighlight">\(\Phi\)</span>, to this HJB equation
+resursively according to</p>
+<ul>
+<li><p>Start with current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> where
+<span class="math notranslate nohighlight">\(n \{0,1, 2,\ldots\}\)</span> is called iteration step. Specifically,
+<span class="math notranslate nohighlight">\(\Phi^0\)</span> is the initial guess of value function, which can be
+vital to success of algorithm. We solve the HJB equation and update
+value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> to <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> in two steps.</p>
+<ol class="arabic">
+<li><p>Take current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> as given, let’s start
+with current distortion and jump misspecification
+<span class="math notranslate nohighlight">\(h_k^n, h_y^n, h_j^n, g^n, f_\ell^n\)</span> and solve optimal
+distortion and jump misspecification in two sub-steps.</p>
+<p>1.1. Take value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> and current distortion and
+jump misspecification $h_k^n, h_y^n, h_j^n, g^n,
+f_:raw-latex:<cite>ell`^n $ as given, we update optimal actions from
+:math:`i_k^{n}, i_j^{n}, mathcal{E}^{n}</cite> to
+<span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in a maximization
+problem.</p>
+<p>1.2. With updated robustly optimal actions
+<span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in hand, we update
+optimal distortion
+<span class="math notranslate nohighlight">\(h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}\)</span> by
+solving a minimization problem.</p>
+</li>
+<li><p>With updated robustly optimal actions and probability distortion,
+we finally can update value function <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> via upwind
+scheme.</p></li>
+</ol>
+</li>
+<li><p>We obtain a convergent solution to the HJB equation when the
+difference between two subsequent iterations is very tiny as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[|v^{n+1}-v^{n}| &lt; \epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is set to be <span class="math notranslate nohighlight">\(10^{-7}\)</span>.</p>
+</section>
+<section id="appendix-a-2-optimzation">
+<h2 id="appendix-a-2-optimzation">Appendix A.2 Optimzation<a class="headerlink" href="#appendix-a-2-optimzation" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="appendix-a-2-1-maximization">
+<h2 id="appendix-a-2-1-maximization">Appendix A.2.1 Maximization<a class="headerlink" href="#appendix-a-2-1-maximization" title="Permalink to this heading">¶</a></h2>
+<p>Solution process for <span class="math notranslate nohighlight">\(i_k\)</span> is given as follows, of which the same
+logic can apply to other actions <span class="math notranslate nohighlight">\(i_j, \mathcal{E}\)</span> easily.</p>
+<p>First order condition for <span class="math notranslate nohighlight">\(i_k\)</span> writes</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi)} = \frac{d \Phi}{dk}\left(1-\kappa i_k\right)\]</div>
+<p>which is a highly non-linear equation of <span class="math notranslate nohighlight">\(i_k\)</span> and doesn’t admit a
+quasi-analytial solution.</p>
+<p>Cobweb algorithm states that given current value function and
+probability distortion, we can update current actions
+<span class="math notranslate nohighlight">\(i_k^{n}, i_j^{n}, \mathcal{E}^{n}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[mu^{n} = \frac{d \Phi^n}{dk}\left(1-\kappa {i_k^{n+1}}'\right)\]</div>
+<p>where we define</p>
+<div class="math notranslate nohighlight">
+\[mu^{n} \doteq \delta\left(\frac{\alpha-i_k^{n}-i_j^{n}-\alpha \phi_0\left[1-\frac{\mathcal{E}^{n}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi^n)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi^n)}\]</div>
+<p>And <span class="math notranslate nohighlight">\(i_k^{n+1}\)</span> is computed with relaxation paramter <span class="math notranslate nohighlight">\(\chi\)</span>
+as</p>
+<div class="math notranslate nohighlight">
+\[i_k^{n+1} = \chi i_k^{n} + (1-\chi) {i_k^{n+1}}'\]</div>
+</section>
+<section id="appendix-a-2-2-minimization">
+<h2 id="appendix-a-2-2-minimization">Appendix A.2.2 Minimization<a class="headerlink" href="#appendix-a-2-2-minimization" title="Permalink to this heading">¶</a></h2>
+<p>Solution process to probability distortions is simpler and we take that
+of <span class="math notranslate nohighlight">\(h_k\)</span> as an example, of which the same logic can apply to other
+probability distortions <span class="math notranslate nohighlight">\(h_y, h_j, g, f_\ell\)</span>.</p>
+<p>First order condition for <span class="math notranslate nohighlight">\(h_k\)</span> is written as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \Phi}{\partial k} \sigma_k = -\xi_k h_k\]</div>
+<p>With given value function <span class="math notranslate nohighlight">\(\Phi^n\)</span>, we can update
+<span class="math notranslate nohighlight">\(h_k^{n+1}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial \Phi^n}{\partial k} \sigma_k\]</div>
+</section>
+<section id="appendix-a-3-upwind-scheme">
+<h2 id="appendix-a-3-upwind-scheme">Appendix A.3 Upwind Scheme<a class="headerlink" href="#appendix-a-3-upwind-scheme" title="Permalink to this heading">¶</a></h2>
+<p>The structure is arranged as follows</p>
+<ol class="arabic simple">
+<li><p>Discretization and Approximation</p></li>
+<li><p>False Transient Algorithm and Upwind Scheme</p></li>
+<li><p>Natural Boundary Condition</p></li>
+</ol>
+<section id="appendix-a-3-1-discretization-and-approximation">
+<h3 id="appendix-a-3-1-discretization-and-approximation">Appendix A.3.1 Discretization and Approximation<a class="headerlink" href="#appendix-a-3-1-discretization-and-approximation" title="Permalink to this heading">¶</a></h3>
 <p>Suppose we have three controled stochastic process <span class="math notranslate nohighlight">\(x_t, y_t, z_t\)</span>
 as</p>
 <div class="math notranslate nohighlight">
@@ -478,8 +563,8 @@ d z_t &amp;= \mu^z(x,y,z,\alpha) dt + \sigma^{z}(x,y,z,\alpha) dB^3_t
 \end{aligned}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(B^1_t, B^2_t, B^3_t\)</span> are three independent standard
 Brownian process.</p>
-<p>Let’s consider a generalized three-dimensional HJB equation for a
-stationary equilibirum:</p>
+<p>Let’s consider a generalized time-independent three-dimensional HJB
+equation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 0= &amp; \max_{\alpha} -\delta v(x,y,z) + u(x,y,z,\alpha)\\
@@ -494,25 +579,14 @@ stationary equilibirum:</p>
 variable <span class="math notranslate nohighlight">\(x,y,z\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
-X &amp;= \{x_1,\ldots,x_N\} \\
-Y &amp;= \{y_1,\ldots,y_N\} \\
-Z &amp;= \{z_1,\ldots,z_N\}
+X &amp;= \{x_1=\underline{X},\ldots,x_N=\bar{X}\} \\
+Y &amp;= \{y_1=\underline{Y},\ldots,y_N=\bar{Y}\} \\
+Z &amp;= \{z_1=\underline{Z},\ldots,z_N=\bar{Z}\}
 \end{aligned}\end{split}\]</div>
-<p>where we set the upper and lower bound as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-x_1 &amp;= \underline{X}, x_N=\bar{X} \\
-y_1 &amp;= \underline{Y}, y_N=\bar{Y} \\
-z_1 &amp;= \underline{Z}, z_N=\bar{Z} \\
-\end{aligned}\end{split}\]</div>
-<p>and the distance between two grid points are as
+<p>where the distance between two grid points are
 <span class="math notranslate nohighlight">\(\Delta x, \Delta y, \Delta z\)</span></p>
-</section>
-<section id="appendix-a-1-2-control-and-approximation-to-value-function">
-<h3 id="appendix-a-1-2-control-and-approximation-to-value-function">Appendix A.1.2 Control and Approximation to Value Function<a class="headerlink" href="#appendix-a-1-2-control-and-approximation-to-value-function" title="Permalink to this heading">¶</a></h3>
-<p>Now that we have discretized the state space, we can approximate value
-function on grid points and use short-hand notation
-<span class="math notranslate nohighlight">\(v(x_i,y_j,z_k) \doteq v_{i,j,k}\)</span> and so on.</p>
+<p>We now approximate value function on grid points and use short-hand
+notation <span class="math notranslate nohighlight">\(v(x_i,y_j,z_k) \doteq v_{i,j,k}\)</span> and so on.</p>
 <p>The partial derivatives <span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> can be approximated
 with either a forward or backward difference approximation</p>
 <div class="math notranslate nohighlight">
@@ -526,40 +600,45 @@ with either a forward or backward difference approximation</p>
 \[\begin{aligned}
 \partial_{x,C} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} - v_{i-1,j,k}}{2\Delta x}
 \end{aligned}\]</div>
-<p>which can be viewed as an average of forward and backward difference
-approximation.</p>
-<p>And we also approximate the second-order partial derivatives
+<p>which is an average of forward and backward difference approximation.</p>
+<p>Then, we approximate the second-order partial derivatives
 <span class="math notranslate nohighlight">\(\partial_{xx} v(x,y,z)\)</span> with a central difference approximation</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \partial_{xx} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} + v_{i-1,j,k}- 2v_{i,j,k}}{\Delta x^2}
 \end{aligned}\]</div>
-<p>Suppose we have a initial guess for value function, we can employ the
-first-order-condition to express our control <span class="math notranslate nohighlight">\(\alpha\)</span> on a grid
-point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear function of value function
-approximations <span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span> and
-<span class="math notranslate nohighlight">\(\partial_{xx} v_{i,j,k}\)</span>.</p>
-<p>In other words, we write our control, drift and diffusion term as</p>
+<p>We can employ the first-order-condition to express our control
+<span class="math notranslate nohighlight">\(\alpha\)</span> on a grid point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear
+function of value function approximations
+<span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span> and $:raw-latex:<cite>partial</cite><em>{xx}
+v</em>{i,j,k} $. Therefore, we use short-hand notations for our control,
+drift and diffusion term as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \alpha(x_i,y_j,z_k) &amp;= \alpha_{i,j,k} \\
-u(x_i,y_j,z_k,\alpha_{i,j,k}) &amp;= u_{i,j,k} \\
-\mu^w(x_i,y_j,z_k,\alpha_{i,j,k}) &amp;= \mu^w_{i,j,k}, \quad w=x,y,z\\
-\sigma^w(x_i,y_j,z_k,\alpha_{i,j,k}) &amp;= \sigma^w_{i,j,k}, \quad w=x,y,z\\
+u(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= u_{i,j,k} \\
+\mu^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= \mu^w_{i,j,k}, \quad w=x,y,z\\
+\sigma^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= \sigma^w_{i,j,k}, \quad w=x,y,z\\
 \end{aligned}\end{split}\]</div>
 </section>
-<section id="appendix-a-1-3-viscosity-in-false-transient-algorithm">
-<h3 id="appendix-a-1-3-viscosity-in-false-transient-algorithm">Appendix A.1.3 Viscosity in False Transient Algorithm<a class="headerlink" href="#appendix-a-1-3-viscosity-in-false-transient-algorithm" title="Permalink to this heading">¶</a></h3>
-<p>To improve the stability of our algorithm, we add an extra term
-<span class="math notranslate nohighlight">\(\partial_t v(x,y,z)\)</span> in our HJB equation, which can be
-approximated as</p>
+<section id="appendix-a-3-2-false-transient-algorithm-and-upwind-scheme">
+<h3 id="appendix-a-3-2-false-transient-algorithm-and-upwind-scheme">Appendix A.3.2 False Transient Algorithm and Upwind Scheme<a class="headerlink" href="#appendix-a-3-2-false-transient-algorithm-and-upwind-scheme" title="Permalink to this heading">¶</a></h3>
+<p>To improve the stability of our algorithm,</p>
+<ol class="arabic simple">
+<li><p>we use false transient algorithm and add an extra term
+<span class="math notranslate nohighlight">\(\partial_t v(x,y,z)\)</span> in the HJB equation as</p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \partial_t v(x,y,z) = \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}
 \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\Delta t\)</span> is the time step.</p>
-<p>Suppose we start with a initial guess <span class="math notranslate nohighlight">\(v^{0}_{i,j,k}\)</span> and then
-update <span class="math notranslate nohighlight">\(v^{n}_{i,j,k}\)</span> according to</p>
+<ol class="arabic simple" start="2">
+<li><p>we use upwind scheme and construct backward approximation with
+negative drift and forward approximation with positive drift.</p></li>
+</ol>
+<p>To sum up, starting with current value function <span class="math notranslate nohighlight">\(v^{n}\)</span>, we update
+<span class="math notranslate nohighlight">\(v^{n+1}\)</span> according to</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t} = &amp;  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n}\\
@@ -567,136 +646,26 @@ update <span class="math notranslate nohighlight">\(v^{n}_{i,j,k}\)</span> accor
     &amp; + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
     &amp; + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
 \end{aligned}\end{split}\]</div>
-<p>which can be written in matrix notation as</p>
+</section>
+<section id="appendix-a-3-3-natural-boundary-condition">
+<h3 id="appendix-a-3-3-natural-boundary-condition">Appendix A.3.3 Natural Boundary Condition<a class="headerlink" href="#appendix-a-3-3-natural-boundary-condition" title="Permalink to this heading">¶</a></h3>
+<p>We approximate second order derivative at boundaries with natural
+boundary condition. More specifically, suppose state variable <span class="math notranslate nohighlight">\(x\)</span>
+is at its upper boundary, we set second order derivative of value
+function to be the same as that of closet inner point.</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_{xx} v^{n+1}_{N,j,k} &amp;=  \partial_{xx} v^{n+1}_{N-1,j,k} = \frac{v^{n+1}_{N,j,k} + v^{n+1}_{N-2,j,k}- 2v^{n+1}_{N-1,j,k}}{\Delta x^2}
+\end{aligned}\]</div>
+<p>Now the matrix notation of HJB equation can be written as</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \frac{1}{\Delta t} (v^{n+1}-v^{n}) + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
 \end{aligned}\]</div>
-<p>This system can in turn be written as</p>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
-B^{n} v^{n+1} = b^{n}
-\end{aligned}\]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-B^{n} &amp;= \left(\frac{1}{\Delta t} + \delta\right) I - A^{n} \\
-b^n &amp;= u^n + \frac{1}{\Delta t} v^{n}
-\end{aligned}\end{split}\]</div>
-<p>Now, to decide when to stop, we hope to see the difference between two
-subsequent iterations very tiny, meaning we have obtained a convergent
-solution to the equation. In other words, we wish to see</p>
-<div class="math notranslate nohighlight">
-\[|v^{n+1}-v^{n}| &lt; \epsilon\]</div>
-<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is set to be <span class="math notranslate nohighlight">\(10^{-7}\)</span>.</p>
-</section>
-<section id="appendix-a-1-4-intuition">
-<h3 id="appendix-a-1-4-intuition">Appendix A.1.4 Intuition<a class="headerlink" href="#appendix-a-1-4-intuition" title="Permalink to this heading">¶</a></h3>
-<p>Finally, it’s instructive to consider the case with an infinitely large
-time step <span class="math notranslate nohighlight">\(\Delta t\)</span>, which leads to a vanishing
-<span class="math notranslate nohighlight">\(\frac{1}{\Delta t}\)</span>. In other words, the aforementioned system
-can be written as</p>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
- \delta v^{n+1} = u^{n} + A^{n} v^{n+1}.
-\end{aligned}\]</div>
-<p>which is immediately another way of writing our HJB equation in matrix
-form. In particula, <span class="math notranslate nohighlight">\(A^n\)</span> encodes the evolution of the stochastic
-process <span class="math notranslate nohighlight">\(x_t,y_t,z_t\)</span>.</p>
 </section>
 </section>
-<section id="appendix-a-2-cobweb-relaxation">
-<h2 id="appendix-a-2-cobweb-relaxation">Appendix A.2 Cobweb Relaxation<a class="headerlink" href="#appendix-a-2-cobweb-relaxation" title="Permalink to this heading">¶</a></h2>
-<section id="appendix-a-2-1-a-deep-look-into-first-order-condition">
-<h3 id="appendix-a-2-1-a-deep-look-into-first-order-condition">Appendix A.2.1 A Deep Look into First Order Condition<a class="headerlink" href="#appendix-a-2-1-a-deep-look-into-first-order-condition" title="Permalink to this heading">¶</a></h3>
-<p>There are HJB equations with simple control dynamics. For example, this
-HJB equation, describing heterogenous agents model in
-Aiyagari-Bewley-Huggett Economy,</p>
-<div class="math notranslate nohighlight">
-\[\rho v(a, z)=\max _c u(c)+\partial_a v(a, z)(z+r a-c)+\mu(z) \partial_z v(a, z)+\frac{\sigma^2(z)}{2} \partial_{z z} v(a, z)\]</div>
-<p>has a very straight-forward optimal consumption choice as</p>
-<div class="math notranslate nohighlight">
-\[c^* = u^{\prime-1}\left(\partial_a v(a, z)\right)\]</div>
-<p>However, our HJB equations doesn’t contain such simple dynamics. To
-solve a very complex system, we resort to a special algorithm called
-Cobweb algorithm. As it will show, the key idea is to reduce the
-non-linearity of the first order condition by progressively solving it
-in multiple steps.</p>
-</section>
-<section id="appendix-a-2-2-progressive-algorithm-against-strong-non-linearity">
-<h3 id="appendix-a-2-2-progressive-algorithm-against-strong-non-linearity">Appendix A.2.2 Progressive Algorithm against Strong Non-linearity<a class="headerlink" href="#appendix-a-2-2-progressive-algorithm-against-strong-non-linearity" title="Permalink to this heading">¶</a></h3>
-<p>We take the HJB equation for post technology jump as an example.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-0= &amp; \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
-&amp; +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-&amp; +\xi_k \frac{\left|h_k\right|^2}{2}
-\end{aligned}\end{split}\]</div>
-<p>First order condition for <span class="math notranslate nohighlight">\(i_k\)</span> writes</p>
-<div class="math notranslate nohighlight">
-\[\delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa i_k\right)\]</div>
-<p>which is a highly nonlinear equation of <span class="math notranslate nohighlight">\(i_k\)</span>.</p>
-<p>To get around the nonlinearity, the Cobweb algorithm states that we
-define a new term <span class="math notranslate nohighlight">\(mu\)</span> as</p>
-<div class="math notranslate nohighlight">
-\[m u=\frac{d v}{dk}\left(1-\kappa i_k\right)\]</div>
-<p>Then we solve the equation in multiple steps. Starting with a initial
-guess of <span class="math notranslate nohighlight">\(i_k\)</span> as <span class="math notranslate nohighlight">\(i_k^0\)</span>, we update <span class="math notranslate nohighlight">\(i_k^n\)</span>,
-<span class="math notranslate nohighlight">\(n=1,2,\ldots,N\)</span> according to</p>
-<div class="math notranslate nohighlight">
-\[mu^{n}= \frac{d v}{dk}\left(1-\kappa i_k^{n+1}\right)\]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[mu^{n} = \delta\left(\frac{\alpha-i_k^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}\]</div>
-<p>Now, to decide when to stop, we hope to see the difference between two
-subsequent iterations very tiny, meaning we have obtained a convergent
-solution to the equation. In other words, we wish to see</p>
-<div class="math notranslate nohighlight">
-\[|i_k^n-i_k^{n-1}| &lt; \epsilon\]</div>
-<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is set to be <span class="math notranslate nohighlight">\(10^{-7}\)</span>.</p>
-</section>
-<section id="appendix-a-2-3-further-improvement">
-<h3 id="appendix-a-2-3-further-improvement">Appendix A.2.3 Further Improvement<a class="headerlink" href="#appendix-a-2-3-further-improvement" title="Permalink to this heading">¶</a></h3>
-<p>While the Cobweb algorithm can alleviate our computational burden of
-dealing with complex first order conditions a lot, there is still much
-room for further improvement on efficiency of our algorithm. For
-example, as we notice that the main purpose is to deliver a convergent
-solution to the value function in the HJB equation, we can alternate the
-Cobweb algorithm in a way that it’s iterating not over control, such as
-<span class="math notranslate nohighlight">\(i_k\)</span>, but directly over value function.</p>
-<p>In other words, we start with initial guess of <span class="math notranslate nohighlight">\(v\)</span>, <span class="math notranslate nohighlight">\(i_k\)</span> as
-<span class="math notranslate nohighlight">\(v^0\)</span>, <span class="math notranslate nohighlight">\(i_k^0\)</span> and complete a inner iteration over
-<span class="math notranslate nohighlight">\(i_k\)</span> and an outer iteration over <span class="math notranslate nohighlight">\(v\)</span>.</p>
-<p>In the inner iteration, we take value function <span class="math notranslate nohighlight">\(v^n\)</span> as given and
-attempt to update <span class="math notranslate nohighlight">\(i_k^n\)</span> according to</p>
-<div class="math notranslate nohighlight">
-\[mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa {i_k^{n+1}}'\right)\]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}\]</div>
-<p>Here we progressively update <span class="math notranslate nohighlight">\(i_k^n\)</span> to <span class="math notranslate nohighlight">\(i_k^{n+1}\)</span> by a
-convex combination of <span class="math notranslate nohighlight">\(i_k^n\)</span> and <span class="math notranslate nohighlight">\({i_k^{n+1}}'\)</span> with a
-relaxation parameter <span class="math notranslate nohighlight">\(\chi\)</span> as</p>
-<div class="math notranslate nohighlight">
-\[i_k^{n+1}= \chi i_k^n + (1-\chi) {i_k^{n+1}}'.\]</div>
-<p>Once we have updated <span class="math notranslate nohighlight">\(i_k^{n+1}\)</span>, we can turn to outer iteration
-that updating <span class="math notranslate nohighlight">\(v^{n+1}\)</span> according to</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-0= &amp;  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
-&amp; +\frac{d v^{n+1}}{dk}\left[\mu_k+{i_k^{n+1}}-\frac{\kappa}{2} {i_k^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h_k^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-&amp; +\xi_k \frac{\left|{h_k^{n+1}}\right|^2}{2}
-\end{aligned}\end{split}\]</div>
-<p>To sum up, this alternated Cobweb algorithm aims at achieving a very
-tiny difference between two subsequent iterations over value function
-<span class="math notranslate nohighlight">\(v\)</span> more directly,</p>
-<div class="math notranslate nohighlight">
-\[|v^{n+1}-v^{n}| &lt; \epsilon\]</div>
-<p>which improved the efficiency and stability gallantly.</p>
-</section>
-</section>
-<section id="appendix-a-3-list-of-parameters-chosen-in-algorithm">
-<h2 id="appendix-a-3-list-of-parameters-chosen-in-algorithm">Appendix A.3 List of Parameters Chosen in Algorithm<a class="headerlink" href="#appendix-a-3-list-of-parameters-chosen-in-algorithm" title="Permalink to this heading">¶</a></h2>
+<section id="appendix-a-4-list-of-parameters-chosen-in-algorithm">
+<h2 id="appendix-a-4-list-of-parameters-chosen-in-algorithm">Appendix A.4 List of Parameters Chosen in Algorithm<a class="headerlink" href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" title="Permalink to this heading">¶</a></h2>
 <table>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -739,7 +708,114 @@ tiny difference between two subsequent iterations over value function
 </tr>
 </tbody>
 </table>
-</section>
+<!-- ## Appendix A.2 Cobweb Relaxation
+
+### Appendix A.2.1 A Deep Look into First Order Condition
+
+There are HJB equations with simple control dynamics. For example, this HJB equation, describing heterogenous agents model in Aiyagari-Bewley-Huggett Economy,
+
+$$
+\rho v(a, z)=\max _c u(c)+\partial_a v(a, z)(z+r a-c)+\mu(z) \partial_z v(a, z)+\frac{\sigma^2(z)}{2} \partial_{z z} v(a, z)
+$$
+
+has a very straight-forward optimal consumption choice as
+
+$$
+c^* = u^{\prime-1}\left(\partial_a v(a, z)\right)
+$$
+
+However, our HJB equations doesn't contain such simple dynamics. To solve a very complex system, we resort to a special algorithm called Cobweb algorithm. As it will show, the key idea is to reduce the non-linearity of the first order condition by progressively solving it in multiple steps.
+
+### Appendix A.2.1 Progressive Algorithm against Strong Non-linearity
+
+We take the HJB equation for post technology jump as an example.
+
+\begin{aligned}
+0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
+& +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+& +\xi_k \frac{\left|h_k\right|^2}{2}
+\end{aligned}
+
+First order condition for $i_k$ writes
+
+$$
+\delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa i_k\right)
+$$
+
+which is a highly nonlinear equation of $i_k$ and doesn't lead to a quasi-analytical solution.
+
+To get around the nonlinearity, the Cobweb algorithm states that we define a new term $mu$ as
+
+$$
+m u=\frac{d v}{dk}\left(1-\kappa i_k\right)
+$$
+
+Then we solve the equation in multiple steps. Starting with a initial guess of $i_k$ as $i_k^0$, we update $i_k^n$, $n=1,2,\ldots,N$ according to
+
+$$
+mu^{n}= \frac{d v}{dk}\left(1-\kappa i_k^{n+1}\right)
+$$
+
+where
+
+$$
+mu^{n} = \delta\left(\frac{\alpha-i_k^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}
+$$
+
+
+Now, to decide when to stop, we hope to see the difference between two subsequent iterations very tiny, meaning we have obtained a convergent solution to the equation. In other words, we wish to see
+
+$$
+|i_k^n-i_k^{n-1}| < \epsilon
+$$
+
+where $\epsilon$ is set to be $10^{-7}$.
+
+
+### Appendix A.2.3 Further Improvement
+
+While the Cobweb algorithm can alleviate our computational burden of dealing with complex first order conditions a lot, there is still much room for further improvement on efficiency of our algorithm. For example, as we notice that the main purpose is to deliver a convergent solution to the value function in the HJB equation, we can alternate the Cobweb algorithm in a way that it's iterating not over control, such as $i_k$, but directly over value function.
+
+In other words, we start with initial guess of $v$, $i_k$ as $v^0$, $i_k^0$ and complete a inner iteration over $i_k$ and an outer iteration over $v$.
+
+In the inner iteration, we take value function $v^n$ as given and attempt to update $i_k^n$ according to
+
+$$
+mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa {i_k^{n+1}}'\right)
+$$
+
+
+where
+
+$$
+mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}
+$$
+
+Here we progressively update $i_k^n$ to $i_k^{n+1}$ by a convex combination of $i_k^n$ and ${i_k^{n+1}}'$ with a relaxation parameter $\chi$ as
+
+$$
+i_k^{n+1}= \chi i_k^n + (1-\chi) {i_k^{n+1}}'.
+$$
+
+
+
+Once we have updated $i_k^{n+1}$, we can turn to outer iteration that updating $v^{n+1}$ according to
+
+
+\begin{aligned}
+0= &  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
+& +\frac{d v^{n+1}}{dk}\left[\mu_k+{i_k^{n+1}}-\frac{\kappa}{2} {i_k^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h_k^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+& +\xi_k \frac{\left|{h_k^{n+1}}\right|^2}{2}
+\end{aligned}
+
+To sum up, this alternated Cobweb algorithm aims at achieving a very tiny difference between two subsequent iterations over value function $v$ more directly,
+
+$$
+|v^{n+1}-v^{n}| < \epsilon
+$$
+
+which improved the efficiency and stability gallantly.
+ --></section>
 </section>
 
 
@@ -789,7 +865,7 @@ tiny difference between two subsequent iterations over value function
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
