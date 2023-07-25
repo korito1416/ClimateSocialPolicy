@@ -68,7 +68,7 @@ Appendix A.2 Optimzation
 ------------------------
 
 Appendix A.2.1 Maximization
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Solution process for :math:`i_k` is given as follows, of which the same
 logic can apply to other actions :math:`i_j, \mathcal{E}` easily.
@@ -108,7 +108,7 @@ as
    i_k^{n+1} = \chi i_k^{n} + (1-\chi) {i_k^{n+1}}'
 
 Appendix A.2.2 Minimization
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Solution process to probability distortions is simpler and we take that
 of :math:`h_k` as an example, of which the same logic can apply to other

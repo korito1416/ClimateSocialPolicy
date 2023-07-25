@@ -307,11 +307,13 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a>
-        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a><nav class="md-nav">
+              <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
         </li>
         <li class="md-nav__item"><a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+        </li></ul>
+            </nav>
         </li>
         <li class="md-nav__item"><a href="#appendix-a-3-upwind-scheme" class="md-nav__link">Appendix A.3 Upwind Scheme</a><nav class="md-nav">
               <ul class="md-nav__list">
@@ -341,9 +343,7 @@
     
     
       <a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a>
-      
-    
-    </li>
+      <ul class="md-nav__list"> 
     <li class="md-nav__item">
     
     
@@ -356,6 +356,8 @@
     
       <a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
       
+    
+    </li></ul>
     
     </li>
     <li class="md-nav__item">
@@ -420,11 +422,13 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
         </li>
-        <li class="md-nav__item"><a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a>
-        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-optimzation" class="md-nav__link">Appendix A.2 Optimzation</a><nav class="md-nav">
+              <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
         </li>
         <li class="md-nav__item"><a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+        </li></ul>
+            </nav>
         </li>
         <li class="md-nav__item"><a href="#appendix-a-3-upwind-scheme" class="md-nav__link">Appendix A.3 Upwind Scheme</a><nav class="md-nav">
               <ul class="md-nav__list">
@@ -507,9 +511,8 @@ difference between two subsequent iterations is very tiny as</p></li>
 </section>
 <section id="appendix-a-2-optimzation">
 <h2 id="appendix-a-2-optimzation">Appendix A.2 Optimzation<a class="headerlink" href="#appendix-a-2-optimzation" title="Permalink to this heading">¶</a></h2>
-</section>
 <section id="appendix-a-2-1-maximization">
-<h2 id="appendix-a-2-1-maximization">Appendix A.2.1 Maximization<a class="headerlink" href="#appendix-a-2-1-maximization" title="Permalink to this heading">¶</a></h2>
+<h3 id="appendix-a-2-1-maximization">Appendix A.2.1 Maximization<a class="headerlink" href="#appendix-a-2-1-maximization" title="Permalink to this heading">¶</a></h3>
 <p>Solution process for <span class="math notranslate nohighlight">\(i_k\)</span> is given as follows, of which the same
 logic can apply to other actions <span class="math notranslate nohighlight">\(i_j, \mathcal{E}\)</span> easily.</p>
 <p>First order condition for <span class="math notranslate nohighlight">\(i_k\)</span> writes</p>
@@ -531,7 +534,7 @@ as</p>
 \[i_k^{n+1} = \chi i_k^{n} + (1-\chi) {i_k^{n+1}}'\]</div>
 </section>
 <section id="appendix-a-2-2-minimization">
-<h2 id="appendix-a-2-2-minimization">Appendix A.2.2 Minimization<a class="headerlink" href="#appendix-a-2-2-minimization" title="Permalink to this heading">¶</a></h2>
+<h3 id="appendix-a-2-2-minimization">Appendix A.2.2 Minimization<a class="headerlink" href="#appendix-a-2-2-minimization" title="Permalink to this heading">¶</a></h3>
 <p>Solution process to probability distortions is simpler and we take that
 of <span class="math notranslate nohighlight">\(h_k\)</span> as an example, of which the same logic can apply to other
 probability distortions <span class="math notranslate nohighlight">\(h_y, h_j, g, f_\ell\)</span>.</p>
@@ -542,6 +545,7 @@ probability distortions <span class="math notranslate nohighlight">\(h_y, h_j, g
 <span class="math notranslate nohighlight">\(h_k^{n+1}\)</span> according to</p>
 <div class="math notranslate nohighlight">
 \[h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial \Phi^n}{\partial k} \sigma_k\]</div>
+</section>
 </section>
 <section id="appendix-a-3-upwind-scheme">
 <h2 id="appendix-a-3-upwind-scheme">Appendix A.3 Upwind Scheme<a class="headerlink" href="#appendix-a-3-upwind-scheme" title="Permalink to this heading">¶</a></h2>
