@@ -1046,7 +1046,7 @@ def plot_simulated_stoc_path_full2(graph_type, graph_title, yaxis_label, graph_r
                 buttons=buttons,
                 active=3,
                 x=0.6,
-                y=1.0,
+                y=1.05,
                 pad={'r': 10, 't': 10})
         ],
     )
