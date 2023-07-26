@@ -52,10 +52,8 @@
     <link rel="stylesheet" type="text/css" href="_static/material.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -478,7 +476,8 @@ example</p>
 <p>which satisfies conditions to switch the order of max and min operator.</p>
 <p>Then, after exchanging the order of max and min operator, we deliver the
 solution, i.e. value function <span class="math notranslate nohighlight">\(\Phi\)</span>, to this HJB equation
-resursively according to</p>
+recursively with the false transient approach described in <cite>Appendix A.3.1</cite>.
+The procedure in each iteration is provided below.</p>
 <ul class="simple">
 <li><p>Start with current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> where
 <span class="math notranslate nohighlight">\(n \in \{0,1, 2,\ldots\}\)</span> is called iteration step.
@@ -490,7 +489,8 @@ steps.</p>
 <li><p>Take current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> as given, let’s start
 with current distortion and jump misspecification
 <span class="math notranslate nohighlight">\(h_k^n, h_y^n, h_j^n, g^n, f_\ell^n\)</span> and solve optimal
-distortion and jump misspecification in two sub-steps.</p>
+distortion and jump misspecification in two sub-steps, which are detailed
+in <cite>Appendix A.2</cite>.</p>
 <ol class="arabic simple">
 <li><p>Take value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> and current distortion and
 jump misspecification
@@ -506,8 +506,8 @@ by solving a minimization problem.</p></li>
 </ol>
 </li>
 <li><p>With updated robustly optimal actions and probability distortion,
-we finally can update value function <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> via upwind
-scheme.</p></li>
+we finally can update value function <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> by solving the
+algebraic system depicted in <cite>Appendix A.3</cite>.</p></li>
 </ol>
 </li>
 <li><p>We obtain a convergent solution to the HJB equation when the
@@ -557,7 +557,7 @@ probability distortions <span class="math notranslate nohighlight">\(h_y, h_j, g
 </section>
 <section id="appendix-a-3-solving-the-algebraic-system">
 <h2 id="appendix-a-3-solving-the-algebraic-system">Appendix A.3 Solving the Algebraic System<a class="headerlink" href="#appendix-a-3-solving-the-algebraic-system" title="Permalink to this heading">¶</a></h2>
-<p>Suppose we have three controled stochastic process <span class="math notranslate nohighlight">\(x_t, y_t, z_t\)</span>
+<p>Suppose we have three controlled stochastic process <span class="math notranslate nohighlight">\(x_t, y_t, z_t\)</span>
 as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -582,8 +582,8 @@ equation:</p>
 <section id="appendix-a-3-1-false-transient-algorithm">
 <h3 id="appendix-a-3-1-false-transient-algorithm">Appendix A.3.1 False Transient Algorithm<a class="headerlink" href="#appendix-a-3-1-false-transient-algorithm" title="Permalink to this heading">¶</a></h3>
 <p>To mitigate the inherent instability of the non-linear HJB, we add a
-false transcient (time) dimension and solve it until convergence. And
-the new HJB equation is as</p>
+false transient (time) dimension and solve it until convergence. And
+the new HJB equation is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 0= &amp; \max_{\alpha} -\delta v(x,y,z, t) + u(x,y,z,\alpha) + \partial_t v(x,y,z,t)\\
@@ -594,10 +594,10 @@ the new HJB equation is as</p>
 </section>
 <section id="appendix-a-3-2-finite-difference-scheme">
 <h3 id="appendix-a-3-2-finite-difference-scheme">Appendix A.3.2 Finite-Difference Scheme<a class="headerlink" href="#appendix-a-3-2-finite-difference-scheme" title="Permalink to this heading">¶</a></h3>
+<p>In this section, we introduce an upwind finite-difference scheme for discretizing the state variables of the HJB.</p>
 <section id="appendix-a-3-2-1-upwind-scheme">
 <h4 id="appendix-a-3-2-1-upwind-scheme">Appendix A.3.2.1 Upwind Scheme<a class="headerlink" href="#appendix-a-3-2-1-upwind-scheme" title="Permalink to this heading">¶</a></h4>
-<p>Accordingly, we construct equispaced grids for these three state
-variable <span class="math notranslate nohighlight">\(x,y,z\)</span> as</p>
+<p>We construct equally spaced grids for these three state variables <span class="math notranslate nohighlight">\(x,y,z\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 X &amp;= \{x_1=\underline{X},\ldots,x_N=\bar{X}\} \\
@@ -606,7 +606,7 @@ Z &amp;= \{z_1=\underline{Z},\ldots,z_N=\bar{Z}\}
 \end{aligned}\end{split}\]</div>
 <p>where the distance between two grid points are
 <span class="math notranslate nohighlight">\(\Delta x, \Delta y, \Delta z\)</span></p>
-<p>We now approximate value function on grid points and use short-hand
+<p>We approximate value function on grid points and use short-hand
 notation <span class="math notranslate nohighlight">\(v(x_i,y_j,z_k) \doteq v_{i,j,k}\)</span> and so on.</p>
 <p>The partial derivatives <span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> can be approximated
 with either a forward or backward difference approximation</p>
@@ -615,7 +615,7 @@ with either a forward or backward difference approximation</p>
 \partial_{x,F} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k}-v_{i,j,k}}{\Delta x} \\
 \partial_{x,B} v_{i,j,k} &amp;=  \frac{v_{i,j,k}-v_{i-1,j,k}}{\Delta x}
 \end{aligned}\end{split}\]</div>
-<p>For accuracy, we decide to approximate the partial derivatives
+<p>For accuracy, we approximate the partial derivatives
 <span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> via central difference approximation</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
@@ -628,7 +628,7 @@ with either a forward or backward difference approximation</p>
 \[\begin{aligned}
 \partial_{xx} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} + v_{i-1,j,k}- 2v_{i,j,k}}{\Delta x^2}
 \end{aligned}\]</div>
-<p>We can employ the first-order-condition to express our control
+<p>We employ the first-order-condition to express our control
 <span class="math notranslate nohighlight">\(\alpha\)</span> on a grid point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear
 function of value function approximations
 <span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span> and <span class="math notranslate nohighlight">\(\partial_{xx} v_{i,j,k}\)</span>. Therefore, we use short-hand notations for our control,
@@ -640,17 +640,8 @@ u(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= u_{i,j,k} \\
 \mu^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= \mu^w_{i,j,k}, \quad w=x,y,z\\
 \sigma^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= \sigma^w_{i,j,k}, \quad w=x,y,z\\
 \end{aligned}\end{split}\]</div>
-<p>We use upwind scheme and construct backward approximation with negative
+<p>In the upwind scheme, we construct backward approximation with negative
 drift and forward approximation with positive drift.</p>
-<p>To sum up, starting with current value function <span class="math notranslate nohighlight">\(v^{n}\)</span>, we update
-<span class="math notranslate nohighlight">\(v^{n+1}\)</span> according to</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-0  = &amp;  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} + \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}\\
-    &amp; + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
-    &amp; + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
-    &amp; + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
-\end{aligned}\end{split}\]</div>
 </section>
 <section id="a-3-2-2-natural-boundary-condition">
 <h4 id="a-3-2-2-natural-boundary-condition">A.3.2.2 Natural Boundary Condition<a class="headerlink" href="#a-3-2-2-natural-boundary-condition" title="Permalink to this heading">¶</a></h4>
@@ -662,14 +653,31 @@ function to be the same as that of closet inner point.</p>
 \[\begin{aligned}
 \partial_{xx} v^{n+1}_{N,j,k} &amp;=  \partial_{xx} v^{n+1}_{N-1,j,k} = \frac{v^{n+1}_{N,j,k} + v^{n+1}_{N-2,j,k}- 2v^{n+1}_{N-1,j,k}}{\Delta x^2}
 \end{aligned}\]</div>
-<p>Now the matrix notation of HJB equation can be written as</p>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
-\frac{1}{\Delta t} (v^{n+1}-v^{n}) + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
-\end{aligned}\]</div>
 </section>
 <section id="a-3-2-3-implicit-euler">
 <h4 id="a-3-2-3-implicit-euler">A.3.2.3 Implicit Euler<a class="headerlink" href="#a-3-2-3-implicit-euler" title="Permalink to this heading">¶</a></h4>
+<p>To solve the “transient” system, we use the implicit Euler algorithm, which
+updates <span class="math notranslate nohighlight">\(v^{n+1}\)</span> from current value function <span class="math notranslate nohighlight">\(v^{n}\)</span> recursively.
+At each time step, we solve the following linear system for
+<span class="math notranslate nohighlight">\(v^{n+1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0  = &amp;  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} + \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}\\
+    &amp; + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
+    &amp; + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
+    &amp; + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
+\end{aligned}\end{split}\]</div>
+<p>This system can be written in the matrix form</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\frac{(v^{n+1}-v^{n})}{\Delta t}  + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
+\end{aligned}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A^{n}\)</span> is a sparse matrix. The linear system thus can be solved by
+an iterative method such as conjugate gradient. For efficiency, we use the PETSc
+linear solver library <span id="id1">Balay <em>et al.</em> [<a class="reference internal" href="bib_file.html#id120" title="Satish Balay, Shrirang Abhyankar, Mark F. Adams, Steven Benson, Jed Brown, Peter Brune, Kris Buschelman, Emil Constantinescu, Lisandro Dalcin, Alp Dener, Victor Eijkhout, Jacob Faibussowitsch, William D. Gropp, Václav Hapla, Tobin Isaac, Pierre Jolivet, Dmitry Karpeev, Dinesh Kaushik, Matthew G. Knepley, Fande Kong, Scott Kruger, Dave A. May, Lois Curfman McInnes, Richard Tran Mills, Lawrence Mitchell, Todd Munson, Jose E. Roman, Karl Rupp, Patrick Sanan, Jason Sarich, Barry F. Smith, Stefano Zampini, Hong Zhang, Hong Zhang, and Junchao Zhang. PETSc/TAO users manual. Technical Report ANL-21/39 - Revision 3.19, Argonne National Laboratory, 2023. doi:10.2172/1968587.">7</a>]</span> which includes a long list of linear
+solvers and preconditioners. Based on our empirical experiences, the Stablized
+Biconjugate Gradient (BiCGStab) method paired with the incomplete factorization
+(ILU)preconditioner gives the best performance.</p>
 </section>
 </section>
 </section>
@@ -874,7 +882,7 @@ which improved the efficiency and stability gallantly.
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
