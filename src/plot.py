@@ -1070,3 +1070,398 @@ def plot_simulated_stoc_path_full2(graph_type, graph_title, yaxis_label, graph_r
 
     return fig
 
+
+
+def plot_simulated_stoc_path_full2_split_var3(graph_type, graph_title, yaxis_label, graph_range):
+
+    xi_base = 100000.
+    psi_0 = 0.10583
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+    
+    group_total = {}
+    
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            group_list = {"No Jump": [], "Damage Jump": [],  "Techonology Jump": []}
+
+            if abatement_cost == 0.1:
+
+                xi_list_fullaversion = [0.050]
+
+            if abatement_cost == 0.5:
+
+                xi_list_fullaversion = [0.150]
+
+            folder = "./data_simul3/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+                abatement_cost)
+
+            label = "φ₀={:.1f}".format(
+                abatement_cost)+r', ρ' + '= {:.2f}'.format(rho)
+
+            
+            i = 0
+
+            for xi in xi_list_fullaversion:
+                filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+                    xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+                with open(folder + filename + "model_tech1_pre_damage_UD_simulstoccompile_40direct_direct", "rb") as f:
+                    model_tech1_pre_damage = pickle.load(f)
+
+                PathLength = model_tech1_pre_damage["years"].shape[1]
+                Years = model_tech1_pre_damage["years"][:, 0]
+
+                Mat = model_tech1_pre_damage[graph_type]
+
+                for j in range(PathLength):
+
+                    tech = model_tech1_pre_damage["tech_activate"][:, j]
+                    damage = model_tech1_pre_damage["damage_activate"][:, j]
+
+                    if np.max(tech) == 0 and np.max(damage) == 0:
+
+                        group_name = "No Jump"
+                        
+                    if np.max(tech) == 0 and np.max(damage) == 1:
+
+                        group_name = "Damage Jump"
+
+                    if np.max(tech) == 1:
+                        group_name = "Techonology Jump"
+
+                    group_list[group_name].append(j)
+
+                i = i+1
+                
+            group_total[label] = group_list
+
+
+    # print(group_total)
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            if abatement_cost == 0.1:
+
+                xi_list_fullaversion = [0.050]
+
+            if abatement_cost == 0.5:
+
+                xi_list_fullaversion = [0.150]
+
+            folder = "./data_simul3/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+                abatement_cost)
+
+            label = "φ₀={:.1f}".format(
+                abatement_cost)+r', ρ' + '= {:.2f}'.format(rho)
+
+            i = 0
+
+            for xi in xi_list_fullaversion:
+                filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+                    xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+                with open(folder + filename + "model_tech1_pre_damage_UD_simulstoccompile_40direct_direct", "rb") as f:
+                    model_tech1_pre_damage = pickle.load(f)
+
+                PathLength = model_tech1_pre_damage["years"].shape[1]
+                Years = model_tech1_pre_damage["years"][:, 0]
+
+                Mat = model_tech1_pre_damage[graph_type]
+
+                for k in group_total[label].keys():
+                    
+                    group = group_total[label][k]
+                    
+                    for j in group:
+
+                        tech = model_tech1_pre_damage["tech_activate"][:, j]
+                        damage = model_tech1_pre_damage["damage_activate"][:, j]
+
+                        if np.max(tech) == 0 and np.max(damage) == 0:
+
+                            group_name = "No Jump"
+
+                        if np.max(tech) == 0 and np.max(damage) == 1:
+
+                            group_name = "Damage Jump"
+
+                        if np.max(tech) == 1:
+                            group_name = "Techonology Jump"
+
+                        legend_name = "Path {}".format(j)
+                        
+                        if abatement_cost==0.5 and rho==0.66:
+                            fig.add_trace(go.Scatter(x=Years,
+                                                    y=Mat[:, j],
+                                                    name=legend_name,
+                                                    showlegend=True,
+                                                    visible=True,
+                                                    legendgroup=group_name,
+                                                    legendgrouptitle_text=group_name,
+                                                    # line=dict(color=color[i]),
+                                                    #  visible=False
+                                                    ))
+                        else:
+                            fig.add_trace(go.Scatter(x=Years,
+                                                    y=Mat[:, j],
+                                                    name=legend_name,
+                                                    showlegend=False,
+                                                    visible=False,
+                                                    legendgroup=group_name,
+                                                    legendgrouptitle_text=group_name,
+                                                    # line=dict(color=color[i]),
+                                                    #  visible=False
+                                                    ))
+                i = i+1
+                
+    # for i in range(PathLength):
+    #     fig.data[3*PathLength + i]["visible"] = True
+    #     # fig.data[3*2 + i+12]["visible"] = True
+
+    #     fig.data[3*PathLength + i]["showlegend"] = True
+    #     # fig.data[3*2 + 12]["showlegend"] = True
+
+    buttons = []
+    i = 0
+
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            if abatement_cost == 0.1:
+
+                cost_label = "φ₀=0.1"
+            if abatement_cost == 0.5:
+
+                cost_label = "φ₀=0.5"
+
+            # Hide all traces
+            label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+            button = dict(method='update',
+                          args=[
+                              {
+                                  'visible': [False] * (2 * 3 * PathLength),
+                                  'showlegend': [False] * (2 * 3 * PathLength),
+                              },
+                          ],
+                          label=label)
+            # Enable the two traces we want to see
+            # print(button['args'][0]["visible"])
+
+            for j in range(PathLength):
+
+                button['args'][0]["visible"][PathLength*i + j] = True
+
+                button['args'][0]["showlegend"][PathLength*i + j] = True
+
+            i = i+1
+            # Add step to step list
+            buttons.append(button)
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="dropdown",
+                direction="down",
+                buttons=buttons,
+                active=3,
+                x=0.6,
+                y=1.05,
+                pad={'r': 10, 't': 10}
+            ),
+        ],
+    )
+
+    fig.update_xaxes(showgrid=False, showline=True,
+                     title="Years", range=[0, 40])
+    fig.update_yaxes(showgrid=False,
+                     showline=True,
+                     range=graph_range,
+                     title_text=yaxis_label,
+                     tickformat=".2f")
+
+    fig.update_layout(
+        title=graph_title,
+        barmode="overlay",
+        plot_bgcolor="white",
+        width=1000,
+        height=700,
+        margin=dict(l=50, r=0))
+
+    return fig
+
+
+def plot_simulated_stoc_path_full2_split(graph_type, graph_title, yaxis_label, graph_range):
+
+    xi_base = 100000.
+    psi_0 = 0.10583
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+
+    # print(group_total)
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            if abatement_cost == 0.1:
+
+                xi_list_fullaversion = [0.050]
+
+            if abatement_cost == 0.5:
+
+                xi_list_fullaversion = [0.150]
+
+            folder = "./data_simul3/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+                abatement_cost)
+
+            label = "φ₀={:.1f}".format(
+                abatement_cost)+r', ρ' + '= {:.2f}'.format(rho)
+
+            i = 0
+
+            for xi in xi_list_fullaversion:
+                filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+                    xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+                with open(folder + filename + "model_tech1_pre_damage_UD_simulstoccompile_40direct_direct", "rb") as f:
+                    model_tech1_pre_damage = pickle.load(f)
+
+                PathLength = model_tech1_pre_damage["years"].shape[1]
+                Years = model_tech1_pre_damage["years"][:, 0]
+
+                Mat = model_tech1_pre_damage[graph_type]
+
+
+                for j in range(PathLength):
+
+                    tech = model_tech1_pre_damage["tech_activate"][:, j]
+                    damage = model_tech1_pre_damage["damage_activate"][:, j]
+
+                    if np.max(tech) == 0 and np.max(damage) == 0:
+
+                        group_name = "No Jump"
+                        legend_rank = 1
+
+                    if np.max(tech) == 0 and np.max(damage) == 1:
+
+                        group_name = "Damage Jump"
+                        legend_rank = 2
+
+                    if np.max(tech) == 1:
+                        group_name = "Techonology Jump"
+                        legend_rank = 3
+
+                    legend_name = "Path {}".format(j)
+
+                    if abatement_cost == 0.5 and rho == 0.66:
+                        fig.add_trace(go.Scatter(x=Years,
+                                                    y=Mat[:, j],
+                                                    name=legend_name,
+                                                    showlegend=True,
+                                                    visible=True,
+                                                    legendgroup=group_name,
+                                                    legendgrouptitle_text=group_name,
+                                                    legendrank=legend_rank
+                                                    # line=dict(color=color[i]),
+                                                    #  visible=False
+                                                    ))
+                    else:
+                        fig.add_trace(go.Scatter(x=Years,
+                                                    y=Mat[:, j],
+                                                    name=legend_name,
+                                                    showlegend=False,
+                                                    visible=False,
+                                                    legendgroup=group_name,
+                                                    legendgrouptitle_text=group_name,
+                                                    legendrank=legend_rank
+                                                    # line=dict(color=color[i]),
+                                                    #  visible=False
+                                                    ))
+                i = i+1
+
+    # for i in range(PathLength):
+    #     fig.data[3*PathLength + i]["visible"] = True
+    #     # fig.data[3*2 + i+12]["visible"] = True
+
+    #     fig.data[3*PathLength + i]["showlegend"] = True
+    #     # fig.data[3*2 + 12]["showlegend"] = True
+
+    buttons = []
+    i = 0
+
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            if abatement_cost == 0.1:
+
+                cost_label = "φ₀=0.1"
+            if abatement_cost == 0.5:
+
+                cost_label = "φ₀=0.5"
+
+            # Hide all traces
+            label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+            button = dict(method='update',
+                          args=[
+                              {
+                                  'visible': [False] * (2 * 3 * PathLength),
+                                  'showlegend': [False] * (2 * 3 * PathLength),
+                              },
+                          ],
+                          label=label)
+            # Enable the two traces we want to see
+            # print(button['args'][0]["visible"])
+
+            for j in range(PathLength):
+
+                button['args'][0]["visible"][PathLength*i + j] = True
+
+                button['args'][0]["showlegend"][PathLength*i + j] = True
+
+            i = i+1
+            # Add step to step list
+            buttons.append(button)
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="dropdown",
+                direction="down",
+                buttons=buttons,
+                active=3,
+                x=0.6,
+                y=1.05,
+                pad={'r': 10, 't': 10}
+            ),
+        ],
+    )
+
+    fig.update_xaxes(showgrid=False, showline=True,
+                     title="Years", range=[0, 40])
+    fig.update_yaxes(showgrid=False,
+                     showline=True,
+                     range=graph_range,
+                     title_text=yaxis_label,
+                     tickformat=".2f")
+
+    fig.update_layout(
+        title=graph_title,
+        barmode="overlay",
+        plot_bgcolor="white",
+        width=1000,
+        height=700,
+        margin=dict(l=50, r=0))
+
+    return fig
