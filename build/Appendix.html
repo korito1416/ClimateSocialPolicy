@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Appendix A. Computation Method &#8212; ClimateSocialPolicy 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="bib_file.html" />
+    <link rel="prev" title="10 Stochastic Simulation" href="sec10_stochastic_simulation.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=indigo>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#Appendix" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="ClimateSocialPolicy 0.0.1 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">&#xe55d</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">UncertaintySocialPolicy</span>
+          <span class="md-header-nav__topic"> Appendix A. Computation Method </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">ClimateSocialPolicy 0.0.1 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="ClimateSocialPolicy 0.0.1 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">&#xe55d</i>
+      
+    </a>
+    <a href="index.html"
+       title="ClimateSocialPolicy 0.0.1 documentation">UncertaintySocialPolicy</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Contents:</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec1_introduction.html" class="md-nav__link">1 Introduction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec2_uncertainty.html" class="md-nav__link">2 Confronting Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_climatedynamics.html" class="md-nav__link">3 Climate Dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec4_damagedynamics.html" class="md-nav__link">4 Climate Damages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec5_illustrativeeconomy.html" class="md-nav__link">5 Economic Framework</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec7_uncertinaty_adjust_prob.html" class="md-nav__link">7 Uncertainty Adjusted Probability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec8_robust_action.html" class="md-nav__link">8 Robustly Optimal Action</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec9_social_valuation.html" class="md-nav__link">9 Social Valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec10_stochastic_simulation.html" class="md-nav__link">10 Stochastic Simulation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Appendix A. Computation Method </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Appendix A. Computation Method</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#appendix--page-root" class="md-nav__link">Appendix A. Computation Method</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-solving-the-optimization-problem" class="md-nav__link">Appendix A.2 Solving the Optimization Problem</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-solving-the-algebraic-system" class="md-nav__link">Appendix A.3 Solving the Algebraic System</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-3-1-false-transient-algorithm" class="md-nav__link">Appendix A.3.1 False Transient Algorithm</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-finite-difference-scheme" class="md-nav__link">Appendix A.3.2 Finite-Difference Scheme</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-3-2-1-upwind-scheme" class="md-nav__link">Appendix A.3.2.1 Upwind Scheme</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-2-natural-boundary-condition" class="md-nav__link">Appendix A.3.2.2 Natural Boundary Condition</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-3-implicit-euler" class="md-nav__link">Appendix A.3.2.3 Implicit Euler</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.4 List of Parameters Chosen in Algorithm</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-solving-the-optimization-problem" class="md-nav__link">Appendix A.2 Solving the Optimization Problem</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-3-solving-the-algebraic-system" class="md-nav__link">Appendix A.3 Solving the Algebraic System</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-3-1-false-transient-algorithm" class="md-nav__link">Appendix A.3.1 False Transient Algorithm</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-3-2-finite-difference-scheme" class="md-nav__link">Appendix A.3.2 Finite-Difference Scheme</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.4 List of Parameters Chosen in Algorithm</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="bib_file.html" class="md-nav__link">References</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#appendix--page-root" class="md-nav__link">Appendix A. Computation Method</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-1-overview" class="md-nav__link">Appendix A.1 Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-solving-the-optimization-problem" class="md-nav__link">Appendix A.2 Solving the Optimization Problem</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-2-1-maximization" class="md-nav__link">Appendix A.2.1 Maximization</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-2-2-minimization" class="md-nav__link">Appendix A.2.2 Minimization</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-solving-the-algebraic-system" class="md-nav__link">Appendix A.3 Solving the Algebraic System</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-3-1-false-transient-algorithm" class="md-nav__link">Appendix A.3.1 False Transient Algorithm</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-finite-difference-scheme" class="md-nav__link">Appendix A.3.2 Finite-Difference Scheme</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#appendix-a-3-2-1-upwind-scheme" class="md-nav__link">Appendix A.3.2.1 Upwind Scheme</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-2-natural-boundary-condition" class="md-nav__link">Appendix A.3.2.2 Natural Boundary Condition</a>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-3-implicit-euler" class="md-nav__link">Appendix A.3.2.3 Implicit Euler</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" class="md-nav__link">Appendix A.4 List of Parameters Chosen in Algorithm</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="appendix-a-computation-method">
+<h1 id="appendix--page-root">Appendix A. Computation Method<a class="headerlink" href="#appendix--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="appendix-a-1-overview">
+<h2 id="appendix-a-1-overview">Appendix A.1 Overview<a class="headerlink" href="#appendix-a-1-overview" title="Permalink to this heading">¶</a></h2>
+<p>Let’s take the HJB equation for pre technology and pre damage jump as an
+example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0 &amp; = \max_{i_k, i_j, \mathcal{E}} \min_{h_k, h_y, h_j, g, f_\ell}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{1-\rho}-1\right] \\
+&amp; +\frac{\partial \Phi}{\partial k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \Phi}{\partial k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+&amp; +\frac{\partial \Phi}{\partial y}\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\frac{\partial^2 \Phi}{\partial y^2} \frac{|\varsigma|^2}{2} \mathcal{E}^2 \\
+&amp; -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\lambda_2 \frac{|\varsigma|^2}{2} \mathcal{E}^2\right) \\
+&amp; +\frac{\partial \Phi}{\partial j}\left(-\zeta+\psi_0\left(i_j\right)^{\psi_1} \exp \left(\psi_1 \log K-\psi_1 \log J\right)-\frac{\left|\sigma_j\right|^2}{2}+\sigma_j h_j\right)+\frac{\partial^2 \Phi}{\partial j^2} \frac{\left|\sigma_j\right|^2}{2} \\
+&amp; +\xi_g I_g(J)(1-g+g \log g)+I_g(J) g\left(\Phi^{II}-\Phi\right) \\
+&amp; +\xi_d I_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+I_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
+&amp; +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_j \frac{\left|h_j\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
+\end{aligned}\end{split}\]</div>
+<p>which satisfies conditions to switch the order of max and min operator.</p>
+<p>Then, after exchanging the order of max and min operator, we deliver the
+solution, i.e. value function <span class="math notranslate nohighlight">\(\Phi\)</span>, to this HJB equation
+recursively with the false transient approach described in <cite>Appendix A.3.1</cite>.
+The procedure in each iteration is provided below.</p>
+<ul class="simple">
+<li><p>Start with current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> where
+<span class="math notranslate nohighlight">\(n \in \{0,1, 2,\ldots\}\)</span> is called iteration step.
+Specifically, <span class="math notranslate nohighlight">\(\Phi^0\)</span> is the initial guess of value function,
+which can be vital to success of algorithm. We solve the HJB equation
+and update value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> to <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> in two
+steps.</p>
+<ol class="arabic simple">
+<li><p>Take current value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> as given, let’s start
+with current distortion and jump misspecification
+<span class="math notranslate nohighlight">\(h_k^n, h_y^n, h_j^n, g^n, f_\ell^n\)</span> and solve optimal
+distortion and jump misspecification in two sub-steps, which are detailed
+in <cite>Appendix A.2</cite>.</p>
+<ol class="arabic simple">
+<li><p>Take value function <span class="math notranslate nohighlight">\(\Phi^n\)</span> and current distortion and
+jump misspecification
+<span class="math notranslate nohighlight">\(h_k^n, h_y^n, h_j^n, g^n, f_\ell^n\)</span> as given, we update
+optimal actions from <span class="math notranslate nohighlight">\(i_k^{n}, i_j^{n}, \mathcal{E}^{n}\)</span>
+to <span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in a
+maximization problem.</p></li>
+<li><p>With updated robustly optimal actions
+<span class="math notranslate nohighlight">\(i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}\)</span> in hand, we
+update optimal distortion
+<span class="math notranslate nohighlight">\(h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}\)</span>
+by solving a minimization problem.</p></li>
+</ol>
+</li>
+<li><p>With updated robustly optimal actions and probability distortion,
+we finally can update value function <span class="math notranslate nohighlight">\(\Phi^{n+1}\)</span> by solving the
+algebraic system depicted in <cite>Appendix A.3</cite>.</p></li>
+</ol>
+</li>
+<li><p>We obtain a convergent solution to the HJB equation when the
+difference between two subsequent iterations is very tiny as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[|\Phi^{n+1}-\Phi^{n}| &lt; \epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is set to be <span class="math notranslate nohighlight">\(10^{-7}\)</span>.</p>
+</section>
+<section id="appendix-a-2-solving-the-optimization-problem">
+<h2 id="appendix-a-2-solving-the-optimization-problem">Appendix A.2 Solving the Optimization Problem<a class="headerlink" href="#appendix-a-2-solving-the-optimization-problem" title="Permalink to this heading">¶</a></h2>
+<section id="appendix-a-2-1-maximization">
+<h3 id="appendix-a-2-1-maximization">Appendix A.2.1 Maximization<a class="headerlink" href="#appendix-a-2-1-maximization" title="Permalink to this heading">¶</a></h3>
+<p>Solution process for <span class="math notranslate nohighlight">\(i_k\)</span> is given as follows, of which the same
+logic can apply to other actions <span class="math notranslate nohighlight">\(i_j, \mathcal{E}\)</span> easily.</p>
+<p>First order condition for <span class="math notranslate nohighlight">\(i_k\)</span> writes</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi)} = \frac{d \Phi}{dk}\left(1-\kappa i_k\right)\]</div>
+<p>which is a highly non-linear equation of <span class="math notranslate nohighlight">\(i_k\)</span> and doesn’t admit a
+quasi-analytial solution.</p>
+<p>Cobweb algorithm states that given current value function and
+probability distortion, we can update current actions
+<span class="math notranslate nohighlight">\(i_k^{n}, i_j^{n}, \mathcal{E}^{n}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[mu^{n} = \frac{d \Phi^n}{dk}\left(1-\kappa {i_k^{n+1}}'\right)\]</div>
+<p>where we define</p>
+<div class="math notranslate nohighlight">
+\[mu^{n} \doteq \delta\left(\frac{\alpha-i_k^{n}-i_j^{n}-\alpha \phi_0\left[1-\frac{\mathcal{E}^{n}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi^n)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi^n)}\]</div>
+<p>And <span class="math notranslate nohighlight">\(i_k^{n+1}\)</span> is computed with relaxation paramter <span class="math notranslate nohighlight">\(\chi\)</span>
+as</p>
+<div class="math notranslate nohighlight">
+\[i_k^{n+1} = \chi i_k^{n} + (1-\chi) {i_k^{n+1}}'\]</div>
+</section>
+<section id="appendix-a-2-2-minimization">
+<h3 id="appendix-a-2-2-minimization">Appendix A.2.2 Minimization<a class="headerlink" href="#appendix-a-2-2-minimization" title="Permalink to this heading">¶</a></h3>
+<p>Solution process to probability distortions is simpler and we take that
+of <span class="math notranslate nohighlight">\(h_k\)</span> as an example, of which the same logic can apply to other
+probability distortions <span class="math notranslate nohighlight">\(h_y, h_j, g, f_\ell\)</span>.</p>
+<p>First order condition for <span class="math notranslate nohighlight">\(h_k\)</span> is written as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \Phi}{\partial k} \sigma_k = -\xi_k h_k\]</div>
+<p>With given value function <span class="math notranslate nohighlight">\(\Phi^n\)</span>, we can update
+<span class="math notranslate nohighlight">\(h_k^{n+1}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial \Phi^n}{\partial k} \sigma_k\]</div>
+</section>
+</section>
+<section id="appendix-a-3-solving-the-algebraic-system">
+<h2 id="appendix-a-3-solving-the-algebraic-system">Appendix A.3 Solving the Algebraic System<a class="headerlink" href="#appendix-a-3-solving-the-algebraic-system" title="Permalink to this heading">¶</a></h2>
+<p>Suppose we have three controlled stochastic process <span class="math notranslate nohighlight">\(x_t, y_t, z_t\)</span>
+as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+d x_t &amp;= \mu^x(x,y,z,\alpha) dt + \sigma^{x}(x,y,z,\alpha) dB^1_t \\
+d y_t &amp;= \mu^y(x,y,z,\alpha) dt + \sigma^{y}(x,y,z,\alpha) dB^2_t \\
+d z_t &amp;= \mu^z(x,y,z,\alpha) dt + \sigma^{z}(x,y,z,\alpha) dB^3_t
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(B^1_t, B^2_t, B^3_t\)</span> are three independent standard
+Brownian process.</p>
+<p>Let’s consider a generalized time-independent three-dimensional HJB
+equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+0= &amp; \max_{\alpha} -\delta v(x,y,z) + u(x,y,z,\alpha)\\
+    &amp; + \mu^x(x,y,z,\alpha) \partial_x v(x,y,z) + \frac{{\sigma^x}(x,y,z,\alpha)^2}{2}\partial_{xx} v(x,y,z) \\
+    &amp;+ \mu^y(x,y,z,\alpha) \partial_y v(x,y,z) + \frac{{\sigma^y}(x,y,z,\alpha)^2}{2}\partial_{yy} v(x,y,z) \\
+    &amp; + \mu^z(x,y,z,\alpha) \partial_z v(x,y,z) + \frac{{\sigma^z}(x,y,z,\alpha)^2}{2}\partial_{zz} v(x,y,z)
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the set of controls in the HJB equation,
+<span class="math notranslate nohighlight">\(x,y,z\)</span> are the state variables of value function <span class="math notranslate nohighlight">\(v\)</span> and
+<span class="math notranslate nohighlight">\(u\)</span> is the utility function.</p>
+<section id="appendix-a-3-1-false-transient-algorithm">
+<h3 id="appendix-a-3-1-false-transient-algorithm">Appendix A.3.1 False Transient Algorithm<a class="headerlink" href="#appendix-a-3-1-false-transient-algorithm" title="Permalink to this heading">¶</a></h3>
+<p>To mitigate the inherent instability of the non-linear HJB, we add a
+false transient (time) dimension and solve it until convergence. And
+the new HJB equation is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\partial_t v(x,y,z,t)= &amp; \max_{\alpha} -\delta v(x,y,z, t) + u(x,y,z,\alpha)\\
+    &amp; + \mu^x(x,y,z,\alpha) \partial_x v(x,y,z, t) + \frac{{\sigma^x}(x,y,z,\alpha)^2}{2}\partial_{xx} v(x,y,z, t) \\
+    &amp;+ \mu^y(x,y,z,\alpha) \partial_y v(x,y,z, t) + \frac{{\sigma^y}(x,y,z,\alpha)^2}{2}\partial_{yy} v(x,y,z, t) \\
+    &amp; + \mu^z(x,y,z,\alpha) \partial_z v(x,y,z, t) + \frac{{\sigma^z}(x,y,z,\alpha)^2}{2}\partial_{zz} v(x,y,z, t)
+\end{aligned}\end{split}\]</div>
+</section>
+<section id="appendix-a-3-2-finite-difference-scheme">
+<h3 id="appendix-a-3-2-finite-difference-scheme">Appendix A.3.2 Finite-Difference Scheme<a class="headerlink" href="#appendix-a-3-2-finite-difference-scheme" title="Permalink to this heading">¶</a></h3>
+<p>In this section, we introduce an upwind finite-difference scheme for discretizing the state variables of the HJB.</p>
+<section id="appendix-a-3-2-1-upwind-scheme">
+<h4 id="appendix-a-3-2-1-upwind-scheme">Appendix A.3.2.1 Upwind Scheme<a class="headerlink" href="#appendix-a-3-2-1-upwind-scheme" title="Permalink to this heading">¶</a></h4>
+<p>We construct equally spaced grids for these three state variables <span class="math notranslate nohighlight">\(x,y,z\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+X &amp;= \{x_1=\underline{X},\ldots,x_N=\bar{X}\} \\
+Y &amp;= \{y_1=\underline{Y},\ldots,y_N=\bar{Y}\} \\
+Z &amp;= \{z_1=\underline{Z},\ldots,z_N=\bar{Z}\}
+\end{aligned}\end{split}\]</div>
+<p>where the distance between two grid points are
+<span class="math notranslate nohighlight">\(\Delta x, \Delta y, \Delta z\)</span></p>
+<p>We approximate value function on grid points and use short-hand
+notation <span class="math notranslate nohighlight">\(v(x_i,y_j,z_k) \doteq v_{i,j,k}\)</span> and so on.</p>
+<p>The partial derivatives <span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> can be approximated
+with either a forward or backward difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\partial_{x,F} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k}-v_{i,j,k}}{\Delta x} \\
+\partial_{x,B} v_{i,j,k} &amp;=  \frac{v_{i,j,k}-v_{i-1,j,k}}{\Delta x}
+\end{aligned}\end{split}\]</div>
+<p>For accuracy, we approximate the partial derivatives
+<span class="math notranslate nohighlight">\(\partial_x v(x,y,z)\)</span> via central difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_{x,C} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} - v_{i-1,j,k}}{2\Delta x}
+\end{aligned}\]</div>
+<p>which is an average of forward and backward difference approximation.</p>
+<p>Then, we approximate the second-order partial derivatives
+<span class="math notranslate nohighlight">\(\partial_{xx} v(x,y,z)\)</span> with a central difference approximation</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_{xx} v_{i,j,k} &amp;=  \frac{v_{i+1,j,k} + v_{i-1,j,k}- 2v_{i,j,k}}{\Delta x^2}
+\end{aligned}\]</div>
+<p>We employ the first-order-condition to express our control
+<span class="math notranslate nohighlight">\(\alpha\)</span> on a grid point <span class="math notranslate nohighlight">\(x_i, y_j, z_k\)</span> as a nonlinear
+function of value function approximations
+<span class="math notranslate nohighlight">\(\partial_{x,C} v_{i,j,k}\)</span> and <span class="math notranslate nohighlight">\(\partial_{xx} v_{i,j,k}\)</span>. Therefore, we use short-hand notations for our control,
+drift and diffusion term as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\alpha(x_i,y_j,z_k) &amp;= \alpha_{i,j,k} \\
+u(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= u_{i,j,k} \\
+\mu^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= \mu^w_{i,j,k}, \quad w=x,y,z\\
+\sigma^w(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= \sigma^w_{i,j,k}, \quad w=x,y,z\\
+\end{aligned}\end{split}\]</div>
+<p>In the upwind scheme, we construct backward approximation with negative
+drift and forward approximation with positive drift.</p>
+</section>
+<section id="appendix-a-3-2-2-natural-boundary-condition">
+<h4 id="appendix-a-3-2-2-natural-boundary-condition">Appendix A.3.2.2 Natural Boundary Condition<a class="headerlink" href="#appendix-a-3-2-2-natural-boundary-condition" title="Permalink to this heading">¶</a></h4>
+<p>We approximate second order derivative at boundaries with natural
+boundary condition. More specifically, suppose state variable <span class="math notranslate nohighlight">\(x\)</span>
+is at its upper boundary, we set second order derivative of value
+function to be the same as that of closet inner point.</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\partial_{xx} v^{n+1}_{N,j,k} &amp;=  \partial_{xx} v^{n+1}_{N-1,j,k} = \frac{v^{n+1}_{N,j,k} + v^{n+1}_{N-2,j,k}- 2v^{n+1}_{N-1,j,k}}{\Delta x^2}
+\end{aligned}\]</div>
+</section>
+<section id="appendix-a-3-2-3-implicit-euler">
+<h4 id="appendix-a-3-2-3-implicit-euler">Appendix A.3.2.3 Implicit Euler<a class="headerlink" href="#appendix-a-3-2-3-implicit-euler" title="Permalink to this heading">¶</a></h4>
+<p>To solve the “transient” system, we use the implicit Euler algorithm, which
+updates <span class="math notranslate nohighlight">\(v^{n+1}\)</span> from current value function <span class="math notranslate nohighlight">\(v^{n}\)</span> recursively.
+At each time step, we solve the following linear system for
+<span class="math notranslate nohighlight">\(v^{n+1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}  = &amp;  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} \\
+    &amp; + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
+    &amp; + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
+    &amp; + {\mu^{z,n}_{i,j,k}}^{+} \partial_z v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
+\end{aligned}\end{split}\]</div>
+<p>After spatial discretization via the finite difference scheme, this system can
+be written in the matrix form</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\frac{(v^{n+1}-v^{n})}{\Delta t}  + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
+\end{aligned}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A^{n}\)</span> is a sparse matrix. The linear system thus can be solved by
+an iterative method such as conjugate gradient. For efficiency, we use the PETSc
+linear solver library (<span id="id1">Balay <em>et al.</em> [<a class="reference internal" href="bib_file.html#id120" title="Satish Balay, Shrirang Abhyankar, Mark F. Adams, Steven Benson, Jed Brown, Peter Brune, Kris Buschelman, Emil Constantinescu, Lisandro Dalcin, Alp Dener, Victor Eijkhout, Jacob Faibussowitsch, William D. Gropp, Václav Hapla, Tobin Isaac, Pierre Jolivet, Dmitry Karpeev, Dinesh Kaushik, Matthew G. Knepley, Fande Kong, Scott Kruger, Dave A. May, Lois Curfman McInnes, Richard Tran Mills, Lawrence Mitchell, Todd Munson, Jose E. Roman, Karl Rupp, Patrick Sanan, Jason Sarich, Barry F. Smith, Stefano Zampini, Hong Zhang, Hong Zhang, and Junchao Zhang. PETSc/TAO users manual. Technical Report ANL-21/39 - Revision 3.19, Argonne National Laboratory, 2023. doi:10.2172/1968587.">7</a>]</span>) which includes a long list of linear
+solvers and preconditioners. Based on our empirical experiences, the Stablized
+Biconjugate Gradient (BiCGStab) method paired with the incomplete factorization
+(ILU)preconditioner gives the best performance.</p>
+</section>
+</section>
+</section>
+<section id="appendix-a-4-list-of-parameters-chosen-in-algorithm">
+<h2 id="appendix-a-4-list-of-parameters-chosen-in-algorithm">Appendix A.4 List of Parameters Chosen in Algorithm<a class="headerlink" href="#appendix-a-4-list-of-parameters-chosen-in-algorithm" title="Permalink to this heading">¶</a></h2>
+<table>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\chi\)</span></p></td>
+<td><p>0.0025</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Delta t\)</span></p></td>
+<td><p>0.0025</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\underline{\log K}\)</span></p></td>
+<td><p>4.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\overline{\log K}\)</span></p></td>
+<td><p>9.0</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\underline{Y}\)</span></p></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\overline{Y}\)</span></p></td>
+<td><p>4.0</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\underline{\log J}\)</span></p></td>
+<td><p>1.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\overline{\log J}\)</span></p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Delta \log K\)</span></p></td>
+<td><p>0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Delta Y\)</span></p></td>
+<td><p>0.1</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Delta \log J\)</span></p></td>
+<td><p>0.1</p></td>
+</tr>
+</tbody>
+</table>
+<!-- ## Appendix A.2 Cobweb Relaxation
+
+### Appendix A.2.1 A Deep Look into First Order Condition
+
+There are HJB equations with simple control dynamics. For example, this HJB equation, describing heterogenous agents model in Aiyagari-Bewley-Huggett Economy,
+
+$$
+\rho v(a, z)=\max _c u(c)+\partial_a v(a, z)(z+r a-c)+\mu(z) \partial_z v(a, z)+\frac{\sigma^2(z)}{2} \partial_{z z} v(a, z)
+$$
+
+has a very straight-forward optimal consumption choice as
+
+$$
+c^* = u^{\prime-1}\left(\partial_a v(a, z)\right)
+$$
+
+However, our HJB equations doesn't contain such simple dynamics. To solve a very complex system, we resort to a special algorithm called Cobweb algorithm. As it will show, the key idea is to reduce the non-linearity of the first order condition by progressively solving it in multiple steps.
+
+### Appendix A.2.1 Progressive Algorithm against Strong Non-linearity
+
+We take the HJB equation for post technology jump as an example.
+
+\begin{aligned}
+0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
+& +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+& +\xi_k \frac{\left|h_k\right|^2}{2}
+\end{aligned}
+
+First order condition for $i_k$ writes
+
+$$
+\delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa i_k\right)
+$$
+
+which is a highly nonlinear equation of $i_k$ and doesn't lead to a quasi-analytical solution.
+
+To get around the nonlinearity, the Cobweb algorithm states that we define a new term $mu$ as
+
+$$
+m u=\frac{d v}{dk}\left(1-\kappa i_k\right)
+$$
+
+Then we solve the equation in multiple steps. Starting with a initial guess of $i_k$ as $i_k^0$, we update $i_k^n$, $n=1,2,\ldots,N$ according to
+
+$$
+mu^{n}= \frac{d v}{dk}\left(1-\kappa i_k^{n+1}\right)
+$$
+
+where
+
+$$
+mu^{n} = \delta\left(\frac{\alpha-i_k^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}
+$$
+
+
+Now, to decide when to stop, we hope to see the difference between two subsequent iterations very tiny, meaning we have obtained a convergent solution to the equation. In other words, we wish to see
+
+$$
+|i_k^n-i_k^{n-1}| < \epsilon
+$$
+
+where $\epsilon$ is set to be $10^{-7}$.
+
+
+### Appendix A.2.3 Further Improvement
+
+While the Cobweb algorithm can alleviate our computational burden of dealing with complex first order conditions a lot, there is still much room for further improvement on efficiency of our algorithm. For example, as we notice that the main purpose is to deliver a convergent solution to the value function in the HJB equation, we can alternate the Cobweb algorithm in a way that it's iterating not over control, such as $i_k$, but directly over value function.
+
+In other words, we start with initial guess of $v$, $i_k$ as $v^0$, $i_k^0$ and complete a inner iteration over $i_k$ and an outer iteration over $v$.
+
+In the inner iteration, we take value function $v^n$ as given and attempt to update $i_k^n$ according to
+
+$$
+mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa {i_k^{n+1}}'\right)
+$$
+
+
+where
+
+$$
+mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}
+$$
+
+Here we progressively update $i_k^n$ to $i_k^{n+1}$ by a convex combination of $i_k^n$ and ${i_k^{n+1}}'$ with a relaxation parameter $\chi$ as
+
+$$
+i_k^{n+1}= \chi i_k^n + (1-\chi) {i_k^{n+1}}'.
+$$
+
+
+
+Once we have updated $i_k^{n+1}$, we can turn to outer iteration that updating $v^{n+1}$ according to
+
+
+\begin{aligned}
+0= &  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
+& +\frac{d v^{n+1}}{dk}\left[\mu_k+{i_k^{n+1}}-\frac{\kappa}{2} {i_k^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h_k^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+& +\xi_k \frac{\left|{h_k^{n+1}}\right|^2}{2}
+\end{aligned}
+
+To sum up, this alternated Cobweb algorithm aims at achieving a very tiny difference between two subsequent iterations over value function $v$ more directly,
+
+$$
+|v^{n+1}-v^{n}| < \epsilon
+$$
+
+which improved the efficiency and stability gallantly.
+ --></section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="sec10_stochastic_simulation.html" title="10 Stochastic Simulation"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> 10 Stochastic Simulation </span>
+              </div>
+            </a>
+          
+          
+            <a href="bib_file.html" title="References"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> References </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Bin Cheng.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

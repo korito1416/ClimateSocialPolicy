@@ -1,0 +1,114 @@
+5 Economic Framework
+====================
+
+We start by considering a simple production-based model with an AK
+production technology subject to adjustment costs. By design, this
+formulation has close ties to much of the long-run risk with consumption
+exogenously specified consumption endowments. Prior to introducing
+climate change, we include two modifications. First, we include an
+energy input in way that is mathematically similar to what is used in so
+called \``DICE’’ models; and second, we allow for R&D that could
+eventually remove the need for energy input. In regards to the second
+modification, some suggest that an economically viable version of
+nuclear fusion might achieve this aim.
+
+5.1 Production and Innovation
+-----------------------------
+
+| The economic component to our model has two endogenous state
+  variables: the stock of productive capital and the stock of research
+  and development capital.
+| The stock of productive capital, :math:`K_t,` evolves as
+
+.. math::
+
+
+   dK_t = K_t \left[ - \mu_k    + \left({\frac {I_{t}^k}{K_t}} \right)  -
+   {\frac { \kappa} 2} \left( {\frac {I_{t}^k} {K_t}} \right)^2 \right] dt 
+   + K_t \sigma_k dW_t
+
+where :math:`\sigma_k` is a row vector with the same dimension as the
+underlying Brownian motion. Capital is broadly conceived to include
+human capital and intangible capital. Investment :math:`I_t^k`
+contributes new capital subject to an adjustment cost captured by the
+curvature parameter :math:`\kappa`.
+
+A process :math:`J` captures the stock of knowledge induced by research
+and development as measured by :math:`J_t`:
+
+.. math::
+
+
+   d J_t = - \zeta J_t dt + \psi_0 \left(I_t^j\right)^{\psi_1} \left(J_t\right)^{1 - \psi_1} dt + J_t \sigma_j dW_t 
+
+where :math:`0 < \psi_1 < 1` and :math:`I_t^j` is an investment in
+research and development (R & D).
+
+While we will solve a social planner’s problem, we will subsequently
+entertain the possibility that this evolution equation includes an
+externality associated with R&D. For pedagogical simplicity, we consider
+the case of a single technology jump to a fully productive green
+technology. The parameter, :math:`\zeta,` captures depreciation in the
+stock of knowledge pertinent for future technological progress.
+
+5.1.1 Output
+~~~~~~~~~~~~
+
+Output is split between consumption, productive and R&D capital
+investments, and emissions abatement expenditure.
+
+.. math::
+
+
+   C_t + I_t^k +  I_t^j = \alpha K_t  \left[1 - \phi_{0,t}\left(\iota_t\right)^{\phi_1} \right] 
+
+for :math:`\phi_1 \ge 2` and :math:`0<\phi_{0,t} \le 1,` where
+
+.. math::
+
+
+   \iota_t  =   \left(1 - \frac {{\mathcal E}_t}{\beta \alpha K_t}  \right){\mathbf 1}_{{\mathcal E}_t  < \beta \alpha K_t } 
+
+and where :math:`{\mathbf 1}` is an indicator function that assigns one
+to the event in the parentheses. When emissions fall short of the
+threshold :math:`\beta_t \alpha K_t,` there is a corresponding convex
+adjustment in the output given by the right-hand side of output
+constraint.
+
+This technology is, by design, homogeneous of degree one. For a fixed
+:math:`K_t,` the implied production function is flat when emissions
+exceed the threshold of :math:`\beta \alpha K_t,` and has a zero left
+derivative at this point. The function equals :math:`1-\phi_{0,t}` when
+:math:`{\mathcal E}_t=0` and increases up the threshold as a concave
+function with curvature dictated by the parameter :math:`\phi_1.` We
+feature the case in which :math:`\phi_1 = 3.`
+
+5.2 Social Valuation
+--------------------
+
+The first-order conditions for the socially efficient R & D investment
+are:
+
+.. math::
+
+
+   \frac {\partial {\widehat V}}{ \partial j } (X_t) \psi_0 \psi_1 \left( I_t^j  \right)^{\psi_1-1} \left( J_t \right)^{1-\psi_1} 
+    - \delta \left(C_t\right)^{-\rho}  \left(N_t\right)^{\rho-1}  
+    \left(\exp \left[(\rho - 1) {\widehat V}(X_t)\right] \right) = 0.  
+
+where we replace :math:`C_t` with :math:`\frac{C_t}{N_t}` in the
+preference specification.
+
+Thus
+
+.. math::
+
+
+   \left( I_t^j  \right)^{1 - \psi_1} = \psi_0 \psi_1\left( J_t \right)^{-\psi_1} N_t \left[  \frac { J_t \frac {\partial {\widehat V}}{ \partial j } (X_t)  }{
+   \delta \left(C_t\right)^{-\rho}  \left(N_t\right)^{\rho }  
+    \left(\exp \left[(\rho - 1) {\widehat V}(X_t)\right] \right)}\right] .
+
+The term in brackets is the social value of the knowledge stock of R & D
+expressed in units of (damaged) consumption. We now give an asset
+pricing representation of social value of the stock of R & D which is
+the intertemporal input into the social benefit for R & D investment.
