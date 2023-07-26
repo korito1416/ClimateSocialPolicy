@@ -1069,3 +1069,4 @@ def plot_simulated_stoc_path_full2(graph_type, graph_title, yaxis_label, graph_r
 
 
     return fig
+
