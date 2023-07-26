@@ -175,7 +175,7 @@ the new HJB equation is
 .. math::
 
    \begin{aligned}
-   0= & \max_{\alpha} -\delta v(x,y,z, t) + u(x,y,z,\alpha) + \partial_t v(x,y,z,t)\\
+   \partial_t v(x,y,z,t)= & \max_{\alpha} -\delta v(x,y,z, t) + u(x,y,z,\alpha)\\
        & + \mu^x(x,y,z,\alpha) \partial_x v(x,y,z, t) + \frac{{\sigma^x}(x,y,z,\alpha)^2}{2}\partial_{xx} v(x,y,z, t) \\
        &+ \mu^y(x,y,z,\alpha) \partial_y v(x,y,z, t) + \frac{{\sigma^y}(x,y,z,\alpha)^2}{2}\partial_{yy} v(x,y,z, t) \\
        & + \mu^z(x,y,z,\alpha) \partial_z v(x,y,z, t) + \frac{{\sigma^z}(x,y,z,\alpha)^2}{2}\partial_{zz} v(x,y,z, t)
@@ -279,7 +279,7 @@ At each time step, we solve the following linear system for
 .. math::
 
    \begin{aligned}
-   0  = &  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} + \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}\\
+   \frac{v^{n+1}_{i,j,k} - v^{n}_{i,j,k}}{\Delta t}  = &  -\delta v^{n+1}_{i,j,k} + u_{i,j,k}^{n} \\
        & + {\mu^{x,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{x,n}_{i,j,k}}^{-}  \partial_x v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{x,n}_{i,j,k}}^2}{2}\partial_{xx} v_{i,j,k}^{n+1}\\
        & + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
        & + {\mu^{z,n}_{i,j,k}}^{+} \partial_z v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
