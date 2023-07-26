@@ -321,9 +321,9 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#appendix-a-3-2-1-upwind-scheme" class="md-nav__link">Appendix A.3.2.1 Upwind Scheme</a>
         </li>
-        <li class="md-nav__item"><a href="#a-3-2-2-natural-boundary-condition" class="md-nav__link">A.3.2.2 Natural Boundary Condition</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-2-natural-boundary-condition" class="md-nav__link">Appendix A.3.2.2 Natural Boundary Condition</a>
         </li>
-        <li class="md-nav__item"><a href="#a-3-2-3-implicit-euler" class="md-nav__link">A.3.2.3 Implicit Euler</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-3-implicit-euler" class="md-nav__link">Appendix A.3.2.3 Implicit Euler</a>
         </li></ul>
             </nav>
         </li></ul>
@@ -435,9 +435,9 @@
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#appendix-a-3-2-1-upwind-scheme" class="md-nav__link">Appendix A.3.2.1 Upwind Scheme</a>
         </li>
-        <li class="md-nav__item"><a href="#a-3-2-2-natural-boundary-condition" class="md-nav__link">A.3.2.2 Natural Boundary Condition</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-2-natural-boundary-condition" class="md-nav__link">Appendix A.3.2.2 Natural Boundary Condition</a>
         </li>
-        <li class="md-nav__item"><a href="#a-3-2-3-implicit-euler" class="md-nav__link">A.3.2.3 Implicit Euler</a>
+        <li class="md-nav__item"><a href="#appendix-a-3-2-3-implicit-euler" class="md-nav__link">Appendix A.3.2.3 Implicit Euler</a>
         </li></ul>
             </nav>
         </li></ul>
@@ -643,8 +643,8 @@ u(x_i,y_j,z_k,\alpha(x_i,y_j,z_k)) &amp;= u_{i,j,k} \\
 <p>In the upwind scheme, we construct backward approximation with negative
 drift and forward approximation with positive drift.</p>
 </section>
-<section id="a-3-2-2-natural-boundary-condition">
-<h4 id="a-3-2-2-natural-boundary-condition">A.3.2.2 Natural Boundary Condition<a class="headerlink" href="#a-3-2-2-natural-boundary-condition" title="Permalink to this heading">¶</a></h4>
+<section id="appendix-a-3-2-2-natural-boundary-condition">
+<h4 id="appendix-a-3-2-2-natural-boundary-condition">Appendix A.3.2.2 Natural Boundary Condition<a class="headerlink" href="#appendix-a-3-2-2-natural-boundary-condition" title="Permalink to this heading">¶</a></h4>
 <p>We approximate second order derivative at boundaries with natural
 boundary condition. More specifically, suppose state variable <span class="math notranslate nohighlight">\(x\)</span>
 is at its upper boundary, we set second order derivative of value
@@ -654,8 +654,8 @@ function to be the same as that of closet inner point.</p>
 \partial_{xx} v^{n+1}_{N,j,k} &amp;=  \partial_{xx} v^{n+1}_{N-1,j,k} = \frac{v^{n+1}_{N,j,k} + v^{n+1}_{N-2,j,k}- 2v^{n+1}_{N-1,j,k}}{\Delta x^2}
 \end{aligned}\]</div>
 </section>
-<section id="a-3-2-3-implicit-euler">
-<h4 id="a-3-2-3-implicit-euler">A.3.2.3 Implicit Euler<a class="headerlink" href="#a-3-2-3-implicit-euler" title="Permalink to this heading">¶</a></h4>
+<section id="appendix-a-3-2-3-implicit-euler">
+<h4 id="appendix-a-3-2-3-implicit-euler">Appendix A.3.2.3 Implicit Euler<a class="headerlink" href="#appendix-a-3-2-3-implicit-euler" title="Permalink to this heading">¶</a></h4>
 <p>To solve the “transient” system, we use the implicit Euler algorithm, which
 updates <span class="math notranslate nohighlight">\(v^{n+1}\)</span> from current value function <span class="math notranslate nohighlight">\(v^{n}\)</span> recursively.
 At each time step, we solve the following linear system for

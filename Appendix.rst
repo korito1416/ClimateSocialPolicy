@@ -253,7 +253,7 @@ In the upwind scheme, we construct backward approximation with negative
 drift and forward approximation with positive drift.
 
 
-A.3.2.2 Natural Boundary Condition
+Appendix A.3.2.2 Natural Boundary Condition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We approximate second order derivative at boundaries with natural
@@ -268,7 +268,7 @@ function to be the same as that of closet inner point.
    \end{aligned}
 
 
-A.3.2.3 Implicit Euler
+Appendix A.3.2.3 Implicit Euler
 ^^^^^^^^^^^^^^^^^^^^^^
 
 To solve the "transient" system, we use the implicit Euler algorithm, which
