@@ -285,7 +285,8 @@ At each time step, we solve the following linear system for
        & + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
    \end{aligned}
 
-This system can be written in the matrix form
+After spatial discretization via the finite difference scheme, this system can
+be written in the matrix form
 
 .. math::
 
@@ -295,7 +296,7 @@ This system can be written in the matrix form
 
 where :math:`A^{n}` is a sparse matrix. The linear system thus can be solved by
 an iterative method such as conjugate gradient. For efficiency, we use the PETSc
-linear solver library :cite:t:`petsc` which includes a long list of linear
+linear solver library (:cite:t:`petsc`) which includes a long list of linear
 solvers and preconditioners. Based on our empirical experiences, the Stablized
 Biconjugate Gradient (BiCGStab) method paired with the incomplete factorization
 (ILU)preconditioner gives the best performance.

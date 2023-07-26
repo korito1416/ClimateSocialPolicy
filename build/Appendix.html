@@ -667,14 +667,15 @@ At each time step, we solve the following linear system for
     &amp; + {\mu^{y,n}_{i,j,k}}^{+} \partial_y v^{n+1,F}_{i,j,k} + {\mu^{y,n}_{i,j,k}}^{-}  \partial_y v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{y,n}_{i,j,k}}^2}{2}\partial_{yy} v_{i,j,k}^{n+1}\\
     &amp; + {\mu^{z,n}_{i,j,k}}^{+} \partial_x v^{n+1,F}_{i,j,k} + {\mu^{z,n}_{i,j,k}}^{-}  \partial_z v^{n+1,B}_{i,j,k}+ \frac{{\sigma^{z,n}_{i,j,k}}^2}{2}\partial_{zz} v_{i,j,k}^{n+1}\\
 \end{aligned}\end{split}\]</div>
-<p>This system can be written in the matrix form</p>
+<p>After spatial discretization via the finite difference scheme, this system can
+be written in the matrix form</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 \frac{(v^{n+1}-v^{n})}{\Delta t}  + \delta v^{n+1} = u^{n} + A^{n} v^{n+1}
 \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(A^{n}\)</span> is a sparse matrix. The linear system thus can be solved by
 an iterative method such as conjugate gradient. For efficiency, we use the PETSc
-linear solver library <span id="id1">Balay <em>et al.</em> [<a class="reference internal" href="bib_file.html#id120" title="Satish Balay, Shrirang Abhyankar, Mark F. Adams, Steven Benson, Jed Brown, Peter Brune, Kris Buschelman, Emil Constantinescu, Lisandro Dalcin, Alp Dener, Victor Eijkhout, Jacob Faibussowitsch, William D. Gropp, Václav Hapla, Tobin Isaac, Pierre Jolivet, Dmitry Karpeev, Dinesh Kaushik, Matthew G. Knepley, Fande Kong, Scott Kruger, Dave A. May, Lois Curfman McInnes, Richard Tran Mills, Lawrence Mitchell, Todd Munson, Jose E. Roman, Karl Rupp, Patrick Sanan, Jason Sarich, Barry F. Smith, Stefano Zampini, Hong Zhang, Hong Zhang, and Junchao Zhang. PETSc/TAO users manual. Technical Report ANL-21/39 - Revision 3.19, Argonne National Laboratory, 2023. doi:10.2172/1968587.">7</a>]</span> which includes a long list of linear
+linear solver library (<span id="id1">Balay <em>et al.</em> [<a class="reference internal" href="bib_file.html#id120" title="Satish Balay, Shrirang Abhyankar, Mark F. Adams, Steven Benson, Jed Brown, Peter Brune, Kris Buschelman, Emil Constantinescu, Lisandro Dalcin, Alp Dener, Victor Eijkhout, Jacob Faibussowitsch, William D. Gropp, Václav Hapla, Tobin Isaac, Pierre Jolivet, Dmitry Karpeev, Dinesh Kaushik, Matthew G. Knepley, Fande Kong, Scott Kruger, Dave A. May, Lois Curfman McInnes, Richard Tran Mills, Lawrence Mitchell, Todd Munson, Jose E. Roman, Karl Rupp, Patrick Sanan, Jason Sarich, Barry F. Smith, Stefano Zampini, Hong Zhang, Hong Zhang, and Junchao Zhang. PETSc/TAO users manual. Technical Report ANL-21/39 - Revision 3.19, Argonne National Laboratory, 2023. doi:10.2172/1968587.">7</a>]</span>) which includes a long list of linear
 solvers and preconditioners. Based on our empirical experiences, the Stablized
 Biconjugate Gradient (BiCGStab) method paired with the incomplete factorization
 (ILU)preconditioner gives the best performance.</p>
