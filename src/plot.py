@@ -773,6 +773,160 @@ def plot_simulatedpath_full2(graph_type, graph_title, yaxis_label, graph_range, 
     return fig
 
 
+def plot_simulatedpath_flow_full2(graph_type, graph_title, yaxis_label, graph_range, before15):
+
+    xi_base = 100000.
+    psi_01 = 0.052915
+    psi_02 = 0.052915
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [1.0]:
+
+            if abatement_cost == 0.1:
+
+                xi_list_fullaversion = [0.025, 0.050, 100000.]
+                xi_list_uncertaintydecomp = [0.050]
+
+            if abatement_cost == 0.5:
+
+                xi_list_fullaversion = [0.075, 0.150, 100000.]
+                xi_list_uncertaintydecomp = [0.150]
+
+            folder = "./data_simul2/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_flow_phi0_{}/".format(
+                abatement_cost)
+            i = 0
+            for xi in xi_list_fullaversion:
+                filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_01_{}_psi_02_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+                    xi_base, xi, xi, xi, xi, xi, psi_01, psi_02, psi_1, varrho, rho, delta)
+
+                with open(folder + filename + "model_tech1_pre_damage_UD_simul_40direct_direct", "rb") as f:
+                    model_tech1_pre_damage = pickle.load(f)
+                # print(model_tech1_pre_damage.keys())
+                # print(filename)
+                # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
+                if xi == 100000.:
+                    label = "Baseline"
+                if xi == 0.050 or xi == 0.150:
+                    label = "Less Aversion"
+                if xi == 0.025 or xi == 0.075:
+                    label = "More Aversion"
+                # print(model_tech1_pre_damage[graph_type])
+                if before15 == False:
+                    fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+                                             y=model_tech1_pre_damage[graph_type],
+                                             name=label,
+                                             showlegend=False,
+                                             visible=False,                                     line=dict(color=color[i]),
+                                             #  visible=False
+                                             ))
+                elif before15 == True:
+                    fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                             y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                             name=label,
+                                             showlegend=False,
+                                             visible=False,                                     line=dict(color=color[i]),
+                                             #  visible=False
+                                             ))
+                i = i+1
+
+    for i in range(3):
+        fig.data[3*0 + i]["visible"] = True
+        # fig.data[3*2 + i+12]["visible"] = True
+        
+        fig.data[3*0 + i]["showlegend"] = True
+        # fig.data[3*2 + 12]["showlegend"] = True
+
+
+
+
+    buttons = []
+    i = 0
+
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [1.0]:
+
+            if abatement_cost == 0.1:
+
+                xi_list = [0.025, 0.050]
+                cost_label = "φ₀=0.1"
+            if abatement_cost == 0.5:
+
+                xi_list = [0.075, 0.150]
+                cost_label = "φ₀=0.5"
+
+            # Hide all traces
+            label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+            button = dict(method='update',
+                          args=[
+                              {
+                                  'visible': [False] * (2 * 1 * 3),
+                                  'showlegend': [False] * (2 * 1 * 3),
+                              },
+                          ],
+                          label=label)
+            # Enable the two traces we want to see
+            # print(button['args'][0]["visible"])
+
+            button['args'][0]["visible"][3*i + 0] = True
+            button['args'][0]["visible"][3*i + 1] = True
+            button['args'][0]["visible"][3*i + 2] = True
+
+            button['args'][0]["showlegend"][3*i + 0] = True
+            button['args'][0]["showlegend"][3*i + 1] = True
+            button['args'][0]["showlegend"][3*i + 2] = True
+
+            i = i+1
+            # Add step to step list
+            buttons.append(button)
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                buttons=buttons,
+                # direction="right",
+                active=0,
+                x=1.3,
+                y=0.7,
+                # xanchor="left",
+                # yanchor="top",
+                pad={"r": 10,
+                     "t": 10, "b": 10},
+                showactive=True
+            )
+        ])
+
+    fig.update_xaxes(showgrid=False, showline=True,
+                     title="Years", range=[0, 40])
+    fig.update_yaxes(showgrid=False,
+                     showline=True,
+                     range=graph_range,
+                     title_text=yaxis_label,
+                     tickformat=".2f")
+    # fig.update_yaxes(showgrid=False, showline=True,
+    #                  range=[1., 2.1], col=2, row=1)
+    # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
+    #                  tickformat=".1f",
+    #                  col=2,
+    #                  row=1)
+    # fig.update_layout(height=400, width=1280)
+    fig.update_layout(
+        title=graph_title,
+        barmode="overlay",
+        plot_bgcolor="white",
+        width=800,
+        height=500,
+        margin=dict(l=50, r=0))
+
+    return fig
+
 def plot_simulatedpath_uncer_decomp2(graph_type, graph_title, yaxis_label, graph_range, before15):
 
     xi_base = 100000.
@@ -1463,5 +1617,143 @@ def plot_simulated_stoc_path_full2_split(graph_type, graph_title, yaxis_label, g
         width=1000,
         height=700,
         margin=dict(l=50, r=0))
+
+    return fig
+
+
+
+def plot_simulated_stoc_path_full2_singapore(graph_type, graph_title, yaxis_label, graph_range):
+
+
+    xi_base = 100000.
+    psi_0 = 0.10583
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            if abatement_cost == 0.1:
+
+                xi_list_fullaversion = [0.050]
+
+            if abatement_cost == 0.5:
+
+                xi_list_fullaversion = [0.150]
+
+            folder = "./data_simul2/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+                abatement_cost)
+            i = 0
+            
+            for xi in xi_list_fullaversion:
+                filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+                    xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+                with open(folder + filename + "model_tech1_pre_damage_UD_simulstoccompile_40direct_direct", "rb") as f:
+                    model_tech1_pre_damage = pickle.load(f)
+                
+                PathLength = 5
+                Years = model_tech1_pre_damage["years"][:,0]
+                
+                Mat = model_tech1_pre_damage[graph_type][:, 0:PathLength]
+
+                for j in range(PathLength):
+                    
+                    legend_name = "Path {}".format(j+1)
+
+                    fig.add_trace(go.Scatter(x=Years,
+                                                y=Mat[:, j],
+                                                name=legend_name,
+                                                showlegend=True,
+                                                visible=True,
+                                                line=dict(width=8),
+                                                #  visible=False
+                                                ))
+
+                fig.update_traces(visible=False, line=dict(width=8))
+
+                i = i+1
+
+    for i in range(PathLength):
+        fig.data[3*PathLength + i]["visible"] = True
+        # fig.data[3*2 + i+12]["visible"] = True
+
+        fig.data[3*PathLength + i]["showlegend"] = True
+        # fig.data[3*2 + 12]["showlegend"] = True
+    
+    buttons = []
+    i = 0
+
+    for abatement_cost in [0.1, 0.5]:
+        for rho in [0.66, 1.0, 1.5]:
+
+            if abatement_cost == 0.1:
+
+                cost_label = "φ₀=0.1"
+            if abatement_cost == 0.5:
+
+                cost_label = "φ₀=0.5"
+
+            # Hide all traces
+            label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+            button = dict(method='update',
+                          args=[
+                              {
+                                  'visible': [False] * (2 * 3 * PathLength ),
+                                  'showlegend': [False] * (2 * 3 * PathLength ),
+                              },
+                          ],
+                          label=label)
+            # Enable the two traces we want to see
+            # print(button['args'][0]["visible"])
+
+            for j in range(PathLength):
+                
+                button['args'][0]["visible"][PathLength*i + j] = True
+
+                button['args'][0]["showlegend"][PathLength*i + j] = True
+
+            i = i+1
+            # Add step to step list
+            buttons.append(button)
+
+
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="dropdown",
+                direction="down",
+                buttons=buttons,
+                active=3,
+                x=0.6,
+                y=1.05,
+                pad={'r': 10, 't': 10})
+        ],
+    )
+    
+    fig.update_xaxes(showgrid=False, showline=True,
+                    title="Years", range=[0, 40], linewidth=8)
+    fig.update_yaxes(showgrid=False,
+                    showline=True,
+                    range=graph_range,
+                     title_text=yaxis_label, linewidth=8
+                    # tickformat=".2f"
+                    )
+
+    fig.update_layout(
+        # title=graph_title,
+        # barmode="overlay",
+        plot_bgcolor="white",
+        width=1100,
+        height=700,
+        font=dict(size=24),
+        margin=dict(l=100, r=0,t=0))
+
 
     return fig
