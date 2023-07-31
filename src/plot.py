@@ -1147,10 +1147,10 @@ def plot_simulated_stoc_path_full2(graph_type, graph_title, yaxis_label, graph_r
                 i = i+1
 
     for i in range(PathLength):
-        fig.data[3*PathLength + i]["visible"] = True
+        fig.data[4*PathLength + i]["visible"] = True
         # fig.data[3*2 + i+12]["visible"] = True
 
-        fig.data[3*PathLength + i]["showlegend"] = True
+        fig.data[4*PathLength + i]["showlegend"] = True
         # fig.data[3*2 + 12]["showlegend"] = True
     
     buttons = []
@@ -1198,7 +1198,7 @@ def plot_simulated_stoc_path_full2(graph_type, graph_title, yaxis_label, graph_r
                 type="dropdown",
                 direction="down",
                 buttons=buttons,
-                active=3,
+                active=4,
                 x=0.6,
                 y=1.05,
                 pad={'r': 10, 't': 10})
@@ -1518,7 +1518,7 @@ def plot_simulated_stoc_path_full2_split(graph_type, graph_title, yaxis_label, g
 
                     legend_name = "Path {}".format(j)
 
-                    if abatement_cost == 0.5 and rho == 0.66:
+                    if abatement_cost == 0.5 and rho == 1.0:
                         fig.add_trace(go.Scatter(x=Years,
                                                     y=Mat[:, j],
                                                     name=legend_name,
@@ -1594,7 +1594,7 @@ def plot_simulated_stoc_path_full2_split(graph_type, graph_title, yaxis_label, g
                 type="dropdown",
                 direction="down",
                 buttons=buttons,
-                active=3,
+                active=4,
                 x=0.6,
                 y=1.05,
                 pad={'r': 10, 't': 10}
@@ -1688,7 +1688,7 @@ def plot_simulated_stoc_path_full2_split2(graph_type, graph_title, yaxis_label, 
 
                     legend_name = "Path {}".format(j)
 
-                    if abatement_cost == 0.5 and rho == 0.66:
+                    if abatement_cost == 0.5 and rho == 1.0:
                         fig.add_trace(go.Scatter(x=Years,
                                                     y=Mat[:, j],
                                                     name=legend_name,
@@ -1764,7 +1764,7 @@ def plot_simulated_stoc_path_full2_split2(graph_type, graph_title, yaxis_label, 
                 type="dropdown",
                 direction="down",
                 buttons=buttons,
-                active=3,
+                active=4,
                 x=0.6,
                 y=1.05,
                 pad={'r': 10, 't': 10}
