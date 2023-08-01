@@ -310,11 +310,11 @@ def plot_climatehist(graph_title):
 
 
     for i in range(2):
-        fig.data[2*2 + i]["visible"] = True
-        fig.data[2*2 + i+12]["visible"] = True
+        fig.data[2*4 + i]["visible"] = True
+        fig.data[2*4 + i+12]["visible"] = True
         
-        fig.data[2*2 + i]["showlegend"] = True
-        fig.data[2*2 + 12]["showlegend"] = True
+        fig.data[2*4 + i]["showlegend"] = True
+        fig.data[2*4 + 12]["showlegend"] = True
 
 
     buttons = []
@@ -369,7 +369,7 @@ def plot_climatehist(graph_title):
                 type="buttons",
                 buttons=buttons,
                 # direction="right",
-                active=2,
+                active=4,
                 x=1.25,
                 y=0.7,
                 # xanchor="left",
@@ -514,11 +514,11 @@ def plot_gammahist(graph_title):
 
 
     for i in range(2):
-        fig.data[2*2 + i]["visible"] = True
-        fig.data[2*2 + i+12]["visible"] = True
+        fig.data[2*4 + i]["visible"] = True
+        fig.data[2*4 + i+12]["visible"] = True
         
-        fig.data[2*2 + i]["showlegend"] = True
-        fig.data[2*2 + 12]["showlegend"] = True
+        fig.data[2*4 + i]["showlegend"] = True
+        fig.data[2*4 + 12]["showlegend"] = True
 
 
     buttons = []
@@ -571,7 +571,7 @@ def plot_gammahist(graph_title):
                 type="buttons",
                 buttons=buttons,
                 # direction="right",
-                active=2,
+                active=4,
                 x=1.25,
                 y=0.7,
                 # xanchor="left",
@@ -681,10 +681,10 @@ def plot_simulatedpath_full2(graph_type, graph_title, yaxis_label, graph_range, 
                 i = i+1
 
     for i in range(3):
-        fig.data[3*2 + i]["visible"] = True
+        fig.data[3*4 + i]["visible"] = True
         # fig.data[3*2 + i+12]["visible"] = True
         
-        fig.data[3*2 + i]["showlegend"] = True
+        fig.data[3*4 + i]["showlegend"] = True
         # fig.data[3*2 + 12]["showlegend"] = True
 
 
@@ -737,7 +737,7 @@ def plot_simulatedpath_full2(graph_type, graph_title, yaxis_label, graph_range, 
                 type="buttons",
                 buttons=buttons,
                 # direction="right",
-                active=2,
+                active=4,
                 x=1.3,
                 y=0.7,
                 # xanchor="left",
@@ -836,10 +836,10 @@ def plot_simulatedpath_flow_full2(graph_type, graph_title, yaxis_label, graph_ra
                 i = i+1
 
     for i in range(3):
-        fig.data[3*0 + i]["visible"] = True
+        fig.data[3*4 + i]["visible"] = True
         # fig.data[3*2 + i+12]["visible"] = True
         
-        fig.data[3*0 + i]["showlegend"] = True
+        fig.data[3*4 + i]["showlegend"] = True
         # fig.data[3*2 + 12]["showlegend"] = True
 
 
@@ -892,7 +892,7 @@ def plot_simulatedpath_flow_full2(graph_type, graph_title, yaxis_label, graph_ra
                 type="buttons",
                 buttons=buttons,
                 # direction="right",
-                active=0,
+                active=4,
                 x=1.3,
                 y=0.7,
                 # xanchor="left",
@@ -1000,10 +1000,10 @@ def plot_simulatedpath_uncer_decomp2(graph_type, graph_title, yaxis_label, graph
                                              ))
 
     for i in range(4):
-        fig.data[4*2 + i]["visible"] = True
+        fig.data[4*4 + i]["visible"] = True
         # fig.data[3*2 + i+12]["visible"] = True
         
-        fig.data[4*2 + i]["showlegend"] = True
+        fig.data[4*4 + i]["showlegend"] = True
         # fig.data[3*2 + 12]["showlegend"] = True
 
     buttons = []
@@ -1055,7 +1055,7 @@ def plot_simulatedpath_uncer_decomp2(graph_type, graph_title, yaxis_label, graph
                 type="buttons",
                 buttons=buttons,
                 # direction="right",
-                active=2,
+                active=4,
                 x=1.3,
                 y=0.7,
                 # xanchor="left",
