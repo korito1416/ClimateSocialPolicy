@@ -185,6 +185,124 @@ def plot_damage(graph_title):
     return fig
 
 
+def plot_damage2(graph_title):
+    fig = go.Figure()
+    Y = np.linspace(0., 3., 1000)
+    y_underline = 1.5
+    y_overline = 2
+
+    gamma_1 = 0.00017675
+    gamma_2 = 2 * 0.0022
+    gamma_3_list = np.linspace(0, 1. / 3, 20)
+
+    y_limits = np.arange(y_underline, y_overline + 0.05, 0.1)
+
+    def y_data(y_limit):
+        LHS_ylimit = np.zeros((1000, 20))
+
+        i = 0
+        for gamma_3 in gamma_3_list:
+
+            LHS_ylimitlower = gamma_1 * Y + gamma_2/2 * Y**2  # y<y_limit
+            LHS_ylimitupper = gamma_1 * Y + gamma_2*y_underline * \
+                (Y-y_limit) + (gamma_2+gamma_3)/2 * \
+                (Y-y_limit)**2 + gamma_2/2 * y_limit**2
+
+            LHS_ylimit[:, i] = LHS_ylimitlower * \
+                (Y < y_limit) + LHS_ylimitupper*(Y > y_limit)
+            i = i+1
+        return LHS_ylimit
+
+    for y_limit in y_limits:
+        damages = y_data(y_limit)
+        damage_upper = np.max(damages, axis=1)
+        damage_lower = np.min(damages, axis=1)
+        mean_damage = np.mean(damages, axis=1)
+
+        fig.add_trace(
+            go.Scatter(
+                x=Y,
+                y=damage_lower,
+                visible=False,
+                showlegend=False,
+                line=dict(color="rgba(214,39,40, 0.5)"),
+            ))
+        fig.add_trace(
+            go.Scatter(x=Y,
+                       y=damage_upper,
+                       fill='tonexty',
+                       fillcolor="rgba(214,39,40, 0.3)",
+                       visible=False,
+                       showlegend=False,
+                       line=dict(color="rgba(214,39,40, 0.5)")))
+        fig.add_trace(
+            go.Scatter(
+                x=Y,
+                y=mean_damage,
+                visible=False,
+                showlegend=False,
+                line=dict(color='black'),
+            ))
+        fig.add_trace(
+            go.Scatter(
+                x=y_limit * np.ones(100),
+                y=np.linspace(0.65, 1.01, 100),
+                line=dict(color='black', dash="dash"),
+                visible=False,
+                showlegend=False,
+            ))
+
+    for i in range(4):
+        fig.data[i].visible = True
+
+    fig.update_layout(
+        height=500,
+        width=1000,
+    )
+
+    steps = []
+    for i in range(len(y_limits)):
+        # Hide all traces
+        label = r'ỹ='+"{:.2f}".format(y_limits[i])
+        step = dict(method='update',
+                    args=[
+                        {
+                            'visible': [False] * len(fig.data)
+                        },
+                    ],
+                    label=label)
+        # Enable the two traces we want to see
+        for j in range(4):
+            step['args'][0]["visible"][4 * i + j] = True
+        # Add step to step list
+        steps.append(step)
+
+    sliders = [
+        dict(
+            active=0,
+            currentvalue={"prefix": 'Jump threshold ', "offset": 20},
+            steps=steps,
+            pad={"t": 70},
+        )
+    ]
+
+    fig.update_layout(sliders=sliders,
+                      font=dict(size=13),
+                      plot_bgcolor="white",
+                      title=graph_title)
+    fig.update_xaxes(linecolor='black',
+                     range=[0, 3],
+                     title_text="Temperature Anomaly",
+                     title_font={"size": 13})
+    fig.update_yaxes(range=[0.65, 1 + 0.01],
+                     showline=True,
+                     linecolor="black",
+                     title_text="Proportional reduction in economic output",
+                     title_font={"size": 13})
+    # fig.write_html('fig1.html')
+    return fig
+
+
 
 
 
@@ -662,22 +780,40 @@ def plot_simulatedpath_full2(graph_type, graph_title, yaxis_label, graph_range, 
                 if xi == 0.025 or xi == 0.075:
                     label = "More Aversion"
                 # print(model_tech1_pre_damage[graph_type])
-                if before15 == False:
-                    fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
-                                             y=model_tech1_pre_damage[graph_type],
-                                             name=label,
-                                             showlegend=False,
-                                             visible=False,                                     line=dict(color=color[i]),
-                                             #  visible=False
-                                             ))
-                elif before15 == True:
-                    fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
-                                             y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
-                                             name=label,
-                                             showlegend=False,
-                                             visible=False,                                     line=dict(color=color[i]),
-                                             #  visible=False
-                                             ))
+                if graph_type=="hkt" or graph_type=="hjt":
+                    if before15 == False:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+                                                y=-model_tech1_pre_damage[graph_type],
+                                                name=label,
+                                                showlegend=False,
+                                                visible=False,                                     line=dict(color=color[i]),
+                                                #  visible=False
+                                                ))
+                    elif before15 == True:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                y=-model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                name=label,
+                                                showlegend=False,
+                                                visible=False,                                     line=dict(color=color[i]),
+                                                #  visible=False
+                                                ))
+                else:
+                    if before15 == False:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+                                                 y=model_tech1_pre_damage[graph_type],
+                                                 name=label,
+                                                 showlegend=False,
+                                                 visible=False,                                     line=dict(color=color[i]),
+                                                 #  visible=False
+                                                 ))
+                    elif before15 == True:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                 y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                 name=label,
+                                                 showlegend=False,
+                                                 visible=False,                                     line=dict(color=color[i]),
+                                                 #  visible=False
+                                                 ))
                 i = i+1
 
     for i in range(3):
@@ -979,25 +1115,40 @@ def plot_simulatedpath_uncer_decomp2(graph_type, graph_title, yaxis_label, graph
                 if xi_num == 3:
                     label = "Producticity Uncertainty"
                 # print(model_tech1_pre_damage[graph_type])
-                if before15 == False:
-                    fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
-                                             y=model_tech1_pre_damage[graph_type],
-                                             name=label,
-                                             showlegend=False,
-                                             visible=False,
-                                             line=dict(color=color[xi_num]),
-                                             #  visible=False
-                                             ))
-                elif before15 == True:
-                    fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
-                                             y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
-                                             name=label,
-                                             showlegend=False,
-                                             visible=False,
-                                             line=dict(color=color[xi_num]),
-
-                                             #  visible=False
-                                             ))
+                if graph_type == "hkt" or graph_type == "hjt":
+                    if before15 == False:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+                                                 y=-model_tech1_pre_damage[graph_type],
+                                                 name=label,
+                                                 showlegend=False,
+                                                 visible=False,                                     line=dict(color=color[xi_num]),
+                                                 #  visible=False
+                                                 ))
+                    elif before15 == True:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                 y=-model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                 name=label,
+                                                 showlegend=False,
+                                                 visible=False,                                     line=dict(color=color[xi_num]),
+                                                 #  visible=False
+                                                 ))
+                else:
+                    if before15 == False:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+                                                 y=model_tech1_pre_damage[graph_type],
+                                                 name=label,
+                                                 showlegend=False,
+                                                 visible=False,                                     line=dict(color=color[xi_num]),
+                                                 #  visible=False
+                                                 ))
+                    elif before15 == True:
+                        fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                 y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+                                                 name=label,
+                                                 showlegend=False,
+                                                 visible=False,                                     line=dict(color=color[xi_num]),
+                                                 #  visible=False
+                                                 ))
 
     for i in range(4):
         fig.data[4*4 + i]["visible"] = True
