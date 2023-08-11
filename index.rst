@@ -28,6 +28,7 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
    sec12_stochastic_simulation_more.rst
    sec13_economy_flow.rst
    sec14_postdamage.rst
+   sec15_notechnology.rst
    Appendix.rst
    .. sec1_introduction.ipynb
 
