@@ -909,6 +909,612 @@ def plot_simulatedpath_full2(graph_type, graph_title, yaxis_label, graph_range, 
     return fig
 
 
+def plot_simulatedpath_full2_post(graph_type, graph_title, yaxis_label, graph_range, before15):
+
+    xi_base = 100000.
+    psi_0 = 0.10583
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+    # for abatement_cost in [0.1, 0.5]:
+    #     for rho in [0.66, 1.0, 1.5]:
+    abatement_cost = 0.5
+    rho = 1.0
+
+    if abatement_cost == 0.1:
+
+        xi_list_fullaversion = [0.025, 0.050, 100000.]
+        xi_list_uncertaintydecomp = [0.050]
+
+    if abatement_cost == 0.5:
+
+        xi_list_fullaversion = [0.075, 0.150, 100000.]
+        xi_list_uncertaintydecomp = [0.150]
+
+    folder = "./data_simul6/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+        abatement_cost)
+    i = 0
+    # for xi in xi_list_fullaversion:
+    xi = 0.150
+    filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+        xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+    for TAjump in [1.5, 2.0]:
+        for gamma_3_i in gamma_3_list:
+            
+            with open(folder + filename + "model_tech1_pre_damage_to_post_damage_{:.4f}" .format(gamma_3_i)+"_UD_simul_fulltransit_50_{}".format(TAjump) + "direct_direct", "rb") as f:
+                model_tech1_pre_damage = pickle.load(f)
+            # print(model_tech1_pre_damage.keys())
+            # print(filename)
+            # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
+            # if xi == 100000.:
+            #     label = "Baseline"
+            # if xi == 0.050 or xi == 0.150:
+            #     label = "Less Aversion"
+            # if xi == 0.025 or xi == 0.075:
+            #     label = "More Aversion"
+            # print(model_tech1_pre_damage[graph_type])
+
+            label ="λ₃={:.4f}".format(gamma_3_i)
+
+            # if before15 == False:
+            # for k in [1.5, 2.0]:
+            #     for j in [1.5, 2.0]:
+                    
+            #         if k==1.5 and j ==1.5:
+                        
+            #             graph_type = graph_type + "hist"
+            
+            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"],
+                                        y=model_tech1_pre_damage[graph_type],
+                                        name=label,
+                                        showlegend=False,
+                                        visible=False,                                     
+                                        # line=dict(color=color[i]),
+                                        #  visible=False
+                                        ))
+            # elif before15 == True:
+            #     fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+            #                                 y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+            #                                 name=label,
+            #                                 showlegend=False,
+            #                                 visible=False,                                     line=dict(color=color[i]),
+            #                                 #  visible=False
+            #                                 ))
+            
+    # i = i+1
+
+    for i in range(20):
+        fig.data[0*20 + i]["visible"] = True
+        # fig.data[3*2 + i+12]["visible"] = True
+        
+        fig.data[0*20 + i]["showlegend"] = True
+        # fig.data[3*2 + 12]["showlegend"] = True
+
+
+
+
+    buttons = []
+    i = 0
+
+    # for abatement_cost in [0.1, 0.5]:
+    #     for rho in [0.66, 1.0, 1.5]:
+
+    abatement_cost = 0.5
+    rho = 1.0
+    
+    for TAjump in [1.5, 2.0]:
+        
+
+        cost_label = "Jump at {:.1f} degree".format(TAjump)
+
+
+        # Hide all traces
+        # label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+        button = dict(method='update',
+                        args=[
+                            {
+                                'visible': [False] * (2 * 20),
+                                'showlegend': [False] * (2 * 20),
+                            },
+                        ],
+                      label=cost_label)
+        # Enable the two traces we want to see
+        # print(button['args'][0]["visible"])
+
+        for j in range(20):
+            button['args'][0]["visible"][20*i + j] = True
+            button['args'][0]["showlegend"][20*i + j] = True
+
+
+
+
+        i = i+1
+        # Add step to step list
+        buttons.append(button)
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="dropdown",
+                direction="down",
+                buttons=buttons,
+                # direction="right",
+                active=0,
+                x=0.7,
+                y=1.0,
+                # xanchor="left",
+                # yanchor="top",
+                pad={"r": 10,
+                     "t": 10, "b": 10},
+                showactive=True
+            )
+        ])
+
+    fig.update_xaxes(showgrid=False, showline=True,
+                     title="Years", range=[0, 50])
+    fig.update_yaxes(showgrid=False,
+                     showline=True,
+                     range=graph_range,
+                     title_text=yaxis_label,
+                     tickformat=".2f")
+    # fig.update_yaxes(showgrid=False, showline=True,
+    #                  range=[1., 2.1], col=2, row=1)
+    # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
+    #                  tickformat=".1f",
+    #                  col=2,
+    #                  row=1)
+    # fig.update_layout(height=400, width=1280)
+    fig.update_layout(
+        title=graph_title,
+        barmode="overlay",
+        plot_bgcolor="white",
+        width=1000,
+        height=700,
+        margin=dict(l=50, r=0))
+
+    return fig
+
+
+
+def plot_simulatedpath_full2_lambda_post(graph_type, graph_title, yaxis_label, graph_range, before15):
+
+    xi_base = 100000.
+    psi_0 = 0.10583
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+    # for abatement_cost in [0.1, 0.5]:
+    #     for rho in [0.66, 1.0, 1.5]:
+    abatement_cost = 0.5
+    rho = 1.0
+
+    if abatement_cost == 0.1:
+
+        xi_list_fullaversion = [0.025, 0.050, 100000.]
+        xi_list_uncertaintydecomp = [0.050]
+
+    if abatement_cost == 0.5:
+
+        xi_list_fullaversion = [0.075, 0.150, 100000.]
+        xi_list_uncertaintydecomp = [0.150]
+
+    folder = "./data_simul6/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+        abatement_cost)
+    i = 0
+    # for xi in xi_list_fullaversion:
+    xi = 0.150
+    filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+        xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+    # for TAjump in [1.5, 2.0]:
+        # for gamma_3_i in gamma_3_list:
+            
+    with open(folder + filename + "model_tech1_pre_damage"+"_UD_simul_50" + "direct_direct", "rb") as f:
+        model_tech1_pre_damage = pickle.load(f)
+    # print(model_tech1_pre_damage.keys())
+    # print(filename)
+    # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
+    # if xi == 100000.:
+    #     label = "Baseline"
+    # if xi == 0.050 or xi == 0.150:
+    #     label = "Less Aversion"
+    # if xi == 0.025 or xi == 0.075:
+    #     label = "More Aversion"
+    # print(model_tech1_pre_damage[graph_type])
+
+    # label ="λ₃={:.4f}".format(gamma_3_i)
+
+    # if before15 == False:
+    for k in [1.5, 2.0]:
+        for j in [1.5, 2.0]:
+            
+            if k==1.5 and j ==1.5:
+                
+                graph_type1 = graph_type + "hist_k15_j15"
+            
+            if k==1.5 and j ==2:
+                
+                graph_type1 = graph_type + "hist_k15_j2"
+                        
+            if k==2 and j ==1.5:
+                
+                graph_type1 = graph_type + "hist_k2_j15"
+                        
+            if k==2 and j ==2:
+                
+                graph_type1 = graph_type + "hist_k2_j2"
+                
+            if k == 1.5:
+
+                cost_label1 = "Low Capital, "
+
+            else:
+                cost_label1 = "High Capital, "
+
+            if j == 1.5:
+
+                cost_label2 = "Low R&D Stock"
+
+            else:
+                cost_label2 = "High R&D Stock"
+
+            cost_label = cost_label1 + cost_label2
+
+                
+            # print(model_tech1_pre_damage["gamma_3_list"].shape)
+            # print(model_tech1_pre_damage[graph_type1].shape)
+            
+            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["gamma_3_list"],
+                                        y=model_tech1_pre_damage[graph_type1][:,0],
+                                        name=cost_label,
+                                        # showlegend=False,
+                                        # visible=False,                                     
+                                        # line=dict(color=color[i]),
+                                         visible=True
+                                        ))
+            # elif before15 == True:
+            #     fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+            #                                 y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+            #                                 name=label,
+            #                                 showlegend=False,
+            #                                 visible=False,                                     line=dict(color=color[i]),
+            #                                 #  visible=False
+            #                                 ))
+            
+    # i = i+1
+
+    # for i in range(4):
+    # fig.data[0*4 + 2]["visible"] = True
+    # # fig.data[3*2 + i+12]["visible"] = True
+    
+    # fig.data[0*4 + 2]["showlegend"] = True
+        # fig.data[3*2 + 12]["showlegend"] = True
+
+
+
+
+    buttons = []
+    i = 0
+
+
+    # abatement_cost = 0.5
+    # rho = 1.0
+    
+    # for k in [1.5, 2.0]:
+    #     for j in [1.5, 2.0]:
+            
+    #         if k==1.5:
+                
+    #             cost_label1 = "Low Capital, "
+            
+    #         else:
+    #             cost_label1 = "High Capital, "
+                
+    #         if j==1.5:
+                
+    #             cost_label2 = "Low R&D Stock"
+            
+    #         else:
+    #             cost_label2 = "High R&D Stock"
+
+
+    #         cost_label = cost_label1 + cost_label2
+
+
+    #         # Hide all traces
+    #         # label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+    #         button = dict(method='update',
+    #                         args=[
+    #                             {
+    #                                 'visible': [False] * (4),
+    #                                 'showlegend': [False] * (4),
+    #                             },
+    #                         ],
+    #                     label=cost_label)
+    #         # Enable the two traces we want to see
+    #         # print(button['args'][0]["visible"])
+
+    #         # for j in range(4):
+    #         button['args'][0]["visible"][4*0 + i] = True
+    #         button['args'][0]["showlegend"][4*0 + i] = True
+
+
+    #         i = i+1
+    #         # Add step to step list
+    #         buttons.append(button)
+
+    # fig.update_layout(
+    #     updatemenus=[
+    #         dict(
+    #             type="dropdown",
+    #             direction="down",
+    #             buttons=buttons,
+    #             # direction="right",
+    #             active=0,
+    #             x=0.7,
+    #             y=1.0,
+    #             # xanchor="left",
+    #             # yanchor="top",
+    #             pad={"r": 10,
+    #                  "t": 10, "b": 10},
+    #             showactive=True
+    #         )
+    #     ])
+
+    fig.update_xaxes(showgrid=False, showline=True,
+                     title="λ₃", range=[0, 1/3])
+    fig.update_yaxes(showgrid=False,
+                     showline=True,
+                     range=graph_range,
+                     title_text=yaxis_label,
+                     tickformat=".2f")
+    # fig.update_yaxes(showgrid=False, showline=True,
+    #                  range=[1., 2.1], col=2, row=1)
+    # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
+    #                  tickformat=".1f",
+    #                  col=2,
+    #                  row=1)
+    # fig.update_layout(height=400, width=1280)
+    fig.update_layout(
+        title=graph_title,
+        barmode="overlay",
+        plot_bgcolor="white",
+        width=1000,
+        height=700,
+        margin=dict(l=50, r=0))
+
+    return fig
+
+
+def plot_simulatedpath_full2_dist_post(graph_type, graph_title, xlabel, yaxis_label, graph_range, before15):
+
+    xi_base = 100000.
+    psi_0 = 0.10583
+    psi_1 = 0.5
+    varrho = 1120.0
+    delta = 0.01
+    # fig = make_subplots(1, 2)
+    color = ["#d62728", "darkgreen", "navy", "darkorange"]
+
+    fig = go.Figure()
+    # for abatement_cost in [0.1, 0.5]:
+    #     for rho in [0.66, 1.0, 1.5]:
+    abatement_cost = 0.5
+    rho = 1.0
+
+    if abatement_cost == 0.1:
+
+        xi_list_fullaversion = [0.025, 0.050, 100000.]
+        xi_list_uncertaintydecomp = [0.050]
+
+    if abatement_cost == 0.5:
+
+        xi_list_fullaversion = [0.075, 0.150, 100000.]
+        xi_list_uncertaintydecomp = [0.150]
+
+    folder = "./data_simul6/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.2,0.1,0.1_LR_0.0025_FK_phi0_{}/".format(
+        abatement_cost)
+    i = 0
+    # for xi in xi_list_fullaversion:
+    xi = 0.150
+    filename = "xi_a_{}_xi_k_{}_xi_c_{}_xi_j_{}_xi_d_{}_xi_g_{}_psi_0_{}_psi_1_{}_varrho_{}_rho_{}_delta_{}_" .format(
+        xi_base, xi, xi, xi, xi, xi, psi_0, psi_1, varrho, rho, delta)
+
+    # for TAjump in [1.5, 2.0]:
+        # for gamma_3_i in gamma_3_list:
+            
+    with open(folder + filename + "model_tech1_pre_damage"+"_UD_simul_50" + "direct_direct", "rb") as f:
+        model_tech1_pre_damage = pickle.load(f)
+    # print(model_tech1_pre_damage.keys())
+    # print(filename)
+    # label = r'ξᵣ = {:.1f}'.format(xi_list_fullaversion[i])
+    # if xi == 100000.:
+    #     label = "Baseline"
+    # if xi == 0.050 or xi == 0.150:
+    #     label = "Less Aversion"
+    # if xi == 0.025 or xi == 0.075:
+    #     label = "More Aversion"
+    # print(model_tech1_pre_damage[graph_type])
+
+    # label ="λ₃={:.4f}".format(gamma_3_i)
+
+    # if before15 == False:
+    for k in [1.5, 2.0]:
+        for j in [1.5, 2.0]:
+            
+            if k==1.5 and j ==1.5:
+                
+                graph_type1 = graph_type + "hist_k15_j15"
+            
+            if k==1.5 and j ==2:
+                
+                graph_type1 = graph_type + "hist_k15_j2"
+                        
+            if k==2 and j ==1.5:
+                
+                graph_type1 = graph_type + "hist_k2_j15"
+                        
+            if k==2 and j ==2:
+                
+                graph_type1 = graph_type + "hist_k2_j2"
+                        
+            if k == 1.5:
+
+                cost_label1 = "Low Capital, "
+
+            else:
+                cost_label1 = "High Capital, "
+
+            if j == 1.5:
+
+                cost_label2 = "Low R&D Stock"
+
+            else:
+                cost_label2 = "High R&D Stock"
+
+            cost_label = cost_label1 + cost_label2
+
+
+
+            fig.add_trace(go.Histogram(
+                x=model_tech1_pre_damage[graph_type1][:,0],
+                histnorm='probability density',
+                # marker=dict(color="red", line=dict(color='grey', width=1)),
+                showlegend=False,
+                xbins=dict(size=0.5),
+                name=cost_label,
+                # legendgroup=1,
+                opacity=0.5,
+            ))
+            # elif before15 == True:
+            #     fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
+            #                                 y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
+            #                                 name=label,
+            #                                 showlegend=False,
+            #                                 visible=False,                                     line=dict(color=color[i]),
+            #                                 #  visible=False
+            #                                 ))
+
+    # i = i+1
+
+    for i in range(4):
+        fig.data[0*4 + i]["visible"] = True
+        # fig.data[3*2 + i+12]["visible"] = True
+        
+        fig.data[0*4 + i]["showlegend"] = True
+        # fig.data[3*2 + 12]["showlegend"] = True
+
+
+
+
+    buttons = []
+    i = 0
+
+
+    abatement_cost = 0.5
+    rho = 1.0
+    
+    for k in [1.5, 2.0]:
+        for j in [1.5, 2.0]:
+            
+            if k==1.5:
+                
+                cost_label1 = "Low Capital, "
+            
+            else:
+                cost_label1 = "High Capital, "
+                
+            if j==1.5:
+                
+                cost_label2 = "Low R&D Stock"
+            
+            else:
+                cost_label2 = "High R&D Stock"
+
+
+            cost_label = cost_label1 + cost_label2
+
+
+            # Hide all traces
+            # label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
+
+            button = dict(method='update',
+                            args=[
+                                {
+                                    'visible': [False] * (4),
+                                    'showlegend': [False] * (4),
+                                },
+                            ],
+                        label=cost_label)
+            # Enable the two traces we want to see
+            # print(button['args'][0]["visible"])
+
+            # for j in range(4):
+            button['args'][0]["visible"][4*0 + i] = True
+            button['args'][0]["showlegend"][4*0 + i] = True
+
+
+            i = i+1
+            # Add step to step list
+            buttons.append(button)
+
+    # fig.update_layout(
+    #     updatemenus=[
+    #         dict(
+    #             type="dropdown",
+    #             direction="down",
+    #             buttons=buttons,
+    #             # direction="right",
+    #             active=0,
+    #             x=0.7,
+    #             y=1.0,
+    #             # xanchor="left",
+    #             # yanchor="top",
+    #             pad={"r": 10,
+    #                  "t": 10, "b": 10},
+    #             showactive=True
+    #         )
+    #     ])
+
+
+    fig.update_xaxes(showgrid=False, showline=True,
+                     title=xlabel, range=graph_range)
+    fig.update_yaxes(showgrid=False,
+                     showline=True,
+                    #  range=graph_range,
+                     title_text=yaxis_label,
+                     tickformat=".2f")
+    # fig.update_yaxes(showgrid=False, showline=True,
+    #                  range=[1., 2.1], col=2, row=1)
+    # fig.update_yaxes(tickvals=[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2.0],
+    #                  tickformat=".1f",
+    #                  col=2,
+    #                  row=1)
+    # fig.update_layout(height=400, width=1280)
+    fig.update_layout(
+        title=graph_title,
+        barmode="overlay",
+        plot_bgcolor="white",
+        width=1000,
+        height=700,
+        margin=dict(l=50, r=0))
+
+    return fig
+
+
+
+
 def plot_simulatedpath_flow_full2(graph_type, graph_title, yaxis_label, graph_range, before15):
 
     xi_base = 100000.
