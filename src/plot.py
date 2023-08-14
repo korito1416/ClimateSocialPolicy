@@ -8,6 +8,7 @@ import os
 import sys
 import pickle
 import plotly.express as px
+from scipy.interpolate import interp1d
 
 sys.path.append(os.path.dirname(os.getcwd()))
 pyo.init_notebook_mode()
@@ -1501,6 +1502,7 @@ def plot_simulatedpath_full2_post(graph_type, graph_title, yaxis_label, graph_ra
 
 
 def plot_simulatedpath_full2_lambda_post(graph_type, graph_title, yaxis_label, graph_range, before15):
+    colors = ["#d62728", "darkorange", "darkgreen", "navy"]
 
     xi_base = 100000.
     psi_0 = 0.10583
@@ -1588,107 +1590,107 @@ def plot_simulatedpath_full2_lambda_post(graph_type, graph_title, yaxis_label, g
 
             cost_label = cost_label1 + cost_label2
 
+            if graph_type=="x":
+
+                line15 = 3.55
+                line2 = 5.82
+            
+            if graph_type=="e":
+                line15 = 12.08
+                line2 = 18.37
+
+
+            grid = model_tech1_pre_damage["gamma_3_list"]
+            # grid = (model_tech1_pre_damage["gamma_3_list"],)
+            # grid = np.expand_dims(grid,axis=-1)
+            value = model_tech1_pre_damage[graph_type1][:,0]
+            # value = np.expand_dims(model_tech1_pre_damage[graph_type1][:,0],axis=-1)
+            # print(grid.shape,value.shape)
+
+            # graph_func = RegularGridInterpolator(grid, value)
+            graph_func = interp1d(grid, value,kind="cubic")
+
+
+            def point_return(line):
+
+                err = 1
+
+                x_lower = 0
+                x_upper = 1/3
+
+                x_lower = np.expand_dims(x_lower,axis=-1)
+                x_upper = np.expand_dims(x_upper,axis=-1)
+
+                while err > 10**(-9):
+
+                    x_mid = (x_lower+x_upper)/2
+
+                    if (graph_func(x_lower)-line)*(graph_func(x_mid)-line) < 0:
+                        x_upper = x_mid
+
+                    if (graph_func(x_upper)-line)*(graph_func(x_mid)-line) < 0:
+                        x_lower = x_mid     
+                    
+                    err = max(abs(x_mid - x_upper),abs(x_mid - x_lower))
+
+                return x_mid[0]
+            
+
+
                 
+            # fig.update_traces(marker=dict(size=12),
+            #     selector=dict(mode='markers'))
+            color_cur=colors[i]
             # print(model_tech1_pre_damage["gamma_3_list"].shape)
             # print(model_tech1_pre_damage[graph_type1].shape)
-            
-            fig.add_trace(go.Scatter(x=model_tech1_pre_damage["gamma_3_list"],
+            trace = go.Scatter(x=model_tech1_pre_damage["gamma_3_list"],
                                         y=model_tech1_pre_damage[graph_type1][:,0],
                                         name=cost_label,
                                         # showlegend=False,
                                         # visible=False,                                     
-                                        # line=dict(color=color[i]),
+                                        line=dict(color=color_cur),
+                                        mode="lines",
                                          visible=True
-                                        ))
-            # elif before15 == True:
-            #     fig.add_trace(go.Scatter(x=model_tech1_pre_damage["years"][model_tech1_pre_damage["states"][:, 1] < 1.5],
-            #                                 y=model_tech1_pre_damage[graph_type][model_tech1_pre_damage["states"][:, 1] < 1.5],
-            #                                 name=label,
-            #                                 showlegend=False,
-            #                                 visible=False,                                     line=dict(color=color[i]),
-            #                                 #  visible=False
-            #                                 ))
+                                        )
+            fig.add_trace(trace)
+            # print(fig.layout.template.layout.colorway)
+
+
+            # print(fig.data)
             
-    # i = i+1
+            if k == 1.5:
 
-    # for i in range(4):
-    # fig.data[0*4 + 2]["visible"] = True
-    # # fig.data[3*2 + i+12]["visible"] = True
-    
-    # fig.data[0*4 + 2]["showlegend"] = True
-        # fig.data[3*2 + 12]["showlegend"] = True
+                fig.add_trace(go.Scatter(
+                        x=np.array((point_return(line15))),
+                        y=np.array((line15)),
+                        hovertemplate='x: %{x} <br>y: %{y}',
+                        name="Jump at 1.5 Degree",
+                        mode="markers",
+                        showlegend=False,
+                        marker=dict(size=12,color=color_cur)
+                    ))
+                # print(point_return(line15))
 
+            if k == 2:
+                
+                fig.add_trace(go.Scatter(
+                        x=np.array((point_return(line2))),
+                        y=np.array((line2)),
+                        hovertemplate='x: %{x} <br>y: %{y}',
+                        name="Jump at 2 Degree",
+                        mode="markers",
+                        showlegend=False,
+                        marker=dict(size=12,color=color_cur)
+                    ))
 
+                # print(point_return(line2))
 
+            i = i+1
 
     buttons = []
     i = 0
 
 
-    # abatement_cost = 0.5
-    # rho = 1.0
-    
-    # for k in [1.5, 2.0]:
-    #     for j in [1.5, 2.0]:
-            
-    #         if k==1.5:
-                
-    #             cost_label1 = "Low Capital, "
-            
-    #         else:
-    #             cost_label1 = "High Capital, "
-                
-    #         if j==1.5:
-                
-    #             cost_label2 = "Low R&D Stock"
-            
-    #         else:
-    #             cost_label2 = "High R&D Stock"
-
-
-    #         cost_label = cost_label1 + cost_label2
-
-
-    #         # Hide all traces
-    #         # label = cost_label+r', ρ' + '= {:.2f}'.format(rho)
-
-    #         button = dict(method='update',
-    #                         args=[
-    #                             {
-    #                                 'visible': [False] * (4),
-    #                                 'showlegend': [False] * (4),
-    #                             },
-    #                         ],
-    #                     label=cost_label)
-    #         # Enable the two traces we want to see
-    #         # print(button['args'][0]["visible"])
-
-    #         # for j in range(4):
-    #         button['args'][0]["visible"][4*0 + i] = True
-    #         button['args'][0]["showlegend"][4*0 + i] = True
-
-
-    #         i = i+1
-    #         # Add step to step list
-    #         buttons.append(button)
-
-    # fig.update_layout(
-    #     updatemenus=[
-    #         dict(
-    #             type="dropdown",
-    #             direction="down",
-    #             buttons=buttons,
-    #             # direction="right",
-    #             active=0,
-    #             x=0.7,
-    #             y=1.0,
-    #             # xanchor="left",
-    #             # yanchor="top",
-    #             pad={"r": 10,
-    #                  "t": 10, "b": 10},
-    #             showactive=True
-    #         )
-    #     ])
 
     fig.update_xaxes(showgrid=False, showline=True,
                      title="λ₃", range=[0, 1/3])
@@ -1713,8 +1715,6 @@ def plot_simulatedpath_full2_lambda_post(graph_type, graph_title, yaxis_label, g
         margin=dict(l=50, r=0))
 
     return fig
-
-
 def plot_simulatedpath_full2_dist_post(graph_type, graph_title, xlabel, yaxis_label, graph_range, before15):
 
     xi_base = 100000.
