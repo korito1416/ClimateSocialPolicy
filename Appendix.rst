@@ -10,14 +10,14 @@ example
 .. math::
 
    \begin{aligned}
-   0 & = \max_{i_k, i_j, \mathcal{E}} \min_{h_k, h_y, h_j, g, f_\ell}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{1-\rho}-1\right] \\
+   0 & = \max_{i_k, i_r, \mathcal{E}} \min_{h_k, h_y, h_r, g, f_\ell}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_r-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{1-\rho}-1\right] \\
    & +\frac{\partial \Phi}{\partial k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \Phi}{\partial k^2} \frac{\left|\sigma_k\right|^2}{2} \\
    & +\frac{\partial \Phi}{\partial y}\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\frac{\partial^2 \Phi}{\partial y^2} \frac{|\varsigma|^2}{2} \mathcal{E}^2 \\
    & -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\lambda_2 \frac{|\varsigma|^2}{2} \mathcal{E}^2\right) \\
-   & +\frac{\partial \Phi}{\partial j}\left(-\zeta+\psi_0\left(i_j\right)^{\psi_1} \exp \left(\psi_1 \log K-\psi_1 \log J\right)-\frac{\left|\sigma_j\right|^2}{2}+\sigma_j h_j\right)+\frac{\partial^2 \Phi}{\partial j^2} \frac{\left|\sigma_j\right|^2}{2} \\
-   & +\xi_g I_g(J)(1-g+g \log g)+I_g(J) g\left(\Phi^{II}-\Phi\right) \\
-   & +\xi_d I_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+I_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
-   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_j \frac{\left|h_j\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
+   & +\frac{\partial \Phi}{\partial r}\left(-\zeta+\psi_0\left(i_r\right)^{\psi_1} \exp \left(\psi_1 \log K-\psi_1 \log R\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r h_r\right)+\frac{\partial^2 \Phi}{\partial r^2} \frac{\left|\sigma_r\right|^2}{2} \\
+   & +\xi_g J_g(r)(1-g+g \log g)+J_g(r) g\left(\Phi^{II}-\Phi\right) \\
+   & +\xi_d J_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+J_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
+   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_j \frac{\left|h_r\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
    \end{aligned}
 
 which satisfies conditions to switch the order of max and min operator.
@@ -36,21 +36,21 @@ The procedure in each iteration is provided below.
 
    1. Take current value function :math:`\Phi^n` as given, let’s start
       with current distortion and jump misspecification
-      :math:`h_k^n, h_y^n, h_j^n, g^n, f_\ell^n` and solve optimal
+      :math:`h_k^n, h_y^n, h_r^n, g^n, f_\ell^n` and solve optimal
       distortion and jump misspecification in two sub-steps, which are detailed
       in `Appendix A.2`. 
 
       1. Take value function :math:`\Phi^n` and current distortion and
          jump misspecification
-         :math:`h_k^n, h_y^n, h_j^n, g^n, f_\ell^n` as given, we update
-         optimal actions from :math:`i_k^{n}, i_j^{n}, \mathcal{E}^{n}`
-         to :math:`i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}` in a
+         :math:`h_k^n, h_y^n, h_r^n, g^n, f_\ell^n` as given, we update
+         optimal actions from :math:`i_k^{n}, i_r^{n}, \mathcal{E}^{n}`
+         to :math:`i_k^{n+1}, i_r^{n+1}, \mathcal{E}^{n+1}` in a
          maximization problem.
 
       2. With updated robustly optimal actions
-         :math:`i_k^{n+1}, i_j^{n+1}, \mathcal{E}^{n+1}` in hand, we
+         :math:`i_k^{n+1}, i_r^{n+1}, \mathcal{E}^{n+1}` in hand, we
          update optimal distortion
-         :math:`h_k^{n+1}, h_y^{n+1}, h_j^{n+1}, g^{n+1}, f_\ell^{n+1}`
+         :math:`h_k^{n+1}, h_y^{n+1}, h_r^{n+1}, g^{n+1}, f_\ell^{n+1}`
          by solving a minimization problem.
 
    2. With updated robustly optimal actions and probability distortion,
@@ -74,21 +74,21 @@ Appendix A.2.1 Maximization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Solution process for :math:`i_k` is given as follows, of which the same
-logic can apply to other actions :math:`i_j, \mathcal{E}` easily.
+logic can apply to other actions :math:`i_r, \mathcal{E}` easily.
 
 First order condition for :math:`i_k` writes
 
 .. math::
 
 
-   \delta\left(\frac{\alpha-i_k-i_j-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi)} = \frac{d \Phi}{dk}\left(1-\kappa i_k\right)
+   \delta\left(\frac{\alpha-i_k-i_r-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi)} = \frac{d \Phi}{dk}\left(1-\kappa i_k\right)
 
 which is a highly non-linear equation of :math:`i_k` and doesn’t admit a
 quasi-analytial solution.
 
 Cobweb algorithm states that given current value function and
 probability distortion, we can update current actions
-:math:`i_k^{n}, i_j^{n}, \mathcal{E}^{n}` according to
+:math:`i_k^{n}, i_r^{n}, \mathcal{E}^{n}` according to
 
 .. math::
 
@@ -100,7 +100,7 @@ where we define
 .. math::
 
 
-   mu^{n} \doteq \delta\left(\frac{\alpha-i_k^{n}-i_j^{n}-\alpha \phi_0\left[1-\frac{\mathcal{E}^{n}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi^n)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi^n)}
+   mu^{n} \doteq \delta\left(\frac{\alpha-i_k^{n}-i_r^{n}-\alpha \phi_0\left[1-\frac{\mathcal{E}^{n}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi^n)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi^n)}
 
 And :math:`i_k^{n+1}` is computed with relaxation paramter :math:`\chi`
 as
@@ -115,7 +115,7 @@ Appendix A.2.2 Minimization
 
 Solution process to probability distortions is simpler and we take that
 of :math:`h_k` as an example, of which the same logic can apply to other
-probability distortions :math:`h_y, h_j, g, f_\ell`.
+probability distortions :math:`h_y, h_r, g, f_\ell`.
 
 First order condition for :math:`h_k` is written as
 
@@ -314,11 +314,11 @@ Parameter                  Value
 :math:`\overline{\log K}`  9.0
 :math:`\underline{Y}`      0.0
 :math:`\overline{Y}`       4.0
-:math:`\underline{\log J}` 1.0
-:math:`\overline{\log J}`  6.0
+:math:`\underline{\log R}` 1.0
+:math:`\overline{\log R}`  6.0
 :math:`\Delta \log K`      0.2
 :math:`\Delta Y`           0.1
-:math:`\Delta \log J`      0.1
+:math:`\Delta \log R`      0.1
 ========================== ======
 
 .. raw:: html

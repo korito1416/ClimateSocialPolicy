@@ -113,18 +113,18 @@ The histogram of these coefficients are represented below:
 3.3 Intensity function
 ----------------------
 
-| The intensity function, :math:`{\mathcal J}`, determines the
+| The intensity function, :math:`{\mathcal J}_n`, determines the
   possibility of a jump over the next small increment in time. For
-  :math:`Y_t = y`, :math:`\epsilon \mathcal J (y)` is the approximate
+  :math:`Y_t = y`, :math:`\epsilon \mathcal J_n (y)` is the approximate
   jump probability over small time increment :math:`\epsilon`.
-  Equivalently, :math:`{\mathcal J}` is a local measure of probability
+  Equivalently, :math:`{\mathcal J}_n` is a local measure of probability
   per unit of time.
 | In our computations, we use intensity function
 
 .. math::
     
     \begin{equation}
-    {\mathcal J}(y) = \left\{ \begin{matrix} {\sf r}_1 \left( \exp \left[ {\frac {{\sf r}_2}  2} (y -{\underline y})^2\right] - 1 \right) & y \ge {\underline y} \cr
+    {\mathcal J}_n(y) = \left\{ \begin{matrix} {\sf r}_1 \left( \exp \left[ {\frac {{\sf r}_2}  2} (y -{\underline y})^2\right] - 1 \right) & y \ge {\underline y} \cr
     0 & 0 \le y < {\underline y} \end{matrix} \right.
     \end{equation}
 

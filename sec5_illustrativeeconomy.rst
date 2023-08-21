@@ -33,15 +33,15 @@ human capital and intangible capital. Investment :math:`I_t^k`
 contributes new capital subject to an adjustment cost captured by the
 curvature parameter :math:`\kappa`.
 
-A process :math:`J` captures the stock of knowledge induced by research
-and development as measured by :math:`J_t`:
+A process :math:`R` captures the stock of knowledge induced by research
+and development as measured by :math:`R_t`:
 
 .. math::
 
 
-   d J_t = - \zeta J_t dt + \psi_0 \left(I_t^j\right)^{\psi_1} \left(J_t\right)^{1 - \psi_1} dt + J_t \sigma_j dW_t 
+   d R_t = - \zeta R_t dt + \psi_0 \left(I_t^r\right)^{\psi_1} \left(R_t\right)^{1 - \psi_1} dt + R_t \sigma_r dW_t 
 
-where :math:`0 < \psi_1 < 1` and :math:`I_t^j` is an investment in
+where :math:`0 < \psi_1 < 1` and :math:`I_t^r` is an investment in
 research and development (R & D).
 
 While we will solve a social planner’s problem, we will subsequently
@@ -60,14 +60,14 @@ investments, and emissions abatement expenditure.
 .. math::
 
 
-   C_t + I_t^k +  I_t^j = \alpha K_t  \left[1 - \phi_{0,t}\left(\iota_t\right)^{\phi_1} \right] 
+   C_t + I_t^k +  I_t^r = \alpha K_t  \left[1 - \phi_{0,t}\left(\iota_t\right)^{\phi_1} \right] 
 
 for :math:`\phi_1 \ge 2` and :math:`0<\phi_{0,t} \le 1,` where
 
 .. math::
 
 
-   \iota_t  =   \left(1 - \frac {{\mathcal E}_t}{\beta \alpha K_t}  \right){\mathbf 1}_{{\mathcal E}_t  < \beta \alpha K_t } 
+   \iota_t  =   \left(1 - \frac {{\mathcal E}_t}{\beta \alpha K_t}  \right){\mathbf 1}_{\{{\mathcal E}_t  < \beta \alpha K_t \}} 
 
 and where :math:`{\mathbf 1}` is an indicator function that assigns one
 to the event in the parentheses. When emissions fall short of the
@@ -92,7 +92,7 @@ are:
 .. math::
 
 
-   \frac {\partial {\widehat V}}{ \partial j } (X_t) \psi_0 \psi_1 \left( I_t^j  \right)^{\psi_1-1} \left( J_t \right)^{1-\psi_1} 
+   \frac {\partial {\widehat V}}{ \partial r } (X_t) \psi_0 \psi_1 \left( I_t^r  \right)^{\psi_1-1} \left( R_t \right)^{1-\psi_1} 
     - \delta \left(C_t\right)^{-\rho}  \left(N_t\right)^{\rho-1}  
     \left(\exp \left[(\rho - 1) {\widehat V}(X_t)\right] \right) = 0.  
 
@@ -104,7 +104,7 @@ Thus
 .. math::
 
 
-   \left( I_t^j  \right)^{1 - \psi_1} = \psi_0 \psi_1\left( J_t \right)^{-\psi_1} N_t \left[  \frac { J_t \frac {\partial {\widehat V}}{ \partial j } (X_t)  }{
+   \left( I_t^r  \right)^{1 - \psi_1} = \psi_0 \psi_1\left( R_t \right)^{-\psi_1} N_t \left[  \frac { R_t \frac {\partial {\widehat V}}{ \partial r } (X_t)  }{
    \delta \left(C_t\right)^{-\rho}  \left(N_t\right)^{\rho }  
     \left(\exp \left[(\rho - 1) {\widehat V}(X_t)\right] \right)}\right] .
 
