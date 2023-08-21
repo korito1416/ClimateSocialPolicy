@@ -14,7 +14,7 @@ follows:
 .. math::
 
 
-   dW_t = \begin{bmatrix} dW_t^k \cr dW_t^j \cr dW_t^y \cr dW_t^n \cr \end{bmatrix}
+   dW_t = \begin{bmatrix} dW_t^k \cr dW_t^r \cr dW_t^y \cr dW_t^n \cr \end{bmatrix}
 
 where the first component consists of the technology shocks, the second
 component consists of the R&D shocks and the third component contains
@@ -77,7 +77,7 @@ a convex cost:
 
 The term multiplying :math:`\xi_r` is a local (in time) measure of
 relative entropy applicable to jump
-processes[#]_.
+processes[1]_.
 
 
 To confront misspecification, we solve: 
@@ -88,4 +88,4 @@ To confront misspecification, we solve:
     & +  \xi_r {\mathfrak I}(x) \sum_{\ell=0}^L \left[ 1 - f( \ell \mid x )  + f( \ell \mid x )  \log f( \ell \mid x )\right]   \pi(\ell \mid x)  
     \end{align*}
 
-.. [#] See, for instance,  :cite:t:`AndersonHansenSargent:2003`.
+.. [1] See, for instance,  :cite:t:`AndersonHansenSargent:2003`.
