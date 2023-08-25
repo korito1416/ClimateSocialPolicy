@@ -278,24 +278,6 @@ PostSolver.py
     
 
 
-::
-
-
-    ---------------------------------------------------------------------------
-
-    ModuleNotFoundError                       Traceback (most recent call last)
-
-    c:\Users\33678\ClimateSocialPolicy\Module.ipynb Cell 2 in <cell line: 6>()
-          <a href='vscode-notebook-cell:/c%3A/Users/33678/ClimateSocialPolicy/Module.ipynb#W0sZmlsZQ%3D%3D?line=3'>4</a> from datetime import datetime
-          <a href='vscode-notebook-cell:/c%3A/Users/33678/ClimateSocialPolicy/Module.ipynb#W0sZmlsZQ%3D%3D?line=4'>5</a> import time
-    ----> <a href='vscode-notebook-cell:/c%3A/Users/33678/ClimateSocialPolicy/Module.ipynb#W0sZmlsZQ%3D%3D?line=5'>6</a> import petsclinearsystem
-          <a href='vscode-notebook-cell:/c%3A/Users/33678/ClimateSocialPolicy/Module.ipynb#W0sZmlsZQ%3D%3D?line=6'>7</a> from petsc4py import PETSc
-          <a href='vscode-notebook-cell:/c%3A/Users/33678/ClimateSocialPolicy/Module.ipynb#W0sZmlsZQ%3D%3D?line=7'>8</a> import petsc4py
-    
-
-    ModuleNotFoundError: No module named 'petsclinearsystem'
-
-
 PreSolver.py
 ------------
 
