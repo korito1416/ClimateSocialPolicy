@@ -30,6 +30,7 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
    sec14_postdamage.rst
    sec15_notechnology.rst
    Appendix.rst
+   Module.rst
    .. sec1_introduction.ipynb
 
 
