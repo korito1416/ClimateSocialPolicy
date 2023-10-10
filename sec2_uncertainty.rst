@@ -23,49 +23,51 @@ the climate change shocks.
 2.2: Jump misspecification
 --------------------------
 
-Let :math:`{\mathfrak I}` denote a state dependent jump intensity and
-let :math:`\pi(\ell \mid x )`,
-:math:`\ell =1,2,…,L`` give the jump distribution conditioned on
-a jump when :math:`X_t = x`. While our application will have multiple
-jumps, for pedagogical simplicity, we suppose that there is a single
-jump that shifts a value function from :math:`{\widehat V}(x)` to
-:math:`{\widetilde V}[\tilde x(\ell), \ell ]` with baseline
-probability :math:`\pi(\ell \mid x)` for :math:`\ell=0,1,...L` where
-
-.. math::
-
-    \begin{equation}
-    \sum_{\ell = 0}^L \pi(\ell \mid  x) = 1.
-    \end{equation}
-
-
-Following a jump, :math:`x` changes as does the value function. For
-each choice of :math:`\ell`, :math:`x` jumps to the
-:math:`{\tilde x}(\ell)` where :math:`\ell` is uncertain prior to the
-jump.
-| The jump process contributes the following term to the drift of
-:math:`{\widehat V} (X)`:
-
-.. math::
-    
-    \begin{equation}
-    {\mathfrak I}(x) \sum_{\ell=0}^L  \left[ {\widetilde  V} [\tilde x(\ell),\ell] - {\widehat V} (x) \right] \pi(\ell \mid x)  .
-    \end{equation}
-
-To capture potential misspecification, we introduce a nonnegative
-function :math:`f` where the altered jump distribution is:
+We suppose there is a discrete set of jump states :math:`\mathcal{Z}`.
+Let :math:`z` denote a realized value in the set :math:`\mathcal{Z}`.
+Let :math:`\mathcal{J}` denote a state-dependent jump intensity, and let
+:math:`\pi(\tilde{z} \mid x, z), z \in \mathcal{Z}` give the jump
+distribution conditioned on a jump when :math:`X_t=x` in discrete state
+:math:`Z_t=z`. Recall that the jump intensity, :math:`\mathcal{J}`,
+implies an approximate jump probability, :math:`\epsilon \mathcal{J}`,
+over a small time increment, :math:`\epsilon`. Following a jump,
+:math:`x` changes as does the value function. For each choice of
+:math:`\tilde{z}`, :math:`x` jumps to the :math:`\tilde{x}(\tilde{z})`,
+where :math:`\tilde{z}` is uncertain prior to the jump. The baseline
+probabilities are :math:`\pi(\tilde{z} \mid x, z)` for
+:math:`z \in \mathcal{Z}`, where
 
 .. math::
 
 
-   \frac {f( \ell  \mid x) \pi(\ell, x) }{ {\bar f}( x) },
+   \sum_{\mathcal{Z}} \pi(\tilde{z} \mid x, z)=1 .
 
-and intensity :math:`\mathfrak I(x) {\bar f}( x )` where
+With these jumps, a value function shifts from :math:`\hat{V}(x, z)` to
+:math:`\tilde{V}[\tilde{x}(\tilde{z}), \tilde{z}]`. The jump process
+contributes the following term to the drift of :math:`\widehat{V}(X, Z)`
+:
 
 .. math::
 
 
-   {\bar f}( x ) = \sum_{{m} = 0}^M  f ( \ell  \mid x ) \pi({\ell} \mid x)
+   \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[\tilde{V}[\tilde{x}(\tilde{z}), \tilde{z}]-\hat{V}(x, z)] \pi(\tilde{z} \mid x, z)
+
+capturing the jump risk contribution to the decision problem.
+
+To capture potential misspecification, we introduce a non-negative
+function :math:`f` where the altered jump distribution is
+
+.. math::
+
+
+   \frac{f(\tilde{z} \mid x, z) \pi(\tilde{z} \mid x, z)}{\tilde{f}(x, z)}
+
+and intensity :math:`\mathcal{J}(x, z) \bar{f}(x, z)` where
+
+.. math::
+
+
+   \bar{f}(x, z)=\sum_{\bar{z} \in \mathcal{Z}} f(\tilde{z} \mid x, z) \pi(\tilde{z} \mid x, z) .
 
 To restrain the exploration of potential misspecification, we introduce
 a convex cost:
@@ -73,19 +75,16 @@ a convex cost:
 .. math::
 
 
-   \xi_r {\mathfrak I}(x) \sum_{\ell = 0}^L \left[ 1 - f( \ell \mid x )  + f( \ell  \mid x )  \log f( \ell  \mid x )\right]   \pi(\ell \mid x).  
+   \xi \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)] \pi(\tilde{z} \mid x, z)
 
-The term multiplying :math:`\xi_r` is a local (in time) measure of
-relative entropy applicable to jump
-processes[1]_.
+The term multiplying :math:`\xi` is a local (in time) measure of
+relative entropy or Kullback–Leibler divergence applicable to jump
+processes
 
-
-To confront misspecification, we solve: 
+To confront misspecification, we solve:
 
 .. math::
-    \begin{align*} 
-    \min_{f \ge 0} \hspace{.3cm}  & {\mathfrak I}(x)  \sum_{\ell = 0}^L   \left[ {\widetilde  V} [\tilde x(\ell),\ell] - {\widehat V} (x) \right] f( \ell  \mid x) \pi( \ell \mid x)\cr
-    & +  \xi_r {\mathfrak I}(x) \sum_{\ell=0}^L \left[ 1 - f( \ell \mid x )  + f( \ell \mid x )  \log f( \ell \mid x )\right]   \pi(\ell \mid x)  
-    \end{align*}
-
-.. [1] See, for instance,  :cite:t:`AndersonHansenSargent:2003`.
+   \begin{align*} 
+   \min _{f \geqslant 0} & \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[\tilde{V}[\tilde{x}(\tilde{z}), \tilde{z}]-\hat{V}(x, z)] f(\tilde{z} \mid x, z) \pi(\tilde{z} \mid x, z) \\
+   & +\xi \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)] \pi(\tilde{z} \mid x, z) .
+   \end{align*}
