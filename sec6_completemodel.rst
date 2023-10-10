@@ -1,31 +1,75 @@
 6 Complete Model and HJB
 ========================
 
+We specify here that the four subvectors of Brownian motion are mutually
+independent. Hence, we make further definition of distortion as
+
+.. math::
+
+
+   h = \begin{bmatrix} h_k \cr h_r \cr h_y \cr \end{bmatrix}
+
+Also, we separate the vector of uncertainty parameter :math:`\xi` as
+
+.. math::
+
+
+   \xi = \begin{bmatrix} \xi_k \cr \xi_c \cr \xi_r \cr \xi_d \cr \xi_g\end{bmatrix}
+
+corresponding to capital misspecification, temperature anomaly
+misspecification, R&D stock misspecification, damage jump
+misspecification, technology jump misspecification.
+
 6.1 Post Technology Jump
 ------------------------
 
+6.1.1 Post Technology and Post Damage Jump
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Controls:
 
--  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
+-  :math:`i_k` is a potential value for :math:`I_t^k`
 -  :math:`h_k` is the distortion to capital accumulation.
 
 State:
 
--  :math:`k` is a realization of :math:`\log K`.
+-  :math:`k` is a realization of :math:`K_t`.
 
-We have HJB for post technology jump as follows
+We have HJB for post technology and post damage jump as follows
 
 .. math::
 
    \begin{aligned}
-   0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
-   & +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i_k}{\exp (\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z}))} \right)^{1-\rho}-1\right] \\
+   & +\frac{d \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k}\left[\mu_k+\frac{i_k}{k}-\frac{\kappa}{2} \left(\frac{i_k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
    & +\xi_k \frac{\left|h_k\right|^2}{2}
    \end{aligned}
 
-In case of post damage jump, we call obtained solution as
-:math:`v \doteq \Phi^{\ell,II}`. And in case of pre damage jump, we call
-obtained solution as :math:`v \doteq\Phi^{II}`.
+where :math:`\tilde{z} \in \{(1,1), (1,2), \ldots, (1,L_n)\}`
+
+6.1.2 Post Technology and Pre Damage Jump
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Controls:
+
+-  :math:`i_k` is a potential value for :math:`I_t^k`
+-  :math:`h_k` is the distortion to capital accumulation.
+
+State:
+
+-  :math:`k` is a realization of :math:`K_t`.
+
+We have HJB for post technology and post damage jump as follows
+
+.. math::
+
+   \begin{aligned}
+   0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i_k}{\exp (\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z}))} \right)^{1-\rho}-1\right] \\
+   & +\frac{d \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k}\left[\mu_k+\frac{i_k}{k}-\frac{\kappa}{2} \left(\frac{i_k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\xi_k \frac{\left|h_k\right|^2}{2}
+   \end{aligned}
+
+where :math:`\tilde{z} \in \{(1,0)\}`
 
 6.2 Pre technology Jump
 -----------------------
@@ -35,77 +79,86 @@ obtained solution as :math:`v \doteq\Phi^{II}`.
 
 Controls:
 
--  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
--  :math:`i_r` is a potential value for :math:`\frac{I_t^r}{K_t}`
--  :math:`\mathcal{E}` is a potential value for :math:`\mathcal{E}_t`
+-  :math:`i_k` is a potential value for :math:`I_t^k`
+-  :math:`i_r` is a potential value for :math:`I_t^r`
+-  :math:`e` is a potential value for :math:`\mathcal{E}_t`
 -  :math:`h_k` is the distortion to capital accumulation.
 -  :math:`h_y` is the distortion to temperature anomaly accumulation.
 -  :math:`h_r` is the distortion to R&D accumulation.
+-  :math:`g` is the misspecification to technology jump.
 
 State:
 
--  :math:`k` is a realization of :math:`\log K`.
--  :math:`y` is a realization of :math:`Y`.
--  :math:`r` is a realization of :math:`\log R`.
--  :math:`n` is a realization of :math:`\log N`.
+-  :math:`k` is a realization of :math:`K_t`.
+-  :math:`y` is a realization of :math:`Y_t`.
+-  :math:`r` is a realization of :math:`R_t`.
+-  :math:`n` is a realization of :math:`N_t`.
 
-We attempt to solve a value function of the form
+The solution has a quasi-analytical simplification of the form
 
 .. math::
 
 
-   V^\ell(k,y,r,n) =  \frac{\partial V^\ell}{\partial n} n + \Phi^\ell(k, y, r)
+   \tilde{V}\left(X_t, Z_t\right)=\tilde{v}\left(X_t^1, Z_t\right)-\log N
+
+After plugging this simplification into our HJB equation and removing
+common terms, we are left with the following simplified HJB to solve:
 
 .. math::
 
    \begin{aligned}
-   & 0=\max_{i_k, i_r, \mathcal{E}} \min_{h_k, h_y, h_r} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_r-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha K}\right]^{\phi_1}}{\exp (\Phi^\ell)} K\right)^{1-\rho}-1\right] \\
-   & +\frac{\partial \Phi^\ell}{\partial k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \Phi^\ell}{\partial k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-   & +\frac{\partial \Phi^\ell}{\partial y}\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\frac{\partial^2 \Phi^\ell}{\partial y^2} \frac{|\varsigma|^2}{2} \mathcal{E}^2 \\
-   & -\left(\left[\lambda_1+\lambda_2 y+\lambda_3(y-\bar{y})\right]\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\left(\lambda_2+\lambda_3\right) \frac{|\varsigma|^2}{2} \mathcal{E}^2\right) \\
-   & +\frac{\partial \Phi^\ell}{\partial r}\left(-\zeta+\psi_0\left(i_r\right)^{\psi_1} \exp \left(\psi_1 k-\psi_1 r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r h_r\right)+\frac{\partial^2 \Phi^\ell}{\partial r^2}\frac{\left|\sigma_r\right|^2}{2} \\
-   & +\xi_g J_g(r)(1-g+g \log g)+J_g(r) g\left(\Phi^{\ell,II}-\Phi^\ell\right) \\
-   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_r \frac{\left|h_r\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m) \\
+   & 0=\max_{i_k, i_r, e} \min_{h_k, h_y, h_r, g} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i_k-i_r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1}}{\exp (\tilde{v})} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial \tilde{v}}{\partial \log k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{\partial \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\frac{\partial \tilde{v}}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma h_y\right) e+\frac{\partial^2 \tilde{v}}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
+   & -\left(\left[\lambda_1+\lambda_2 y+\lambda_3(y-\bar{y})\right]\left(\frac{1}{L_y} \sum_\ell^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma h_y\right) e+\left(\lambda_2+\lambda_3\right) \frac{|\varsigma|^2}{2} e^2\right) \\
+   & +\frac{\partial \tilde{v}}{\partial \log r}\left(-\zeta+\psi_0\left(i_r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r h_r\right)+\frac{\partial^2 \tilde{v}}{\partial \log r^2}\frac{\left|\sigma_r\right|^2}{2} \\
+   & +\xi_g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\hat{z}), \hat{z})-\tilde{v}\right) \\
+   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_r \frac{\left|h_r\right|^2}{2}+\chi \frac{1}{L_y} \sum_\ell^{L_y}  q(\ell \mid x,z) \log  q(\ell \mid x,z) \\
    &
    \end{aligned}
+
+where the first component for :math:`\hat{z}` is 1.
 
 6.2.1 Pre Technology and Pre Damage Jump
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Controls:
 
--  :math:`i_k` is a potential value for :math:`\frac{I_t^k}{K_t}`
--  :math:`i_r` is a potential value for :math:`\frac{I_t^r}{K_t}`
--  :math:`\mathcal{E}` is a potential value for :math:`\mathcal{E}_t`
+-  :math:`i_k` is a potential value for :math:`I_t^k`
+-  :math:`i_r` is a potential value for :math:`I_t^r`
+-  :math:`e` is a potential value for :math:`\mathcal{E}_t`
 -  :math:`h_k` is the distortion to capital accumulation.
 -  :math:`h_y` is the distortion to temperature anomaly accumulation.
 -  :math:`h_r` is the distortion to R&D accumulation.
+-  :math:`g` is the misspecification to technology jump.
+-  :math:`f` is the misspecification to damage jump.
 
 State:
 
--  :math:`k` is a realization of :math:`\log K`.
--  :math:`y` is a realization of :math:`Y`.
--  :math:`r` is a realization of :math:`\log R`.
--  :math:`n` is a realization of :math:`\log N`.
+-  :math:`k` is a realization of :math:`K_t`.
+-  :math:`y` is a realization of :math:`Y_t`.
+-  :math:`r` is a realization of :math:`R_t`.
+-  :math:`n` is a realization of :math:`N_t`.
 
 We attempt to solve a value function of the form
 
 .. math::
 
 
-   V(k,y,r,n) =  \frac{\partial V}{\partial n} n + \Phi(k, y, r)
+   \hat{V}\left(X_t, Z_t\right)=v\left(X_t^1, Z_t\right)-\log N
 
 .. math::
 
    \begin{aligned}
-   0 & = \max_{i_k, i_r, \mathcal{E}} \min_{h_k, h_y, h_r}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_r-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha K}\right]^{\phi_1}}{\exp (\Phi)} K\right)^{1-\rho}-1\right] \\
-   & +\frac{\partial \Phi}{\partial k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \Phi}{\partial k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-   & +\frac{\partial \Phi}{\partial y}\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\frac{\partial^2 \Phi}{\partial y^2} \frac{|\varsigma|^2}{2} \mathcal{E}^2 \\
-   & -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\lambda_2 \frac{|\varsigma|^2}{2} \mathcal{E}^2\right) \\
-   & +\frac{\partial \Phi}{\partial r}\left(-\zeta+\psi_0\left(i_r\right)^{\psi_1} \exp \left(\psi_1 \log K-\psi_1 \log R\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r h_r\right)+\frac{\partial^2 \Phi}{\partial r^2} \frac{\left|\sigma_r\right|^2}{2} \\
-   & +\xi_g J_g(r)(1-g+g \log g)+J_g(r) g\left(\Phi^{II}-\Phi\right) \\
-   & +\xi_d J_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+J_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
-   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_r \frac{\left|h_r\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
+   0 & = \max_{i_k, i_r, e} \min_{h_k, h_y, h_r, g, f}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k-i_k-i_r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k}\right]^{\phi_1}}{\exp (v)} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial v}{\partial \log k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 v}{\partial \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\frac{\partial v}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma h_y\right) e+\frac{\partial^2 v}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
+   & -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma h_y\right) e+\lambda_2 \frac{|\varsigma|^2}{2} e^2\right) \\
+   & +\frac{\partial v}{\partial \log r}\left(-\zeta+\psi_0\left(i_r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r h_r\right)+\frac{\partial^2 v}{\partial \log r^2} \frac{\left|\sigma_r\right|^2}{2} \\
+   & +\xi_g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
+   & +\xi_d \mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z)(1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)) \\
+   & +\mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z) f(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
+   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_r \frac{\left|h_r\right|^2}{2}+\chi \frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \log q(\ell \mid x,z)
    \end{aligned}
 
 

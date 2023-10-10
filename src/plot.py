@@ -3839,7 +3839,7 @@ def plot_simulatedpath_full2_delta(graph_type, graph_title, yaxis_label, graph_r
 
         xi_list_uncertaintydecomp = [0.150]
 
-    delta_list = [0.010, 0.020, 0.030]
+    delta_list = [0.010, 0.015, 0.020]
 
     folder = "./data_simul7/2jump_step_4.00,9.00_0.0,4.0_1.0,6.0_0.0,3.0_SS_0.1,0.1,0.1_LR_0.025_FK2_phi0_{}/".format(
         abatement_cost)

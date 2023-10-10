@@ -26,10 +26,10 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
    sec10_distortion.rst
    sec11_stochastic_simulation.rst
    sec12_stochastic_simulation_more.rst
-   sec13_economy_flow.rst
-   sec14_postdamage.rst
-   sec15_notechnology.rst
-   sec16_delta.rst
+   .. sec13_economy_flow.rst
+   sec13_postdamage.rst
+   sec14_notechnology.rst
+   sec15_delta.rst
    Appendix.rst
    Module.rst
    .. sec1_introduction.ipynb
