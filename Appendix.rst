@@ -1,4 +1,4 @@
-Appendix A. Computation Method
+Appendix A. Computational Method
 ==============================
 
 Appendix A.1 Overview
