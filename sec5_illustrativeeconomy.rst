@@ -60,14 +60,14 @@ investments, and emissions abatement expenditure.
 .. math::
 
 
-   C_t + I_t^k +  I_t^r = \alpha K_t  \left[1 - \phi_{0,t}\left(\iota_t\right)^{\phi_1} \right] 
+   C_t + I_t^k +  I_t^r = \alpha K_t  \left[1 - \phi_{0}(Z_t)\left(A^b_t\right)^{\phi_1} \right] 
 
-for :math:`\phi_1 \ge 2` and :math:`0<\phi_{0,t} \le 1,` where
+for :math:`\phi_1 \ge 2` and :math:`0<\phi_{0}(Z_t)\le 1,` where
 
 .. math::
 
 
-   \iota_t  =   \left(1 - \frac {{\mathcal E}_t}{\beta \alpha K_t}  \right){\mathbf 1}_{\{{\mathcal E}_t  < \beta \alpha K_t \}} 
+   A^b_t  =   \left(1 - \frac {{\mathcal E}_t}{\beta \alpha K_t}  \right){\mathbf 1}_{\{{\mathcal E}_t  < \beta \alpha K_t \}} 
 
 and where :math:`{\mathbf 1}` is an indicator function that assigns one
 to the event in the parentheses. When emissions fall short of the
@@ -78,7 +78,7 @@ constraint.
 This technology is, by design, homogeneous of degree one. For a fixed
 :math:`K_t,` the implied production function is flat when emissions
 exceed the threshold of :math:`\beta \alpha K_t,` and has a zero left
-derivative at this point. The function equals :math:`1-\phi_{0,t}` when
+derivative at this point. The function equals :math:`1-\phi_{0}(Z_t)` when
 :math:`{\mathcal E}_t=0` and increases up the threshold as a concave
 function with curvature dictated by the parameter :math:`\phi_1.` We
 feature the case in which :math:`\phi_1 = 3.`
