@@ -109,7 +109,7 @@ magnitudes.
       (1- \gamma)  \frac {\partial {\widehat V}(x)}  {\partial x'}\sigma(x,a) \sigma(x,a)' \frac {\partial {\widehat V}(x)}{\partial x} ,
       \end{align*}
    where the term multiplying :math:`1-\gamma` is the  local variance of the continuation value process
-   :math:`{\widehat V}(X)`. Setting $ :math:`\gamma - 1 = \frac{1}{\xi}` gives a mathematical
+   :math:`{\widehat V}(X)`. Setting :math:`\gamma - 1 = \frac{1}{\xi}` gives a mathematical
    equivalence between robustness and risk considerations, although the
    rationale for the two adjustments is very different. We will
    eventually show how to embed this into a full recursive utility

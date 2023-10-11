@@ -27,12 +27,12 @@ Our specific form:
 .. math::
 
 
-   d Y_t = \mathcal{E}_t[\theta(m)d t+\varsigma d W_t^y]
+   d Y_t = \mathcal{E}_t[\theta(\ell)d t+\varsigma d W_t^y]
 
-for :math:`\theta(m) \in \Theta` where :math:`\theta(m)` is a specific
+for :math:`\theta(\ell) \in \Theta` where :math:`\theta(\ell)` is a specific
 TCRE obtained from the set of TCRE models :math:`\Theta`. Here we
 constructed this histogram. For baseline probabilities, we presume that
-each model has subjective probability :math:`{\frac 1 M}` and :math:`M`
+each model has subjective probability :math:`{\frac 1 L_y}` and :math:`L_y`
 is the number of climate models we use as inputs. In other words, we
 treat each such model as having the same subjective probability. We
 abstract from parameter learning since learning about such parameters
@@ -42,9 +42,9 @@ has been very slow.
 --------------------------
 
 More specifically, we use exponentially weighted average of each of
-response functions as coefficients :math:`\theta(m) \in \Theta` in our
+response functions as coefficients :math:`\theta(\ell) \in \Theta` in our
 computations, where the discount rate is set as :math:`\delta=0.01` and
-the number of climate models is :math:`M = \# \Theta = 144`.
+the number of climate models is :math:`L_y = \# \Theta = 144`.
 
 The histogram of these coefficients are represented below:
 
