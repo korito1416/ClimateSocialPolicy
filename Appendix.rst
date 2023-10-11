@@ -82,7 +82,7 @@ First order condition for :math:`{i^k}` writes
 .. math::
 
 
-   \delta\left(\frac{\alpha k-{i^k}-{i^r}-\alpha \phi_0(z)\left[1-\frac{e}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (v)} \right)^{-\rho} \frac{k}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa {i^k}\right)
+   \delta\left(\frac{\alpha k-{i^k}-{i^r}-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k}\right]^{\phi_1}}{\exp (v)} \right)^{-\rho} \frac{1}{\exp (v)} = \frac{d v}{d \log k}\left(1-\kappa {i^k}\right)
 
 which is a highly non-linear equation of :math:`{i^k}` and doesn’t admit a
 quasi-analytial solution.
@@ -94,14 +94,14 @@ probability distortion, we can update current actions
 .. math::
 
 
-   mu^{n} = \frac{d v^n}{dk}\left(1-\kappa {{i^k}^{n+1}}'\right)
+   mu^{n} = \frac{d v^n}{d \log k}\left(1-\kappa {{i^k}^{n+1}}'\right)
 
 where we define
 
 .. math::
 
 
-   mu^{n} \doteq \delta\left(\frac{\alpha-{i^k}^{n}-{i^r}^{n}-\alpha \phi_0\left[1-\frac{e^{n}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp (v^n)} \right)^{-\rho} \frac{k}{\exp (v^n)}
+   mu^{n} \doteq \delta\left(\frac{\alpha k-{i^k}^{n}-{i^r}^{n}-\alpha  k \phi_0\left[1-\frac{e^{n}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp (v^n)} \right)^{-\rho} \frac{1}{\exp (v^n)}
 
 And :math:`{i^k}^{n+1}` is computed with relaxation paramter :math:`\chi`
 as
