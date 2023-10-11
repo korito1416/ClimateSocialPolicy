@@ -16,8 +16,7 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
 
    sec1_introduction.rst
    sec2_uncertainty.rst
-   sec3_climatedynamics.rst
-   sec4_damagedynamics.rst
+
    sec5_illustrativeeconomy.rst
 
    sec7_uncertinaty_adjust_prob.rst
@@ -31,7 +30,8 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
    sec15_delta.rst
    Appendix.rst
    Module.rst
-
+   .. sec3_climatedynamics.rst
+   .. sec4_damagedynamics.rst
    .. sec6_completemodel.rst
 
    References <bib_file.rst>
