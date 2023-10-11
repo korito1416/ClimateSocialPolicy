@@ -9,16 +9,10 @@ independent. Hence, we make further definition of distortion as
 
    h = \begin{bmatrix} {h^k} \cr {h^r} \cr {h^y} \cr \end{bmatrix}
 
-Also, we separate the vector of uncertainty parameter :math:`\xi` as
-
-.. math::
-
-
-   \xi = \begin{bmatrix} \xi^k \cr \xi_c \cr \xi^r \cr \xi_d \cr \xi_g\end{bmatrix}
-
-corresponding to capital misspecification, temperature anomaly
-misspecification, R&D stock misspecification, damage jump
-misspecification, technology jump misspecification.
+For our analysis here, rather than a constant value of :math:`\xi` for
+all uncertainty channels, we use a set of values
+:math:`\{\xi^k, \xi^c, \xi^r, \xi^d, \xi^g\}`, one for each uncertainty
+channel, one for each uncertainty channel so that we can carry out our uncertainty decompositions.
 
 We define realizations of controls and states as following:
 
@@ -48,7 +42,6 @@ State:
 
 We have HJB for post technology and post damage jump as follows
 
-
 .. math::
 
    \begin{aligned}
@@ -63,7 +56,6 @@ where :math:`\tilde{z} \in \{(1,1), (1,2), \ldots, (1,L_n)\}`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have HJB for post technology and post damage jump as follows
-
 
 .. math::
 
@@ -91,7 +83,6 @@ The solution has a quasi-analytical simplification of the form
 After plugging this simplification into our HJB equation and removing
 common terms, we are left with the following simplified HJB to solve:
 
-
 .. math::
 
    \begin{aligned}
@@ -100,8 +91,8 @@ common terms, we are left with the following simplified HJB to solve:
    & +\frac{\partial \tilde{v}}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\frac{\partial^2 \tilde{v}}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
    & -\left(\left[\lambda_1+\lambda_2 y+\lambda_3(y-\bar{y})\right]\left(\frac{1}{L_y} \sum_\ell^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\left(\lambda_2+\lambda_3\right) \frac{|\varsigma|^2}{2} e^2\right) \\
    & +\frac{\partial \tilde{v}}{\partial \log r}\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 \tilde{v}}{\partial \log r^2}\frac{\left|\sigma_r\right|^2}{2} \\
-   & +\xi_g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\hat{z}), \hat{z})-\tilde{v}\right) \\
-   & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi_c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_\ell^{L_y}  q(\ell \mid x,z) \log  q(\ell \mid x,z) \\
+   & +\xi^g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\hat{z}), \hat{z})-\tilde{v}\right) \\
+   & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_\ell^{L_y}  q(\ell \mid x,z) \log  q(\ell \mid x,z) \\
    &
    \end{aligned}
 
@@ -117,7 +108,6 @@ We attempt to solve a value function of the form
 
    \hat{V}\left(X_t, Z_t\right)=v\left(X_t^1, Z_t\right)-\log N
 
-
 .. math::
 
    \begin{aligned}
@@ -126,10 +116,10 @@ We attempt to solve a value function of the form
    & +\frac{\partial v}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\frac{\partial^2 v}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
    & -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\lambda_2 \frac{|\varsigma|^2}{2} e^2\right) \\
    & +\frac{\partial v}{\partial \log r}\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 v}{\partial \log r^2} \frac{\left|\sigma_r\right|^2}{2} \\
-   & +\xi_g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
-   & +\xi_d \mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z)(1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)) \\
+   & +\xi^g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
+   & +\xi^d \mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z)(1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)) \\
    & +\mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z) f(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
-   & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi_c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \log q(\ell \mid x,z)
+   & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \log q(\ell \mid x,z)
    \end{aligned}
 
 
