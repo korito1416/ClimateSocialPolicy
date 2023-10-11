@@ -10,51 +10,52 @@ example
 .. math::
 
    \begin{aligned}
-   0 & = \max_{i_k, i_r, \mathcal{E}} \min_{h_k, h_y, h_r, g, f_\ell}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k-i_r-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{1-\rho}-1\right] \\
-   & +\frac{\partial \Phi}{\partial k}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{\partial^2 \Phi}{\partial k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-   & +\frac{\partial \Phi}{\partial y}\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\frac{\partial^2 \Phi}{\partial y^2} \frac{|\varsigma|^2}{2} \mathcal{E}^2 \\
-   & -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{M} \sum_m^M q(x \mid m) \theta(m)+\varsigma h_y\right) \mathcal{E}+\lambda_2 \frac{|\varsigma|^2}{2} \mathcal{E}^2\right) \\
-   & +\frac{\partial \Phi}{\partial r}\left(-\zeta+\psi_0\left(i_r\right)^{\psi_1} \exp \left(\psi_1 \log K-\psi_1 \log R\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r h_r\right)+\frac{\partial^2 \Phi}{\partial r^2} \frac{\left|\sigma_r\right|^2}{2} \\
-   & +\xi_g J_g(r)(1-g+g \log g)+J_g(r) g\left(\Phi^{II}-\Phi\right) \\
-   & +\xi_d J_n(y) \sum_{\ell=1}^L \pi_d^{\ell}\left(1-f_{\ell}+f_{\ell} \log f_{\ell}\right)+J_n(y) \sum_{\ell=1}^L \pi_d^{\ell} f_{\ell}\left(\Phi^{\ell}-\Phi\right) \\
-   & +\xi_k \frac{\left|h_k\right|^2}{2}+\xi_c \frac{\left|h_y\right|^2}{2}+\xi_j \frac{\left|h_r\right|^2}{2}+\xi_a \frac{1}{M} \sum_m^M q(x \mid m) \log q(x \mid m)
+   0 & = \max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g, f}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k-i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k}\right]^{\phi_1}}{\exp (v)} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial v}{\partial \log k}\left[\mu_k+i^k-\frac{\kappa}{2} \left(i^k\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 v}{\partial \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\frac{\partial v}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\frac{\partial^2 v}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
+   & -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\lambda_2 \frac{|\varsigma|^2}{2} e^2\right) \\
+   & +\frac{\partial v}{\partial \log r}\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 v}{\partial \log r^2} \frac{\left|\sigma_r\right|^2}{2} \\
+   & +\xi_g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
+   & +\xi_d \mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z)(1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)) \\
+   & +\mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z) f(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
+   & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi_c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \log q(\ell \mid x,z)
    \end{aligned}
 
 which satisfies conditions to switch the order of max and min operator.
 
 Then, after exchanging the order of max and min operator, we deliver the
-solution, i.e. value function :math:`\Phi`, to this HJB equation
+solution, i.e. value function :math:`v`, to this HJB equation
 recursively with the false transient approach described in `Appendix A.3.1`.
 The procedure in each iteration is provided below.
 
--  Start with current value function :math:`\Phi^n` where
+-  Start with current value function :math:`v^n` where
    :math:`n \in \{0,1, 2,\ldots\}` is called iteration step.
-   Specifically, :math:`\Phi^0` is the initial guess of value function,
+   Specifically, :math:`v^0` is the initial guess of value function,
    which can be vital to success of algorithm. We solve the HJB equation
-   and update value function :math:`\Phi^n` to :math:`\Phi^{n+1}` in two
+   and update value function :math:`v^n` to :math:`v^{n+1}` in two
    steps.
 
-   1. Take current value function :math:`\Phi^n` as given, let’s start
+   1. Take current value function :math:`v^n` as given, let’s start
       with current distortion and jump misspecification
-      :math:`h_k^n, h_y^n, h_r^n, g^n, f_\ell^n` and solve optimal
+      :math:`{h^k}^n, {h^y}^n, {h^r}^n, g^n, f^n` and solve optimal
       distortion and jump misspecification in two sub-steps, which are detailed
       in `Appendix A.2`. 
 
-      1. Take value function :math:`\Phi^n` and current distortion and
+      1. Take value function :math:`v^n` and current distortion and
          jump misspecification
-         :math:`h_k^n, h_y^n, h_r^n, g^n, f_\ell^n` as given, we update
-         optimal actions from :math:`i_k^{n}, i_r^{n}, \mathcal{E}^{n}`
-         to :math:`i_k^{n+1}, i_r^{n+1}, \mathcal{E}^{n+1}` in a
+         :math:`{h^k}^n, {h^y}^n, {h^r}^n, g^n, f^n` as given, we update
+         optimal actions from :math:`{i^k}^{n}, {i^r}^{n}, e^{n}`
+         to :math:`{i^k}^{n+1}, {i^r}^{n+1}, e^{n+1}` in a
          maximization problem.
 
       2. With updated robustly optimal actions
-         :math:`i_k^{n+1}, i_r^{n+1}, \mathcal{E}^{n+1}` in hand, we
+         :math:`{i^k}^{n+1}, {i^r}^{n+1}, e^{n+1}` in hand, we
          update optimal distortion
-         :math:`h_k^{n+1}, h_y^{n+1}, h_r^{n+1}, g^{n+1}, f_\ell^{n+1}`
+         :math:`{h^k}^{n+1}, {h^y}^{n+1}, {h^r}^{n+1}, g^{n+1}, f^{n+1}`
          by solving a minimization problem.
 
    2. With updated robustly optimal actions and probability distortion,
-      we finally can update value function :math:`\Phi^{n+1}` by solving the
+      we finally can update value function :math:`v^{n+1}` by solving the
       algebraic system depicted in `Appendix A.3`.
 
 -  We obtain a convergent solution to the HJB equation when the
@@ -63,7 +64,7 @@ The procedure in each iteration is provided below.
 .. math::
 
 
-   |\Phi^{n+1}-\Phi^{n}| < \epsilon
+   |v^{n+1}-v^{n}| < \epsilon
 
 where :math:`\epsilon` is set to be :math:`10^{-7}`.
 
@@ -73,64 +74,64 @@ Appendix A.2 Solving the Optimization Problem
 Appendix A.2.1 Maximization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Solution process for :math:`i_k` is given as follows, of which the same
-logic can apply to other actions :math:`i_r, \mathcal{E}` easily.
+Solution process for :math:`{i^k}` is given as follows, of which the same
+logic can apply to other actions :math:`{i^r}, e` easily.
 
-First order condition for :math:`i_k` writes
+First order condition for :math:`{i^k}` writes
 
 .. math::
 
 
-   \delta\left(\frac{\alpha-i_k-i_r-\alpha \phi_0\left[1-\frac{\mathcal{E}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi)} = \frac{d \Phi}{dk}\left(1-\kappa i_k\right)
+   \delta\left(\frac{\alpha-{i^k}-{i^r}-\alpha \phi_0\left[1-\frac{e}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (v)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa {i^k}\right)
 
-which is a highly non-linear equation of :math:`i_k` and doesn’t admit a
+which is a highly non-linear equation of :math:`{i^k}` and doesn’t admit a
 quasi-analytial solution.
 
 Cobweb algorithm states that given current value function and
 probability distortion, we can update current actions
-:math:`i_k^{n}, i_r^{n}, \mathcal{E}^{n}` according to
+:math:`{i^k}^{n}, {i^r}^{n}, e^{n}` according to
 
 .. math::
 
 
-   mu^{n} = \frac{d \Phi^n}{dk}\left(1-\kappa {i_k^{n+1}}'\right)
+   mu^{n} = \frac{d v^n}{dk}\left(1-\kappa {{i^k}^{n+1}}'\right)
 
 where we define
 
 .. math::
 
 
-   mu^{n} \doteq \delta\left(\frac{\alpha-i_k^{n}-i_r^{n}-\alpha \phi_0\left[1-\frac{\mathcal{E}^{n}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (\Phi^n)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (\Phi^n)}
+   mu^{n} \doteq \delta\left(\frac{\alpha-{i^k}^{n}-{i^r}^{n}-\alpha \phi_0\left[1-\frac{e^{n}}{\beta_t \alpha \exp(k)}\right]^{\phi_1}}{\exp (v^n)} \exp(k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^n)}
 
-And :math:`i_k^{n+1}` is computed with relaxation paramter :math:`\chi`
+And :math:`{i^k}^{n+1}` is computed with relaxation paramter :math:`\chi`
 as
 
 .. math::
 
 
-   i_k^{n+1} = \chi i_k^{n} + (1-\chi) {i_k^{n+1}}'
+   {i^k}^{n+1} = \chi {i^k}^{n} + (1-\chi) {{i^k}^{n+1}}'
 
 Appendix A.2.2 Minimization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Solution process to probability distortions is simpler and we take that
-of :math:`h_k` as an example, of which the same logic can apply to other
-probability distortions :math:`h_y, h_r, g, f_\ell`.
+of :math:`{h^k}` as an example, of which the same logic can apply to other
+probability distortions :math:`{h^y}, {h^r}, g, f`.
 
-First order condition for :math:`h_k` is written as
-
-.. math::
-
-
-   \frac{\partial \Phi}{\partial k} \sigma_k = -\xi_k h_k
-
-With given value function :math:`\Phi^n`, we can update
-:math:`h_k^{n+1}` according to
+First order condition for :math:`{h^k}` is written as
 
 .. math::
 
 
-   h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial \Phi^n}{\partial k} \sigma_k 
+   \frac{\partial v}{\partial k} \sigma_k = -\x{i^k} {h^k}
+
+With given value function :math:`v^n`, we can update
+:math:`{h^k}^{n+1}` according to
+
+.. math::
+
+
+   {h^k}^{n+1} = - \frac{1}{\x{i^k}} \frac{\partial v^n}{\partial k} \sigma_k 
 
 Appendix A.3 Solving the Algebraic System
 -----------------------------------------
@@ -346,42 +347,42 @@ Parameter                  Value
    We take the HJB equation for post technology jump as an example.
 
    \begin{aligned}
-   0= & \max_{i_k}\min_{h_k} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
-   & +\frac{d v}{dk}\left[\mu_k+i_k-\frac{\kappa}{2} i_k^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k h_k\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-   & +\xi_k \frac{\left|h_k\right|^2}{2}
+   0= & \max_{{i^k}}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-{i^k}}{\exp (v)} \exp(k)\right)^{1-\rho}-1\right] \\
+   & +\frac{d v}{dk}\left[\mu_k+{i^k}-\frac{\kappa}{2} {i^k}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{d^2 v}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\x{i^k} \frac{\left|{h^k}\right|^2}{2}
    \end{aligned}
 
-   First order condition for $i_k$ writes
+   First order condition for ${i^k}$ writes
 
    $$
-   \delta\left(\frac{\alpha-i_k}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa i_k\right)
+   \delta\left(\frac{\alpha-{i^k}}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)} = \frac{d v}{dk}\left(1-\kappa {i^k}\right)
    $$
 
-   which is a highly nonlinear equation of $i_k$ and doesn't lead to a quasi-analytical solution.
+   which is a highly nonlinear equation of ${i^k}$ and doesn't lead to a quasi-analytical solution.
 
    To get around the nonlinearity, the Cobweb algorithm states that we define a new term $mu$ as
 
    $$
-   m u=\frac{d v}{dk}\left(1-\kappa i_k\right)
+   m u=\frac{d v}{dk}\left(1-\kappa {i^k}\right)
    $$
 
-   Then we solve the equation in multiple steps. Starting with a initial guess of $i_k$ as $i_k^0$, we update $i_k^n$, $n=1,2,\ldots,N$ according to 
+   Then we solve the equation in multiple steps. Starting with a initial guess of ${i^k}$ as ${i^k}^0$, we update ${i^k}^n$, $n=1,2,\ldots,N$ according to 
 
    $$
-   mu^{n}= \frac{d v}{dk}\left(1-\kappa i_k^{n+1}\right)
+   mu^{n}= \frac{d v}{dk}\left(1-\kappa {i^k}^{n+1}\right)
    $$
 
    where 
 
    $$
-   mu^{n} = \delta\left(\frac{\alpha-i_k^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}
+   mu^{n} = \delta\left(\frac{\alpha-{i^k}^n}{\exp (v)} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v)}
    $$
 
 
    Now, to decide when to stop, we hope to see the difference between two subsequent iterations very tiny, meaning we have obtained a convergent solution to the equation. In other words, we wish to see
 
    $$
-   |i_k^n-i_k^{n-1}| < \epsilon
+   |{i^k}^n-{i^k}^{n-1}| < \epsilon
    $$
 
    where $\epsilon$ is set to be $10^{-7}$.
@@ -389,38 +390,38 @@ Parameter                  Value
 
    ### Appendix A.2.3 Further Improvement
 
-   While the Cobweb algorithm can alleviate our computational burden of dealing with complex first order conditions a lot, there is still much room for further improvement on efficiency of our algorithm. For example, as we notice that the main purpose is to deliver a convergent solution to the value function in the HJB equation, we can alternate the Cobweb algorithm in a way that it's iterating not over control, such as $i_k$, but directly over value function.
+   While the Cobweb algorithm can alleviate our computational burden of dealing with complex first order conditions a lot, there is still much room for further improvement on efficiency of our algorithm. For example, as we notice that the main purpose is to deliver a convergent solution to the value function in the HJB equation, we can alternate the Cobweb algorithm in a way that it's iterating not over control, such as ${i^k}$, but directly over value function.
 
-   In other words, we start with initial guess of $v$, $i_k$ as $v^0$, $i_k^0$ and complete a inner iteration over $i_k$ and an outer iteration over $v$. 
+   In other words, we start with initial guess of $v$, ${i^k}$ as $v^0$, ${i^k}^0$ and complete a inner iteration over ${i^k}$ and an outer iteration over $v$. 
 
-   In the inner iteration, we take value function $v^n$ as given and attempt to update $i_k^n$ according to 
+   In the inner iteration, we take value function $v^n$ as given and attempt to update ${i^k}^n$ according to 
 
    $$
-   mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa {i_k^{n+1}}'\right)
+   mu^{n}= \frac{d v^{n}}{dk}\left(1-\kappa {{i^k}^{n+1}}'\right)
    $$
 
 
    where 
 
    $$
-   mu^{n}= \delta\left(\frac{\alpha-i_k^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}
+   mu^{n}= \delta\left(\frac{\alpha-{i^k}^{n}}{\exp (v^{n})} \exp (k)\right)^{-\rho} \frac{\exp (k)}{\exp (v^{n})}
    $$
 
-   Here we progressively update $i_k^n$ to $i_k^{n+1}$ by a convex combination of $i_k^n$ and ${i_k^{n+1}}'$ with a relaxation parameter $\chi$ as
+   Here we progressively update ${i^k}^n$ to ${i^k}^{n+1}$ by a convex combination of ${i^k}^n$ and ${{i^k}^{n+1}}'$ with a relaxation parameter $\chi$ as
 
    $$
-   i_k^{n+1}= \chi i_k^n + (1-\chi) {i_k^{n+1}}'.
+   {i^k}^{n+1}= \chi {i^k}^n + (1-\chi) {{i^k}^{n+1}}'.
    $$
 
 
 
-   Once we have updated $i_k^{n+1}$, we can turn to outer iteration that updating $v^{n+1}$ according to 
+   Once we have updated ${i^k}^{n+1}$, we can turn to outer iteration that updating $v^{n+1}$ according to 
 
 
    \begin{aligned}
-   0= &  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-i_k^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
-   & +\frac{d v^{n+1}}{dk}\left[\mu_k+{i_k^{n+1}}-\frac{\kappa}{2} {i_k^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h_k^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-   & +\xi_k \frac{\left|{h_k^{n+1}}\right|^2}{2}
+   0= &  \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha-{i^k}^{n+1}}{\exp (v^{n})} \exp(k)\right)^{1-\rho}-1\right] \\
+   & +\frac{d v^{n+1}}{dk}\left[\mu_k+{{i^k}^{n+1}}-\frac{\kappa}{2} {{i^k}^{n+1}}^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {{h^k}^{n+1}}\right]+\frac{d^2 v^{n+1}}{d k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\x{i^k} \frac{\left|{{h^k}^{n+1}}\right|^2}{2}
    \end{aligned}
 
    To sum up, this alternated Cobweb algorithm aims at achieving a very tiny difference between two subsequent iterations over value function $v$ more directly, 

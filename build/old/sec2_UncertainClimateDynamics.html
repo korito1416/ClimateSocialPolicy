@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>2 Uncertain climate dynamics &#8212; ClimateSocialPolicy 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=indigo>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#old/sec2_UncertainClimateDynamics" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="ClimateSocialPolicy 0.0.1 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">&#xe55d</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">UncertaintySocialPolicy</span>
+          <span class="md-header-nav__topic"> 2 Uncertain climate dynamics </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">ClimateSocialPolicy 0.0.1 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="ClimateSocialPolicy 0.0.1 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">&#xe55d</i>
+      
+    </a>
+    <a href="../index.html"
+       title="ClimateSocialPolicy 0.0.1 documentation">UncertaintySocialPolicy</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Contents:</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec1_introduction.html" class="md-nav__link">1 Introduction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec2_uncertainty.html" class="md-nav__link">2 Confronting Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec3_climatedynamics.html" class="md-nav__link">3 Climate Dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec4_damagedynamics.html" class="md-nav__link">4 Climate Damages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec5_illustrativeeconomy.html" class="md-nav__link">5 Economic Framework</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec7_uncertinaty_adjust_prob.html" class="md-nav__link">7 Uncertainty Adjusted Probability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec8_robust_action.html" class="md-nav__link">8 Robustly Optimal Action</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec9_social_valuation.html" class="md-nav__link">9 Social Valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec10_distortion.html" class="md-nav__link">10 Distortion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec11_stochastic_simulation.html" class="md-nav__link">11 Stochastic Simulation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec12_stochastic_simulation_more.html" class="md-nav__link">12 Stochastic Simulation with More Pathways</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec13_postdamage.html" class="md-nav__link">13 Post Damage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec14_notechnology.html" class="md-nav__link">14 No Technology Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../sec15_delta.html" class="md-nav__link">15 Sensitivity to <span class="math notranslate nohighlight">\(\delta\)</span></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Appendix.html" class="md-nav__link">Appendix A. Computational Method</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Module.html" class="md-nav__link">Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../bib_file.html" class="md-nav__link">References</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#old-sec2-uncertainclimatedynamics--page-root" class="md-nav__link">2 Uncertain climate dynamics</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#2.1-approximation-to-climate-dynamics" class="md-nav__link">2.1 approximation to climate dynamics</a>
+        </li>
+        <li class="md-nav__item"><a href="#2.2-Stochastic-climate-pulses" class="md-nav__link">2.2 Stochastic climate pulses</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="2-Uncertain-climate-dynamics">
+<h1 id="old-sec2-uncertainclimatedynamics--page-root">2 Uncertain climate dynamics<a class="headerlink" href="#old-sec2-uncertainclimatedynamics--page-root" title="Permalink to this heading">¶</a></h1>
+<section id="2.1-approximation-to-climate-dynamics">
+<h2 id="2.1-approximation-to-climate-dynamics">2.1 approximation to climate dynamics<a class="headerlink" href="#2.1-approximation-to-climate-dynamics" title="Permalink to this heading">¶</a></h2>
+<p>We use exponentially weighted average of each of response functions as coefficients <span class="math notranslate nohighlight">\(\{\theta_\ell\}_{\ell=1}^L\)</span> in our computations. The discount rate <span class="math notranslate nohighlight">\(\delta=0.01\)</span> and the number of climate models <span class="math notranslate nohighlight">\(L = 144\)</span>.</p>
+<p>The histogram of those coefficients are represented below:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">src.plots</span> <span class="kn">import</span> <span class="n">plot2</span>
+<span class="n">plot2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div> <div class="plotly-graph-div" id="e1321d86-bb7c-4d4a-88ab-3fa3d8866799" style="height:500px; width:600px;"></div> <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("e1321d86-bb7c-4d4a-88ab-3fa3d8866799")) {                    Plotly.newPlot(                        "e1321d86-bb7c-4d4a-88ab-3fa3d8866799",                        [{"histnorm":"probability density","legendgroup":"1","marker":{"color":"red","line":{"color":"grey","width":1}},"name":"baseline","opacity":0.5,"showlegend":false,"type":"histogram","x":[2.10137,1.65249,1.68799,1.88301,1.68972,1.51397,2.08753,1.82399,1.61574,2.71033,2.13137,2.17716,2.4287,2.1794,1.95271,2.69249,2.35258,2.08397,2.60347,2.04733,2.09132,2.33294,2.09347,1.87572,2.58633,2.25982,2.00181,2.09218,1.64526,1.68061,1.87478,1.68234,1.50735,2.07841,1.81602,1.60868,2.31139,1.81764,1.85669,2.07121,1.8586,1.66528,2.29617,2.00629,1.77722,2.3965,1.88458,1.92506,2.14748,1.92705,1.7266,2.38072,2.08016,1.84267,2.58788,2.03507,2.07879,2.31897,2.08093,1.86448,2.57084,2.24628,1.9898199999999997,1.70128,1.33786,1.3666,1.5245,1.36801,1.22572,1.69008,1.47671,1.30811,1.51799,1.19372,1.21937,1.36025,1.22062,1.09366,1.50799,1.31761,1.16718,2.80927,2.20917,2.25663,2.51736,2.25895,2.02399,2.79077,2.43845,2.16005,1.40936,1.1083,1.13211,1.26291,1.13327,1.0154,1.40008,1.22332,1.08365,2.55972,2.01292,2.05617,2.29373,2.05828,1.84419,2.54286,2.22184,1.96817,1.93271,1.51985,1.55251,1.73188,1.5541,1.39245,1.91998,1.6776,1.48606,2.58448,2.03239,2.07606,2.31592,2.07819,1.86203,2.56746,2.24333,1.9872,1.93883,1.52466,1.55742,1.73736,1.55902,1.39686,1.92606,1.6829,1.49076,1.83463,1.44272,1.47372,1.64399,1.47524,1.32179,1.82255,1.59246,1.41064],"xbins":{"size":0.15}}],                        {"height":500,"plot_bgcolor":"white","template":{"data":{"scatter":[{"type":"scatter"}]}},"title":{"text":"Figure 2: Histograms of climate sensitivity parameters."},"width":600,"xaxis":{"linecolor":"black","linewidth":1,"range":[0.8,3],"showgrid":true,"showline":true,"title":{"font":{"size":13},"text":"Climate Sensitivity"}},"yaxis":{"linecolor":"black","linewidth":1,"range":[0,1.5],"showgrid":true,"showline":true,"title":{"text":"Density"}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('e1321d86-bb7c-4d4a-88ab-3fa3d8866799');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script> </div></div>
+</div>
+</section>
+<section id="2.2-Stochastic-climate-pulses">
+<h2 id="2.2-Stochastic-climate-pulses">2.2 Stochastic climate pulses<a class="headerlink" href="#2.2-Stochastic-climate-pulses" title="Permalink to this heading">¶</a></h2>
+<p>To explore uncertainty, we introduce explicit stochasticity as a precursor to the study of uncertainty. We capture this randomness in part by an exogenous forcing processes that evolves as:</p>
+<div class="math notranslate nohighlight">
+\[dZ_t = \mu_z(Z_t) dt + \sigma_z(Z_t) dW_t\]</div>
+<p>where <span class="math notranslate nohighlight">\(\{ W_t : t \ge 0\}\)</span> a multivariate standard Brownian motion. We partition the vector Brownian motion into two subvectors as follows:</p>
+<div class="math notranslate nohighlight">
+\[dW_t = \begin{bmatrix} dW_t^y \cr dW_t^n \cr dW_t^k \end{bmatrix}\]</div>
+<p>where the first component consists of the climate change shocks and the second component contains the technology shocks. Consider an emissions “pulse” of the form</p>
+<div class="math notranslate nohighlight">
+\[\left(\iota_y \cdot Z_t \right) {\mathcal E}_t  \left( \theta dt + \varsigma \cdot dW_t^y\right)\]</div>
+<div class="line-block">
+<div class="line">where <span class="math notranslate nohighlight">\({\mathcal E}_t\)</span> is fossil fuel emissions and <span class="math notranslate nohighlight">\(\iota_y \cdot Z = \{ \iota_y \cdot Z_t : t\ge 0\}\)</span> is a positive process which we normalize to have mean one. The <span class="math notranslate nohighlight">\(\iota_y\cdot Z\)</span>-process captures “left out” components of the climate system’s reaction to an emission of <span class="math notranslate nohighlight">\({\mathcal E}_t\)</span> gigatons into the atmosphere while the <span class="math notranslate nohighlight">\(\varsigma \cdot dW\)</span> process captures short time scale fluctuations.</div>
+<div class="line">We will use a positive Feller square root process for the <span class="math notranslate nohighlight">\(\iota_y\cdot Z\)</span> process in our analysis.</div>
+</div>
+<p>Within this framework, we impose the “Matthews’ approximation” by making the consequence of the pulse permanent:</p>
+<div class="math notranslate nohighlight">
+\[dY_t = \mu_y(Z_t, {\mathcal E}_t) dt + \sigma_y(Z_t, {\mathcal E}_t) dW_t^y\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+\mu_y(z, e) &amp; =  e \left(\iota_y \cdot z \right) \theta   \cr
+\sigma_y(z, e) &amp; = e \left(\iota_y \cdot z \right) \varsigma'
+\end{align*}\]</div>
+<p>Throughout, we will use uppercase letters to denote random vector or stochastic processes and lower case letters to denote possible realizations. Armed with this “Matthews’ approximation”, we collapse the climate change uncertainty into the cross-model empirical distribution reported in the figure above. We will eventually introduce uncertainty about <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<blockquote>
+<div><p><strong>Remark 1</strong></p>
+<p>For a more general starting point, let <span class="math notranslate nohighlight">\(Y_t\)</span> be a vector used to represent temperature dynamics where the temperature impact on damages is the first component of <span class="math notranslate nohighlight">\(Y_t\)</span>. This state vector evolves according to:</p>
+<div class="math notranslate nohighlight">
+\[dY_t = \Lambda Y_t dt +   {\mathcal E}_t  \left(\iota_y \cdot Z_t \right)  \left(\Theta dt + \Phi dW_t^y \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda\)</span> is a square matrix and <span class="math notranslate nohighlight">\(\Theta\)</span> is a column vector. Given an initial condition <span class="math notranslate nohighlight">\(Y_0\)</span>, the solution for <span class="math notranslate nohighlight">\(Y_t\)</span> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[Y_t = \exp \left( t \Lambda \right) Y_0 + \int_0^t  \exp\left[ (t-u) \Lambda \right] \left(\iota_y \cdot Z_u \right) {\mathcal E}_u \left(\Theta du + \Phi dW_u^y \right)\]</div>
+<p>Thus under this specification, the expected future response of <span class="math notranslate nohighlight">\(Y\)</span> to a pulse at date zero is:</p>
+<div class="math notranslate nohighlight">
+\[\exp \left( u \Lambda \right) \Theta\]</div>
+<p>It is the first component of this function that determines the response dynamics. This generalization allows for multiple exponentials to approximate the pulse responses. Our introduction of a multiple exponential approximation adapts for example, <span class="math">\cite{Joosetal:2013}</span> and
+<span class="math">\cite{Pierrehumbert:2014}</span>.:nbsphinx-math:<cite>footnote{See equation (5) of cite{Joosetal:2013} and  equations (1)-(3) of cite{Pierrehumbert:2014}.   citeauthor{Pierrehumbert:2014} puts the change in radiative forcing equal to a constant times the logarithm of the ratio of atmospheric $CO_2$ at date $t$ to atmospheric $CO_2$ at baseline date zero. His  Figures 1 and 2 illustrate how an approximation of the Earth System dynamics by three exponentials plus a constant tracks a radiative forcing induced by a pulse into the atmosphere at a baseline date from the atmosphere works quite well with half lives of approximately six, sixty five, and four hundred and fifty years.}</cite></p>
+<p>As an example, we capture the initial rise in the emission responses by the following two-dimensional specification</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*} dY_t^1&amp; =  Y_t^2 dt \cr  dY_t^2 &amp; = - \lambda Y_t^2 dt + \lambda  \theta {\mathcal E}_t dt \end{align*}\]</div>
+<p>which implies the response to a pulse is:</p>
+<div class="math notranslate nohighlight">
+\[\theta \left[ 1 - \exp( - \lambda t) \right] {\mathcal E}_0\]</div>
+<p>A high value of <span class="math notranslate nohighlight">\(\lambda\)</span> implies more rapid convergence to the limiting response <span class="math notranslate nohighlight">\(\theta {\mathcal E}_0\)</span>. This approximation is intended as a simple representation of the dynamics where the second state variable can be thought of as an exponentially weighted average of current and past
+emissions.:nbsphinx-math:<cite>footnote{In independent work, cite{DietzVenmans:2019} and cite{BarnettBrockHansen:2020} have used such simplified approximations within an explicit economic optimization framework.  The former contribution includes the initial rapid upswing in the impulse response functions.  The latter contribution  abstracts from this.   citeauthor{BarnettBrockHansen:2020} instead explore ways to confront uncertainty, broadly-conceived, while using the Matthews approximation.}</cite></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Remark 2</strong></p>
+<p>The approximation in <span class="math">\cite{Geoffroy:2013}</span> includes the logarithm of carbon in the atmosphere as argued for by <span class="math">\cite{Arrhenius:1896}</span> which is not directly reflected in the linear approximation to the temperature dynamics that we use. The pulse experiments from <span class="math">\cite{Joosetal:2013}</span> show a more than proportional change in atmospheric carbon when the pulse size is changed. It turns out that this is enough to approximately offset the logarithmic
+<span class="math">\citeauthor{Arrhenius:1896}</span> adjustment so that the long-term temperature response remains approximately proportional for small pulse sizes. See also <span class="math">\cite{Pierrehumbert:2014}</span> who discusses the approximate offsetting impacts of nonlinearity in temperature and climate dynamics.</p>
+</div></blockquote>
+<p><strong>Next section:</strong></p>
+<p><a class="reference external" href="sec3_UncertainDamage.ipynb">Section 3: Uncertain damage</a></p>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Bin Cheng.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>
