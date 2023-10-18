@@ -87,6 +87,8 @@ concave function with curvature dictated by the parameter
 --------------------
 
 In our computations we use the following state variables:
+
+
 .. math::
    \begin{align*}
     X_t :=\begin{bmatrix} X_t^1 \cr {\widehat N}_t  \end{bmatrix}  \hspace{.3cm} \textrm{ where } \hspace{.3cm} 
@@ -196,7 +198,7 @@ Prior to both jump realizations, the first-order conditions for
 emissions are
 
 .. math::
-   
+
    \begin{align*}
    & \left[ \frac {\partial {\widehat V}} {\partial y} (X_t, Z_t)  - \lambda_1 - \lambda_2 Y_t    \right] \left[{\frac 1 L_y} \sum_{\ell = 1}^{L_y} q(\ell \mid X_t, Z_t) \theta(\ell) + \varsigma H_t  \right] 
    + {\mathcal E}_t \left[ \frac {\partial^2 {\widehat V}(X_t, Z_t)}{\partial y^2 } - \lambda_2 \right]|\varsigma|^2 \cr
