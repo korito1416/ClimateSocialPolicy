@@ -90,6 +90,7 @@ In our computations we use the following state variables:
 
 
 .. math::
+
    \begin{align*}
     X_t :=\begin{bmatrix} X_t^1 \cr {\widehat N}_t  \end{bmatrix}  \hspace{.3cm} \textrm{ where } \hspace{.3cm} 
    X_t^1  := \begin{bmatrix}
@@ -99,6 +100,7 @@ In our computations we use the following state variables:
 where
 
 .. math::
+   
    \begin{align*}
    {\widehat K}_t & := \log K_t \cr
    {\widehat R}_t  & := \log R_t \cr
