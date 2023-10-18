@@ -100,7 +100,7 @@ In our computations we use the following state variables:
 where
 
 .. math::
-   
+
    \begin{align*}
    {\widehat K}_t & := \log K_t \cr
    {\widehat R}_t  & := \log R_t \cr
@@ -236,7 +236,7 @@ state; in this case it is the social cost of global warming given by
 
    \frac {-\frac {\partial {\widehat V}} {\partial y} (X_t, Z_t)}{\delta \left( C_t \right)^{-\rho}\left( N_t \right)^{\rho } \exp \left( (\rho - 1) {\widehat V}(X_t, Z_t) \right) } .
 
-Notice also that social cost of carbon .. math::\eqref{SCC}` includes
+Notice also that social cost of carbon includes
 an explicit volatility adjustment because emissions in our model alter
 the local exposure to Brownian motion risk.
 
