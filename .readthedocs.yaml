@@ -13,16 +13,17 @@ sphinx:
 formats:
    - pdf
 
-# python:
-#    version: 3.8
-#    install:
-#    - requirements: requirements.txt
 
 build:
   os: ubuntu-22.04
   tools:
    python: "3.8"
-      install:
-      - requirements: requirements.txt
+      # install:
+      # - requirements: requirements.txt
+
+python:
+   # version: 3.8
+   install:
+   - requirements: requirements.txt
 
 # Optionally set the version of Python and requirements required to build your docs
