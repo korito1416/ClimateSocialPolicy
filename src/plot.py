@@ -90,7 +90,7 @@ def plot_damage(graph_title):
         for gamma_3 in gamma_3_list:
             
             LHS_ylimitlower = gamma_1 * Y + gamma_2/2 * Y**2 # y<y_limit
-            LHS_ylimitupper = gamma_1 * Y + gamma_2*y_underline * \
+            LHS_ylimitupper = gamma_1 * Y + gamma_2*y_overline * \
                 (Y-y_limit) + (gamma_2+gamma_3)/2 * \
                 (Y-y_limit)**2 + gamma_2/2 * y_limit**2
         
