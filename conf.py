@@ -13,9 +13,9 @@ sys.path.insert(0, os.path.abspath('.'))
 
 import sphinx_material
 project = 'ClimateSocialPolicy'
-copyright = '2023, Bin Cheng'
-author = 'Bin Cheng'
-release = '0.0.1'
+copyright = '2024, Michael Barnett, William Brock, Lars Peter Hansen and Hong Zhang'
+author = 'Haoyang Sun'
+release = '0.1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

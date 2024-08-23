@@ -3,11 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the documentation for *How Should Climate Change Uncertainty Impact Social Valuation and Policy*!
+Uncertainty, Social Valuation, and Climate Change Policy
 ============================================================================================
-This documentation represents the computations in *How Should Climate Change Uncertainty Impact Social Valuation and Policy* by Mike Barnett, William Brock, Lars Peter Hansen and Hong Zhang.
+This documentation represents the computations in *Uncertainty, Social Valuation, and Climate Change Policy* by Mike Barnett, William Brock, Lars Peter Hansen and Hong Zhang.
 
-For related research, also checkout: `Pricing Uncertainty Induced by Climate Change <https://github.com/lphansen/Climate>`_ and `Climate Change Uncertainty Spillover in the Macroeconomy <https://github.com/lphansen/ClimateUncertaintySpillover>`_.
+Related Research
+----------------
+
+Check out our related work:
+- `Pricing Uncertainty Induced by Climate Change <https://github.com/lphansen/Climate>`_
+- `Climate Change Uncertainty Spillover in the Macroeconomy <https://github.com/lphansen/ClimateUncertaintySpillover>`_
 
 .. toctree::
    :maxdepth: 2
@@ -35,9 +40,3 @@ For related research, also checkout: `Pricing Uncertainty Induced by Climate Cha
 
    References <bib_file.rst>
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
