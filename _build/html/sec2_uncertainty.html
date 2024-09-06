@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>2 Confronting Uncertainty &#8212; ClimateSocialPolicy 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <script src="_static/documentation_options.js?v=38b66d78"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3.1 Pre-jump stochastic dynamics" href="sec3_FaynmanKac.html" />
+    <link rel="prev" title="1 Introduction" href="sec1_introduction.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=indigo>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#sec2_uncertainty" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="ClimateSocialPolicy 0.1.0 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">&#xe55d</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">UncertaintySocialPolicy</span>
+          <span class="md-header-nav__topic"> 2 Confronting Uncertainty </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">ClimateSocialPolicy 0.1.0 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="ClimateSocialPolicy 0.1.0 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">&#xe55d</i>
+      
+    </a>
+    <a href="index.html"
+       title="ClimateSocialPolicy 0.1.0 documentation">UncertaintySocialPolicy</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Contents:</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec1_introduction.html" class="md-nav__link">1 Introduction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> 2 Confronting Uncertainty </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">2 Confronting Uncertainty</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#sec2-uncertainty--page-root" class="md-nav__link">2 Confronting Uncertainty</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#2.1:-Brownian-Motion-Misspecification" class="md-nav__link">2.1: Brownian Motion Misspecification</a>
+        </li>
+        <li class="md-nav__item"><a href="#2.2:-Jump-misspecification" class="md-nav__link">2.2: Jump misspecification</a>
+        </li>
+        <li class="md-nav__item"><a href="#2.3-Incorporating-ambiguity-aversion" class="md-nav__link">2.3 Incorporating ambiguity aversion</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#2.1:-Brownian-Motion-Misspecification" class="md-nav__link">2.1: Brownian Motion Misspecification</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#2.2:-Jump-misspecification" class="md-nav__link">2.2: Jump misspecification</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#2.3-Incorporating-ambiguity-aversion" class="md-nav__link">2.3 Incorporating ambiguity aversion</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html" class="md-nav__link">3.1 Pre-jump stochastic dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html#3.2-Variational-process" class="md-nav__link">3.2 Variational process</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html#3.3-Marginal-valuation" class="md-nav__link">3.3 Marginal valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html#3.4-Incorporating-robustness" class="md-nav__link">3.4 Incorporating robustness</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec4_climatedynamics.html" class="md-nav__link">4 Climate Dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec5_illustrativeeconomy.html" class="md-nav__link">5 Economic Framework</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec7_uncertinaty_adjust_prob.html" class="md-nav__link">7 Uncertainty Adjusted Probability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec8_robust_action.html" class="md-nav__link">8 Robustly Optimal Action</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec9_social_valuation.html" class="md-nav__link">9 Social Valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec10_distortion.html" class="md-nav__link">10 Distortion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec11_stochastic_simulation.html" class="md-nav__link">11 Stochastic Simulation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec12_stochastic_simulation_more.html" class="md-nav__link">12 Stochastic Simulation with More Pathways</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec13_postdamage.html" class="md-nav__link">13 Post Damage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec14_notechnology.html" class="md-nav__link">14 No Technology Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec15_delta.html" class="md-nav__link">15 Sensitivity to <span class="math notranslate nohighlight">\(\delta\)</span></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec16_value_decomposition.html" class="md-nav__link">16.1 Value Decomposition</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec16_value_decomposition.html#16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons" class="md-nav__link">16.2 Expected Marginal Social Payoffs for Alternative Horizons</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Appendix.html" class="md-nav__link">Appendix A. Computational Method</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Module.html" class="md-nav__link">Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="bib_file.html" class="md-nav__link">References</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#sec2-uncertainty--page-root" class="md-nav__link">2 Confronting Uncertainty</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#2.1:-Brownian-Motion-Misspecification" class="md-nav__link">2.1: Brownian Motion Misspecification</a>
+        </li>
+        <li class="md-nav__item"><a href="#2.2:-Jump-misspecification" class="md-nav__link">2.2: Jump misspecification</a>
+        </li>
+        <li class="md-nav__item"><a href="#2.3-Incorporating-ambiguity-aversion" class="md-nav__link">2.3 Incorporating ambiguity aversion</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="2-Confronting-Uncertainty">
+<h1 id="sec2-uncertainty--page-root">2 Confronting Uncertainty<a class="headerlink" href="#sec2-uncertainty--page-root" title="Link to this heading">¶</a></h1>
+<section id="2.1:-Brownian-Motion-Misspecification">
+<h2 id="2.1:-Brownian-Motion-Misspecification">2.1: Brownian Motion Misspecification<a class="headerlink" href="#2.1:-Brownian-Motion-Misspecification" title="Link to this heading">¶</a></h2>
+<p>Under a baseline probability specification, <span class="math notranslate nohighlight">\(W  := \{ W_t : t \ge 0\}\)</span> is a multivariate standard Brownian motion, and <span class="math notranslate nohighlight">\({\mathfrak F}  := \{ {\mathfrak F}_t : t \ge 0\}\)</span> is the corresponding information filtration with <span class="math notranslate nohighlight">\(\mathfrak{F}_t\)</span> generated information that is realized between dates zero and t. This information includes the Brownian increments that have been realized up to date <span class="math notranslate nohighlight">\(t\)</span>. Initially, we let <span class="math notranslate nohighlight">\({\mathfrak F}\)</span> be the Brownian filtration, but we
+subsequently will augment this filtration to include realizations of jumps that will influence technology and damages induced by climate change.</p>
+<p>As is familiar from derivative claims pricing, positive martingales with expectations equal to one parameterize changes in probability measures. From Girsanov theory, such martingales can be characterized by their implied drift distortions. In particular, under the martingale change in the probability measure, process <span class="math notranslate nohighlight">\(W  := \{ W_t : t \ge 0\}\)</span> instead has a drift <span class="math notranslate nohighlight">\(H := \{ H_t : t \ge 0\}\)</span>.</p>
+<p>Suppose that the state vector process <span class="math notranslate nohighlight">\(X\)</span> has a local mean increment $:nbsphinx-math:<cite>mu</cite>_x(X_t,A_t)dt $ and stochastic increment <span class="math notranslate nohighlight">\(\sigma_x(X_t, A_t) dW_t\)</span>, where <span class="math notranslate nohighlight">\(A_t\)</span> is a decision or action taken at time <span class="math notranslate nohighlight">\(t\)</span>. Throughout the essay we let lower-case variables capture potential realizations of random vectors. The realizations of the state vector <span class="math notranslate nohighlight">\(X_t\)</span> reside in a state space <span class="math notranslate nohighlight">\({\mathcal X}.\)</span> For a value function, <span class="math notranslate nohighlight">\({\widehat V},\)</span> the drift or local mean
+of <span class="math notranslate nohighlight">\({\widehat V} (X)\)</span> is given by:nbsphinx-math:<cite>footnote{
+We use the notation $frac{partial {widehat V} }{partial x}(x)$ to denote a column vector of derivatives with respect to the column vector $x$  and  $frac{partial {widehat V} }{partial x’}(x)$ to be the corresponding row vectors of derivatives with respect to the row vector $x’.$}</cite></p>
+<p><span class="math">\begin{equation}
+\frac{\partial {\widehat V} }{\partial x'}(X_t)\mu_x(X_t,A_t) + \frac 1 2 {\rm trace}\left[\sigma_x(X_t,A_t)' \frac{\partial^2 {\widehat V} }{\partial x \partial x'}(X_t)\sigma_x(X_t,A_t)\right] .
+\end{equation}</span></p>
+<p>In this equation, we omit time dependence and think of ${:nbsphinx-math:<a href="#id1"><span class="problematic" id="id2">`</span></a>widehat <a href="#id3"><span class="problematic" id="id4">`</span></a>V} $ as the value function for an infinite horizon discounted problem.</p>
+<!-- Under a baseline probability specification, $W  \doteq \{ W_t : t \ge 0\}$ is a multivariate standard Brownian motion.
+
+We partition the vector of Brownian motion into four subvectors as follows:
+
+
+$$
+dW_t = \begin{bmatrix} dW_t^k \cr dW_t^r \cr dW_t^y \cr dW_t^n \cr \end{bmatrix}
+$$
+
+where the first component consists of the technology shocks, the second component consists of the R\&D shocks and the third component contains the climate change shocks.  --><p>Formula (1) captures the time increment to risk confronted by the decision-maker.</p>
+<p>The decision-maker entertains possible misspecification uncertainty by replacing formula (1) with the solution</p>
+<p><span class="math">\begin{align*}
+\min_{h} \frac{\partial {\widehat V} }{\partial x'}(x) \left[\mu_x(x,a) + \sigma_x(x,a) h \right] + \frac 1 2 {\rm trace}\left[\sigma_x(x,a)' \frac{\partial^2 {\widehat V} }{\partial x \partial x'}(x)\sigma_x(x,a)\right] + \frac{\xi}{2} h'h
+\end{align*}</span></p>
+<p>for a penalty parameter <span class="math notranslate nohighlight">\(\xi\)</span>.</p>
+<p>The minimization captures a form of uncertainty aversion, analogous to risk aversion, since the minimizing objective will be less than or equal to (1). The penalty parameter <span class="math notranslate nohighlight">\(\xi\)</span> restrains the concern for robustness to model misspecification. The quadratic penalty in <span class="math notranslate nohighlight">\(h\)</span> is a local measure of ``relative entropy’’ or Kulback–Leibler divergence. A limiting choice of <span class="math notranslate nohighlight">\(\xi \approx \infty\)</span> implies a minimizing choice of <span class="math notranslate nohighlight">\(h=0\)</span> with an implied contribution given by (1). Since
+the minimization problem is quadratic in <span class="math notranslate nohighlight">\(h\)</span>, the minimizer is</p>
+<p><span class="math">\begin{equation}
+h^* = - \frac 1 {\xi} \sigma_x(x,a)'\frac{\partial {\widehat V} }{\partial x}(x)
+\end{equation}</span></p>
+<p>with a minimized objective:</p>
+<p><span class="math">\begin{align*}
+\frac{\partial {\widehat V} }{\partial x'}(x) \mu_x(x,a) + \frac 1 2 {\rm trace}\left[\sigma_x(x,a)' \frac{\partial^2 {\widehat V} }{\partial x \partial x'}(x)\sigma_x(x,a)\right]
+- \frac 1 {2 \xi} \frac{\partial {\widehat V} }{\partial x'}(x)\sigma_x(x,a)\sigma_x(x,a)'\frac{\partial {\widehat V} }{\partial x}(x) .
+\end{align*}</span></p>
+<p>Notice that the minimizing drift, <span class="math notranslate nohighlight">\(h^*,\)</span> is potentially state dependent. When <span class="math notranslate nohighlight">\(\sigma\)</span> depends on the action <span class="math notranslate nohighlight">\(a\)</span>, the drift of interest for valuation and interpretation depends on the maximizing action <span class="math notranslate nohighlight">\(a\)</span> expressed as a function of the state. The drift vector, <span class="math notranslate nohighlight">\(h^*,\)</span> has larger entries where the value function is more adversely exposed to the Brownian increments. Smaller values of <span class="math notranslate nohighlight">\(\xi\)</span> result in drift adjustments with larger
+magnitudes.:nbsphinx-math:<cite>footnote{While this looks obvious from formula eqref{drift_distort}, it is a bit more subtle because the value function implicitly depends on $xi$.}</cite></p>
+<blockquote>
+<div><p>While we motivated the adjustment to an HJB equation in terms of robustness, it may also be viewed as a risk adjustment in conjunction with recursive utility. Consider the local counterpart or small <span class="math notranslate nohighlight">\(\epsilon\)</span> counterpart to the risk adjustment: <span class="math">\begin{align}
+&amp; \frac 1 {\epsilon } \left( \frac 1 {1 -\gamma}  \log {\mathbb E} \left[ \exp \left( (1- \gamma) {\widehat V}(X_{t+\epsilon})  \right) \mid {\mathfrak F}_t \right] - {\widehat V}(X_t)\right) \cr &amp;  =  \frac 1 {\epsilon (1 -\gamma) }\log {\mathbb E} \left[ \exp \left( (1 - \gamma) \left({\widehat V}(X_{t+\epsilon}) - {\widehat V}(X_t) \right) \right) \mid {\mathfrak F}_t \right] .
+\end{align}</span> This exponential risk adjustment of the continuation value induces a local log-normal type of adjustment given by <span class="math">\begin{align*}
+(1- \gamma)  \frac {\partial {\widehat V}(x)}  {\partial x'}\sigma(x,a) \sigma(x,a)' \frac {\partial {\widehat V}(x)}{\partial x} ,
+\end{align*}</span> where the term multiplying <span class="math notranslate nohighlight">\(1-\gamma\)</span> is the local variance of the continuation value process <span class="math notranslate nohighlight">\({\widehat V}(X)\)</span>. Setting $ <span class="math">\gamma `- 1 = :nbsphinx-math:</span>frac 1` {<span class="math">\xi</span>}$ gives a mathematical equivalence between robustness and risk considerations, although the rationale for the two adjustments is very different. We will eventually show how to embed this into a full recursive utility specification preferences. The resulting equivalence
+is a direct extension of a well-known result from risk-sensitive control theory.</p>
+</div></blockquote>
+<blockquote>
+<div><p>As <span class="math">\cite{AndersonHansenSargent:2003}</span> emphasize, the negative implied drift distortions from a planner’s problem are also the local shadow prices for concerns about misspecification. While they featured the case in which these shadow prices are also pertinent for competitive financial markets, the same insight carries over to social valuation in the presence of externalities that induce a wedge between market prices and social counterparts.</p>
+</div></blockquote>
+</section>
+<section id="2.2:-Jump-misspecification">
+<h2 id="2.2:-Jump-misspecification">2.2: Jump misspecification<a class="headerlink" href="#2.2:-Jump-misspecification" title="Link to this heading">¶</a></h2>
+<p>We suppose there is a discrete set of jump states <span class="math notranslate nohighlight">\(\mathcal{Z}\)</span>. Let <span class="math notranslate nohighlight">\(z\)</span> denote a realized value in the set <span class="math notranslate nohighlight">\(\mathcal{Z}\)</span>. Let <span class="math notranslate nohighlight">\(\mathcal{J}\)</span> denote a state-dependent jump intensity, and let <span class="math notranslate nohighlight">\(\pi(\tilde{z} \mid x, z), z \in \mathcal{Z}\)</span> give the jump distribution conditioned on a jump when <span class="math notranslate nohighlight">\(X_t=x\)</span> in discrete state <span class="math notranslate nohighlight">\(Z_t=z\)</span>. Recall that the jump intensity, <span class="math notranslate nohighlight">\(\mathcal{J}\)</span>, implies an approximate jump probability, <span class="math notranslate nohighlight">\(\epsilon \mathcal{J}\)</span>, over a
+small time increment, <span class="math notranslate nohighlight">\(\epsilon\)</span>. Following a jump, <span class="math notranslate nohighlight">\(x\)</span> changes as does the value function. For each choice of <span class="math notranslate nohighlight">\(\tilde{z}\)</span>, <span class="math notranslate nohighlight">\(x\)</span> jumps to the <span class="math notranslate nohighlight">\(\tilde{x}(\tilde{z})\)</span>, where <span class="math notranslate nohighlight">\(\tilde{z}\)</span> is uncertain prior to the jump. The baseline probabilities are <span class="math notranslate nohighlight">\(\pi(\tilde{z} \mid x, z)\)</span> for <span class="math notranslate nohighlight">\(z \in \mathcal{Z}\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[\sum_{\mathcal{Z}} \pi(\tilde{z} \mid x, z)=1 .\]</div>
+<p>With these jumps, a value function shifts from <span class="math notranslate nohighlight">\(\hat{V}(x, z)\)</span> to <span class="math notranslate nohighlight">\(\tilde{V}[\tilde{x}(\tilde{z}), \tilde{z}]\)</span>. The jump process contributes the following term to the drift of <span class="math notranslate nohighlight">\(\widehat{V}(X, Z)\)</span> :</p>
+<p><span class="math">\begin{equation}
+\mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[\tilde{V}[\tilde{x}(\tilde{z}), \tilde{z}]-\hat{V}(x, z)] \pi(\tilde{z} \mid x, z)
+\end{equation}</span></p>
+<p>capturing the jump risk contribution to the decision problem.</p>
+<p>To capture potential misspecification, we introduce a non-negative function <span class="math notranslate nohighlight">\(f\)</span> where the altered jump distribution is</p>
+<div class="math notranslate nohighlight">
+\[\frac{f(\tilde{z} \mid x, z) \pi(\tilde{z} \mid x, z)}{\tilde{f}(x, z)}\]</div>
+<p>and intensity <span class="math notranslate nohighlight">\(\mathcal{J}(x, z) \bar{f}(x, z)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\bar{f}(x, z)=\sum_{\bar{z} \in \mathcal{Z}} f(\tilde{z} \mid x, z) \pi(\tilde{z} \mid x, z) .\]</div>
+<p>To restrain the exploration of potential misspecification, we introduce a convex cost:</p>
+<div class="math notranslate nohighlight">
+\[\xi \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)] \pi(\tilde{z} \mid x, z)\]</div>
+<p>The term multiplying <span class="math notranslate nohighlight">\(\xi\)</span> is a local (in time) measure of relative entropy or Kullback–Leibler divergence applicable to jump processes</p>
+<p>To confront misspecification, we solve:</p>
+<p><span class="math">\begin{align*}
+\min _{f \geqslant 0} &amp; \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[\tilde{V}[\tilde{x}(\tilde{z}), \tilde{z}]-\hat{V}(x, z)] f(\tilde{z} \mid x, z) \pi(\tilde{z} \mid x, z) \\
+&amp; +\xi \mathcal{J}(x, z) \sum_{\tilde{z} \in \mathcal{Z}}[1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)] \pi(\tilde{z} \mid x, z) .
+\end{align*}</span></p>
+<p>The above minimization problem has a quasi-analytical solution:</p>
+<p><span class="math">\begin{align}
+f^*( {\tilde z}  \mid x, z )  = \exp \left( - {\frac{1}{\xi}} \left( {\widetilde  V} [{\tilde x}({\tilde z}), {\tilde z} ] - {\widehat V} (x, z) \right) \right),
+\end{align}</span></p>
+<p>with a minimized objective: <span class="math">\begin{equation}
+\xi {\mathcal J}(x, z) \left[ 1 -  \sum_{{\tilde z } \in {\mathcal Z}}   \exp \left( - {\frac{1}{\xi}} \left( {\widetilde  V} [{\tilde x}({\tilde z}), {\tilde z} ] - {\widehat V} (x, z) \right) \right) \right] \pi({\tilde z} \mid x, z)  ,
+\end{equation}</span></p>
+<p>which we use in place of (1).</p>
+</section>
+<section id="2.3-Incorporating-ambiguity-aversion">
+<h2 id="2.3-Incorporating-ambiguity-aversion">2.3 Incorporating ambiguity aversion<a class="headerlink" href="#2.3-Incorporating-ambiguity-aversion" title="Link to this heading">¶</a></h2>
+<p>Imagine there are alternative models of different components of the dynamics. We follow <span class="math">\cite{HansenMiao:2018}</span> by supposing that the drift <span class="math notranslate nohighlight">\(\mu(x, z, a \mid \theta)\)</span> depends on an unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span> residing in a set <span class="math notranslate nohighlight">\(\Theta.\)</span> The parameter, <span class="math notranslate nohighlight">\(\theta,\)</span> could index one of a discrete set of alternative models or depict a unknown parameter vector. The decision-maker has a baseline probability <span class="math notranslate nohighlight">\(d P_t(\theta)\)</span> for each time instant, <span class="math notranslate nohighlight">\(t\)</span>, and
+makes an adjustment for ambiguity by solving <span class="math">\begin{align*}
+\min_{q,\, \int_\Theta q(\theta) dP_t(\theta)  = 1} \hspace{.3cm} &amp;\frac{\partial {\widehat V} }{\partial x'}(x, z) \int_\Theta \mu_x(x, z, a \mid \theta) q(\theta)  d P_t(\theta)  \cr &amp; + \chi \int_\Theta  q(\theta) \log q(\theta) d P_t(\theta) ,
+\end{align*}</span> where <span class="math notranslate nohighlight">\(\chi\)</span> is a penalty parameter.</p>
+<p>This problem is known to have a solution that entails exponential tilting as a function of the drift of the value function for alternative values of <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<p><span class="math">\begin{equation*}
+q^*_t({\tilde \theta}) = \frac {\exp\left( - \frac 1 {\chi} \frac{\partial {\widehat V} }{\partial x'}(x, z)  \mu_x (x, z, a \mid {\tilde \theta}) \right)}{ \int_\Theta \exp\left( - \frac 1 {\chi} \frac{\partial {\widehat V} }{\partial x'}(x, z)  \mu_x\left(x, z, a \mid \theta\right)\right) d P_t(\theta) } .
+\end{equation*}</span></p>
+<p>The minimized objective is <span class="math">\begin{equation*}
+\chi \log \int_\Theta  \exp\left( - \frac 1 {\chi} \frac{\partial {\widehat V} }{\partial x'}(x, z)  \mu_x(x, z, a \mid \theta)\right) d P_t(\theta) .
+\end{equation*}</span></p>
+<p>Notice that this formulation implies an exponential adjustment for model ambiguity concerns.:nbsphinx-math:<cite>footnote{As noted by cite{HansenMiao:2018}, this exponential adjustment can equivalently be viewed as a continuous-time version of a smooth ambiguity adjustment.}</cite> We allow the baseline probability to be time dependent to allow for recursive learning, although we will abstract from this learning in our application.</p>
+<p>Problem 3 and Problem 2 show a notable similarity. The smooth ambiguity model applies to Brownian uncertainty, and the objective of interest is the local evolution of the value function. In the case of jump uncertainty, this is replaced by the intensity times the difference between the post-jump and pre-jump value functions. The counterpart to <span class="math notranslate nohighlight">\(\chi\)</span> for the smooth ambiguity adjustment is the intensity times <span class="math notranslate nohighlight">\(\xi.\)</span></p>
+<p>The relative density <span class="math notranslate nohighlight">\(q\)</span> in Problem 3 plays a role analogous to $ {f}/{{:nbsphinx-math:<a href="#id5"><span class="problematic" id="id6">`</span></a>bar <a href="#id7"><span class="problematic" id="id8">`</span></a>f}}$ in Problem 2 when deducing the worst-case distribution. With this mapping, the two robustness adjustments are mathematically equivalent. As we noted, however, the required specification of the intensity introduces an additional source of potential misspecification for the case of jump uncertainty.</p>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="sec1_introduction.html" title="1 Introduction"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> 1 Introduction </span>
+              </div>
+            </a>
+          
+          
+            <a href="sec3_FaynmanKac.html" title="3.1 Pre-jump stochastic dynamics"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> 3.1 Pre-jump stochastic dynamics </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Michael Barnett, William Brock, Lars Peter Hansen and Hong Zhang.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

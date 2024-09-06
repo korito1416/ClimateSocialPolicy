@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>3.1 Pre-jump stochastic dynamics &#8212; ClimateSocialPolicy 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <script src="_static/documentation_options.js?v=38b66d78"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4 Climate Dynamics" href="sec4_climatedynamics.html" />
+    <link rel="prev" title="2 Confronting Uncertainty" href="sec2_uncertainty.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=indigo>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#sec3_FaynmanKac" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="ClimateSocialPolicy 0.1.0 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">&#xe55d</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">UncertaintySocialPolicy</span>
+          <span class="md-header-nav__topic"> 3.1 Pre-jump stochastic dynamics </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">ClimateSocialPolicy 0.1.0 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="ClimateSocialPolicy 0.1.0 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">&#xe55d</i>
+      
+    </a>
+    <a href="index.html"
+       title="ClimateSocialPolicy 0.1.0 documentation">UncertaintySocialPolicy</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Contents:</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec1_introduction.html" class="md-nav__link">1 Introduction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec2_uncertainty.html" class="md-nav__link">2 Confronting Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> 3.1 Pre-jump stochastic dynamics </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">3.1 Pre-jump stochastic dynamics</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#sec3-faynmankac--page-root" class="md-nav__link">3.1 Pre-jump stochastic dynamics</a>
+        </li>
+        <li class="md-nav__item"><a href="#3.2-Variational-process" class="md-nav__link">3.2 Variational process</a>
+        </li>
+        <li class="md-nav__item"><a href="#3.3-Marginal-valuation" class="md-nav__link">3.3 Marginal valuation</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#Remark" class="md-nav__link">Remark</a>
+        </li>
+        <li class="md-nav__item"><a href="#remark-1" class="md-nav__link">Remark</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#3.4-Incorporating-robustness" class="md-nav__link">3.4 Incorporating robustness</a>
+        </li>
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#3.2-Variational-process" class="md-nav__link">3.2 Variational process</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#3.3-Marginal-valuation" class="md-nav__link">3.3 Marginal valuation</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#Remark" class="md-nav__link">Remark</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#remark-1" class="md-nav__link">Remark</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#3.4-Incorporating-robustness" class="md-nav__link">3.4 Incorporating robustness</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec4_climatedynamics.html" class="md-nav__link">4 Climate Dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec5_illustrativeeconomy.html" class="md-nav__link">5 Economic Framework</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec7_uncertinaty_adjust_prob.html" class="md-nav__link">7 Uncertainty Adjusted Probability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec8_robust_action.html" class="md-nav__link">8 Robustly Optimal Action</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec9_social_valuation.html" class="md-nav__link">9 Social Valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec10_distortion.html" class="md-nav__link">10 Distortion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec11_stochastic_simulation.html" class="md-nav__link">11 Stochastic Simulation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec12_stochastic_simulation_more.html" class="md-nav__link">12 Stochastic Simulation with More Pathways</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec13_postdamage.html" class="md-nav__link">13 Post Damage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec14_notechnology.html" class="md-nav__link">14 No Technology Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec15_delta.html" class="md-nav__link">15 Sensitivity to <span class="math notranslate nohighlight">\(\delta\)</span></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec16_value_decomposition.html" class="md-nav__link">16.1 Value Decomposition</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec16_value_decomposition.html#16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons" class="md-nav__link">16.2 Expected Marginal Social Payoffs for Alternative Horizons</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Appendix.html" class="md-nav__link">Appendix A. Computational Method</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Module.html" class="md-nav__link">Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="bib_file.html" class="md-nav__link">References</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#sec3-faynmankac--page-root" class="md-nav__link">3.1 Pre-jump stochastic dynamics</a>
+        </li>
+        <li class="md-nav__item"><a href="#3.2-Variational-process" class="md-nav__link">3.2 Variational process</a>
+        </li>
+        <li class="md-nav__item"><a href="#3.3-Marginal-valuation" class="md-nav__link">3.3 Marginal valuation</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#Remark" class="md-nav__link">Remark</a>
+        </li>
+        <li class="md-nav__item"><a href="#remark-1" class="md-nav__link">Remark</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#3.4-Incorporating-robustness" class="md-nav__link">3.4 Incorporating robustness</a>
+        </li>
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="3.1-Pre-jump-stochastic-dynamics">
+<h1 id="sec3-faynmankac--page-root">3.1 Pre-jump stochastic dynamics<a class="headerlink" href="#sec3-faynmankac--page-root" title="Link to this heading">¶</a></h1>
+<p>As a part of a more general derivation, we begin with state dynamics modeled as a Markov diffusion:</p>
+<div class="math notranslate nohighlight">
+\[dX_t = \mu(X_t) dt + \sigma(X_t) dW_t\]</div>
+<p>These dynamics could be the outcome of an optimization problem or they could be the socially inefficient outcome of a market equilibrium. Consider the evaluation of discounted utility where the instantaneous contribution is <span class="math notranslate nohighlight">\(U(x)\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is the realization of a state vector <span class="math notranslate nohighlight">\(X_t\)</span>. The function <span class="math notranslate nohighlight">\(V\)</span> is known to satisfy a Feynman-Kac (FK) equation:</p>
+<p><span class="math">\begin{align}
+0 \hspace{.2cm} = \hspace{.2cm} &amp; \delta U(x) - \delta V(x) +
+\mu(x) \cdot \frac{\partial V}{\partial x}(x)
++ {\frac{1}{2}} {\rm trace}\left[\sigma(x)' \frac{\partial^2 V}{\partial x \partial x'}(x) \sigma(x) \right] \cr
+&amp; + \sum_{\ell = 1}^L {\mathcal J}^\ell(x)  \left[ {V}^\ell(x)   - V (x) \right]
+\end{align}</span></p>
+<p>for a given collection of “terminal” value functions, <span class="math notranslate nohighlight">\(V^{\ell}\)</span> for <span class="math notranslate nohighlight">\(\ell = 1,2,...,L\)</span>. These are post-jump value functions that are computed in advance of solving for <span class="math notranslate nohighlight">\(V\)</span>. Then <span class="math notranslate nohighlight">\(V\)</span> satisfies the forward-looking equation:</p>
+<p><span class="math">\begin{equation}
+V(X_0) = \mathbb{E} \left[ \int_0^\infty Dis_t \left[\delta U(X_t) + \sum_{\ell = 1}^L {\mathcal J}^\ell(x) V^\ell(x) \right] \mid X_0 \right]
+\end{equation}</span></p>
+<p>where <span class="math notranslate nohighlight">\(Dis\)</span> contributes a state-dependent discount rate:</p>
+<p><span class="math">\begin{equation}
+Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u) \right] du \right)
+\end{equation}</span></p>
+<p>The process <span class="math notranslate nohighlight">\(Dis\)</span> includes both an adjustment for the probability that a jump has not occurred, given by:</p>
+<div class="math notranslate nohighlight">
+\[\exp\left( - \int_0^t \left[ \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u) \right] du \right)\]</div>
+<p>along with the usual exponential contribution <span class="math notranslate nohighlight">\(\exp(-\delta t)\)</span>. The flow term being discounted in the formula includes both a direct utility contribution and a continuation-value contribution should a jump take place.</p>
+<p>We want to represent:</p>
+<div class="math notranslate nohighlight">
+\[V_{x_i}(x) \equiv \frac{\partial V}{\partial x_i}(x)\]</div>
+<p>as an expected discounted value of a marginal impulse response of future <span class="math notranslate nohighlight">\(X_t\)</span> to a marginal change in the <span class="math notranslate nohighlight">\(i^{th}\)</span> coordinate of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</section>
+<section id="3.2-Variational-process">
+<h1 id="3.2-Variational-process">3.2 Variational process<a class="headerlink" href="#3.2-Variational-process" title="Link to this heading">¶</a></h1>
+<div class="line-block">
+<div class="line">As in [Borovicka, Hansen, Scheinkman (2014)], we construct marginal impulse response functions using what are called variational processes.</div>
+<div class="line">Following [Fournie et al. (1999)], we form the first variational process, <span class="math notranslate nohighlight">\(M\)</span>, that gives the marginal impact on future <span class="math notranslate nohighlight">\(X\)</span> of a marginal change in one of the initial states. This process has the same dimension as the number of components of <span class="math notranslate nohighlight">\(X\)</span>. By initializing the process at one of the alternative coordinate vectors, we determine the initial state of interest.</div>
+<div class="line"><span class="math">\footnote{Our initial condition for $M_0$ differs from [Fournie et al. (1999)] in a superficial way. They treat $M$ as a matrix with an identity as the initialization. In this way, they consider all of the states of interest simultaneously. We take $M$ to be a vector and characterize the marginal initial responses one at a time by letting the initial condition be any one of the coordinate vectors.}</span></div>
+</div>
+<p>The drift for the <span class="math notranslate nohighlight">\(i^{th}\)</span> component of <span class="math notranslate nohighlight">\(M\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[m' \frac{\partial \mu_i}{\partial x}(x)\]</div>
+<p>and the coefficient on the Brownian increment is given by:</p>
+<div class="math notranslate nohighlight">
+\[m' \frac{\partial \sigma_i}{\partial x}(x)\]</div>
+<p>for <span class="math notranslate nohighlight">\(m\)</span> as a hypothetical realization of <span class="math notranslate nohighlight">\(M_t\)</span> and <span class="math notranslate nohighlight">\(x\)</span> as a hypothetical realization of <span class="math notranslate nohighlight">\(X_t\)</span>, where <span class="math notranslate nohighlight">\('\)</span> denotes vector or matrix transposition. The implied evolution of the process <span class="math notranslate nohighlight">\(M^i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[dM_{t}^i = \left(M_t\right)'\frac{\partial \mu_i}{\partial x}(X_t) dt + \left({M_t}\right)'\frac{\partial \sigma_i}{\partial x}(X_t) dW_t\]</div>
+<p>The drift for the composite process <span class="math notranslate nohighlight">\((X,M)\)</span> is given by:</p>
+<p><span class="math">\begin{equation}
+\hat{\mu} (x,m) \equiv \begin{bmatrix}
+\mu(x) \\
+m' \frac{\partial \mu_1}{\partial x}(x) \\
+\vdots \\
+m' \frac{\partial \mu_n}{\partial x}(x)
+\end{bmatrix}
+\end{equation}</span></p>
+<p>and the composite matrix coefficient on <span class="math notranslate nohighlight">\(dW_t\)</span> is given by:</p>
+<p><span class="math">\begin{equation}
+\hat{\sigma}(x,m) \equiv \begin{bmatrix}
+\sigma(x) \\
+m' \frac{\partial \sigma_1}{\partial x}(x) \\
+\vdots \\
+m' \frac{\partial \sigma_n}{\partial x}(x)
+\end{bmatrix}
+\end{equation}</span></p>
+<p>With these constructions, we now write the composite dynamics as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} d X_t \\ d M_t \end{bmatrix} = \hat{\mu}(X_t, M_t) dt + \hat{\sigma}(X_t, M_t) d W_t\end{split}\]</div>
+<p>By initializing <span class="math notranslate nohighlight">\(M_0\)</span> at a coordinate vector in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> with a one in position <span class="math notranslate nohighlight">\(i\)</span>, we obtain the vector <span class="math notranslate nohighlight">\(M_t\)</span> of stochastic responses to a marginal change in the <span class="math notranslate nohighlight">\(i^{th}\)</span> component of the state vector <span class="math notranslate nohighlight">\(X_0\)</span>. In our application, we simulate the <span class="math notranslate nohighlight">\(M\)</span> process using these stochastic dynamics.</p>
+</section>
+<section id="3.3-Marginal-valuation">
+<h1 id="3.3-Marginal-valuation">3.3 Marginal valuation<a class="headerlink" href="#3.3-Marginal-valuation" title="Link to this heading">¶</a></h1>
+<p>By differentiating the Feynman-Kac equation with respect to each coordinate, we obtain a vector of equations, one for each state variable. We then form the dot product of this vector system with respect to <span class="math notranslate nohighlight">\(m\)</span> to obtain a scalar equation system that is of particular interest. The resulting equation turns out to also be an FK equation for the function:</p>
+<div class="math notranslate nohighlight">
+\[m \cdot \frac{\partial V}{\partial x}(x)\]</div>
+<p>Given that the equation to be solved involves both <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(x\)</span>, this equation uses the diffusion dynamics for the joint process <span class="math notranslate nohighlight">\((X,M)\)</span>.</p>
+<p>The solution to this derived Feynman-Kac equation is of the form of a discounted expected value:</p>
+<p><span class="math">\begin{equation}
+\frac{\partial V}{\partial x}(X_0) \cdot M_0 = \mathbb{E} \left[ \int_0^\infty Dis_t \left(M_t \cdot Scf_t \right) \mid X_0, M_0 \right]
+\end{equation}</span></p>
+<p>where <span class="math notranslate nohighlight">\(Dis\)</span> is given by the discount equation, and <span class="math notranslate nohighlight">\(Scf\)</span> is a social cash flow vector given as:</p>
+<p>:nbsphinx-math:<a href="#id1"><span class="problematic" id="id2">`</span></a>begin{equation*}
+Scf_t equiv delta U_x(X_t)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>sum_{ell=1}^{L} {mathcal J}^{ell}_x(X_t) left[V^ell(X_t) - V(X_t)right]</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>sum_{ell=1}^{L} {mathcal J}^{ell}(X_t) V^ell_x(X_t)</p></li>
+</ul>
+<p>end{equation*}`</p>
+<p>By initializing the state vector <span class="math notranslate nohighlight">\(M_0\)</span> to be a coordinate vector of zeros in all entries but entry <span class="math notranslate nohighlight">\(i\)</span>, we obtain the formula of interest.</p>
+<p>The social cash flow process <span class="math notranslate nohighlight">\(Scf\)</span> has three terms to be discounted, two of which come from the possibilities of jumps to new continuation values. The marginal response process <span class="math notranslate nohighlight">\(M\)</span> acts as an additional stochastic adjustment to valuation. In effect, there is a composite stochastic discount vector process <span class="math notranslate nohighlight">\(Dis M\)</span> applied component-by-component to the state vector. Notice that the cash-flow process can be decomposed additively into a direct utility contribution and contributions
+for each of the potential jumps.</p>
+<p>In our application, we report contributions for each time horizon and for each jump component along with the direct utility contribution:</p>
+<p><span class="math">\begin{align*}
+\delta &amp;  \mathbb{E}\left[ Dis_t M_t \cdot U_x(X_t) \mid X_0, M_0 \right]  \cr
+&amp; + \mathbb{E}\left[Dis_t M_t \cdot  {\mathcal J}^{\ell}_x(X_t)  \left[V^\ell(X_t)  - V(X_t)  \right] \mid X_0, M_0 \right] \cr
+&amp; + \mathbb{E} \left[  Dis_t M_t \cdot   V^\ell_x(X_t) {\mathcal J}^{\ell}(X_t) \mid X_0, M_0 \right]
+\end{align*}</span></p>
+<p>for <span class="math notranslate nohighlight">\(t \geq 0\)</span> and <span class="math notranslate nohighlight">\(\ell = 1,\dots,L\)</span>. These provide valuation counterparts to impulse responses commonly reported in economic dynamics. The initialization of <span class="math notranslate nohighlight">\(M_0\)</span> dictates the marginal change under consideration.</p>
+<section id="Remark">
+<h2 id="Remark">Remark<a class="headerlink" href="#Remark" title="Link to this heading">¶</a></h2>
+<p>Notice that the components of <span class="math notranslate nohighlight">\(Scf_t\)</span> given by:</p>
+<div class="math notranslate nohighlight">
+\[\delta U_x(X_t)
+ + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t)  V^\ell(X_t)
++  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t)   V^\ell_x(X_t)\]</div>
+<p>come from differentiating the stochastic flow contribution of the value function with respect to the state vector. The additional component:</p>
+<div class="math notranslate nohighlight">
+\[- \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t)   V(X_t)\]</div>
+<p>is present because altering the state at date <span class="math notranslate nohighlight">\(t\)</span> changes the jump probabilities and hence the discounting. The value function <span class="math notranslate nohighlight">\(V\)</span> emerges as a convenient way to capture this forward-looking impact. Note that <span class="math notranslate nohighlight">\(V(X_t)\)</span> can be expressed using the forward-looking formula shifted forward to date <span class="math notranslate nohighlight">\(t\)</span>. Analogous forward-looking formulas apply to post-jump continuation values, <span class="math notranslate nohighlight">\(V^\ell\)</span>, although these are computed in advance and are based on different jump possibilities.</p>
+</section>
+<section id="remark-1">
+<span id="id3"></span><h2 id="remark-1">Remark<a class="headerlink" href="#remark-1" title="Link to this heading">¶</a></h2>
+<p><span class="math">\cite{Fournieetal:1999}</span> use these types of methods to produce measurements of the sensitivity of derivative claims prices to inputs. However, we have not seen these techniques developed and applied in the setting of stochastic optimal control. Moreover, we extend these methods to allow for uncertainties, broadly conceived, along with revealing decompositions.</p>
+</section>
+</section>
+<section id="3.4-Incorporating-robustness">
+<h1 id="3.4-Incorporating-robustness">3.4 Incorporating robustness<a class="headerlink" href="#3.4-Incorporating-robustness" title="Link to this heading">¶</a></h1>
+<p>To incorporate robustness, we use the expectation associated with the stochastic dynamics induced by the minimizing <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(g^\ell\)</span>’s. We let <span class="math notranslate nohighlight">\(g^{\ell *}\)</span> denote the latter minimizer for <span class="math notranslate nohighlight">\(\ell = 1, 2, ... L\)</span>. We obtain a formula analogous to the marginal value function:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial V}{\partial x}(X_0) \cdot M_0  =   \widetilde{\mathbb E} \left[ \int_0^\infty  Dis_t \left(M_t \cdot Scf_t \right)  \mid X_0, M_0 \right]\]</div>
+<p>where the expectation <span class="math notranslate nohighlight">\(\widetilde{\mathbb E}\)</span> uses the diffusion dynamics incorporating the minimizing drift distortions, <span class="math notranslate nohighlight">\(h^*\)</span>, implied by robustness. In addition, we modify the discount factor term to be:</p>
+<div class="math notranslate nohighlight">
+\[Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_\tau) g^{\ell*}(X_\tau) \right] d\tau  \right)\]</div>
+<p>and the flow term:</p>
+<p>:nbsphinx-math:<a href="#id4"><span class="problematic" id="id5">`</span></a>begin{align}
+Scf_t  equiv  delta U_x(X_t)</p>
+<blockquote>
+<div><p>&amp; + sum_{ell=1}^{L} {mathcal J}^{ell}_x(X_t) g^{ell*}(X_t) left[V^ell(X_t)  - V(X_t)  right] cr</p>
+</div></blockquote>
+<p>&amp; +  sum_{ell=1}^{L}  {mathcal J}^{ell}(X_t) g^{ell*}(X_t)   V^ell_x(X_t) cr
+&amp; + xi sum_{ell = 1}^L {mathcal J}^ell_x(X_t)  left[ 1 - g^{ell*}(X_t) + g^{ell*}(X_t) log g^{ell*} (X_t) right].
+end{align}`</p>
+<p>Notice that we have scaled each intensity or its partial derivative by the corresponding <span class="math notranslate nohighlight">\(g^{\ell*}\)</span> with the exception of the fourth contribution to the flow term. This fourth term is included because marginal changes in the state vector alter the exposure to uncertainty and thus impact valuation. While partial derivatives with respect to the intensities <span class="math notranslate nohighlight">\({\mathcal J}^\ell\)</span> contribute to the second term in <span class="math notranslate nohighlight">\(Scf\)</span>, there is no counterpart from the jump distortion,
+<span class="math notranslate nohighlight">\(g^{\ell*}\)</span>. We may treat this robust probability adjustment as exogenous to the decision maker and hence not impacted by endogenous state vector components. As verified in the appendix, this treatment is a ramification of the minimization (via application of the Envelope Theorem).</p>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="sec2_uncertainty.html" title="2 Confronting Uncertainty"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> 2 Confronting Uncertainty </span>
+              </div>
+            </a>
+          
+          
+            <a href="sec4_climatedynamics.html" title="4 Climate Dynamics"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> 4 Climate Dynamics </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Michael Barnett, William Brock, Lars Peter Hansen and Hong Zhang.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

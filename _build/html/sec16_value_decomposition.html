@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>16.1 Value Decomposition &#8212; ClimateSocialPolicy 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
+    <link rel="stylesheet" type="text/css" href="_static/material.css?v=79c92029" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script src="_static/documentation_options.js?v=38b66d78"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Appendix A. Computational Method" href="Appendix.html" />
+    <link rel="prev" title="15 Sensitivity to \(\delta\)" href="sec15_delta.html" />
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=indigo>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#sec16_value_decomposition" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="index.html" title="ClimateSocialPolicy 0.1.0 documentation"
+           class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">&#xe55d</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">UncertaintySocialPolicy</span>
+          <span class="md-header-nav__topic"> 16.1 Value Decomposition </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder=""Search""
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = ""versions.json"",
+        target_loc = "../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">ClimateSocialPolicy 0.1.0 documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="index.html" title="ClimateSocialPolicy 0.1.0 documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon">&#xe55d</i>
+      
+    </a>
+    <a href="index.html"
+       title="ClimateSocialPolicy 0.1.0 documentation">UncertaintySocialPolicy</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/binchengecon/ClimateSocialPolicy" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Uncertainty Social Policy
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+      <span class="md-nav__link caption"><span class="caption-text">Contents:</span></span>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec1_introduction.html" class="md-nav__link">1 Introduction</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec2_uncertainty.html" class="md-nav__link">2 Confronting Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html" class="md-nav__link">3.1 Pre-jump stochastic dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html#3.2-Variational-process" class="md-nav__link">3.2 Variational process</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html#3.3-Marginal-valuation" class="md-nav__link">3.3 Marginal valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec3_FaynmanKac.html#3.4-Incorporating-robustness" class="md-nav__link">3.4 Incorporating robustness</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec4_climatedynamics.html" class="md-nav__link">4 Climate Dynamics</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec5_illustrativeeconomy.html" class="md-nav__link">5 Economic Framework</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec6_completemodel.html" class="md-nav__link">6 Complete Model and HJB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec7_uncertinaty_adjust_prob.html" class="md-nav__link">7 Uncertainty Adjusted Probability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec8_robust_action.html" class="md-nav__link">8 Robustly Optimal Action</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec9_social_valuation.html" class="md-nav__link">9 Social Valuation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec10_distortion.html" class="md-nav__link">10 Distortion</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec11_stochastic_simulation.html" class="md-nav__link">11 Stochastic Simulation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec12_stochastic_simulation_more.html" class="md-nav__link">12 Stochastic Simulation with More Pathways</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec13_postdamage.html" class="md-nav__link">13 Post Damage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec14_notechnology.html" class="md-nav__link">14 No Technology Uncertainty</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="sec15_delta.html" class="md-nav__link">15 Sensitivity to <span class="math notranslate nohighlight">\(\delta\)</span></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> 16.1 Value Decomposition </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">16.1 Value Decomposition</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#sec16-value-decomposition--page-root" class="md-nav__link">16.1 Value Decomposition</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#Table:-Components-to-the-partial-derivative-of-the-value-function-with-respect-to-the-R&amp;D-state-variable.-The-column-iii(dc)-includes-only-the-contributions-from-the-damage-curve-realization-jumps-to-iii,-and-iii(td)-includes-the-remaining-contribution-from-the-technology-discovery-jump-to-iii." class="md-nav__link">Table: Components to the partial derivative of the value function with respect to the R&D state variable. The column iii(dc) includes only the contributions from the damage curve realization jumps to iii, and iii(td) includes the remaining contribution from the technology discovery jump to iii.</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons" class="md-nav__link">16.2 Expected Marginal Social Payoffs for Alternative Horizons</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#Remark" class="md-nav__link">Remark</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#Table:-Components-to-the-partial-derivative-of-the-value-function-with-respect-to-the-R&amp;D-state-variable.-The-column-iii(dc)-includes-only-the-contributions-from-the-damage-curve-realization-jumps-to-iii,-and-iii(td)-includes-the-remaining-contribution-from-the-technology-discovery-jump-to-iii." class="md-nav__link">Table: Components to the partial derivative of the value function with respect to the R&D state variable. The column iii(dc) includes only the contributions from the damage curve realization jumps to iii, and iii(td) includes the remaining contribution from the technology discovery jump to iii.</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons" class="md-nav__link">16.2 Expected Marginal Social Payoffs for Alternative Horizons</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#Remark" class="md-nav__link">Remark</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Appendix.html" class="md-nav__link">Appendix A. Computational Method</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="Module.html" class="md-nav__link">Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="bib_file.html" class="md-nav__link">References</a>
+      
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">"Contents"</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#sec16-value-decomposition--page-root" class="md-nav__link">16.1 Value Decomposition</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#Table:-Components-to-the-partial-derivative-of-the-value-function-with-respect-to-the-R&amp;D-state-variable.-The-column-iii(dc)-includes-only-the-contributions-from-the-damage-curve-realization-jumps-to-iii,-and-iii(td)-includes-the-remaining-contribution-from-the-technology-discovery-jump-to-iii." class="md-nav__link">Table: Components to the partial derivative of the value function with respect to the R&D state variable. The column iii(dc) includes only the contributions from the damage curve realization jumps to iii, and iii(td) includes the remaining contribution from the technology discovery jump to iii.</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons" class="md-nav__link">16.2 Expected Marginal Social Payoffs for Alternative Horizons</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#Remark" class="md-nav__link">Remark</a>
+        </li></ul>
+            </nav>
+        </li>
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<section id="16.1-Value-Decomposition">
+<h1 id="sec16-value-decomposition--page-root">16.1 Value Decomposition<a class="headerlink" href="#sec16-value-decomposition--page-root" title="Link to this heading">¶</a></h1>
+<p>We interpret the partial derivative of the value function with respect to the R&amp;D knowledge state as an asset price. As such, it has four payoff contributions as we have derived previously:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\delta m \cdot \frac{\partial U}{\partial x}\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(m \cdot \sum_{\ell=1}^L \frac{\partial {\mathcal J}^\ell}{\partial x} g^{\ell*} (V^\ell - V)\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(m \cdot \sum_{\ell=1}^L {\mathcal J}^\ell g^{\ell*} \frac{\partial V^\ell}{\partial x}\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\xi m \cdot \sum_{\ell=1}^L \frac{\partial {\mathcal J}^\ell}{\partial x} (1 - g^{\ell*} + g^{\ell*} \log g^{\ell*})\)</span>.</p></li>
+</ol>
+<p>Terms ii) and iv) simplify further because <span class="math notranslate nohighlight">\(\frac{\partial {\mathcal J}^\ell}{\partial r} = 0\)</span> except for <span class="math notranslate nohighlight">\(\ell = L\)</span>, which is the technology jump. Term iii) has a <strong>direct</strong> contribution coming from</p>
+<div class="math notranslate nohighlight">
+\[\sum_{\ell=1}^{L-1} {\mathcal J}^\ell g^{\ell*} \frac{\partial V^\ell}{\partial {\hat r}}.\]</div>
+<p>Note that the continuation value function <span class="math notranslate nohighlight">\(V^L\)</span> does not depend on the R&amp;D stock because it conditions on the R&amp;D success.</p>
+<p>Term iii) also has indirect contributions because a marginal change in the initial stock of R&amp;D induces marginal changes in the other state variables. While the continuation values <span class="math notranslate nohighlight">\(V^{\ell}\)</span> for <span class="math notranslate nohighlight">\(\ell = 1,2,\dots, L-1\)</span> do not depend on the pre-jump temperature, term iii) includes contributions from the damage jumps as these will depend on the knowledge stock along with the other state variables.</p>
+<p>Term iv) reflects the reduction in the uncertainty challenges associated with a technology jump. These four contributions to the marginal values add up to the total. In the computations that follow, we measure them separately. In addition, we will split the contribution to iii) coming from the damage curve realization jumps (<span class="math notranslate nohighlight">\(\ell = 1,\dots,L-1\)</span>) and the technology discovery jump (<span class="math notranslate nohighlight">\(\ell = L\)</span>).</p>
+<p>We also consider four different configurations of uncertainty aversion as a way to assess the different economic forces in play:</p>
+<ol class="arabic simple">
+<li><p>pre-jump neutrality - post-jump neutrality;</p></li>
+<li><p>pre-jump neutrality - post-jump aversion;</p></li>
+<li><p>pre-jump aversion - post-jump neutrality;</p></li>
+<li><p>pre-jump aversion - post-jump aversion.</p></li>
+</ol>
+<p>We include cases b) and c) because they provide revealing intermediate cases that help understand the overall uncertainty implications. For instance, there are two forces in play. First, uncertainty about when the new technology will be realized would seem to make investment in R&amp;D less attractive. Second, the positive implications for a technological success can be stronger when there is more aversion to this uncertainty. Intermediate case c) allows us to feature more the first force, while
+intermediate case b) shifts attention to the second force. With these intermediate cases, we can better assess the quantitative magnitude of these offsetting forces.</p>
+<p>The results are reported in Table below.</p>
+<table>
+<thead>
+<tr class="row-odd"><th class="head"><p>Case</p></th>
+<th class="head"><p>i</p></th>
+<th class="head"><p>ii</p></th>
+<th class="head"><p>iii(dc)</p></th>
+<th class="head"><p>iii(td)</p></th>
+<th class="head"><p>iv</p></th>
+<th class="head"><p>sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pre neutrality</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><ol class="loweralpha simple">
+<li><p>post neutrality</p></li>
+</ol>
+</td>
+<td><p>0.00186</p></td>
+<td><p>0.01287</p></td>
+<td><p>0.01356</p></td>
+<td><p>0.00173</p></td>
+<td><p>0.00000</p></td>
+<td><p>0.03003</p></td>
+</tr>
+<tr class="row-even"><td><ol class="loweralpha simple" start="2">
+<li><p>post aversion</p></li>
+</ol>
+</td>
+<td><p>0.00261</p></td>
+<td><p>0.01610</p></td>
+<td><p>0.01570</p></td>
+<td><p>0.00264</p></td>
+<td><p>0.00000</p></td>
+<td><p>0.03705</p></td>
+</tr>
+<tr class="row-odd"><td><p>pre aversion</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><ol class="loweralpha simple" start="3">
+<li><p>post neutrality</p></li>
+</ol>
+</td>
+<td><p>0.00190</p></td>
+<td><p>0.00960</p></td>
+<td><p>0.01598</p></td>
+<td><p>0.00124</p></td>
+<td><p>0.00241</p></td>
+<td><p>0.03113</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="loweralpha simple" start="4">
+<li><p>post aversion</p></li>
+</ol>
+</td>
+<td><p>0.00272</p></td>
+<td><p>0.01104</p></td>
+<td><p>0.01999</p></td>
+<td><p>0.00177</p></td>
+<td><p>0.00387</p></td>
+<td><p>0.03962</p></td>
+</tr>
+</tbody>
+</table>
+<section id="Table:-Components-to-the-partial-derivative-of-the-value-function-with-respect-to-the-R&amp;D-state-variable.-The-column-iii(dc)-includes-only-the-contributions-from-the-damage-curve-realization-jumps-to-iii,-and-iii(td)-includes-the-remaining-contribution-from-the-technology-discovery-jump-to-iii.">
+<h2 id="Table:-Components-to-the-partial-derivative-of-the-value-function-with-respect-to-the-R&amp;D-state-variable.-The-column-iii(dc)-includes-only-the-contributions-from-the-damage-curve-realization-jumps-to-iii,-and-iii(td)-includes-the-remaining-contribution-from-the-technology-discovery-jump-to-iii.">Table: Components to the partial derivative of the value function with respect to the R&amp;D state variable. The column iii(dc) includes only the contributions from the damage curve realization jumps to iii, and iii(td) includes the remaining contribution from the technology discovery jump to iii.<a class="headerlink" href="#Table:-Components-to-the-partial-derivative-of-the-value-function-with-respect-to-the-R&amp;D-state-variable.-The-column-iii(dc)-includes-only-the-contributions-from-the-damage-curve-realization-jumps-to-iii,-and-iii(td)-includes-the-remaining-contribution-from-the-technology-discovery-jump-to-iii." title="Link to this heading">¶</a></h2>
+<p>The partial derivative decomposition in the table reveals the following:</p>
+<ul class="simple">
+<li><p>The totals for pre aversion-post aversion (0.040) are very close to pre neutrality-post aversion (0.037).</p></li>
+<li><p>The continuation value contributions ii) and iii) are larger for pre neutrality-post aversion than for pre neutrality-post neutrality, as might be expected.</p></li>
+<li><p>The continuation value contribution iii) is primarily due to the damage jumps and not to the technology jump.</p></li>
+<li><p>The total for pre aversion-post neutrality (0.031) is only slightly larger than for pre neutrality-post neutrality (0.030). The difference is more than offset by the relative entropy contribution to the pre neutrality-post aversion total.</p></li>
+</ul>
+<p>In terms of the fourth observation, when we net out the entropy contribution, the pre-jump uncertainty contribution reduces the marginal valuation because of the more pessimistic view of the success of R&amp;D. This reduction turns out to be quite small, however. Perhaps this small magnitude should be anticipated because of our very low subjective discount rate. For instance, by driving the discount rate to zero, we make the timing of the success less relevant in decision-making.</p>
+</section>
+</section>
+<section id="16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons">
+<h1 id="16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons">16.2 Expected Marginal Social Payoffs for Alternative Horizons<a class="headerlink" href="#16.2-Expected-Marginal-Social-Payoffs-for-Alternative-Horizons" title="Link to this heading">¶</a></h1>
+<p>As we demonstrated, the derivative of the value function has the interpretation as a stochastically discounted social cash flow, with the four contributions given at the outset of Section 3.3. The “stochastic discount factor” includes the vector of stochastic impulse responses, the process <span class="math notranslate nohighlight">\(M\)</span>, along with the subjective rate of discount, <span class="math notranslate nohighlight">\(\delta\)</span>. The following figure shows the period-by-period contribution for each of the four components.</p>
+<p>Both of the continuation value contributions to the social cash flow, terms ii) and iii), are important contributors to the marginal value of R&amp;D, but there are substantial differences in their horizon dependence. Term ii) has an important initial contribution that then gradually vanishes so that by a thirty-year horizon it is between one fourth and a third of its initial impact, depending on the uncertainty configuration. In contrast, term iii) is initially very small but has a substantial peak
+effect by year thirty. Both contributions are enhanced by post-jump uncertainty aversion. Its impact on marginal valuation remains important well past a horizon of forty years, reflecting the long-term nature of the valuation. The direct marginal utility contribution, term i), is small across all horizons, although it does increase up to twenty years. The entropy contribution, term iv), is also relatively minor across all horizons and uncertainty aversion configurations, though the initial
+magnitude is augmented by pre-jump uncertainty aversion, and this effect persists out to thirty years.</p>
+<p>In summary, the more skeptical assessment of R&amp;D prospects prior to a jump induces only a quantitatively minor adverse impact on the incentive for R&amp;D investment. A possible R&amp;D success, however, gives a quantitatively important incentive for more R&amp;D investment. While these quantitative results are special and tied to our model calibration, these competing forces are likely to be in play in more general circumstances.</p>
+<section id="Remark">
+<h2 id="Remark">Remark<a class="headerlink" href="#Remark" title="Link to this heading">¶</a></h2>
+<p>Recall that this is “big project” R&amp;D analogous perhaps to the Manhattan Project or the Apollo program, with uncertainty in the R&amp;D investment only about the timing of a successful outcome or social payoff. For the reasons we have discussed, more R&amp;D leads to an increased likelihood that the new, clean technology will be discovered sooner, even though the uncertainty in the technology may be greater. This increase in a more uncertain investment stands in contrast to a standard portfolio
+allocation problem with riskless and uncertain investment alternatives. In this latter problem, an enhanced concern about uncertainty leads to a reduction in the portfolio weight associated with the uncertain investment.</p>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="sec15_delta.html" title="15 Sensitivity to \(\delta\)"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> "Previous" </span> 15 Sensitivity to <span class="math notranslate nohighlight">\(\delta\)</span> </span>
+              </div>
+            </a>
+          
+          
+            <a href="Appendix.html" title="Appendix A. Computational Method"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> "Next" </span> Appendix A. Computational Method </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2024, Michael Barnett, William Brock, Lars Peter Hansen and Hong Zhang.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>
