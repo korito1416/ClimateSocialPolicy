@@ -74,7 +74,6 @@ as an expected discounted value of a marginal impulse response of future
   the same dimension as the number of components of :math:`X`. By
   initializing the process at one of the alternative coordinate vectors,
   we determine the initial state of interest.
-| :raw-latex:`\footnote{Our initial condition for $M_0$ differs from [Fournie et al. (1999)] in a superficial way. They treat $M$ as a matrix with an identity as the initialization. In this way, they consider all of the states of interest simultaneously. We take $M$ to be a vector and characterize the marginal initial responses one at a time by letting the initial condition be any one of the coordinate vectors.}`
 
 The drift for the :math:`i^{th}` component of :math:`M` is given by:
 
@@ -103,7 +102,7 @@ vector or matrix transposition. The implied evolution of the process
 The drift for the composite process :math:`(X,M)` is given by:
 
 :raw-latex:`\begin{equation} 
-\hat{\mu} (x,m) \equiv \begin{bmatrix} 
+\hat{\mu} (x,m) = \begin{bmatrix} 
 \mu(x) \\ 
 m' \frac{\partial \mu_1}{\partial x}(x) \\ 
 \vdots \\ 
@@ -114,7 +113,7 @@ m' \frac{\partial \mu_n}{\partial x}(x)
 and the composite matrix coefficient on :math:`dW_t` is given by:
 
 :raw-latex:`\begin{equation}  
-\hat{\sigma}(x,m) \equiv \begin{bmatrix} 
+\hat{\sigma}(x,m) = \begin{bmatrix} 
 \sigma(x) \\ 
 m' \frac{\partial \sigma_1}{\partial x}(x) \\ 
 \vdots \\ 
@@ -166,7 +165,7 @@ where :math:`Dis` is given by the discount equation, and :math:`Scf` is
 a social cash flow vector given as:
 
 :raw-latex:`\begin{equation*}
-Scf_t \equiv \delta U_x(X_t) 
+Scf_t = \delta U_x(X_t) 
  + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) \left[V^\ell(X_t) - V(X_t)\right]  
 +  \sum_{\ell=1}^{L} {\mathcal J}^{\ell}(X_t) V^\ell_x(X_t)
 \end{equation*}`
@@ -265,7 +264,7 @@ to be:
 and the flow term:
 
 :raw-latex:`\begin{align} 
-Scf_t  \equiv  \delta U_x(X_t) 
+Scf_t  = \delta U_x(X_t) 
  & + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) g^{\ell*}(X_t) \left[V^\ell(X_t)  - V(X_t)  \right] \cr
 & +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t) \cr
 & + \xi \sum_{\ell = 1}^L {\mathcal J}^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t) + g^{\ell*}(X_t) \log g^{\ell*} (X_t) \right].
