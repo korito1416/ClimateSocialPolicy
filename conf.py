@@ -26,6 +26,7 @@ extensions = ['sphinx.ext.mathjax',
               'sphinxcontrib.bibtex',
               'sphinx.ext.intersphinx',
               'sphinx_togglebutton', 
+              'sphinx_toggleprompt',
               "nbsphinx"]
 
 mathjax3_config = {
@@ -71,6 +72,8 @@ html_static_path = ['_static']
 
 bibtex_bibfiles = ['climate.bib']
 
+
+toggleprompt_offset_right = 30 
 
 nbsphinx_allow_errors = True
 nbsphinx_kernel_name = "python"

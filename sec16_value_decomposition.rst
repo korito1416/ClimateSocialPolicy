@@ -797,10 +797,6 @@ All four channels are activated with :math:`\xi = 0.15`
 |               | 53070 |        |        |        |        |        |
 +---------------+-------+--------+--------+--------+--------+--------+
 
-
-
-
-
 16.2 Expected Marginal Social Payoffs for Alternative Horizons
 --------------------------------------------------------------
 
