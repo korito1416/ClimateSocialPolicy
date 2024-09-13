@@ -240,3 +240,5 @@ exogenous to the decision maker and hence not impacted by endogenous
 state vector components. As verified in the appendix, this treatment is
 a ramification of the minimization (via application of the Envelope
 Theorem).
+
+
