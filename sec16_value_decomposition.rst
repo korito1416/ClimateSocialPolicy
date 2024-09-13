@@ -170,6 +170,219 @@ derivatives at every point. The derivative we need to calculate is
         df_V1_interpolated_m4 = RGI([W_unique,Z_unique, V_unique, X_unique], df_V1_m4, fill_value=None, bounds_error=True)
 
 
+Then we could start for loop from time 0 to recursively get four
+discounted term.
+
+.. code:: python
+
+    for t in range(N-1): 
+        muW_t = df_muW_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+        sigmaW0_t = df_sigmaW0_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+        
+        muZ_t = df_muZ_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+        sigmaZ0_t = df_sigmaZ0_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+        
+        muV_t = df_muV_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+        sigmaV0_t = df_sigmaV0_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+    
+        muX_t = df_muX_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+        sigmaX0_t = df_sigmaX0_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
+    
+        mu_m1_t = m1_process[t]*df_muW_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_muW_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_muW_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_muW_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+    
+        sigma_m1_t = m1_process[t]*df_sigmaW0_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_sigmaW0_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_sigmaW0_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_sigmaW0_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+                    
+        mu_m2_t = m1_process[t]*df_muZ_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_muZ_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_muZ_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_muZ_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+                    
+        sigma_m2_t = m1_process[t]*df_sigmaZ0_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_sigmaZ0_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_sigmaZ0_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_sigmaZ0_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+                    
+        mu_m3_t = m1_process[t]*df_muV_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_muV_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_muV_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_muV_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+    
+        sigma_m3_t = m1_process[t]*df_sigmaV0_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_sigmaV0_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_sigmaV0_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_sigmaV0_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+        
+    
+        mu_m4_t = m1_process[t]*df_muX_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_muX_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_muX_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_muX_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+    
+        sigma_m4_t = m1_process[t]*df_sigmaX0_interpolated_m1([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m2_process[t]*df_sigmaX0_interpolated_m2([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m3_process[t]*df_sigmaX0_interpolated_m3([w_process[t],z_process[t],v_process[t],x_process[t]])+\
+                    m4_process[t]*df_sigmaX0_interpolated_m4([w_process[t],z_process[t],v_process[t],x_process[t]])
+        
+    
+    
+        m1_process[t+1] = m1_process[t] + mu_m1_t*dt + W1[t]*sigma_m1_t
+        m2_process[t+1] = m2_process[t] + mu_m2_t*dt + W2[t]*sigma_m2_t
+        m3_process[t+1] = m3_process[t] + mu_m3_t*dt + W3[t]*sigma_m3_t
+        m4_process[t+1] = m4_process[t] + mu_m4_t*dt + W4[t]*sigma_m4_t
+                
+        w_process[t+1] = w_process[t] + muW_t*dt + W1[t]*sigmaW0_t 
+        z_process[t+1] = z_process[t] + muZ_t*dt + W2[t]*sigmaZ0_t
+        v_process[t+1] = v_process[t] + muV_t*dt + W3[t]*sigmaV0_t
+        x_process[t+1] = x_process[t] + muX_t*dt + W4[t]*sigmaX0_t
+    
+        u1_process[t+1] = df_U_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        u2_process[t+1] = df_U_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        u3_process[t+1] = df_U_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        u4_process[t+1] = df_U_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+     
+        j1_process[t+1] = df_J1_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        j2_process[t+1] = df_J2_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        j3_process[t+1] = df_J3_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        j4_process[t+1] = df_J4_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+    
+        v1_process[t+1] = df_V1_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+    
+        for i in range(n_damage):
+    
+            v2_process[i,t+1] = df_V2_interpolated[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            damage_process[i,t+1] = f_damage_interpolated[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+    
+        tech_process[t+1] = f_tech_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+        Entropy_x1_process[t+1] = df_Entropy_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        Entropy_x2_process[t+1] = df_Entropy_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        Entropy_x3_process[t+1] = df_Entropy_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        Entropy_x4_process[t+1] = df_Entropy_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+        # v2_process[t+1] = df_V2_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+        v3_process[t+1] = df_V3_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        v4_process[t+1] = df_V4_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+        va_process[t+1] = df_V_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+        dj1_dx1_process[t+1] = df_J1_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dj2_dx2_process[t+1] = df_J2_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dj3_dx3_process[t+1] = df_J3_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dj4_dx4_process[t+1] = df_J4_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        
+        dv1_dx1_process[t+1] = df_V1_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv1_dx2_process[t+1] = df_V1_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv1_dx3_process[t+1] = df_V1_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv1_dx4_process[t+1] = df_V1_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+    
+        for i in range(n_damage):
+            dv2_dx1_process[i,t+1] = df_V2_interpolated_m1[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            dv2_dx2_process[i,t+1] = df_V2_interpolated_m2[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            dv2_dx3_process[i,t+1] = df_V2_interpolated_m3[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            dv2_dx4_process[i,t+1] = df_V2_interpolated_m4[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+    
+            dfdamage_dx1_process[i,t+1] = df_f_damage_interpolated_m1[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            dfdamage_dx2_process[i,t+1] = df_f_damage_interpolated_m2[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            dfdamage_dx3_process[i,t+1] = df_f_damage_interpolated_m3[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+            dfdamage_dx4_process[i,t+1] = df_f_damage_interpolated_m4[i]([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+        dftech_dx1_process[t+1] = df_f_tech_m1_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dftech_dx2_process[t+1] = df_f_tech_m2_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dftech_dx3_process[t+1] = df_f_tech_m3_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dftech_dx4_process[t+1] = df_f_tech_m4_interpolated([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+     
+    
+        dv3_dx1_process[t+1] = df_V3_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv3_dx2_process[t+1] = df_V3_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv3_dx3_process[t+1] = df_V3_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv3_dx4_process[t+1] = df_V3_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        
+        dv4_dx1_process[t+1] = df_V4_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv4_dx2_process[t+1] = df_V4_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv4_dx3_process[t+1] = df_V4_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv4_dx4_process[t+1] = df_V4_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        
+        dv_dx1_process[t+1] = df_V_interpolated_m1([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv_dx2_process[t+1] = df_V_interpolated_m2([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv_dx3_process[t+1] = df_V_interpolated_m3([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+        dv_dx4_process[t+1] = df_V_interpolated_m4([w_process[t+1],z_process[t+1],v_process[t+1],x_process[t+1]])
+    
+    
+    
+        first_term[t+1] = u1_process[t+1]*m1_process[t+1]+\
+                        u2_process[t+1]*m2_process[t+1]+\
+                        u3_process[t+1]*m3_process[t+1]+\
+                        u4_process[t+1]*m4_process[t+1]
+     
+        second_term[t+1] = dj1_dx1_process[t+1]*(v1_process[t+1] - va_process[t+1])*m1_process[t+1]+\
+                    dj2_dx2_process[t+1]*np.mean(damage_process[:,t+1]*(v2_process[:,t+1] - va_process[t+1]),axis=0)*m2_process[t+1]+\
+                    dj3_dx3_process[t+1]*tech_process[t+1]*(v3_process[t+1] - va_process[t+1])*m3_process[t+1]+\
+                    dj4_dx4_process[t+1]*(v4_process[t+1] - va_process[t+1])*m4_process[t+1]
+        third_term_1[t+1] = j1_process[t+1]*(dv1_dx1_process[t+1])*m1_process[t+1]+\
+                        j1_process[t+1]*(dv1_dx2_process[t+1])*m2_process[t+1]+\
+                        j1_process[t+1]*(dv1_dx3_process[t+1])*m3_process[t+1]+\
+                        j1_process[t+1]*(dv1_dx4_process[t+1])*m4_process[t+1]
+     
+        third_term_2[t+1] = j2_process[t+1]*np.mean(damage_process[:,t+1]*dv2_dx1_process[:,t+1],axis=0)*m1_process[t+1]+\
+                        j2_process[t+1]*np.mean(damage_process[:,t+1]*dv2_dx2_process[:,t+1],axis=0)*m2_process[t+1]+\
+                        j2_process[t+1]*np.mean(damage_process[:,t+1]*dv2_dx3_process[:,t+1],axis=0)*m3_process[t+1]+\
+                        j2_process[t+1]*np.mean(damage_process[:,t+1]*dv2_dx4_process[:,t+1],axis=0)*m4_process[t+1]
+     
+        third_term_3[t+1] = j3_process[t+1]*tech_process[t+1]*(dv3_dx1_process[t+1])*m1_process[t+1]+\
+                        j3_process[t+1]*tech_process[t+1]*(dv3_dx2_process[t+1])*m2_process[t+1]+\
+                        j3_process[t+1]*tech_process[t+1]*(dv3_dx3_process[t+1])*m3_process[t+1]+\
+                        j3_process[t+1]*tech_process[t+1]*(dv3_dx4_process[t+1])*m4_process[t+1]
+    
+        third_term_4[t+1] = j4_process[t+1]*(dv4_dx1_process[t+1])*m1_process[t+1]+\
+                        j4_process[t+1]*(dv4_dx2_process[t+1])*m2_process[t+1]+\
+                        j4_process[t+1]*(dv4_dx3_process[t+1])*m3_process[t+1]+\
+                        j4_process[t+1]*(dv4_dx4_process[t+1])*m4_process[t+1]
+        
+     
+        fourth_term_entropy[t+1] = Entropy_x1_process[t+1]*m1_process[t+1]+\
+                                    Entropy_x2_process[t+1]*m2_process[t+1]+\
+                                    Entropy_x3_process[t+1]*m3_process[t+1]+\
+                                    Entropy_x4_process[t+1]*m4_process[t+1]
+     
+        discount_factor_temps[t+1] =  -delta-j1_process[t+1]-j2_process[t+1]*np.mean(damage_process[:,t+1],axis=0)-j3_process[t+1]*tech_process[t+1]-j4_process[t+1]
+        discount_factor_temps_nodelta[t+1] =  -j1_process[t+1]-j2_process[t+1]*np.mean(damage_process[:,t+1],axis=0)-j3_process[t+1]*tech_process[t+1]-j4_process[t+1]
+    
+        discount_factors[t+1] = discount_factors[t]+discount_factor_temps[t+1]*dt
+    
+        discount_factor_nodelta_DisSep_Damage[t+1] = discount_factor_nodelta_DisSep_Damage[t]+(-j2_process[t+1]*np.mean(damage_process[:,t+1],axis=0))*dt
+        discount_factor_nodelta_DisSep_Tech[t+1] = discount_factor_nodelta_DisSep_Tech[t]+(-j3_process[t+1]*tech_process[t+1])*dt
+        discount_factor_nodelta[t+1] = discount_factor_nodelta[t]+discount_factor_temps_nodelta[t+1]*dt
+        
+        discount_factor_nodeltadt_DisSep_Damage[t+1] = -np.exp(discount_factor_nodelta[t+1]) * ( - j2_process[t+1]*np.mean(damage_process[:,t+1],axis=0)) 
+        discount_factor_nodeltadt_DisSep_Tech[t+1] = -np.exp(discount_factor_nodelta[t+1]) * (  - j3_process[t+1]*tech_process[t+1]) 
+        discount_factor_nodeltadt[t+1] = -np.exp(discount_factor_nodelta[t+1]) * discount_factor_temps_nodelta[t+1]
+        undiscount_process[t+1] = delta*first_term[t+1]+second_term[t+1]+third_term_1[t+1]+third_term_2[t+1]+third_term_3[t+1]+third_term_4[t+1]+fourth_term_entropy[t+1]
+     
+        discount_process[t+1] = undiscount_process[t+1] * np.exp(discount_factors[t+1])
+     
+        time_process[t+1] = time_process[t]+dt
+
+We primarily use above code to get the value decomposition results. In
+each iteraton step, we store calculate every term used in value
+decomposition. Alternative way is to get the entire simulated state
+variable and first variational path and then calculate remaining terms.
+We can use our generalized code for state varibable and impulse response
+simulation.
+
 Once we have the partial derivatives, we can use general code showed
 below to parrellelize simulation and calculate the four terms of
 discounted social cashflow. In our case, we don’t have jumps, just use
@@ -311,9 +524,12 @@ None for L_matrix.
     
         return t, discount_V_increment, discount_U_increment, drift_rest_diff_t, U_xt, V_xt  # Return a tuple directly
 
-This code uses the law of motion of state variables to simulate the
+Below code uses the law of motion of state variables to simulate the
 evolution of state variables and their response to an initial
 perturbation in one state using different random seeds.
+
+Input
+~~~~~
 
 +--------+-------------------------------------------------------------+
 | **Vari | **Description**                                             |
@@ -351,6 +567,9 @@ perturbation in one state using different random seeds.
 | `time_ | continuous-time model.                                      |
 | step`` |                                                             |
 +--------+-------------------------------------------------------------+
+
+Output
+~~~~~~
 
 +--------+-------------------------------------------------------------+
 | **Vari | **Description**                                             |
@@ -632,3 +851,5 @@ allocation problem with riskless and uncertain investment alternatives.
 In this latter problem, an enhanced concern about uncertainty leads to a
 reduction in the portfolio weight associated with the uncertain
 investment.
+
+
