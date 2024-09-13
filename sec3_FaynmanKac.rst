@@ -1,5 +1,8 @@
-3.1 Pre-jump stochastic dynamics
---------------------------------
+3. Value Decomposition
+======================
+
+3.1: Pre-jump stochastic dynamics
+---------------------------------
 
 As a part of a more general derivation, we begin with state dynamics
 modeled as a Markov diffusion:
@@ -9,8 +12,6 @@ modeled as a Markov diffusion:
 
    dX_t = \mu(X_t) dt + \sigma(X_t) dW_t
 
-These dynamics could be the outcome of an optimization problem or they
-could be the socially inefficient outcome of a market equilibrium.
 Consider the evaluation of discounted utility where the instantaneous
 contribution is :math:`U(x)`, where :math:`x` is the realization of a
 state vector :math:`X_t`. The function :math:`V` is known to satisfy a
@@ -65,15 +66,12 @@ as an expected discounted value of a marginal impulse response of future
 3.2 Variational process
 -----------------------
 
-| As in [Borovicka, Hansen, Scheinkman (2014)], we construct marginal
-  impulse response functions using what are called variational
-  processes.
-| Following [Fournie et al. (1999)], we form the first variational
-  process, :math:`M`, that gives the marginal impact on future :math:`X`
-  of a marginal change in one of the initial states. This process has
-  the same dimension as the number of components of :math:`X`. By
-  initializing the process at one of the alternative coordinate vectors,
-  we determine the initial state of interest.
+We form the first variational process, :math:`M`, that gives the
+marginal impact on future :math:`X` of a marginal change in one of the
+initial states. This process has the same dimension as the number of
+components of :math:`X`. By initializing the process at one of the
+alternative coordinate vectors, we determine the initial state of
+interest.
 
 The drift for the :math:`i^{th}` component of :math:`M` is given by:
 
@@ -164,11 +162,11 @@ discounted expected value:
 where :math:`Dis` is given by the discount equation, and :math:`Scf` is
 a social cash flow vector given as:
 
-:raw-latex:`\begin{equation*}
+:raw-latex:`\begin{align}
 Scf_t = \delta U_x(X_t) 
  + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) \left[V^\ell(X_t) - V(X_t)\right]  
 +  \sum_{\ell=1}^{L} {\mathcal J}^{\ell}(X_t) V^\ell_x(X_t)
-\end{equation*}`
+\end{align}`
 
 By initializing the state vector :math:`M_0` to be a coordinate vector
 of zeros in all entries but entry :math:`i`, we obtain the formula of
@@ -196,46 +194,6 @@ for :math:`t \geq 0` and :math:`\ell = 1,\dots,L`. These provide
 valuation counterparts to impulse responses commonly reported in
 economic dynamics. The initialization of :math:`M_0` dictates the
 marginal change under consideration.
-
-Remark
-~~~~~~
-
-Notice that the components of :math:`Scf_t` given by:
-
-.. math::
-
-
-   \delta U_x(X_t) 
-    + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t)  V^\ell(X_t)  
-   +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t)   V^\ell_x(X_t)
-
-come from differentiating the stochastic flow contribution of the value
-function with respect to the state vector. The additional component:
-
-.. math::
-
-
-   - \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t)   V(X_t) 
-
-is present because altering the state at date :math:`t` changes the jump
-probabilities and hence the discounting. The value function :math:`V`
-emerges as a convenient way to capture this forward-looking impact. Note
-that :math:`V(X_t)` can be expressed using the forward-looking formula
-shifted forward to date :math:`t`. Analogous forward-looking formulas
-apply to post-jump continuation values, :math:`V^\ell`, although these
-are computed in advance and are based on different jump possibilities.
-
-.. _remark-1:
-
-Remark
-~~~~~~
-
-:raw-latex:`\cite{Fournieetal:1999}` use these types of methods to
-produce measurements of the sensitivity of derivative claims prices to
-inputs. However, we have not seen these techniques developed and applied
-in the setting of stochastic optimal control. Moreover, we extend these
-methods to allow for uncertainties, broadly conceived, along with
-revealing decompositions.
 
 3.4 Incorporating robustness
 ----------------------------
@@ -265,9 +223,9 @@ and the flow term:
 
 :raw-latex:`\begin{align} 
 Scf_t  = \delta U_x(X_t) 
- & + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) g^{\ell*}(X_t) \left[V^\ell(X_t)  - V(X_t)  \right] \cr
-& +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t) \cr
-& + \xi \sum_{\ell = 1}^L {\mathcal J}^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t) + g^{\ell*}(X_t) \log g^{\ell*} (X_t) \right].
+ & + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) g^{\ell*}(X_t) \left[V^\ell(X_t)  - V(X_t)  \right] \\
+ & +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t) \\
+ & + \xi \sum_{\ell = 1}^L {\mathcal J}^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t) + g^{\ell*}(X_t) \log g^{\ell*} (X_t) \right].
 \end{align}`
 
 Notice that we have scaled each intensity or its partial derivative by
@@ -282,5 +240,3 @@ exogenous to the decision maker and hence not impacted by endogenous
 state vector components. As verified in the appendix, this treatment is
 a ramification of the minimization (via application of the Envelope
 Theorem).
-
-
