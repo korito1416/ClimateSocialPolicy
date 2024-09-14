@@ -5,20 +5,20 @@
 -----------------------------------
 
 As we discussed in section 3, there are two steps to do value
-decomposition: 1. Simulate state variable processes and first variation
-processes. 2. Calculated four terms of discounted social cash flow.
-While simulating state variables and first variational process instep
-(1) is case by case, step (2) is more general an one can use our general
-code in Quant MFR.
+decomposition:
+
+1. Simulate state variable processes and first variation processes.
+
+2. Calculated four terms of discounted social cash flow.
 
 Here we use finite difference method to calculate the derivatives with
 respect to state variables and the interpolate to get partial
 derivatives at every point. The derivative we need to calculate is
-:raw-latex:`\begin{align}
+:raw-latex:`\begin{align*}
 \{\frac{\partial \mu_i}{\partial x}(x) ,    \frac{\partial \sigma_i}{\partial x}(x) , \frac{\partial V}{\partial x}(x)  ,V^\ell_x(X_t) , U_x(X_t) , {\mathcal J}^{\ell}_x(X_t)      \}
-\end{align}`
+\end{align*}`
 
-.. code:: python
+.. code:: ipython3
 
     def simulate_pre(data, Data_Dir, File_Dir):
     
@@ -170,10 +170,10 @@ derivatives at every point. The derivative we need to calculate is
         df_V1_interpolated_m4 = RGI([W_unique,Z_unique, V_unique, X_unique], df_V1_m4, fill_value=None, bounds_error=True)
 
 
-Then we could start for loop from time 0 to recursively get four
+Then we start the for loop from time 0 to recursively get four
 discounted term.
 
-.. code:: python
+.. code:: ipython3
 
     for t in range(N-1): 
         muW_t = df_muW_interpolated([w_process[t],z_process[t],v_process[t],x_process[t]])
@@ -432,7 +432,7 @@ None for L_matrix.
 | ime_step`` |                                                         |
 +------------+---------------------------------------------------------+
 
-.. code:: python
+.. code:: ipython3
 
     def compose_irf(X_matrix, M_matrix, L_matrix, U_x, V_x, delta_V, delta_U, drift_rest_diff, sim_length, time_step): 
         #########################################################################
@@ -589,7 +589,7 @@ Output
 |        | and time step.                                              |
 +--------+-------------------------------------------------------------+
 
-.. code:: python
+.. code:: ipython3
 
     def pool_simulation(lom, drift_adj, P_trans, X0, M0, L0, num_shock, sim_time, sim_num, time_step): 
     
@@ -808,44 +808,59 @@ the process :math:`M`, along with the subjective rate of discount,
 :math:`\delta`. The following figure shows the period-by-period
 contribution for each of the four components.
 
-Both of the continuation value contributions to the social cash flow,
-terms ii) and iii), are important contributors to the marginal value of
-R&D, but there are substantial differences in their horizon dependence.
-Term ii) has an important initial contribution that then gradually
-vanishes so that by a thirty-year horizon it is between one fourth and a
-third of its initial impact, depending on the uncertainty configuration.
-In contrast, term iii) is initially very small but has a substantial
-peak effect by year thirty. Both contributions are enhanced by post-jump
-uncertainty aversion. Its impact on marginal valuation remains important
-well past a horizon of forty years, reflecting the long-term nature of
-the valuation. The direct marginal utility contribution, term i), is
-small across all horizons, although it does increase up to twenty years.
-The entropy contribution, term iv), is also relatively minor across all
-horizons and uncertainty aversion configurations, though the initial
-magnitude is augmented by pre-jump uncertainty aversion, and this effect
-persists out to thirty years.
+Horizon decomposition of social cash flow contributions to the R&D stock
+valuation. The four panels correspond to different uncertainty aversion
+configurations: Panel A is the pre neutrality-post aversion
+configuration; Panel B is the pre aversion-post neutrality
+configuration; Panel C is the pre aversion-post aversion configuration;
+and Panel D is the pre neutrality-post neutrality configuration. The
+blue lines correspond to the payoff contribution i)
+:math:`\delta m \cdot \frac{\partial U}{\partial r}`. The green lines
+correspond to the payoff contribution ii)
+:math:`m \cdot \sum_\ell g^{\ell*}\frac{\partial {\mathcal J}^\ell}{\partial r} (V^\ell - V)`.
+The red lines correspond to the payoff contribution iii) $m
+:raw-latex:`\cdot `:raw-latex:`\sum`\_:raw-latex:`\ell `g\ :sup:`{:raw-latex:`\ell*`}{:raw-latex:`\mathcal `J}`\ :raw-latex:`\ell `:raw-latex:`\frac {\partial V^\ell}{\partial r}`
+$. The light blue lines correspond to the payoff contribution iv)
+:math:`\xi m \cdot \sum_\ell \frac{\partial {\mathcal J}^\ell }{\partial r} (1-g^{\ell*} + g^{\ell*} \log g^{\ell*} )`.
 
-In summary, the more skeptical assessment of R&D prospects prior to a
-jump induces only a quantitatively minor adverse impact on the incentive
-for R&D investment. A possible R&D success, however, gives a
-quantitatively important incentive for more R&D investment. While these
-quantitative results are special and tied to our model calibration,
-these competing forces are likely to be in play in more general
-circumstances.
+.. code:: ipython3
 
-Remark
-~~~~~~
+    from pdf2image import convert_from_path
+    import matplotlib.pyplot as plt
+    
+    # List of PDF paths
+    pdf_files = [
+        'additional/Aversion IntensityPre Neutrality Post Less AversionTechnology0.083_Discount_Term1234_dt2.pdf',
+        'additional/Aversion IntensityPre Less Aversion Post NeutralityTechnology0.083_Discount_Term1234_dt2.pdf',
+        'additional/Aversion IntensityPre Less Aversion Post Less AversionTechnology0.083_Discount_Term1234_dt2.pdf',
+        'additional/Aversion IntensityPre Neutrality Post NeutralityTechnology0.083_Discount_Term1234_dt2.pdf'
+    ]
+    
+    # Convert each PDF to image
+    images = [convert_from_path(pdf, first_page=0, last_page=1)[0] for pdf in pdf_files]
+    
+    # Plot the images in a 2x2 grid using matplotlib
+    fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+    
+    # Display each image in the grid
+    captions = [
+        'pre neutrality-post aversion', 
+        'pre aversion-post neutrality', 
+        'pre aversion-post aversion', 
+        'pre neutrality-post neutrality'
+    ]
+    
+    for i, ax in enumerate(axs.flatten()):
+        ax.imshow(images[i])
+        ax.axis('off')  # Turn off axis
+        ax.set_title(captions[i])
+    
+    # Adjust layout for spacing between images and titles
+    plt.tight_layout()
+    plt.show()
 
-Recall that this is “big project” R&D analogous perhaps to the Manhattan
-Project or the Apollo program, with uncertainty in the R&D investment
-only about the timing of a successful outcome or social payoff. For the
-reasons we have discussed, more R&D leads to an increased likelihood
-that the new, clean technology will be discovered sooner, even though
-the uncertainty in the technology may be greater. This increase in a
-more uncertain investment stands in contrast to a standard portfolio
-allocation problem with riskless and uncertain investment alternatives.
-In this latter problem, an enhanced concern about uncertainty leads to a
-reduction in the portfolio weight associated with the uncertain
-investment.
 
+
+
+.. image:: sec16_value_decomposition_files/sec16_value_decomposition_18_0.png
 
