@@ -15,7 +15,7 @@ import sphinx_material
 project = 'ClimateSocialPolicy'
 copyright = '2024, Michael Barnett, William Brock, Lars Peter Hansen and Hong Zhang'
 author = 'Haoyang Sun'
-release = '0.1.0'
+release = '1.1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -26,7 +26,6 @@ extensions = ['sphinx.ext.mathjax',
               'sphinxcontrib.bibtex',
               'sphinx.ext.intersphinx',
               'sphinx_togglebutton', 
-              'sphinx_toggleprompt',
               "nbsphinx"]
 
 mathjax3_config = {
