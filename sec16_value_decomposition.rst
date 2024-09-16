@@ -15,7 +15,7 @@ Here we use finite difference method to calculate the derivatives with
 respect to state variables and the interpolate to get partial
 derivatives at every point. The derivative we need to calculate is
 :raw-latex:`\begin{align*}
-\{\frac{\partial \mu_i}{\partial x}(x) ,    \frac{\partial \sigma_i}{\partial x}(x) , \frac{\partial V}{\partial x}(x)  ,V^\ell_x(X_t) , U_x(X_t) , {\mathcal J}^{\ell}_x(X_t)      \}
+ \frac{\partial \mu_i}{\partial x}(x) ,    \frac{\partial \sigma_i}{\partial x}(x) , \frac{\partial V}{\partial x}(x)  ,V^\ell_x(X_t) , U_x(X_t) , {\mathcal J}^{\ell}_x(X_t)     
 \end{align*}`
 
 .. code:: ipython3
@@ -819,7 +819,7 @@ blue lines correspond to the payoff contribution i)
 correspond to the payoff contribution ii)
 :math:`m \cdot \sum_\ell g^{\ell*}\frac{\partial {\mathcal J}^\ell}{\partial r} (V^\ell - V)`.
 The red lines correspond to the payoff contribution iii) $m
-:raw-latex:`\cdot `:raw-latex:`\sum`\_:raw-latex:`\ell `g\ :sup:`{:raw-latex:`\ell*`}{:raw-latex:`\mathcal `J}`\ :raw-latex:`\ell `:raw-latex:`\frac {\partial V^\ell}{\partial r}`
+:raw-latex:`\cdot `:raw-latex:`\sum`\_:raw-latex:`\ell `g\ :sup:`{:raw-latex:`\ell*`}:raw-latex:`\mathcal `J`\ :raw-latex:`\ell `:raw-latex:`\frac{\partial V^\ell}{\partial r}`
 $. The light blue lines correspond to the payoff contribution iv)
 :math:`\xi m \cdot \sum_\ell \frac{\partial {\mathcal J}^\ell }{\partial r} (1-g^{\ell*} + g^{\ell*} \log g^{\ell*} )`.
 

@@ -224,9 +224,9 @@ and the flow term:
 
 :raw-latex:`\begin{align*} 
 Scf_t  = \delta U_x(X_t) 
- & + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) g^{\ell*}(X_t) \left[V^\ell(X_t)  - V(X_t)  \right] \\
- & +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t) \\
- & + \xi \sum_{\ell = 1}^L {\mathcal J}^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t) + g^{\ell*}(X_t) \log g^{\ell*} (X_t) \right].
+ & + \sum_{\ell=1}^{L} \mathcal J^{\ell}_x(X_t) g^{\ell*}(X_t) \left[V^\ell(X_t)  - V(X_t)  \right] \\
+ & +  \sum_{\ell=1}^{L}  \mathcal J^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t) \\
+ & + \xi \sum_{\ell = 1}^L \mathcal J^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t) + g^{\ell*}(X_t) \log g^{\ell*} (X_t) \right].
 \end{align*}`
 
 Notice that we have scaled each intensity or its partial derivative by
