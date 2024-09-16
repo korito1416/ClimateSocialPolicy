@@ -27,7 +27,7 @@ Check out our related work:
 
    sec1_introduction.rst
    sec2_uncertainty.rst
-   sec3_FaynmanKac.rst
+   sec3_FaynmanKac.ipynb
    sec4_climatedynamics.rst
    sec5_illustrativeeconomy.rst
    sec6_completemodel.rst
