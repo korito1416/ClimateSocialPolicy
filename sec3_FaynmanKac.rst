@@ -155,18 +155,19 @@ process :math:`(X,M)`.
 The solution to this derived Feynman-Kac equation is of the form of a
 discounted expected value:
 
-:raw-latex:`\begin{equation}  
-\frac{\partial V}{\partial x}(X_0) \cdot M_0 = \mathbb{E} \left[ \int_0^\infty Dis_t \left(M_t \cdot Scf_t \right) \mid X_0, M_0 \right]
-\end{equation}`
+.. math::
+
+
+   \frac{\partial V}{\partial x}(X_0) \cdot M_0 = \mathbb{E} \left[ \int_0^\infty Dis_t \left(M_t \cdot Scf_t \right) \mid X_0, M_0 \right]
 
 where :math:`Dis` is given by the discount equation, and :math:`Scf` is
 a social cash flow vector given as:
 
-:raw-latex:`\begin{align}
+:raw-latex:`\begin{align*}
 Scf_t = \delta U_x(X_t) 
  + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) \left[V^\ell(X_t) - V(X_t)\right]  
 +  \sum_{\ell=1}^{L} {\mathcal J}^{\ell}(X_t) V^\ell_x(X_t)
-\end{align}`
+\end{align*}`
 
 By initializing the state vector :math:`M_0` to be a coordinate vector
 of zeros in all entries but entry :math:`i`, we obtain the formula of
@@ -221,12 +222,12 @@ to be:
 
 and the flow term:
 
-:raw-latex:`\begin{align} 
+:raw-latex:`\begin{align*} 
 Scf_t  = \delta U_x(X_t) 
  & + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) g^{\ell*}(X_t) \left[V^\ell(X_t)  - V(X_t)  \right] \\
  & +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t) \\
  & + \xi \sum_{\ell = 1}^L {\mathcal J}^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t) + g^{\ell*}(X_t) \log g^{\ell*} (X_t) \right].
-\end{align}`
+\end{align*}`
 
 Notice that we have scaled each intensity or its partial derivative by
 the corresponding :math:`g^{\ell*}` with the exception of the fourth
