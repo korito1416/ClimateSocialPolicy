@@ -1,0 +1,38 @@
+\documentclass{article}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+%
+%
+%
+\begin{document}%
+\normalsize%
+\section{Algorithm Example}%
+\label{sec:AlgorithmExample}%
+
+    \begin{algorithm}
+    \caption{Solving the HJB Equation via Iterative Method}
+    \begin{algorithmic}[1]
+        \STATE \textbf{Input:} Initial guess for value function $V^0$, tolerance $\epsilon = 10^{-7}$, relaxation parameter $\chi$
+        \STATE \textbf{Output:} Converged value function $V^*$
+        \STATE Initialize $n = 0$, set $V^n = V^0$
+        
+        \WHILE{$|V^{n+1} - V^n| \geq \epsilon$}
+            \STATE \textbf{Step 1: Solve for optimal actions $\Phi^{n+1}$}
+            \STATE Update actions using cobweb algorithm: $\Phi^{n+1} = \Phi(V^n,\Phi^n,\Gamma^n)$
+            \STATE \textbf{Step 2: Solve for optimal probability distortions $\Gamma^{n+1}$}
+            \STATE $\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^n)$
+            \STATE \textbf{Step 3: Update value function $V^{n+1}$}
+            \STATE $V^{n+1} = V(V^n,\Phi^{n+1},\Gamma^{n+1})$
+            \STATE \textbf{Step 4: Check for convergence}
+            \STATE If $|V^{n+1} - V^n| < \epsilon$, then stop.
+        \ENDWHILE
+        \STATE \textbf{Return:} $V^*$
+    \end{algorithmic}
+    \end{algorithm}
+    
+
+%
+\end{document}

@@ -26,10 +26,6 @@ Check out our related work:
    :caption: Contents:
 
    sec1_introduction.rst
-   sec2_uncertainty.rst
-   sec3_FaynmanKac.rst
-   sec4_climatedynamics.rst
-   sec5_illustrativeeconomy.rst
    sec6_completemodel.rst
    sec7_uncertinaty_adjust_prob.rst
    sec8_robust_action.rst
@@ -41,7 +37,6 @@ Check out our related work:
    sec14_notechnology.rst
    sec15_delta.rst
    sec16_value_decomposition.rst
-   Appendix.rst
    Module.rst
 
 
