@@ -145,6 +145,30 @@ For simplicity, I denote the control set and distortion set:
 
    Algorithm
 
+Below functions implement above algorithm in solving four HJB equations.
+
+-  `hjb_post_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PostSolver_new.py#L150C5-L150C18>`__
+   function in two-capital-climate-change/python/src/PostSolver_new.py
+
+-  `hjb_post_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PostSolver_new_rho1.py#L195C5-L195C18>`__
+   function in
+   two-capital-climate-change/python/src/PostSolver_new_rho1.py
+
+-  `hjb_pre_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PreSolver_CRS2_new.py#L329>`__
+   function in
+   two-capital-climate-change/python/src/PreSolver_CRS2_new.py
+
+-  `hjb_pre_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PreSolver_CRS2_new_rho1.py#L325>`__
+   function in
+   two-capital-climate-change/python/src/PreSolver_CRS2_new_rho1.py
+
+‘’hjb_post_tech’’ function could solve post-tech-post-damage HJB and
+post-tech-pre-damage HJB because two equations have the same state
+variables and controls. Similarly, ‘’hjb_pre_tech’’ function could solve
+pre-tech-post-damage HJB and pre-tech-pre-damage HJB.
+
+
+
 1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -259,9 +283,14 @@ solving HJB equations.
 1.3 Procedures to solve four HJB equations
 ------------------------------------------
 
+To solve HJB equations, we first run below code in
+`two-capital-climate-change/master
+/master_zero_shock.sh <https://github.com/korito1416/two-capital-climate-change/blob/main/master/master_zero_shock.sh>`__.
+Make sure you give right command-line arguments.
 
-
-
+| \```bash bash ./conduction/Postdamage.sh
+| sleep 1200 bash ./conduction/Postdamage_sub.sh sleep 1200 bash
+  ./conduction/Predamage.sh
 
 
 
