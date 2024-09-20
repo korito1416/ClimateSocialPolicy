@@ -24,9 +24,8 @@ Check out our related work:
    :maxdepth: 2
    :hidden:
    :caption: Contents:
-
-   sec1_introduction.rst
-   sec6_completemodel.rst
+ 
+   sec6_completemodel.ipynb
    sec7_uncertinaty_adjust_prob.rst
    sec8_robust_action.rst
    sec9_social_valuation.rst
