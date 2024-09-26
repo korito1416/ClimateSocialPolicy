@@ -38,7 +38,7 @@ variabls and controls with first variational process
 .. math::
 
    \begin{align*}
-      \{ \log K_t, Y_t,\log R_t ,\log N_t\},  \{i^k,i^r,\mathcal{E}_t\},\{M_t\},
+      \{ \hat{k}_t, y_t, \hat{r}_t , \hat{n}_t\},  \{i^k,i^r,\mathcal{E}_t\},\{M_t\},
    \end{align*}
 
 and other variables that we use to do value decomposition.
@@ -46,8 +46,8 @@ and other variables that we use to do value decomposition.
 .. math::
 
    \begin{align*}
-     \{g^{\ell*}( x_{t}),g^{\ell'*}( x_{t})\},\{    \mathcal{J}^{\ell}(X_t) ,\mathcal{J}^{\ell'}(X_t) ,
-       {\mathcal J}^{\ell'}_{\log R}(X_t)\}
+     \{g^{\ell } ,f^{L } \},\{    \mathcal{J}^{\ell}  ,\mathcal{J}^{L}  ,
+       {\mathcal J}^{L}_{\hat{r} }\}
    \end{align*}
 
 4.2 Value Decomposition
@@ -219,14 +219,18 @@ configurations: Panel A is the pre neutrality-post aversion
 configuration; Panel B is the pre aversion-post neutrality
 configuration; Panel C is the pre aversion-post aversion configuration;
 and Panel D is the pre neutrality-post neutrality configuration. The
-blue lines correspond to the payoff contribution i)
-:math:`\delta m \cdot \frac{\partial U}{\partial r}`. The green lines
-correspond to the payoff contribution ii)
-:math:`m \cdot \sum_\ell g^{\ell*}\frac{\partial {\mathcal J}^\ell}{\partial r} (V^\ell - V)`.
-The red lines correspond to the payoff contribution iii) $m
-:raw-latex:`\cdot `:raw-latex:`\sum`\_:raw-latex:`\ell `g\ :sup:`{:raw-latex:`\ell*`}:raw-latex:`\mathcal `J`\ :raw-latex:`\ell `:raw-latex:`\frac{\partial V^\ell}{\partial r}`
-$. The light blue lines correspond to the payoff contribution iv)
-:math:`\xi m \cdot \sum_\ell \frac{\partial {\mathcal J}^\ell }{\partial r} (1-g^{\ell*} + g^{\ell*} \log g^{\ell*} )`.
+blue lines correspond to the payoff contribution
+
+i)   :math:`\delta m \cdot \frac{\partial U}{\partial r}`. The green
+     lines correspond to the payoff contribution
+
+ii)  :math:`m \cdot \sum_\ell g^{\ell*}\frac{\partial {\mathcal J}^\ell}{\partial r} (V^\ell - V)`.
+     The red lines correspond to the payoff contribution
+
+iii) :math:`m\cdot \sum_\ell g^{\ell*}\mathcal J^\ell \frac{\partial V^\ell}{\partial r}`
+     . The light blue lines correspond to the payoff contribution
+
+iv)  :math:`\xi m \cdot \sum_\ell \frac{\partial {\mathcal J}^\ell }{\partial r} (1-g^{\ell*} + g^{\ell*} \log g^{\ell*} )`.
 
 .. code:: ipython3
 

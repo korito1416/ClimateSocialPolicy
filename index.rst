@@ -29,6 +29,7 @@ Check out our related work:
    sec2_uncertinaty_adjust_prob.rst
    sec3_stochastic_simulation.rst
    sec4_value_decomposition.rst
+   sec5_notechnology.rst 
    Module.rst
 
 
