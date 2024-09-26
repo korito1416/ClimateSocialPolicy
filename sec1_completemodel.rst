@@ -254,7 +254,7 @@ Algorithm: Solving the HJB Equation via Policy Iteration
    &\text{Initialize } n = 0, V^n = V^0 \\
    \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
    &\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
-   &\ \quad \quad \text{Cobweb algorithm (\label{cobweb}) is applied here:} \\
+   &\ \quad \quad \text{Cobweb algorithm (\eqref{eq:cobweb}) is applied here:} \\
    &\ \quad \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
    &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
    &\ \quad \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
@@ -312,7 +312,10 @@ Since this equation is highly non-linear and does not admit an
 analytical solution, we use the Cobweb algorithm to iteratively update
 the actions. For each iteration :math:`n`, the update is:
 
-.. math:: \hat{i}_k^{t+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^t - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}   
+.. math::
+
+   \begin{align} \label{eq:cobweb}
+   \hat{i}_k^{t+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^t - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align} 
 
 The updated action :math:`i_k^{n+1}` is computed using a relaxation
 parameter :math:`\zeta`:
