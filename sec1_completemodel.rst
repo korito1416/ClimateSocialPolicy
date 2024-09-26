@@ -17,9 +17,12 @@
 .. math::
 
    \begin{align*} 
-   d \log  N_t  = \left\{ \begin{array}{ll} \left(\lambda_1 + \lambda_2 {Y}_t \right) {\mathcal E}_t \left[ \bar \theta  dt +  \varsigma dW_t\right]  +  \frac {\lambda_2 |\varsigma|^2 \left({\mathcal E}_t\right)^2} 2 dt   & t  \le \tau \\
+   d \log  N_t  = \left\{ 
+   \begin{array}{ll} 
+   \left(\lambda_1 + \lambda_2 {Y}_t \right) {\mathcal E}_t \left[ \bar \theta  dt +  \varsigma dW_t\right]  +  \frac {\lambda_2 |\varsigma|^2 \left({\mathcal E}_t\right)^2} 2 dt   & t  \le \tau \\
    \left[ \lambda_1 + \lambda_2{\widehat Y}_t  + \lambda_3\left(\ell \right) \left({\widehat Y}_t - {\bar y}\right)\right]  {\mathcal E}_t \left[ \bar \theta  dt + \varsigma dW_t\right] \\ 
-   \hspace{.2cm} + \frac {\left[ \lambda_2 + \lambda_3(\ell)  \right] |{\varsigma}|^2  \left({\mathcal E}_t\right)^2} 2 dt  & t >  \tau , \end{array} \right. 
+   \hspace{.2cm} + \frac {\left[ \lambda_2 + \lambda_3(\ell)  \right] |{\varsigma}|^2  \left({\mathcal E}_t\right)^2} 2 dt  & t >  \tau , 
+   \end{array} \right. 
    \end{align*}
 
 :math:`k_t` is a potential realization of :math:`K_t`, and
@@ -240,59 +243,29 @@ For simplicity, I denote the control set and distortion set:
       \Gamma^n &=\{ h_k^{n}, h_y^{n}, h_j^{n}, g^{n}, f_\ell^{n} \} 
    \end{align*}
 
-$$:raw-latex:`\textbf{Algorithm: Solving the HJB Equation via Policy Iteration }`
+Algorithm: Solving the HJB Equation via Policy Iteration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:raw-latex:`\begin{align*}
-\textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\
-\textbf{Output:} &\ \text{Converged value function } V^* \\
-&\text{Initialize } n = 0, V^n = V^0 \\
-\textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
-&\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
-&\ \quad \text{Cobweb algorithm \ref{cobweb} is applied here:} \\
-&\ \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
-&\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
-&\ \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
-&\ \quad \text{Step 3: Update value function } V^{n+1} \\
-&\ \quad V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1}) \\
-&\ \quad \text{Step 4: Check for convergence} \\
-&\ \quad \text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
-\textbf{Return:} &\ V^* \\
-\end{align*}`$$
+.. math::
 
-| **Input:** Initial guess for value function :math:`V^0`, tolerance
-  :math:`\epsilon = 10^{-7}`.
-| **Output:** Converged value function :math:`V^*`.
 
-1. Initialize :math:`n = 0`, set :math:`V^n = V^0`.
+   \begin{align*}
+   \textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\ 
+   &\text{Initialize } n = 0, V^n = V^0 \\
+   \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
+   &\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
+   &\ \quad \quad \text{Cobweb algorithm (\label{cobweb}) is applied here:} \\
+   &\ \quad \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
+   &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
+   &\ \quad \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
+   &\ \quad \text{Step 3: Update value function } V^{n+1} \text{ by minimization}\\
+   &\ \quad \quad V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1}) \\
+   &\ \quad \text{Step 4: Check for convergence} \\
+   &\ \quad \quad\text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
+   \textbf{Return:} &\ V^* \\
+   \end{align*}
 
-2. **While** :math:`|V^{n+1} - V^n| \geq \epsilon` **do**:
 
-   -  **Step 1:** Solve for optimal actions :math:`\Phi^{n+1}` by
-      maximization.
-
-      -  Cobweb algorithm is applied here:
-      -  :math:`\Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n})`
-
-   -  **Step 2:** Solve for optimal probability distortions
-      :math:`\Gamma^{n+1}` by minimization.
-
-      -  :math:`\Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n})`
-
-   -  **Step 3:** Update value function :math:`V^{n+1}`.
-
-      -  Update value function using the upwind finite difference
-         scheme.
-      -  :math:`V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1})`
-
-   -  **Step 4:** Check for convergence.
-
-      -  If :math:`|V^{n+1} - V^n| < \epsilon`, then the algorithm
-         converges.
-      -  Otherwise, set :math:`n = n+1` and repeat from Step 1.
-
-**Return:** :math:`V^*`
-
---------------
 
 Below functions implement above algorithm in solving four HJB equations.
 
@@ -316,29 +289,19 @@ post-tech-pre-damage HJB because two equations have the same state
 variables and controls. Similarly, ‘’hjb_pre_tech’’ function could solve
 pre-tech-post-damage HJB and pre-tech-pre-damage HJB.
 
-1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n}) \label{cobweb}`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First order condition of HJB w.r.t control :math:`\phi_t` are
+In solving HJB equations, we often encounter complex, highly non-linear
+equations that do not admit analytical solutions. To address this
+challenge, iterative numerical methods like the **Cobweb algorithm** are
+employed to approximate the optimal control variables.
 
-.. math::
-
-   \begin{align*}
-       0 =  \delta    \left(\frac {C_t}{\exp(V_t)} \right)^{ -\rho}   \frac{\partial C_t}{\partial \phi_t}  + \frac {\partial} {\partial \phi_t}\frac {d V_t } {dt}  
-   \end{align*}
-
-We use Cobweb algorithm to update controls:
-
-.. math::
-
-   \begin{align*}
-       \frac {\partial} {\partial \phi_{t+1}'}\frac {d V_t } {dt}  = - \delta    \left(\frac {C_t}{\exp(V_t)} \right)^{ -\rho}   \frac{\partial C_t}{\partial \phi_t}   
-   \end{align*}
-
-The updated action :math:`\phi_{t+1}` is computed using a relaxation
-parameter :math:`\mathcal{\iota}`:
-
-.. math::  \phi_{t+1} = \mathcal \iota \phi_{t}+ (1 - \mathcal \iota)  \phi_{t+1}'
+The Cobweb algorithm works by: - Starting with an initial guess for the
+control variable. - Computing the corresponding values in the equations.
+- Updating the control variable based on the discrepancies observed. -
+Repeating the process until the control variable converges to a stable
+value.
 
 For example, we update for :math:`i_k` for pre damage pre technology
 HJB, using the first-order condition:
@@ -349,16 +312,12 @@ Since this equation is highly non-linear and does not admit an
 analytical solution, we use the Cobweb algorithm to iteratively update
 the actions. For each iteration :math:`n`, the update is:
 
-.. math:: \mu^n = \frac{\partial v^n}{\partial \log k} \left(1 - \kappa {i_k^{n+1}}\right)
-
-Where we define:
-
-.. math:: \mu^n = \delta \left( \frac{\alpha k - i_k^n - i_j^n - \alpha k \phi_0 \left[1 - \frac{\mathcal{E}^n}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v^n)} \right)^{-\rho} \frac{1}{\exp(v^n)}
+.. math:: \hat{i}_k^{t+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^t - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}   
 
 The updated action :math:`i_k^{n+1}` is computed using a relaxation
 parameter :math:`\zeta`:
 
-.. math:: i_k^{n+1} = \zeta i_k^n + (1 - \zeta) i_k^{n+1}
+.. math:: i_k^{n+1} = \zeta i_k^n + (1 - \zeta) \hat{i}_k^{n+1}
 
 1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^{n} )`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
