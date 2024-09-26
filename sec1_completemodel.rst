@@ -1,7 +1,7 @@
 1 Complete Model and HJB
 ========================
 
-**State$**
+**State**
 
 -  The stock of productive capital :math:`K_t` :
 
@@ -17,12 +17,12 @@
 .. math::
 
    \begin{align*} 
-   d \log  N_t  = \left\{ 
-   \begin{array}{ll} 
-   \left(\lambda_1 + \lambda_2 {Y}_t \right) {\mathcal E}_t \left[ \bar \theta  dt +  \varsigma dW_t\right]  +  \frac {\lambda_2 |\varsigma|^2 \left({\mathcal E}_t\right)^2} 2 dt   & t  \le \tau \\
-   \left[ \lambda_1 + \lambda_2{\widehat Y}_t  + \lambda_3\left(\ell \right) \left({\widehat Y}_t - {\bar y}\right)\right]  {\mathcal E}_t \left[ \bar \theta  dt + \varsigma dW_t\right] \\ 
-   \hspace{.2cm} + \frac {\left[ \lambda_2 + \lambda_3(\ell)  \right] |{\varsigma}|^2  \left({\mathcal E}_t\right)^2} 2 dt  & t >  \tau , 
-   \end{array} \right. 
+    d \log N_t = 
+       \begin{cases}
+       \left( \lambda_1 + \lambda_2 Y_t \right) \mathcal{E}_t \left[ \bar{\theta}\, dt + \varsigma\, dW_t \right] + \dfrac{ \lambda_2 |\varsigma|^2 \left( \mathcal{E}_t \right)^2 }{2}\, dt, & \text{if } t \leq \tau \\[2ex]
+       \left[ \lambda_1 + \lambda_2 \widehat{Y}_t + \lambda_3(\ell)\left( \widehat{Y}_t - \bar{y} \right) \right] \mathcal{E}_t \left[ \bar{\theta}\, dt + \varsigma\, dW_t \right] \\
+       \quad + \dfrac{ \left[ \lambda_2 + \lambda_3(\ell) \right] |\varsigma|^2 \left( \mathcal{E}_t \right)^2 }{2}\, dt, & \text{if } t > \tau
+       \end{cases}
    \end{align*}
 
 :math:`k_t` is a potential realization of :math:`K_t`, and
