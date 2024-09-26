@@ -1,7 +1,7 @@
 1 Complete Model and HJB
 ========================
 
-**State :math:`X_t`**
+**State$**
 
 -  The stock of productive capital :math:`K_t` :
 
@@ -31,13 +31,13 @@ potential realization of :math:`N_t`, and :math:`\hat{n_t}` is
 :math:`\log n_t`; :math:`r_t` is a potential realization of :math:`R_t`,
 and :math:`\hat{r_t}` is :math:`\log r_t`.
 
-**Controls :math:`\Phi_t`**
+**Controls**
 
 -  :math:`i^k` is a potential value for :math:`I_t^k`
 -  :math:`i^r` is a potential value for :math:`I_t^r`
 -  :math:`e` is a potential value for :math:`\mathcal{E}_t`
 
-**Distortion :math:`\Gamma_t`**
+**Distortion**
 
 -  :math:`h^k` is the distortion to capital accumulation.
 -  :math:`h^y` is the distortion to temperature anomaly accumulation.
