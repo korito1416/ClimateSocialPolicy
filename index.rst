@@ -25,17 +25,10 @@ Check out our related work:
    :hidden:
    :caption: Contents:
  
-   sec6_completemodel.ipynb
-   sec7_uncertinaty_adjust_prob.rst
-   sec8_robust_action.rst
-   sec9_social_valuation.rst
-   sec10_distortion.rst
-   sec11_stochastic_simulation.rst
-   sec12_stochastic_simulation_more.rst
-   sec13_postdamage.rst
-   sec14_notechnology.rst
-   sec15_delta.rst
-   sec16_value_decomposition.rst
+   sec1_completemodel.rst
+   sec2_uncertinaty_adjust_prob.rst
+   sec3_stochastic_simulation.rst
+   sec4_value_decomposition.rst
    Module.rst
 
 
