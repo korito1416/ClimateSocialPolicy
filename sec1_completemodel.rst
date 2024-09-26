@@ -254,7 +254,7 @@ Algorithm: Solving the HJB Equation via Policy Iteration
    &\text{Initialize } n = 0, V^n = V^0 \\
    \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
    &\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
-   &\ \quad \quad \text{Cobweb algorithm (\eqref{eq:cobweb}) is applied here:} \\
+   &\ \quad \quad \text{Cobweb algorithm \eqref{eq:cobweb}  is applied here:} \\
    &\ \quad \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
    &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
    &\ \quad \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
@@ -264,8 +264,6 @@ Algorithm: Solving the HJB Equation via Policy Iteration
    &\ \quad \quad\text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
    \textbf{Return:} &\ V^* \\
    \end{align*}
-
-
 
 Below functions implement above algorithm in solving four HJB equations.
 
@@ -289,8 +287,8 @@ post-tech-pre-damage HJB because two equations have the same state
 variables and controls. Similarly, ‘’hjb_pre_tech’’ function could solve
 pre-tech-post-damage HJB and pre-tech-pre-damage HJB.
 
-1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### 1.2.2 Updating Rules
+:math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
 
 In solving HJB equations, we often encounter complex, highly non-linear
 equations that do not admit analytical solutions. To address this
@@ -321,6 +319,8 @@ The updated action :math:`i_k^{n+1}` is computed using a relaxation
 parameter :math:`\zeta`:
 
 .. math:: i_k^{n+1} = \zeta i_k^n + (1 - \zeta) \hat{i}_k^{n+1}
+
+
 
 1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^{n} )`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
