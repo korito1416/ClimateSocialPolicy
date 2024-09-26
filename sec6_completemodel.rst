@@ -1,39 +1,46 @@
 1 Complete Model and HJB
 ========================
 
-| We start to quasi-analytically simplify the general HJB equation for
-  :math:`\rho \neq 1` in appendix C.3.
-| :raw-latex:`\begin{align*}
-      0 &= \frac  {\delta}{1 - \rho}  \left[ \left(\frac {C_t}{\exp(V_t)} \right)^{1-\rho}  - 1 \right] + \frac {d V_t } {dt}  \\
-     &=\frac  {\delta}{1 - \rho}  \left[ \left(\frac {  C_t / n}{\exp(\hat{V_t})/ n} \right)^{1-\rho}  - 1 \right] + \frac {d \hat{V}_t } {dt} -  \frac{d n}{d t} \\
-      &=\frac  {\delta}{1 - \rho}  \left[ \left(\frac {  C_t  }{\exp(\hat{V_t}) } \right)^{1-\rho}  - 1 \right] + \frac {d \hat{V}_t } {dt} -  \frac{d n}{d t}
-  \end{align*}`
+**State $X_t $**
 
-For our analysis here, rather than a constant value of :math:`\xi` for
-all uncertainty channels, we use a set of values
-:math:`\{\xi^k, \xi^c, \xi^r, \xi^d, \xi^g\}`, one for each uncertainty
-channel so that we can carry out our uncertainty decomposition.
+-  The stock of productive capital :math:`K_t` :
 
-We define realizations of controls and states as following:
+   .. math:: dK_t = K_t \left( - \mu_k    + \frac {I_{t}^k}{K_t}  -{\frac { \kappa} 2} \left( {\frac {I_{t} ^k} {K_t}} \right)^2 \right) dt + K_t \sigma_k dW_t
+-  Temperature anomaly :math:`Y_t`:
 
-**Controls :math:`\Phi`**
+   .. math:: dY_t = {\mathcal E}_t [{\bar \theta} dt + \varsigma dW_t]
+-  the stock of R&D-induced knowledge capital :math:`R_t`:
+
+   .. math:: d R_t = - \zeta R_t dt + \psi_0 \left(I_t^r\right)^{\psi_1} \left(R_t\right)^{1 - \psi_1} dt + R_t \sigma_r dW_t 
+-  The damage evolution :math:`N_t`.
+
+:raw-latex:`\begin{equation*} 
+d \log  N_t  = \left\{ \begin{array}{ll} \left(\lambda_1 + \lambda_2 {Y}_t \right) {\mathcal E}_t \left[ \bar \theta  dt +  \varsigma dW_t\right]     +  \frac {\lambda_2 |\varsigma|^2 \left({\mathcal E}_t\right)^2} 2 dt   & t  \le \tau \\
+\left[ \lambda_1 + \lambda_2{\widehat Y}_t  + \lambda_3\left(\ell \right) \left({\widehat Y}_t - {\bar y}\right)\right]  {\mathcal E}_t \left[ \bar \theta  dt + \varsigma dW_t\right] \\ \hspace{.2cm} + \frac {\left[ \lambda_2 + \lambda_3(\ell)  \right] |{\varsigma}|^2  \left({\mathcal E}_t\right)^2} 2 dt  & t >  \tau , \end{array} \right. 
+\end{equation*}`
+
+:math:`k_t` is a potential realization of :math:`K_t`, and
+:math:`\hat{k_t}` is :math:`\log k_t`. Similarly, :math:`n_t` is a
+potential realization of :math:`N_t`, and :math:`\hat{n_t}` is
+:math:`\log n_t`; :math:`r_t` is a potential realization of :math:`R_t`,
+and :math:`\hat{r_t}` is :math:`\log r_t`.
+
+**Controls :math:`\Phi_t`**
 
 -  :math:`i^k` is a potential value for :math:`I_t^k`
 -  :math:`i^r` is a potential value for :math:`I_t^r`
 -  :math:`e` is a potential value for :math:`\mathcal{E}_t`
 
-**Distortion :math:`\Gamma`** - :math:`h^k` is the distortion to capital
-accumulation. - :math:`h^y` is the distortion to temperature anomaly
-accumulation. - :math:`h^r` is the distortion to R&D accumulation. -
-:math:`g` is the misspecification to technology jump. - :math:`f` is the
-misspecification to damage jump.
+**Distortion :math:`\Gamma_t`** - :math:`h^k` is the distortion to
+capital accumulation. - :math:`h^y` is the distortion to temperature
+anomaly accumulation. - :math:`h^r` is the distortion to R&D
+accumulation. - :math:`g` is the misspecification to technology jump. -
+:math:`f` is the misspecification to damage jump.
 
-**State $:raw-latex:`\Theta `$**
-
--  :math:`k` is a realization of :math:`K_t`.
--  :math:`y` is a realization of :math:`Y_t`.
--  :math:`r` is a realization of :math:`R_t`.
--  :math:`n` is a realization of :math:`N_t`.
+For our analysis here, rather than a constant value of :math:`\xi` for
+all uncertainty channels, we use a set of values
+:math:`\{\xi^k, \xi^c, \xi^r, \xi^d, \xi^g\}`, one for each uncertainty
+channel so that we can carry out our uncertainty decomposition.
 
 1.1 HJB equations
 -----------------
@@ -41,89 +48,164 @@ misspecification to damage jump.
 1.1.1 Post-tech-post-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After technology jump occurs, temperature and damage remains constant.
-Then the optimal choice of emission is ${:raw-latex:`\mathcal `E_t}
->:raw-latex:`\beta `:raw-latex:`\alpha `K_t $. In this case, the state
-space, control space and distortion space become
-:raw-latex:`\begin{align}
-    \Theta &= \{ K,\bar{N}\}\\
-    \Phi &= \{  i^k \}\\
-    \Gamma &= \{h^k\}
-\end{align}` We have HJB for post technology and post damage jump as
-follows
+| After technology jump occurs, temperature and damage remains constant.
+  Then the optimal choice of emission is 0. In this case, the state
+  space, control space and distortion space become
+  :raw-latex:`\begin{align*}
+      X &= \{ \hat{k} \}\\
+      \Phi &= \{  i^k \}\\
+      \Gamma &= \{h^k\}
+  \end{align*}` Compute :math:`V^{\ell,L}(x)` for
+  :math:`\ell = 1, ..., L-1` conditioned on both a technology jump and a
+  damage jump occurring,by solving HJB equation
+| 
 
-:raw-latex:`\begin{align}
-0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z}))} \right)^{1-\rho}-1\right] \\
-& +\frac{d \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{d^2 \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-& +\xi^k \frac{\left|{h^k}\right|^2}{2}
-\end{align}`
+  .. math::
 
-where :math:`\tilde{z} \in \{(1,1), (1,2), \ldots, (1,L_n)\}`
+
+     \begin{align*}
+     0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{V}^{\ell,L})} \right)^{1-\rho}-1\right] \\
+     & +\frac{\partial \hat{V}^{\ell,L}}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{V}^{\ell,L}}{\partial \hat{k} \, \partial \hat{k}'}\frac{\left|\sigma_k\right|^2}{2} \\
+     & +\xi^k \frac{\left|{h^k}\right|^2}{2}
+     \end{align*}
 
 1.1.2 Post Technology and Pre Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Compute the value function :math:`V^L(x)` assuming that only a
+technology jump has been realized. This value function incorporates the
+possibility of jumping to one of :math:`L-1` possible damage states,
+however, because the temperature anomaly remains constant at the point
+where any incremental curvature has no impact on the damages this damage
+curve realization is inconsequential. Therefore, we can ignore the
+damage curve intensities and the associated continuation values for this
+computation.
+
 In this case, the state space, control space and distortion space become
-:raw-latex:`\begin{align}
-    \Theta &= \{ K,\bar{N}\}\\
+:raw-latex:`\begin{align*}
+    X &= \{ \hat{k} \}\\
     \Phi &= \{  i^k \}\\
     \Gamma &= \{h^k\}
-\end{align}` We have HJB for post technology and post damage jump as
+\end{align*}` We have HJB for post technology and post damage jump as
 follows
 
-.. raw:: latex
+.. math::
 
-   \begin{aligned}
-   0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z}))} \right)^{1-\rho}-1\right] \\
-   & +\frac{d \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{d^2 \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{d \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
+
+   \begin{align*}
+   0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{V}^L)} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial \hat{V}^{L}}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{V}^{ L}}{\partial \hat{k} \, \partial \hat{k}'} \frac{\left|\sigma_k\right|^2}{2} \\
    & +\xi^k \frac{\left|{h^k}\right|^2}{2}
-   \end{aligned}
-
-where :math:`\tilde{z} \in \{(1,0)\}`
+   \end{align*}
 
 1.1.3 Pre Technology and Post Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this case, the state space, control space and distortion space become
-:raw-latex:`\begin{align}
-    \Theta &= \{ K, Y,R,N \}\\
-    \Phi &= \{  i^k, i^r, e \}\\
-    \Gamma &= \{{h^k}, {h^y}, {h^r}, g\}
-\end{align}` After plugging this simplification into our HJB equation
-and removing common terms, we are left with the following simplified HJB
-to solve:
+Compute the values functions :math:`V^{\ell}(x)` assuming that only a
+damage jump has been realized for :math:`\ell = 1,..., L-1.` These
+values functions depend on the entire state vector :math:`X` and have
+one possible jump state which is the technology discovery with intensity
+:math:`{\mathcal J}^L.` The continuation value for the jump is
+:math:`V^{\ell,L}(x)` viewed as a function of :math:`x` for
+:math:`\ell=1,...,L-1.`
 
-:raw-latex:`\begin{align}
-& 0=\max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1}}{\exp (\tilde{v})} \right)^{1-\rho}-1\right] \\
-& +\frac{\partial \tilde{v}}{\partial \log k}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})}{\partial \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-& +\frac{\partial \tilde{v}}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\frac{\partial^2 \tilde{v}}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
-& -\left(\left[\lambda_1+\lambda_2 y+\lambda_3(y-\bar{y})\right]\left(\frac{1}{L_y} \sum_\ell^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\left(\lambda_2+\lambda_3\right) \frac{|\varsigma|^2}{2} e^2\right) \\
-& +\frac{\partial \tilde{v}}{\partial \log r}\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 \tilde{v}}{\partial \log r^2}\frac{\left|\sigma_r\right|^2}{2} \\
-& +\xi^g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\hat{z}), \hat{z})-\tilde{v}\right) \\
-& +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_\ell^{L_y}  q(\ell \mid x,z) \log  q(\ell \mid x,z) \\
-&
-\end{align}` where the first component for :math:`\hat{z}` is 1.
+.. math::
+
+
+   \begin{align*}
+       X &= \{ \hat{k}, y, \hat{r}, \hat{n} \}\\
+       \Phi &= \{  i^k, i^r, e \}\\
+       \Gamma &= \{{h^k}, {h^y}, {h^r}, g\}
+   \end{align*}
+
+After plugging this simplification into our HJB equation and removing
+common terms, we are left with the following simplified HJB to solve:
+
+.. math::
+
+
+   \begin{align*}
+   & 0=\max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1}}{\exp (\hat{V}^\ell)} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial \hat{V}^\ell}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{V}^\ell }{\partial  \hat{k} \partial  \hat{k}'} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\frac{\partial \hat{V}^\ell}{\partial \hat{y}}\left(  \bar{\theta}+\varsigma {h^y}\right) e+\frac{\partial^2 \hat{V}^\ell}{\partial y \partial y'} \frac{|\varsigma|^2}{2} e^2 \\
+   & -\left(\left[\lambda_1+\lambda_2 y+\lambda_3(y-\bar{y})\right]\left( \bar{\theta}+\varsigma {h^y}\right) e+\left(\lambda_2+\lambda_3\right) \frac{|\varsigma|^2}{2} e^2\right) \\
+   & +\frac{\partial \hat{V}^\ell}{\partial \hat{r} }\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 \hat{V}^\ell}{\partial \hat{r} \partial \hat{r}'}\frac{\left|\sigma_r\right|^2}{2} \\
+   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  g \left(\hat{V}^{\ell,L}-\hat{V}^\ell \right) \\
+   & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}  \\
+   &
+   \end{align*}
 
 1.1.4 Pre-tech-pre-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this case, the state space, control space and distortion space become
-:raw-latex:`\begin{align}
-    \Theta &= \{ K, Y,R,N \}\\
-    \Phi &= \{  i^k, i^r, e \}\\
-    \Gamma &= \{{h^k}, {h^y}, {h^r}, g, f\}
-\end{align}` After plugging this simplification into our HJB equation
-and removing common terms, :raw-latex:`\begin{align}
-0 & = \max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g, f}\left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k-i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k}\right]^{\phi_1}}{\exp (v)} \right)^{1-\rho}-1\right] \\
-& +\frac{\partial v}{\partial \log k}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 v}{\partial \log k^2} \frac{\left|\sigma_k\right|^2}{2} \\
-& +\frac{\partial v}{\partial y}\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\frac{\partial^2 v}{\partial y^2} \frac{|\varsigma|^2}{2} e^2 \\
-& -\left(\left[\lambda_1+\lambda_2 y\right]\left(\frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \theta(\ell)+\varsigma {h^y}\right) e+\lambda_2 \frac{|\varsigma|^2}{2} e^2\right) \\
-& +\frac{\partial v}{\partial \log r}\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 v}{\partial \log r^2} \frac{\left|\sigma_r\right|^2}{2} \\
-& +\xi^g \mathcal{J}_g(r)(1-g(\tilde{z} \mid x, z)+g(\tilde{z} \mid x, z) \log g(\tilde{z} \mid x, z))+\mathcal{J}_g(r) g(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
-& +\xi^d \mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z)(1-f(\tilde{z} \mid x, z)+f(\tilde{z} \mid x, z) \log f(\tilde{z} \mid x, z)) \\
-& +\mathcal{J}_n(y) \sum_{\tilde{z} \in \mathcal{Z}} \pi(\tilde{z} \mid x, z) f(\tilde{z} \mid x, z)\left(\tilde{v}(\tilde{x}(\tilde{z}), \tilde{z})-v\right) \\
-& +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}+\chi \frac{1}{L_y} \sum_{\ell=1}^{L_y} q(\ell \mid x,z) \log q(\ell \mid x,z)
-\end{align}`
+Compute :math:`V(x)` prior to any jumps occurring. This value function
+has two possible types of jumps, either a technology jump or a damage
+curvature jump. The continuation value for the technology jump is
+:math:`V^L(x)`, and the potential continuation values for the damage
+curvature jump are the set of :math:`V^{\ell}(x)` for
+:math:`\ell = 1,..., L-1.`
+
+.. math::
+
+
+   \begin{align*}
+       X &= \{ k, y,r,n \}\\
+       \Phi &= \{  i^k, i^r, e \}\\
+       \Gamma &= \{{h^k}, {h^y}, {h^r}, g, f\}
+   \end{align*}
+
+After plugging this simplification into our HJB equation and removing
+common terms, :raw-latex:`\begin{align*}
+0  = & \max_{i^k, i^r, e} \, \min_{h, g^{\ell}} \, \frac{\delta}{1-\rho} \left(\left(\frac{\alpha k-i^{k}-i^{r}-\alpha k \phi_0 \left(1-\frac{e}{\beta \alpha k}\right)^{\phi_1}}{\exp(\hat{V})} \right)^{1-\rho}-1 \right) \\
+& + \frac{\partial \hat{V}}{\partial \hat{k}} \left( -\mu_{k}+ \frac{i^{k}}{k}-\frac{\kappa}{2}\left(\frac{I^{k}}{k}\right)^{2}-\frac{|\sigma_{k}|^{2}}{2} + \sigma_k h^k \right) +  \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}\frac{|\sigma_{k}|^{2}}{2} \\
+& + \frac{\partial \hat{V}}{\partial y} e \left( \bar{\theta}+\varsigma h^y \right) + \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}\frac{|\varsigma|^{2}}{2}e^{2}  - \left( (\lambda_{1}+\lambda_{2}y) e \left( \bar{\theta}+\varsigma h^y \right) +\lambda_{2}\frac{|\varsigma|^{2}}{2}e^{2} \right) \\
+& + \frac{\partial \hat{V}}{\partial \hat{r}} \left( -\zeta + \psi_{0}(i^{r})^{\psi_{1}}\exp( -\psi_{1} \hat{r})-\frac{|\sigma_{r}|^{2}}{2}+\sigma_{r} h^r \right) +\frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'}\frac{|\sigma_{r}|^{2}}{2} \\
+& +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  \cdot g  \cdot \left(\hat{V}^L -\hat{V}\right) \\
+&+\xi^d \mathcal{J}_n  \sum_{\ell} \pi^\ell  (1-f^\ell +f^\ell  \log f^\ell ) \\
+&+\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell \cdot \left(\hat{V}^\ell-\hat{V}\right) \\
+&+\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}
+\end{align*}`
+
+To solve HJB equations, we first run below code in
+`two-capital-climate-change/master
+/master_zero_shock.sh <https://github.com/korito1416/two-capital-climate-change/blob/main/master/master_zero_shock.sh>`__.
+Make sure you give right command-line arguments.
+
+We solve four HJB equations sequentially. First, solve 20
+post-tech-post-damage HJB for each :math:`\gamma^3`. Then we solve one
+post-tech-pre-damage and 20 pre-tech-post-damage HJB conditional on
+post-tech-post-damage Value function. Finally we solve
+pre-tech-pre-damage HJB given post-tech-pre-damage and
+pre-tech-post-damage value functions. Below bash code shows this logics.
+
+| \```bash bash ./conduction/Postdamage.sh
+| sleep 1200 bash ./conduction/Postdamage_sub.sh sleep 1200 bash
+  ./conduction/Predamage.sh
+
+In
+`Postdamage.sh <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Postdamage.py>`__,
+we solve post_damage_post_tech and post-damage-pre-tech value functions
+and controls.
+`Post_damage_post_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Postdamage.py#L310>`__
+section solves post-damage-post-tech HJB.
+`Post-damage-pre-tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Postdamage.py#L412>`__
+section solves Post-damage-pre-tech HJB. In order to make sure our
+results are stable, we first randomly pick initial values and then use
+the first result to resolve the HJB.
+
+`Postdamage_sub.sh <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/conduction/Postdamage_sub.sh>`__
+is aimed at further improving computational efficiency. The solutions
+obtained from post_damage.py serve as baseline solutions for
+Postdamage_sub.py to resolve the HJB equations.
+
+In
+`Predamage.sh <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Predamage.py>`__,
+we solve pre_damage_post_tech and pre-damage-pre-tech value functions
+and controls.
+`Pre_damage_post_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Predamage.py#L249>`__
+section solves pre-damage-post-tech HJB.
+`Pre-damage-pre-tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Predamage.py#L312>`__
+section solves Pre-damage-pre-tech HJB.
 
 1.2 Computation method
 ----------------------
@@ -135,15 +217,51 @@ In this section, we explain how did we solve HJB equation.
 
 For simplicity, I denote the control set and distortion set:
 
-:raw-latex:`\begin{align}
-   \Phi^n &= \{ i_k^{n}, i_j^{n}, \mathcal{E}^{n} \} \\
-   \Gamma^n &=\{ h_k^{n}, h_y^{n}, h_j^{n}, g^{n}, f_\ell^{n} \} 
-\end{align}`
+.. math::
 
-.. figure:: policyiterationAlgo.jpg
-   :alt: Algorithm
 
-   Algorithm
+   \begin{align*}
+      \Phi^n &= \{ i_k^{n}, i_j^{n}, \mathcal{E}^{n} \} \\
+      \Gamma^n &=\{ h_k^{n}, h_y^{n}, h_j^{n}, g^{n}, f_\ell^{n} \} 
+   \end{align*}
+
+| **Input:** Initial guess for value function $ V^0 $, tolerance $
+  :raw-latex:`\epsilon `= 10^{-7} $.
+| **Output:** Converged value function $ V^\* $.
+
+1. Initialize $ n = 0 $, set $ V^n = V^0 $.
+
+2. **While** $ \|V^{n+1} - V^n\|
+   :raw-latex:`\geq `:raw-latex:`\epsilon `$ **do**:
+
+   -  **Step 1:** Solve for optimal actions $ :raw-latex:`\Phi`^{n+1} $
+      by maximization.
+
+      -  Cobweb algorithm is applied here:
+      -  $ :raw-latex:`\Phi`^{n+1} = :raw-latex:`\Phi`(V^n,
+         :raw-latex:`\Phi`^{n}, :raw-latex:`\Gamma`^{n}) $
+
+   -  **Step 2:** Solve for optimal probability distortions $
+      :raw-latex:`\Gamma`^{n+1} $ by minimization.
+
+      -  $ :raw-latex:`\Gamma`^{n+1} = :raw-latex:`\Gamma`(V^n,
+         :raw-latex:`\Phi`^{n+1}, :raw-latex:`\Gamma`^{n}) $
+
+   -  **Step 3:** Update value function $ V^{n+1} $.
+
+      -  Update value function using the upwind finite difference
+         scheme.
+      -  :math:`V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1})`
+
+   -  **Step 4:** Check for convergence.
+
+      -  If $ \|V^{n+1} - V^n\| < :raw-latex:`\epsilon `$, then the
+         algorithm converges.
+      -  Otherwise, set :math:`n = n+1` and repeat from Step 1.
+
+**Return:** $ V^\* $
+
+--------------
 
 Below functions implement above algorithm in solving four HJB equations.
 
@@ -167,18 +285,16 @@ post-tech-pre-damage HJB because two equations have the same state
 variables and controls. Similarly, ‘’hjb_pre_tech’’ function could solve
 pre-tech-post-damage HJB and pre-tech-pre-damage HJB.
 
-
-
 1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First order condition of HJB w.r.t control :math:`\phi_t` are
-:raw-latex:`\begin{align}
+:raw-latex:`\begin{align*}
     0 =  \delta    \left(\frac {C_t}{\exp(V_t)} \right)^{ -\rho}   \frac{\partial C_t}{\partial \phi_t}  + \frac {\partial} {\partial \phi_t}\frac {d V_t } {dt}  
-\end{align}` We use Cobweb algorithm to update controls:
-:raw-latex:`\begin{align}
+\end{align*}` We use Cobweb algorithm to update controls:
+:raw-latex:`\begin{align*}
     \frac {\partial} {\partial \phi_{t+1}'}\frac {d V_t } {dt}  = - \delta    \left(\frac {C_t}{\exp(V_t)} \right)^{ -\rho}   \frac{\partial C_t}{\partial \phi_t}   
-\end{align}`
+\end{align*}`
 
 The updated action $ :raw-latex:`\phi`\ *{t+1} $ is computed using a
 relaxation parameter $
@@ -210,23 +326,25 @@ Where we define:
 
    \mu^n = \delta \left( \frac{\alpha k - i_k^n - i_j^n - \alpha k \phi_0 \left[1 - \frac{\mathcal{E}^n}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v^n)} \right)^{-\rho} \frac{1}{\exp(v^n)}
 
-The updated action $ i_k^{n+1} $ is computed using a relaxation
-parameter $ :raw-latex:`\mathcal`:raw-latex:`\chi `$:
+The updated action :math:`i_k^{n+1}` is computed using a relaxation
+parameter :math:`\zeta`:
 
-.. math::
-
-
-   i_k^{n+1} = \chi i_k^n + (1 - \chi) i_k^{n+1'}
+.. math::   i_k^{n+1} = \zeta i_k^n + (1 - \zeta) i_k^{n+1} 
 
 1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^{n} )`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First order condition of HJB w.r.t distortion :math:`\gamma_t` are
-:raw-latex:`\begin{align}
-    0 =    \frac {\partial} {\partial \gamma_t}\frac {d V_t } {dt}  
-\end{align}` Every distortion has analytical solution. For example, we
-solve for $ h_k $, and the same logic applies to $ h_y, h_j, g,
-f\_:raw-latex:`\ell `$. The first-order condition for $ h_k $ is:
+
+.. math::
+
+
+       0 = \frac{\partial }{\partial \gamma_t} \frac{d V_t }{dt}  
+    
+
+Every distortion has analytical solution. For example, we solve for $
+h_k $, and the same logic applies to $ h_y, h_j, g, f_l$. The
+first-order condition for $ h_k $ is:
 
 .. math::
 
@@ -246,30 +364,49 @@ as follows:
 
 To mitigate the inherent instability of the non-linear HJB, we add a
 false transcient (time) dimension and solve it until convergence. And
-the new HJB equation is as :raw-latex:`\begin{align}  
-0 \hspace{0.2cm} = \hspace{0.2cm} & \delta U(x) - \delta V(x,t) + 
-\mu(x) \frac{\partial V}{\partial x} (x,t) \\
-& + \frac{1}{2} \, \mathrm{trace}\left[\sigma(x)^\top \frac{\partial^2 V}{\partial x \partial x^\top}(x,t) \sigma(x) \right] \\
-& + \sum_{\ell = 1}^L \mathcal{J}^\ell(x) \left[ V^\ell(x,t) - V(x,t) \right]
-\end{align}`
+the new HJB equation is as
+
+.. math::
+
+
+   \begin{align*}  
+   0 \hspace{0.2cm} = \hspace{0.2cm} & \delta U(x) - \delta V(x,t) + 
+   \mu(x) \frac{\partial V}{\partial x} (x,t) \\
+   & + \frac{1}{2} \, \mathrm{trace}\left[\sigma(x)^\top \frac{\partial^2 V}{\partial x \partial x^\top}(x,t) \sigma(x) \right] \\
+   & + \sum_{\ell = 1}^L \mathcal{J}^\ell(x) \left[ V^\ell(x,t) - V(x,t) \right]
+   \end{align*}
 
 1.2.5 Finite Difference Schemes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Central Difference (Interior Points): :raw-latex:`\begin{align*}
-         \text{First-Order:} \quad \frac{f_{i+1} - f_{i-1}}{2 \Delta x} \\
-         \text{Second-Order:} \quad \frac{f_{i+1} + f_{i-1} - 2f_i}{\Delta x^2}
-     \end{align*}`
+-  Central Difference (Interior Points):
 
--  Forward Difference (First Boundary Point): :raw-latex:`\begin{align*}
-         \text{First-Order:} \quad \frac{f_{1} - f_{0}}{\Delta x} \\
-         \text{Second-Order:} \quad \frac{f_{2} + f_{0} - 2f_{1}}{\Delta x^2}
-     \end{align*}`
+   .. math::
 
--  Backward Difference (Last Boundary Point): :raw-latex:`\begin{align*}
-     \text{First-Order:} \quad \frac{f_{N-1} - f_{N-2}}{\Delta x} \\
-         \text{Second-Order:} \quad \frac{f_{N-1} + f_{N-3} - 2f_{N-2}}{\Delta x^2}
-   \end{align*}`
+
+      \begin{align*}
+            (\frac{\partial f}{\partial x})_i    = \frac{f_{i+1} - f_{i-1}}{2 \Delta x} \\
+            (\frac{\partial^2 f}{\partial x^2})_i =\frac{f_{i+1} + f_{i-1} - 2f_i}{\Delta x^2}
+        \end{align*}
+       
+-  Forward Difference (First Boundary Point):
+
+   .. math::
+
+
+      \begin{align*}
+            (\frac{\partial f}{\partial x})_0 =\frac{f_{1} - f_{0}}{\Delta x} \\
+            (\frac{\partial^2 f}{\partial x^2})_0 =\frac{f_{2} + f_{0} - 2f_{1}}{\Delta x^2}
+        \end{align*}
+-  Backward Difference (Last Boundary Point):
+
+   .. math::
+
+
+      \begin{align*}
+       (\frac{\partial f}{\partial x})_{N-1}  =\frac{f_{N-1} - f_{N-2}}{\Delta x} \\
+       (\frac{\partial^2 f}{\partial x^2})_{N-1}=\frac{f_{N-1} + f_{N-3} - 2f_{N-2}}{\Delta x^2}
+      \end{align*}
 
 Below two functions are two finite difference functions we used in
 solving HJB equations.
@@ -279,27 +416,3 @@ solving HJB equations.
 
 -  `finiteDiff <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/supportfunctions.py#L12>`__
    in two-capital-climate-change/python/src/supportfunctions.py
-
-1.3 Procedures to solve four HJB equations
-------------------------------------------
-
-To solve HJB equations, we first run below code in
-`two-capital-climate-change/master
-/master_zero_shock.sh <https://github.com/korito1416/two-capital-climate-change/blob/main/master/master_zero_shock.sh>`__.
-Make sure you give right command-line arguments.
-
-| \```bash bash ./conduction/Postdamage.sh
-| sleep 1200 bash ./conduction/Postdamage_sub.sh sleep 1200 bash
-  ./conduction/Predamage.sh
-
-
-
-
-
-
-
-
-
-
-
-

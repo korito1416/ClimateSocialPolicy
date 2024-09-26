@@ -1,5 +1,10 @@
-15 Sensitivity to :math:`\delta`
-================================
+9 Sensitivity to :math:`\delta`
+===============================
+
+In our baseline analysis, we have kept fixed the subjective rate of
+discount used by the social planner by setting :math:`\delta = .01.` We
+now show how changes in this subjective discount rate alters the social
+value of the R&D stock and the social cost of global warming.
 
 .. code:: ipython3
 
@@ -32,7 +37,7 @@
             });
             }
             </script>
-    
+
 
 
 
