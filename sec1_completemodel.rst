@@ -240,27 +240,24 @@ For simplicity, I denote the control set and distortion set:
       \Gamma^n &=\{ h_k^{n}, h_y^{n}, h_j^{n}, g^{n}, f_\ell^{n} \} 
    \end{align*}
 
-$$:raw-latex:`\textbf{Algorithm: Solving the HJB Equation via Iterative Method}`
+$$:raw-latex:`\textbf{Algorithm: Solving the HJB Equation via Policy Iteration }`
 
-.. raw:: latex
-
-   \begin{aligned}
-   \textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\
-   \textbf{Output:} &\ \text{Converged value function } V^* \\
-   &\text{Initialize } n = 0, V^n = V^0 \\
-   \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
-   &\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
-   &\ \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
-   &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \\
-   &\ \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
-   &\ \quad \text{Step 3: Update value function } V^{n+1} \\
-   &\ \quad V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1}) \\
-   &\ \quad \text{Step 4: Check for convergence} \\
-   &\ \quad \text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
-   \textbf{Return:} &\ V^* \\
-   \end{aligned}
-
-$$
+:raw-latex:`\begin{align*}
+\textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\
+\textbf{Output:} &\ \text{Converged value function } V^* \\
+&\text{Initialize } n = 0, V^n = V^0 \\
+\textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
+&\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
+&\ \quad \text{Cobweb algorithm \ref{cobweb} is applied here:} \\
+&\ \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
+&\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
+&\ \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
+&\ \quad \text{Step 3: Update value function } V^{n+1} \\
+&\ \quad V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1}) \\
+&\ \quad \text{Step 4: Check for convergence} \\
+&\ \quad \text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
+\textbf{Return:} &\ V^* \\
+\end{align*}`$$
 
 | **Input:** Initial guess for value function :math:`V^0`, tolerance
   :math:`\epsilon = 10^{-7}`.
@@ -319,8 +316,8 @@ post-tech-pre-damage HJB because two equations have the same state
 variables and controls. Similarly, ‘’hjb_pre_tech’’ function could solve
 pre-tech-post-damage HJB and pre-tech-pre-damage HJB.
 
-1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n}) \label{cobweb}`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First order condition of HJB w.r.t control :math:`\phi_t` are
 
