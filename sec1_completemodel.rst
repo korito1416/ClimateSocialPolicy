@@ -1,7 +1,7 @@
 1 Complete Model and HJB
 ========================
 
-**State $X_t $**
+**State :math:`X_t`**
 
 -  The stock of productive capital :math:`K_t` :
 
@@ -14,10 +14,13 @@
    .. math:: d R_t = - \zeta R_t dt + \psi_0 \left(I_t^r\right)^{\psi_1} \left(R_t\right)^{1 - \psi_1} dt + R_t \sigma_r dW_t 
 -  The damage evolution :math:`N_t`.
 
-**:raw-latex:`\begin{align*} 
-d \log  N_t  = \left\{ \begin{array}{ll} \left(\lambda_1 + \lambda_2 {Y}_t \right) {\mathcal E}_t \left[ \bar \theta  dt +  \varsigma dW_t\right]     +  \frac {\lambda_2 |\varsigma|^2 \left({\mathcal E}_t\right)^2} 2 dt   & t  \le \tau \\
-\left[ \lambda_1 + \lambda_2{\widehat Y}_t  + \lambda_3\left(\ell \right) \left({\widehat Y}_t - {\bar y}\right)\right]  {\mathcal E}_t \left[ \bar \theta  dt + \varsigma dW_t\right] \\ \hspace{.2cm} + \frac {\left[ \lambda_2 + \lambda_3(\ell)  \right] |{\varsigma}|^2  \left({\mathcal E}_t\right)^2} 2 dt  & t >  \tau , \end{array} \right. 
-\end{align*}`**
+.. math::
+
+   \begin{align*} 
+   d \log  N_t  = \left\{ \begin{array}{ll} \left(\lambda_1 + \lambda_2 {Y}_t \right) {\mathcal E}_t \left[ \bar \theta  dt +  \varsigma dW_t\right]  +  \frac {\lambda_2 |\varsigma|^2 \left({\mathcal E}_t\right)^2} 2 dt   & t  \le \tau \\
+   \left[ \lambda_1 + \lambda_2{\widehat Y}_t  + \lambda_3\left(\ell \right) \left({\widehat Y}_t - {\bar y}\right)\right]  {\mathcal E}_t \left[ \bar \theta  dt + \varsigma dW_t\right] \\ 
+   \hspace{.2cm} + \frac {\left[ \lambda_2 + \lambda_3(\ell)  \right] |{\varsigma}|^2  \left({\mathcal E}_t\right)^2} 2 dt  & t >  \tau , \end{array} \right. 
+   \end{align*}
 
 :math:`k_t` is a potential realization of :math:`K_t`, and
 :math:`\hat{k_t}` is :math:`\log k_t`. Similarly, :math:`n_t` is a
@@ -31,11 +34,13 @@ and :math:`\hat{r_t}` is :math:`\log r_t`.
 -  :math:`i^r` is a potential value for :math:`I_t^r`
 -  :math:`e` is a potential value for :math:`\mathcal{E}_t`
 
-**Distortion :math:`\Gamma_t`** - :math:`h^k` is the distortion to
-capital accumulation. - :math:`h^y` is the distortion to temperature
-anomaly accumulation. - :math:`h^r` is the distortion to R&D
-accumulation. - :math:`g` is the misspecification to technology jump. -
-:math:`f` is the misspecification to damage jump.
+**Distortion :math:`\Gamma_t`**
+
+-  :math:`h^k` is the distortion to capital accumulation.
+-  :math:`h^y` is the distortion to temperature anomaly accumulation.
+-  :math:`h^r` is the distortion to R&D accumulation.
+-  :math:`g` is the misspecification to technology jump.
+-  :math:`f` is the misspecification to damage jump.
 
 For our analysis here, rather than a constant value of :math:`\xi` for
 all uncertainty channels, we use a set of values
@@ -235,11 +240,33 @@ For simplicity, I denote the control set and distortion set:
       \Gamma^n &=\{ h_k^{n}, h_y^{n}, h_j^{n}, g^{n}, f_\ell^{n} \} 
    \end{align*}
 
-| **Input:** Initial guess for value function $ V^0 $, tolerance $
-  :raw-latex:`\epsilon `= 10^{-7} $.
-| **Output:** Converged value function $ V^\* $.
+$$:raw-latex:`\textbf{Algorithm: Solving the HJB Equation via Iterative Method}`
 
-1. Initialize $ n = 0 $, set $ V^n = V^0 $.
+.. raw:: latex
+
+   \begin{aligned}
+   \textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\
+   \textbf{Output:} &\ \text{Converged value function } V^* \\
+   &\text{Initialize } n = 0, V^n = V^0 \\
+   \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
+   &\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
+   &\ \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
+   &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \\
+   &\ \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
+   &\ \quad \text{Step 3: Update value function } V^{n+1} \\
+   &\ \quad V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1}) \\
+   &\ \quad \text{Step 4: Check for convergence} \\
+   &\ \quad \text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
+   \textbf{Return:} &\ V^* \\
+   \end{aligned}
+
+$$
+
+| **Input:** Initial guess for value function :math:`V^0`, tolerance
+  :math:`\epsilon = 10^{-7}`.
+| **Output:** Converged value function :math:`V^*`.
+
+1. Initialize :math:`n = 0`, set :math:`V^n = V^0`.
 
 2. **While** :math:`|V^{n+1} - V^n| \geq \epsilon` **do**:
 
@@ -262,11 +289,11 @@ For simplicity, I denote the control set and distortion set:
 
    -  **Step 4:** Check for convergence.
 
-      -  If $ \|V^{n+1} - V^n\| < :raw-latex:`\epsilon `$, then the
-         algorithm converges.
+      -  If :math:`|V^{n+1} - V^n| < \epsilon`, then the algorithm
+         converges.
       -  Otherwise, set :math:`n = n+1` and repeat from Step 1.
 
-**Return:** $ V^\* $
+**Return:** :math:`V^*`
 
 --------------
 
@@ -312,7 +339,7 @@ We use Cobweb algorithm to update controls:
    \end{align*}
 
 The updated action :math:`\phi_{t+1}` is computed using a relaxation
-parameter $ :raw-latex:`\mathcal `:raw-latex:`\iota`$:
+parameter :math:`\mathcal{\iota}`:
 
 .. math::  \phi_{t+1} = \mathcal \iota \phi_{t}+ (1 - \mathcal \iota)  \phi_{t+1}'
 
@@ -349,8 +376,8 @@ first-order condition for :math:`h_k` is:
 
 .. math:: \frac{\partial v}{\partial \log k} \sigma_k = - \xi_k h_k
 
-Given the value function ( v^n ), we update the distortion $ h_k^{n+1} $
-as follows:
+Given the value function :math:`v^n`, we update the distortion
+:math:`h_k^{n+1}` as follows:
 
 .. math:: h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial v^n}{\partial \log k} \sigma_k
 
@@ -408,3 +435,5 @@ solving HJB equations.
 
 -  `finiteDiff <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/supportfunctions.py#L12>`__
    in two-capital-climate-change/python/src/supportfunctions.py
+
+
