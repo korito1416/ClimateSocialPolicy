@@ -322,10 +322,6 @@ parameter :math:`\zeta`:
 1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^{n} )`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First order condition of HJB w.r.t distortion :math:`\gamma_t` are
-
-.. math:: 0 = \frac{\partial }{\partial \gamma_t} \frac{d V_t }{dt}
-
 Every distortion has analytical solution. For example, we solve for
 :math:`h_k`, and the same logic applies to :math:`h_y, h_j, g, f_l`. The
 first-order condition for :math:`h_k` is:
