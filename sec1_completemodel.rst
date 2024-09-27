@@ -295,11 +295,13 @@ equations that do not admit analytical solutions. To address this
 challenge, iterative numerical methods like the **Cobweb algorithm** are
 employed to approximate the optimal control variables.
 
-The Cobweb algorithm works by: - Starting with an initial guess for the
-control variable. - Computing the corresponding values in the equations.
-- Updating the control variable based on the discrepancies observed. -
-Repeating the process until the control variable converges to a stable
-value.
+The Cobweb algorithm works by:
+
+-  Starting with an initial guess for the control variable.
+-  Computing the corresponding values in the equations.
+-  Updating the control variable based on the discrepancies observed.
+-  Repeating the process until the control variable converges to a
+   stable value.
 
 For example, we update for :math:`i_k` for pre damage pre technology
 HJB, using the first-order condition:
