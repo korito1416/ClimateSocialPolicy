@@ -1,5 +1,5 @@
-4: Value Decomposition
-----------------------
+4 Value Decomposition
+---------------------
 
 4.1 Numerical Method Demonstration
 ----------------------------------
