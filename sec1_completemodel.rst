@@ -312,10 +312,8 @@ Since this equation is highly non-linear and does not admit an
 analytical solution, we use the Cobweb algorithm to iteratively update
 the actions. For each iteration :math:`n`, the update is:
 
-.. math::
-
-   \begin{align} \label{eq:cobweb}
-   \hat{i}_k^{t+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^t - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align} 
+:raw-latex:`\begin{align} \label{eq:cobweb}
+\hat{i}_k^{t+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^t - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}`
 
 The updated action :math:`i_k^{n+1}` is computed using a relaxation
 parameter :math:`\zeta`:
