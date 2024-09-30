@@ -198,16 +198,18 @@ To solve HJB equations, we first run below code in
 /master_zero_shock.sh <https://github.com/korito1416/two-capital-climate-change/blob/main/master/master_zero_shock.sh>`__.
 Make sure you give right command-line arguments.
 
-We solve four types of HJB equations sequentially. First, solve 20
-post-tech-post-damage HJB for each :math:`\gamma^3`. Then we solve one
-post-tech-pre-damage and one pre-tech-post-damage HJB conditional on
-post-tech-post-damage Value function. Finally we solve
-pre-tech-pre-damage HJB given post-tech-pre-damage and
-pre-tech-post-damage value functions. Below bash code shows this logics.
+We solve four types of HJB equations sequentially.
 
-| \```bash bash ./conduction/Postdamage.sh
-| sleep 1200 bash ./conduction/Postdamage_sub.sh sleep 1200 bash
-  ./conduction/Predamage.sh
+1. First, solve one post-tech-post-damage HJB. As after technology jump
+   occurs, the curvature of damage function does not appear in HJB
+   equations.
+
+2. Second we solve one post-tech-pre-damage and twenty
+   pre-tech-post-damage HJB conditional on post-tech-post-damage value
+   function.
+
+3. Finally, we solve pre-tech-pre-damage HJB given post-tech-pre-damage
+   and pre-tech-post-damage value functions.
 
 In
 `Postdamage.sh <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/Postdamage.py>`__,
@@ -261,8 +263,8 @@ Algorithm: Solving the HJB Equation via Policy Iteration
    \textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\ 
    &\text{Initialize } n = 0, V^n = V^0 \\
    \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
-   &\ \quad \text{Step 1: Solve for optimal actions } \Phi^{n+1} \text{ by maximization} \\
-   &\ \quad \quad \text{Cobweb algorithm \eqref{eq:cobweb}  is applied here:} \\
+   &\ \quad \text{Step 1: Solve for optimal actions} \Phi^{n+1} \text{ by maximization} \\
+   &\ \quad \quad \text{Cobweb algorithm   is applied here:} \\
    &\ \quad \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
    &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
    &\ \quad \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
@@ -273,35 +275,14 @@ Algorithm: Solving the HJB Equation via Policy Iteration
    \textbf{Return:} &\ V^* \\
    \end{align*}
 
-Below functions implement above algorithm in solving four HJB equations.
-
--  `hjb_post_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PostSolver_new.py#L150C5-L150C18>`__
-   function in two-capital-climate-change/python/src/PostSolver_new.py
-
--  `hjb_post_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PostSolver_new_rho1.py#L195C5-L195C18>`__
-   function in
-   two-capital-climate-change/python/src/PostSolver_new_rho1.py
-
--  `hjb_pre_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PreSolver_CRS2_new.py#L329>`__
-   function in
-   two-capital-climate-change/python/src/PreSolver_CRS2_new.py
-
--  `hjb_pre_tech <https://github.com/korito1416/two-capital-climate-change/blob/641046304faed6e6c5bace7bc0f9af45c8196fd9/python/src/PreSolver_CRS2_new_rho1.py#L325>`__
-   function in
-   two-capital-climate-change/python/src/PreSolver_CRS2_new_rho1.py
-
-‘’hjb_post_tech’’ function could solve post-tech-post-damage HJB and
-post-tech-pre-damage HJB because two equations have the same state
-variables and controls. Similarly, ‘’hjb_pre_tech’’ function could solve
-pre-tech-post-damage HJB and pre-tech-pre-damage HJB.
-
-### 1.2.2 Updating Rules
-:math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n} ,\Gamma^{n})`
+1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n},\Gamma^{n})`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In solving HJB equations, we often encounter complex, highly non-linear
 equations that do not admit analytical solutions. To address this
-challenge, iterative numerical methods like the **Cobweb algorithm** are
-employed to approximate the optimal control variables.
+challenge, iterative numerical methods like the
+`Cobweb <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L85>`__
+algorithm are employed to approximate the optimal control variables.
 
 The Cobweb algorithm works by:
 
@@ -317,18 +298,21 @@ HJB, using the first-order condition:
 .. math:: \delta \left( \frac{\alpha k - i_k - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} = \frac{\partial v}{\partial \log k} \left(1 - \kappa i_k\right)
 
 Since this equation is highly non-linear and does not admit an
-analytical solution, we use the Cobweb algorithm to iteratively update
-the actions. For each iteration :math:`n`, the update is:
+analytical solution, we use the
+`Cobweb <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L246>`__
+algorithm to iteratively update the actions. For each iteration
+:math:`n`, the update is:
 
-:raw-latex:`\begin{align} \label{eq:cobweb}
-\hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}`
+.. math::
 
-The updated action :math:`i_k^{n+1}` is computed using a relaxation
-parameter :math:`\zeta`:
+   \begin{align}  
+   \hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}
+
+The updated action
+`:math:`i_k^{n+1}` <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L250>`__
+is computed using a relaxation parameter :math:`\zeta`:
 
 .. math:: i_k^{n+1} = \zeta i_k^n + (1 - \zeta) \hat{i}_k^{n+1}
-
-
 
 1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^{n} )`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -339,25 +323,65 @@ first-order condition for :math:`h_k` is:
 
 .. math:: \frac{\partial v}{\partial \log k} \sigma_k = - \xi_k h_k
 
-Given the value function :math:`v^n`, we update the distortion
-:math:`h_k^{n+1}` as follows:
+Given the value function :math:`v^n`, we
+`update <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L282>`__
+the distortion :math:`h_k^{n+1}` as follows:
 
 .. math:: h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial v^n}{\partial \log k} \sigma_k
 
-1.2.4 False Transcient Method
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.4 Solve Linear PDE Equation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To mitigate the inherent instability of the non-linear HJB, we add a
-false transcient (time) dimension and solve it until convergence. And
-the new HJB equation is as
+Updating value functions, given the state variables and controls, is
+solving a linear PDE system. To mitigate the potential instability of
+the non-linear HJB, we add a false transcient (time) dimension and solve
+it until convergence. Here we use `Petsc <https://petsc.org/release/>`__
+to solve the PDE system, so we show how to rewrite the PDE and call
+Petsc package.
+
+For example, in pre-tech-pre-damage case with :math:`\rho\neq 1`, we can
+write the HJB into the form:
 
 .. math::
 
-   \begin{align*}  
-   0 \hspace{0.2cm} = \hspace{0.2cm} & \delta U(x) - \delta V(x,t) + 
-   \mu(x) \frac{\partial V}{\partial x} (x,t) \\
-   & + \frac{1}{2} \, \mathrm{trace}\left[\sigma(x)^\top \frac{\partial^2 V}{\partial x \partial x^\top}(x,t) \sigma(x) \right] \\
-   & + \sum_{\ell = 1}^L \mathcal{J}^\ell(x) \left[ V^\ell(x,t) - V(x,t) \right]
+    A \hat{V} 
+   +B_{\hat{k}}  \frac{\partial \hat{V}}{\partial \hat{k}}
+   +B_{y}\frac{\partial \hat{V}}{\partial y}
+   +B_{\hat{r}} \frac{\partial \hat{V}}{\partial \hat{r}} 
+   +C_{\hat{k}} \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}
+   +C_{y} \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}
+   +C_{\hat{r}} \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} 
+   +D =0
+
+First and Second order partial derivatives
+
+.. math:: \{\frac{\partial \hat{V}}{\partial \hat{k}},\frac{\partial \hat{V}}{\partial y}, \frac{\partial \hat{V}}{\partial \hat{r}}\}, \quad, \{ \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} \} 
+
+The coefficient before Value function:
+
+.. math:: A = - \mathcal{J}_g \cdot g-\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell 
+
+Coefficient of first order partial derivatives:
+
+.. math:: B_{\hat{k}} = -\mu_{k}+ \frac{i^{k}}{k}-\frac{\kappa}{2}\left(\frac{I^{k}}{k}\right)^{2}-\frac{|\sigma_{k}|^{2}}{2} + \sigma_k h^k 
+
+.. math:: B_{y} =e \left( \bar{\theta}+\varsigma h^y \right) 
+
+.. math:: B_{\hat{r}} = -\zeta + \psi_{0}(i^{r})^{\psi_{1}}\exp( -\psi_{1} \hat{r})-\frac{|\sigma_{r}|^{2}}{2}+\sigma_{r} h^r  
+
+Coefficient of second order partial derivatives:
+
+.. math:: C_{\hat{k}} =  \frac{|\sigma_{k}|^{2}}{2},\quad C_{y} = \frac{|\varsigma|^{2}}{2}e^{2},\quad C_{\hat{r}} = \frac{|\sigma_{r}|^{2}}{2}
+
+.. math::
+
+   \begin{align*}
+   D = &  \frac{\delta}{1-\rho} \left(\left(\frac{\alpha k-i^{k}-i^{r}-\alpha k \phi_0 \left(1-\frac{e}{\beta \alpha k}\right)^{\phi_1}}{\exp(\hat{V})} \right)^{1-\rho}-1 \right)  \\
+   &   - \left( (\lambda_{1}+\lambda_{2}y) e \left( \bar{\theta}+\varsigma h^y \right) +\lambda_{2}\frac{|\varsigma|^{2}}{2}e^{2} \right) \\
+   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  \cdot g  \cdot \hat{V}^L  \\
+   &+\xi^d \mathcal{J}_n  \sum_{\ell} \pi^\ell  (1-f^\ell +f^\ell  \log f^\ell ) \\
+   &+\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell \cdot \hat{V}^\ell \\
+   &+\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}
    \end{align*}
 
 1.2.5 Finite Difference Schemes
