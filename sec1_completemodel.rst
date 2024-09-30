@@ -1,4 +1,4 @@
-1 Complete Model and HJB
+1 Economic Model and HJB
 ========================
 
 **State**
@@ -81,6 +81,10 @@ equation
    & +\xi^k \frac{\left|{h^k}\right|^2}{2}
    \end{align*}
 
+If :math:`\rho =1`, the first term of the HJB becomes
+
+.. math:: \delta \log ( \alpha k  -i^k )  -   \delta \hat{V}^{\ell,L}
+
 1.1.2 Post Technology and Pre Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -151,6 +155,10 @@ common terms, we are left with the following simplified HJB to solve:
    &
    \end{align*}
 
+If :math:`\rho =1`, the first term of the HJB becomes
+
+.. math:: \delta \log ( \alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1} )  -   \delta \hat{V}^\ell
+
 1.1.4 Pre-tech-pre-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -190,9 +198,9 @@ To solve HJB equations, we first run below code in
 /master_zero_shock.sh <https://github.com/korito1416/two-capital-climate-change/blob/main/master/master_zero_shock.sh>`__.
 Make sure you give right command-line arguments.
 
-We solve four HJB equations sequentially. First, solve 20
+We solve four types of HJB equations sequentially. First, solve 20
 post-tech-post-damage HJB for each :math:`\gamma^3`. Then we solve one
-post-tech-pre-damage and 20 pre-tech-post-damage HJB conditional on
+post-tech-pre-damage and one pre-tech-post-damage HJB conditional on
 post-tech-post-damage Value function. Finally we solve
 pre-tech-pre-damage HJB given post-tech-pre-damage and
 pre-tech-post-damage value functions. Below bash code shows this logics.
@@ -313,7 +321,7 @@ analytical solution, we use the Cobweb algorithm to iteratively update
 the actions. For each iteration :math:`n`, the update is:
 
 :raw-latex:`\begin{align} \label{eq:cobweb}
-\hat{i}_k^{t+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^t - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}`
+\hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}`
 
 The updated action :math:`i_k^{n+1}` is computed using a relaxation
 parameter :math:`\zeta`:
