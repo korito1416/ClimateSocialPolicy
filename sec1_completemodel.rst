@@ -308,9 +308,10 @@ algorithm to iteratively update the actions. For each iteration
    \begin{align}  
    \hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}
 
-The updated action
-`:math:`i_k^{n+1}` <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L250>`__
-is computed using a relaxation parameter :math:`\zeta`:
+The updated
+`action <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L250>`__
+:math:`i_k^{n+1}` is computed using a relaxation parameter
+:math:`\zeta`:
 
 .. math:: i_k^{n+1} = \zeta i_k^n + (1 - \zeta) \hat{i}_k^{n+1}
 

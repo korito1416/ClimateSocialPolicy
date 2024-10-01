@@ -1,6 +1,29 @@
 4 Value Decomposition
 =====================
 
+Value decomposition is
+
+.. math::
+
+
+   \frac {\partial V}{\partial x}(X_0) \cdot M_0  =   {\mathbb E} \left[ \int_0^\infty  Dis_t \left(M_t \cdot Scf_t \right)  \mid X_0, M_0 \right]
+
+where
+
+.. math::
+
+
+   Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u)   \right]du \right)
+
+.. math::
+
+   \begin{align*}  
+   Scf_t  =  \delta U_x(X_t) 
+    & + \sum_{\ell=1}^{L} {\mathcal J}^{\ell}_x(X_t) g^{\ell*}(X_t)  \left[V^\ell(X_t)  - V(X_t)  \right]  \cr
+   & +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_t) g^{\ell*}(X_t)   V^\ell_x(X_t)  \cr & +  \xi \sum_{\ell = 1}^L 
+   {\mathcal J}^\ell_x(X_t)  \left[ 1 - g^{\ell*}(X_t)   + g^{\ell*}(X_t)  \log g^{\ell*} (X_t) \right].  
+   \end{align*}
+
 There are two steps to do value decomposition:
 
 1. `Simulate <https://github.com/korito1416/two-capital-climate-change/blob/main/python/FeymannKacs_simulate.py>`__
@@ -11,9 +34,17 @@ There are two steps to do value decomposition:
 4.1 Simulate First Variational Process and State Variables
 ----------------------------------------------------------
 
+FeymannKacs_prepare.sh and FeymannKacs_simulate.sh are two main bash
+files.
+
+`FeymannKacs_prepare.py <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_prepare.py>`__
+loads solutions from solved HJB equations, computes related variables in
+state space, calculate derivatives via finite difference and interpolate
+them.
+
 `FeymannKacs_simulate.py <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L193>`__
-simulates the first variational process and state variables of
-pre-tech-pre-damage case.
+simulates the first variational process, the distorted state variables
+and other terms needed in value decomposition.
 
 | The first variational process and distorted state variable process are
 | 
@@ -75,63 +106,29 @@ where :math:`\sigma_{\log \tilde{ {K}}_t} = \sigma_k` and
    \frac{\partial \sigma_{\log \tilde{ {K}}_t}}{\partial \tilde{x}} = 0
      
 
-Here we use `finite difference
-method <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L354>`__
-to calculate the derivatives with respect to state variables and the
-`interpolate <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L397>`__
-to get partial derivatives at every point.
+Line
+`303 <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_prepare.py#L303>`__
+shows how we calculate those derivatives by finite differnece.
 
-
-
-The derivative we need to calculate is
-
-.. math::  \frac{\partial \mu_i}{\partial x}(x) ,    \frac{\partial \sigma_i}{\partial x}(x) , \frac{\partial V}{\partial x}(x)  ,V^\ell_x(X_t) , U_x(X_t) , {\mathcal J}^{\ell}_x(X_t)  
-
-.. math::
-
-
-   Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u)   \right]du \right)
+Line
+`397 <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L397>`__
+interpolates the vectors from finite difference to get the functions.
 
 Then we start the for
 `loop <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L727>`__
 from time 0 to recursively get four discounted term.
 
-We primarily use above code to get the value decomposition results. In
-each iteraton step, we store calculate every term used in value
-decomposition. Alternative way is to get the entire simulated state
-variable and first variational path and then calculate remaining terms.
-We can use our generalized code for state varibable and impulse response
-simulation.
+4.2 Calculate four value decomposition terms
+--------------------------------------------
 
-**The output variables are** In each simulated path, we can get state
-variabls and controls with first variational process
+Besides above variables, the derivatives we need in value decomposition
+are
 
-.. math::
+.. math:: \frac{\partial U}{\partial x} ,  \frac{\partial {\mathcal J}^{\ell}}{\partial x}   ,  \frac{\partial {  V^\ell} }{\partial x}
 
-   \begin{align*}
-      \{ \hat{k}_t, y_t, \hat{r}_t , \hat{n}_t\},  \{i^k,i^r,\mathcal{E}_t\},\{M_t\},
-   \end{align*}
-
-and other variables that we use to do value decomposition.
-
-.. math::
-
-   \begin{align*}
-     \{g^{\ell } ,f^{L } \},\{    \mathcal{J}^{\ell}  ,\mathcal{J}^{L}  ,
-       {\mathcal J}^{L}_{\hat{r} }\}
-   \end{align*}
-
-4.2 Value Decomposition
------------------------
-
-We interpret the partial derivative of the value function with respect
-to the R&D knowledge state as an asset price. As such, it has four
-payoff contributions as we have derived previously:
-
-1. :math:`\delta m \cdot \frac{\partial U}{\partial x}`;
-2. :math:`m \cdot \sum_{\ell=1}^L \frac{\partial {\mathcal J}^\ell}{\partial x} g^{\ell*} (V^\ell - V)`;
-3. :math:`m \cdot \sum_{\ell=1}^L {\mathcal J}^\ell g^{\ell*} \frac{\partial V^\ell}{\partial x}`;
-4. :math:`\xi m \cdot \sum_{\ell=1}^L \frac{\partial {\mathcal J}^\ell}{\partial x} (1 - g^{\ell*} + g^{\ell*} \log g^{\ell*})`.
+We use finite difference and interpolation same as above. Line
+`313 <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L313>`__
+shows how we code it. Now we have every element in value decomposition.
 
 We also consider four different configurations of uncertainty aversion
 as a way to assess the different economic forces in play:
@@ -152,46 +149,11 @@ as a way to assess the different economic forces in play:
 
    d. pre-jump aversion - post-jump aversion.
 
-We include cases b) and c) because they provide revealing intermediate
-cases that help understand the overall uncertainty implications. For
-instance, there are two forces in play. First, uncertainty about when
-the new technology will be realized would seem to make investment in R&D
-less attractive. Second, the positive implications for a technological
-success can be stronger when there is more aversion to this uncertainty.
-Intermediate case c) allows us to feature more the first force, while
-intermediate case b) shifts attention to the second force. With these
-intermediate cases, we can better assess the quantitative magnitude of
-these offsetting forces.
+`FeymannKacs_simulate_NewPlug.sh <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/conduction/FeymannKacs_simulate_NewPlug.sh#L23>`__
+controls different :math:`\xi` for different channels.
 
 4.3 Expected Marginal Social Payoffs for Alternative Horizons
 -------------------------------------------------------------
-
-As we demonstrated, the derivative of the value function has the
-interpretation as a stochastically discounted social cash flow, with the
-four contributions given at the outset of Section 3.3. The “stochastic
-discount factor” includes the vector of stochastic impulse responses,
-the process :math:`M`, along with the subjective rate of discount,
-:math:`\delta`. The following figure shows the period-by-period
-contribution for each of the four components.
-
-Horizon decomposition of social cash flow contributions to the R&D stock
-valuation. The four panels correspond to different uncertainty aversion
-configurations: Panel A is the pre neutrality-post aversion
-configuration; Panel B is the pre aversion-post neutrality
-configuration; Panel C is the pre aversion-post aversion configuration;
-and Panel D is the pre neutrality-post neutrality configuration. The
-blue lines correspond to the payoff contribution
-
-i)   :math:`\delta m \cdot \frac{\partial U}{\partial r}`. The green
-     lines correspond to the payoff contribution
-
-ii)  :math:`m \cdot \sum_\ell g^{\ell*}\frac{\partial {\mathcal J}^\ell}{\partial r} (V^\ell - V)`.
-     The red lines correspond to the payoff contribution
-
-iii) :math:`m\cdot \sum_\ell g^{\ell*}\mathcal J^\ell \frac{\partial V^\ell}{\partial r}`
-     . The light blue lines correspond to the payoff contribution
-
-iv)  :math:`\xi m \cdot \sum_\ell \frac{\partial {\mathcal J}^\ell }{\partial r} (1-g^{\ell*} + g^{\ell*} \log g^{\ell*} )`.
 
 .. code:: ipython3
 
