@@ -1,25 +1,96 @@
 4 Value Decomposition
----------------------
+=====================
 
-4.1 Numerical Method Demonstration
-----------------------------------
-
-As we discussed in section 3, there are two steps to do value
-decomposition:
+There are two steps to do value decomposition:
 
 1. `Simulate <https://github.com/korito1416/two-capital-climate-change/blob/main/python/FeymannKacs_simulate.py>`__
    state variable processes and first variation processes.
 
 2. Calculated four terms of discounted social cash flow.
 
+4.1 Simulate First Variational Process and State Variables
+----------------------------------------------------------
+
+`FeymannKacs_simulate.py <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L193>`__
+simulates the first variational process and state variables of
+pre-tech-pre-damage case.
+
+| The first variational process and distorted state variable process are
+| 
+
+  .. math::
+
+      
+     M_t=
+      \begin{bmatrix} 
+      M_t^{ \log \tilde{ {K}}} \cr  
+      M_t^{\tilde{Y}} \cr  
+      M_t^{\log\tilde{{R}}} \cr  
+      M_t^{\log\tilde{{N}}}  
+     \end{bmatrix},\quad
+     \tilde{X}_t=
+      \begin{bmatrix} 
+      \log \tilde{ {K}}_t \cr  
+      \tilde{Y}_t \cr  
+      \log\tilde{{R}}_t \cr  
+      \log\tilde{{N}}_t  
+     \end{bmatrix}
+
+  For notation clarification, we using $:raw-latex:`\log{K}` $ instead
+  of $:raw-latex:`\hat{K}` $ in this section.
+
+To simulate the first variational process with respect to technology, we
+set the initial value of :math:`M_t` to be :math:`[0,0,1,0]'`, and
+:math:`\tilde{X}_t` to be
+:math:`[log(\frac{85}{0.115}), 1.1, log(11.2),1.1 \gamma_1  + 0.5\times 1.1^2\gamma_2 ]'`.
+Initial values are set in code line
+`905 <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L905>`__.
+
+We use :math:`M^{\log \tilde{ {K}}_t}` as an example and others are the
+same. The implied evolution of the process
+:math:`M^{\log \tilde{ {K}}_t}` is given by
+
+.. math:: dM_{t}^{\log \tilde{ {K}}_t} = \left(M_t\right)'\frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \tilde{x}}(\tilde{X}_t) dt + \left({M_t}\right)'\frac{\partial \sigma_{\log \tilde{ {K}}_t}}{\partial \tilde{x}}(\tilde{X}_t) dW_t
+
+, where :math:`\tilde{X}_t` are distorted state variables.
+
+Recall that the distorted Capital evoluation is
+
+.. math:: d \log \tilde{ K}_t =   \left( - \mu_k    + \frac {I_{t}^k}{\tilde{K}_t}  -{\frac { \kappa} 2} \left( {\frac {I_{t} ^k} {\tilde{K}_t}} \right)^2  + h_{\tilde{K}} + \frac{\sigma_k^2}{2} \right) dt +  \sigma_k  dW_t
+
+where :math:`\sigma_{\log \tilde{ {K}}_t} = \sigma_k` and
+:math:`\mu_{\log \tilde{ {K}}_t}`
+
+.. math:: \mu_{\log \tilde{ {K}}_t} = - \mu_k    + \frac {I_{t}^k}{\tilde{K}_t}  -{\frac { \kappa} 2} \left( {\frac {I_{t} ^k} {\tilde{K}_t}} \right)^2  + h_{\tilde{K}} + \frac{\sigma_k^2}{2}
+
+.. math::
+
+    \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \tilde{x}} =
+    \begin{bmatrix} 
+    \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \log \tilde{ {K}}_t}\cr  
+    \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \tilde{Y}_t } \cr  
+   \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \log\tilde{{R}}_t} \cr  
+   \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \log\tilde{{N}}_t} 
+   \end{bmatrix}, \quad
+   \frac{\partial \sigma_{\log \tilde{ {K}}_t}}{\partial \tilde{x}} = 0
+     
+
 Here we use `finite difference
 method <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L354>`__
 to calculate the derivatives with respect to state variables and the
 `interpolate <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L397>`__
-to get partial derivatives at every point. The derivative we need to
-calculate is
+to get partial derivatives at every point.
+
+
+
+The derivative we need to calculate is
 
 .. math::  \frac{\partial \mu_i}{\partial x}(x) ,    \frac{\partial \sigma_i}{\partial x}(x) , \frac{\partial V}{\partial x}(x)  ,V^\ell_x(X_t) , U_x(X_t) , {\mathcal J}^{\ell}_x(X_t)  
+
+.. math::
+
+
+   Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u)   \right]du \right)
 
 Then we start the for
 `loop <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_simulate.py#L727>`__
@@ -65,10 +136,21 @@ payoff contributions as we have derived previously:
 We also consider four different configurations of uncertainty aversion
 as a way to assess the different economic forces in play:
 
-1. pre-jump neutrality - post-jump neutrality;
-2. pre-jump neutrality - post-jump aversion;
-3. pre-jump aversion - post-jump neutrality;
-4. pre-jump aversion - post-jump aversion.
+-  
+
+   a. pre-jump neutrality - post-jump neutrality;
+
+-  
+
+   b. pre-jump neutrality - post-jump aversion;
+
+-  
+
+   c. pre-jump aversion - post-jump neutrality;
+
+-  
+
+   d. pre-jump aversion - post-jump aversion.
 
 We include cases b) and c) because they provide revealing intermediate
 cases that help understand the overall uncertainty implications. For
@@ -80,127 +162,6 @@ Intermediate case c) allows us to feature more the first force, while
 intermediate case b) shifts attention to the second force. With these
 intermediate cases, we can better assess the quantitative magnitude of
 these offsetting forces.
-
-R&D technology discovery channel with :math:`\xi = 0.15`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+-------------------------+----+----+-------+-------+-----+-------+
-| Case                    | i  | ii | ii    | ii    | iv  | sum   |
-|                         |    |    | i(dc) | i(td) |     |       |
-+=========================+====+====+=======+=======+=====+=======+
-| pre neutrality          |    |    |       |       |     |       |
-+-------------------------+----+----+-------+-------+-----+-------+
-| a) post neutrality      | 0  | 0  | 0.    | 0.    | 0   | 0.    |
-|                         | .0 | .0 | 01356 | 00173 | .00 | 03003 |
-|                         | 01 | 12 |       |       | 000 |       |
-|                         | 86 | 87 |       |       |     |       |
-+-------------------------+----+----+-------+-------+-----+-------+
-| b) post aversion        | 0  | 0  | 0.    | 0.    | 0   | 0.    |
-|                         | .0 | .0 | 01570 | 00264 | .00 | 03705 |
-|                         | 02 | 16 |       |       | 000 |       |
-|                         | 61 | 10 |       |       |     |       |
-+-------------------------+----+----+-------+-------+-----+-------+
-| pre aversion            |    |    |       |       |     |       |
-+-------------------------+----+----+-------+-------+-----+-------+
-| c) post neutrality      | 0  | 0  | 0.    | 0.    | 0   | 0.    |
-|                         | .0 | .0 | 01598 | 00124 | .00 | 03113 |
-|                         | 01 | 09 |       |       | 241 |       |
-|                         | 90 | 60 |       |       |     |       |
-+-------------------------+----+----+-------+-------+-----+-------+
-| d) post aversion        | 0  | 0  | 0.    | 0.    | 0   | 0.    |
-|                         | .0 | .0 | 01999 | 00177 | .00 | 03962 |
-|                         | 02 | 11 |       |       | 387 |       |
-|                         | 72 | 04 |       |       |     |       |
-+-------------------------+----+----+-------+-------+-----+-------+
-
-R&D technology discovery channel with :math:`\xi = 0.075`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+---------------+-------+--------+--------+--------+--------+--------+
-|               | i     | ii     | i      | i      | iv     | sum    |
-|               |       |        | ii(dc) | ii(td) |        |        |
-+===============+=======+========+========+========+========+========+
-| **pre         |       |        |        |        |        |        |
-| neutrality**  |       |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| a) post       | 0     | 0.012  | 0.013  | 0.001  | 0.000  | 0.     |
-| neutrality    | .0018 | 873257 | 560828 | 734671 | 000004 | 030026 |
-|               | 57218 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| b) post       | 0     | 0.020  | 0.017  | 0.003  | 0.000  | 0.     |
-| aversion      | .0035 | 756782 | 129194 | 902445 | 000012 | 045307 |
-|               | 18361 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| **pre         |       |        |        |        |        |        |
-| aversion**    |       |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| c) post       | 0     | 0.006  | 0.018  | 0.000  | 0.004  | 0.     |
-| neutrality    | .0019 | 724568 | 433624 | 809961 | 229411 | 032099 |
-|               | 01772 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| d) post       | 0     | 0.006  | 0.029  | 0.001  | 0.010  | 0.     |
-| aversion      | .0033 | 335223 | 402412 | 150690 | 221146 | 050493 |
-|               | 83954 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-
-### R&D technology discovery channel with :math:`\xi = 0.005`
-
-+---------------+-------+--------+--------+--------+--------+--------+
-|               | i     | ii     | i      | i      | iv     | sum    |
-|               |       |        | ii(dc) | ii(td) |        |        |
-+===============+=======+========+========+========+========+========+
-| **pre         |       |        |        |        |        |        |
-| neutrality**  |       |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| post          | 0     | 0.012  | 0.013  | 0.001  | 0.000  | 0.     |
-| neutrality    | .0018 | 873257 | 560828 | 734671 | 000004 | 030026 |
-|               | 57218 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| post aversion | 0     | 0.071  | 0.001  | 0.022  | 0.000  | 0.     |
-|               | .0096 | 895016 | 216563 | 364848 | 000171 | 105103 |
-|               | 26521 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| **pre         |       |        |        |        |        |        |
-| aversion**    |       |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| post          | 0     | -0.000 | 0.023  | 0.000  | 0.001  | 0.     |
-| neutrality    | .0013 | 342846 | 794618 | 000000 | 459983 | 026249 |
-|               | 38064 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| post aversion | -0    | -0.000 | 0.010  | 0.000  | 0.002  | 0.     |
-|               | .0012 | 179618 | 892420 | 000000 | 009618 | 011436 |
-|               | 85934 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-
-All four channels are activated with :math:`\xi = 0.15`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+---------------+-------+--------+--------+--------+--------+--------+
-|               | i     | ii     | i      | i      | iv     | sum    |
-|               |       |        | ii(dc) | ii(td) |        |        |
-+===============+=======+========+========+========+========+========+
-| **pre         |       |        |        |        |        |        |
-| neutrality**  |       |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| a) post       | 0     | 0.012  | 0.013  | 0.001  | 0.000  | 0.     |
-| neutrality    | .0018 | 873257 | 560828 | 734671 | 000004 | 030026 |
-|               | 57218 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| b) post       | 0     | 0.015  | 0.015  | 0.002  | 0.000  | 0.     |
-| aversion      | .0025 | 145588 | 750393 | 774305 | 000007 | 036260 |
-|               | 89657 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| **pre         |       |        |        |        |        |        |
-| aversion**    |       |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| c) post       | 0     | 0.009  | 0.016  | 0.001  | 0.002  | 0.     |
-| neutrality    | .0020 | 885185 | 963779 | 264800 | 905626 | 033076 |
-|               | 56726 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
-| d) post       | 0     | 0.010  | 0.021  | 0.002  | 0.004  | 0.     |
-| aversion      | .0030 | 126330 | 902142 | 065545 | 583659 | 041731 |
-|               | 53070 |        |        |        |        |        |
-+---------------+-------+--------+--------+--------+--------+--------+
 
 4.3 Expected Marginal Social Payoffs for Alternative Horizons
 -------------------------------------------------------------
@@ -271,5 +232,5 @@ iv)  :math:`\xi m \cdot \sum_\ell \frac{\partial {\mathcal J}^\ell }{\partial r}
 
 
 
-.. image:: sec4_value_decomposition_files/sec4_value_decomposition_13_0.png
+.. image:: sec4_value_decomposition_files/sec4_value_decomposition_20_0.png
 
