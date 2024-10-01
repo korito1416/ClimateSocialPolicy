@@ -45,7 +45,6 @@ and other terms needed in value decomposition.
 
   .. math::
 
-      
      M_t=
       \begin{bmatrix} 
       M_t^{ \log \tilde{ {K}}} \cr  
@@ -61,8 +60,8 @@ and other terms needed in value decomposition.
       \log\tilde{{N}}_t  
      \end{bmatrix}
 
-  For notation clarification, we using $:raw-latex:`\log{K}` $ instead
-  of $:raw-latex:`\hat{K}` $ in this section.
+  For notation clarification, we using :math:`\log{K}` instead of
+  :math:`\hat{K}` in this section.
 
 To simulate the first variational process with respect to technology, we
 set the initial value of :math:`M_t` to be :math:`[0,0,1,0]'`, and
