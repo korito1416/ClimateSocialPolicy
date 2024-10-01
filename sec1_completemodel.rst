@@ -345,7 +345,7 @@ write the HJB into the form:
 
 .. math::
 
-    A \hat{V} 
+   A \hat{V} 
    +B_{\hat{k}}  \frac{\partial \hat{V}}{\partial \hat{k}}
    +B_{y}\frac{\partial \hat{V}}{\partial y}
    +B_{\hat{r}} \frac{\partial \hat{V}}{\partial \hat{r}} 
@@ -356,7 +356,7 @@ write the HJB into the form:
 
 First and Second order partial derivatives
 
-.. math:: \{\frac{\partial \hat{V}}{\partial \hat{k}},\frac{\partial \hat{V}}{\partial y}, \frac{\partial \hat{V}}{\partial \hat{r}}\}, \quad, \{ \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} \} 
+.. math:: \{\frac{\partial \hat{V}}{\partial \hat{k}},\frac{\partial \hat{V}}{\partial y}, \frac{\partial \hat{V}}{\partial \hat{r}}\}, \quad, \{ \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} \}
 
 The coefficient before Value function:
 
@@ -395,7 +395,7 @@ Coefficient of second order partial derivatives:
    \begin{align*}
            (\frac{\partial f}{\partial x})_i    = \frac{f_{i+1} - f_{i-1}}{2 \Delta x} \\
            (\frac{\partial^2 f}{\partial x^2})_i =\frac{f_{i+1} + f_{i-1} - 2f_i}{\Delta x^2}
-       \end{align*} 
+       \end{align*}
 
 -  Forward Difference (First Boundary Point):
 

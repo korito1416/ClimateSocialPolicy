@@ -3,17 +3,11 @@
 
 Value decomposition is
 
-.. math::
-
-
-   \frac {\partial V}{\partial x}(X_0) \cdot M_0  =   {\mathbb E} \left[ \int_0^\infty  Dis_t \left(M_t \cdot Scf_t \right)  \mid X_0, M_0 \right]
+.. math:: \frac {\partial V}{\partial x}(X_0) \cdot M_0  =   {\mathbb E} \left[ \int_0^\infty  Dis_t \left(M_t \cdot Scf_t \right)  \mid X_0, M_0 \right]
 
 where
 
-.. math::
-
-
-   Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u)   \right]du \right)
+.. math:: Dis_t = \exp\left( - \int_0^t \left[\delta +  \sum_{\ell=1}^{L}  {\mathcal J}^{\ell}(X_u)   \right]du \right)
 
 .. math::
 
@@ -96,7 +90,7 @@ where :math:`\sigma_{\log \tilde{ {K}}_t} = \sigma_k` and
 
 .. math::
 
-    \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \tilde{x}} =
+   \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \tilde{x}} =
     \begin{bmatrix} 
     \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \log \tilde{ {K}}_t}\cr  
     \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \tilde{Y}_t } \cr  
@@ -104,7 +98,6 @@ where :math:`\sigma_{\log \tilde{ {K}}_t} = \sigma_k` and
    \frac{\partial \mu_{\log \tilde{ {K}}_t}}{\partial \log\tilde{{N}}_t} 
    \end{bmatrix}, \quad
    \frac{\partial \sigma_{\log \tilde{ {K}}_t}}{\partial \tilde{x}} = 0
-     
 
 Line
 `303 <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/FeymannKacs_prepare.py#L303>`__
