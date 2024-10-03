@@ -53,6 +53,14 @@ channel so that we can carry out our uncertainty decomposition.
 1.1 HJB equations
 -----------------
 
+The value function can be written as
+
+.. math:: {V}(X_t) = {\widehat V}(X_t^1)  - {\widehat N}_t
+
+where it is straightforward to verify the additive separability in the
+logarithm of damages. This separability simplifies our numerical
+solutions.
+
 1.1.1 Post-tech-post-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -68,9 +76,9 @@ control space and distortion space become
        \Gamma &= \{h^k\}
    \end{align*}
 
-Compute :math:`V^{\ell,L}(x)` for :math:`\ell = 1, ..., L-1` conditioned
-on both a technology jump and a damage jump occurring,by solving HJB
-equation
+Compute $V^{:raw-latex:`\ell`,L} $ for :math:`\ell = 1, ..., L-1`
+conditioned on both a technology jump and a damage jump occurring,by
+solving HJB equation
 
 .. math::
 
@@ -260,23 +268,23 @@ Algorithm: Solving the HJB Equation via Policy Iteration
 
 
    \begin{align*}
-   \textbf{Input:} &\ \text{Initial guess for value function } V^0, \epsilon = 10^{-7} \\ 
-   &\text{Initialize } n = 0, V^n = V^0 \\
-   \textbf{while} &\ |V^{n+1} - V^n| \geq \epsilon \text{ do:} \\
+   \textbf{Input:} &\ \text{Initial guess for value function } \hat{v}^0, \epsilon = 10^{-7} \\ 
+   &\text{Initialize } n = 0, \hat{v}^n = \hat{v}^0 \\
+   \textbf{while} &\ |\hat{v}^{n+1} - \hat{v}^n| \geq \epsilon \text{ do:} \\
    &\ \quad \text{Step 1: Solve for optimal actions} \Phi^{n+1} \text{ by maximization} \\
    &\ \quad \quad \text{Cobweb algorithm   is applied here:} \\
-   &\ \quad \quad \Phi^{n+1} = \Phi(V^n, \Phi^{n}, \Gamma^{n}) \\
+   &\ \quad \quad \Phi^{n+1} = \Phi(\hat{v}^n, \Phi^{n}, \Gamma^{n}) \\
    &\ \quad \text{Step 2: Solve for optimal probability distortions } \Gamma^{n+1} \text{ by minization}\\
-   &\ \quad \quad \Gamma^{n+1} = \Gamma(V^n, \Phi^{n+1}, \Gamma^{n}) \\
-   &\ \quad \text{Step 3: Update value function } V^{n+1} \text{ by minimization}\\
-   &\ \quad \quad V^{n+1} = V(V^n, \Phi^{n+1}, \Gamma^{n+1}) \\
+   &\ \quad \quad \Gamma^{n+1} = \Gamma(\hat{v}^n, \Phi^{n+1}, \Gamma^{n}) \\
+   &\ \quad \text{Step 3: Update value function } \hat{v}^{n+1} \text{ by minimization}\\
+   &\ \quad \quad \hat{v}^{n+1} = V(\hat{v}^n, \Phi^{n+1}, \Gamma^{n+1}) \\
    &\ \quad \text{Step 4: Check for convergence} \\
-   &\ \quad \quad\text{If } |V^{n+1} - V^n| < \epsilon \text{ then stop, otherwise continue.} \\
-   \textbf{Return:} &\ V^* \\
+   &\ \quad \quad\text{If } |\hat{v}^{n+1} - \hat{v}^n| < \epsilon \text{ then stop, otherwise continue.} \\
+   \textbf{Return:} &\ \hat{v}^* \\
    \end{align*}
 
-1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(V^n,\Phi^{n},\Gamma^{n})`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.2 Updating Rules :math:`\Phi^{n+1} = \Phi(\hat{v}^n,\Phi^{n},\Gamma^{n})`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In solving HJB equations, we often encounter complex, highly non-linear
 equations that do not admit analytical solutions. To address this
@@ -295,7 +303,7 @@ The Cobweb algorithm works by:
 For example, we update for :math:`i_k` for pre damage pre technology
 HJB, using the first-order condition:
 
-.. math:: \delta \left( \frac{\alpha k - i_k - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} = \frac{\partial v}{\partial \log k} \left(1 - \kappa i_k\right)
+.. math:: \delta \left( \frac{\alpha k - i_k - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(\hat{v})} \right)^{-\rho} \frac{1}{\exp(\hat{v})} = \frac{\partial v}{\partial \log k} \left(1 - \kappa i_k\right)
 
 Since this equation is highly non-linear and does not admit an
 analytical solution, we use the
@@ -306,7 +314,7 @@ algorithm to iteratively update the actions. For each iteration
 .. math::
 
    \begin{align}  
-   \hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(v)} \right)^{-\rho} \frac{1}{\exp(v)} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}
+   \hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(\hat{v})} \right)^{-\rho} \frac{1}{\exp(\hat{v})} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}
 
 The updated
 `action <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L250>`__
@@ -356,7 +364,7 @@ write the HJB into the form:
 
 First and Second order partial derivatives
 
-.. math:: \{\frac{\partial \hat{V}}{\partial \hat{k}},\frac{\partial \hat{V}}{\partial y}, \frac{\partial \hat{V}}{\partial \hat{r}}\}, \quad, \{ \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} \}
+.. math:: \left\{\frac{\partial \hat{V}}{\partial \hat{k}},\frac{\partial \hat{V}}{\partial y}, \frac{\partial \hat{V}}{\partial \hat{r}}\right\}, \quad, \left\{ \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} \right\}
 
 The coefficient before Value function:
 
@@ -364,7 +372,7 @@ The coefficient before Value function:
 
 Coefficient of first order partial derivatives:
 
-.. math:: B_{\hat{k}} = -\mu_{k}+ \frac{i^{k}}{k}-\frac{\kappa}{2}\left(\frac{I^{k}}{k}\right)^{2}-\frac{|\sigma_{k}|^{2}}{2} + \sigma_k h^k 
+.. math:: B_{\hat{k}} = -\mu_{k}+ \frac{i^{k}}{k}-\frac{\kappa}{2}\left( i^{k} \right)^{2}-\frac{|\sigma_{k}|^{2}}{2} + \sigma_k h^k 
 
 .. math:: B_{y} =e \left( \bar{\theta}+\varsigma h^y \right) 
 
@@ -393,8 +401,8 @@ Coefficient of second order partial derivatives:
 .. math::
 
    \begin{align*}
-           (\frac{\partial f}{\partial x})_i    = \frac{f_{i+1} - f_{i-1}}{2 \Delta x} \\
-           (\frac{\partial^2 f}{\partial x^2})_i =\frac{f_{i+1} + f_{i-1} - 2f_i}{\Delta x^2}
+           \left(\frac{\partial f}{\partial x}\right)_i    = \frac{f_{i+1} - f_{i-1}}{2 \Delta x} \\
+           \left(\frac{\partial^2 f}{\partial x^2}\right)_i =\frac{f_{i+1} + f_{i-1} - 2f_i}{\Delta x^2}
        \end{align*}
 
 -  Forward Difference (First Boundary Point):
@@ -402,8 +410,8 @@ Coefficient of second order partial derivatives:
 .. math::
 
    \begin{align*}
-           (\frac{\partial f}{\partial x})_0 =\frac{f_{1} - f_{0}}{\Delta x} \\
-           (\frac{\partial^2 f}{\partial x^2})_0 =\frac{f_{2} + f_{0} - 2f_{1}}{\Delta x^2}
+           \left(\frac{\partial f}{\partial x}\right)_0 =\frac{f_{1} - f_{0}}{\Delta x} \\
+           \left(\frac{\partial^2 f}{\partial x^2}\right)_0 =\frac{f_{2} + f_{0} - 2f_{1}}{\Delta x^2}
        \end{align*}
 
 -  Backward Difference (Last Boundary Point):
@@ -411,8 +419,8 @@ Coefficient of second order partial derivatives:
 .. math::
 
    \begin{align*}
-      (\frac{\partial f}{\partial x})_{N-1}  =\frac{f_{N-1} - f_{N-2}}{\Delta x} \\
-      (\frac{\partial^2 f}{\partial x^2})_{N-1}=\frac{f_{N-1} + f_{N-3} - 2f_{N-2}}{\Delta x^2}
+      \left(\frac{\partial f}{\partial x}\right)_{N-1}  =\frac{f_{N-1} - f_{N-2}}{\Delta x} \\
+      \left(\frac{\partial^2 f}{\partial x^2}\right)_{N-1}=\frac{f_{N-1} + f_{N-3} - 2f_{N-2}}{\Delta x^2}
    \end{align*}
 
 Below two functions are two finite difference functions we used in
