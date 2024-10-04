@@ -26,10 +26,9 @@ Check out our related work:
    :caption: Contents:
  
    sec1_completemodel.rst
-   sec2_uncertinaty_adjust_prob.rst
+   sec2_distorted_probability.rst
    sec3_stochastic_simulation.rst
    sec4_value_decomposition.rst
-   sec5_notechnology.rst 
    Module.rst
 
 
