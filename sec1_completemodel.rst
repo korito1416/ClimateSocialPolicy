@@ -55,7 +55,7 @@ channel so that we can carry out our uncertainty decomposition.
 
 The value function can be written as
 
-.. math:: {V}(X_t) = {\widehat V}(X_t^1)  - {\widehat N}_t
+.. math:: {V}(X_t) = {\hat V}(X_t^1)  - {\hat N}_t
 
 where it is straightforward to verify the additive separability in the
 logarithm of damages. This separability simplifies our numerical
@@ -64,41 +64,47 @@ solutions.
 1.1.1 Post-tech-post-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After technology jump occurs, temperature and damage remains constant.
-Then the optimal choice of emission is 0. In this case, the state space,
-control space and distortion space become
+The optimal choice of emission is greater than :math:`\beta \alpha K_t`,
+after technology jump occurs. As temperature and damage remains
+constant, emission only affect the production function. The optimal
+production function is:
+
+.. math:: \max_{{\mathcal E}_t} \alpha K_t  \left (1 - \phi_0\left(   \left(1 - \frac {{\mathcal E}_t}{\beta \alpha K_t}  \right){\mathbf 1}_{\{{\mathcal E}_t  < \beta \alpha K_t\} }    \right)^{\phi_1} \right) = \alpha K_t
+
+In this case, the only state variable, control space and distortion
+space become
 
 .. math::
 
    \begin{align*}
-       X &= \{ \hat{k} \}\\
+       x &= \{ \hat{k} \}\\
        \Phi &= \{  i^k \}\\
        \Gamma &= \{h^k\}
    \end{align*}
 
-Compute $V^{:raw-latex:`\ell`,L} $ for :math:`\ell = 1, ..., L-1`
-conditioned on both a technology jump and a damage jump occurring,by
-solving HJB equation
+Compute $:raw-latex:`\hat{v}`^{:raw-latex:`\ell`,L} $ for
+:math:`\ell = 1, ..., L-1` conditioned on both a technology jump and a
+damage jump occurring,by solving HJB equation
 
 .. math::
 
 
    \begin{align*}
-   0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{V}^{\ell,L})} \right)^{1-\rho}-1\right] \\
-   & +\frac{\partial \hat{V}^{\ell,L}}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{V}^{\ell,L}}{\partial \hat{k} \, \partial \hat{k}'}\frac{\left|\sigma_k\right|^2}{2} \\
+   0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{v}^{\ell,L})} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial \hat{v}^{\ell,L}}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{v}^{\ell,L}}{\partial \hat{k} \, \partial \hat{k}'}\frac{\left|\sigma_k\right|^2}{2} \\
    & +\xi^k \frac{\left|{h^k}\right|^2}{2}
    \end{align*}
 
 If :math:`\rho =1`, the first term of the HJB becomes
 
-.. math:: \delta \log ( \alpha k  -i^k )  -   \delta \hat{V}^{\ell,L}
+.. math:: \delta \log ( \alpha k  -i^k )  -   \delta \hat{v}^{\ell,L}
 
 1.1.2 Post Technology and Pre Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the value function :math:`V^L(x)` assuming that only a
-technology jump has been realized. This value function incorporates the
-possibility of jumping to one of :math:`L-1` possible damage states,
+Compute the value function $:raw-latex:`\hat{v}`^L $ assuming that only
+a technology jump has been realized. This value function incorporates
+the possibility of jumping to one of :math:`L-1` possible damage states,
 however, because the temperature anomaly remains constant at the point
 where any incremental curvature has no impact on the damages this damage
 curve realization is inconsequential. Therefore, we can ignore the
@@ -110,7 +116,7 @@ In this case, the state space, control space and distortion space become
 .. math::
 
    \begin{align*}
-       X &= \{ \hat{k} \}\\
+       x &= \{ \hat{k} \}\\
        \Phi &= \{  i^k \}\\
        \Gamma &= \{h^k\}
    \end{align*}
@@ -121,27 +127,28 @@ We have HJB for post technology and post damage jump as follows
 
 
    \begin{align*}
-   0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{V}^L)} \right)^{1-\rho}-1\right] \\
-   & +\frac{\partial \hat{V}^{L}}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{V}^{ L}}{\partial \hat{k} \, \partial \hat{k}'} \frac{\left|\sigma_k\right|^2}{2} \\
+   0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{v}^L)} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial \hat{v}^{L}}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{v}^{ L}}{\partial \hat{k} \, \partial \hat{k}'} \frac{\left|\sigma_k\right|^2}{2} \\
    & +\xi^k \frac{\left|{h^k}\right|^2}{2}
    \end{align*}
 
 1.1.3 Pre Technology and Post Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the values functions :math:`V^{\ell}(x)` assuming that only a
-damage jump has been realized for :math:`\ell = 1,..., L-1.` These
-values functions depend on the entire state vector :math:`X` and have
-one possible jump state which is the technology discovery with intensity
-:math:`{\mathcal J}^L.` The continuation value for the jump is
-:math:`V^{\ell,L}(x)` viewed as a function of :math:`x` for
-:math:`\ell=1,...,L-1.`
+Compute the values functions $:raw-latex:`\hat{v}`^{:raw-latex:`\ell`} $
+assuming that only a damage jump has been realized for
+:math:`\ell = 1,..., L-1.` These values functions depend on the entire
+state vector :math:`X` and have one possible jump state which is the
+technology discovery with intensity :math:`{\mathcal J}^L.` The
+continuation value for the jump is
+$:raw-latex:`\hat{v}`^{:raw-latex:`\ell`,L} $ viewed as a function of
+:math:`x` for :math:`\ell=1,...,L-1.`
 
 .. math::
 
 
    \begin{align*}
-       X &= \{ \hat{k}, y, \hat{r}, \hat{n} \}\\
+       x &= \{ \hat{k}, y, \hat{r}, \hat{n} \}\\
        \Phi &= \{  i^k, i^r, e \}\\
        \Gamma &= \{{h^k}, {h^y}, {h^r}, g\}
    \end{align*}
@@ -153,34 +160,35 @@ common terms, we are left with the following simplified HJB to solve:
 
 
    \begin{align*}
-   & 0=\max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1}}{\exp (\hat{V}^\ell)} \right)^{1-\rho}-1\right] \\
-   & +\frac{\partial \hat{V}^\ell}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{V}^\ell }{\partial  \hat{k} \partial  \hat{k}'} \frac{\left|\sigma_k\right|^2}{2} \\
-   & +\frac{\partial \hat{V}^\ell}{\partial \hat{y}}\left(  \bar{\theta}+\varsigma {h^y}\right) e+\frac{\partial^2 \hat{V}^\ell}{\partial y \partial y'} \frac{|\varsigma|^2}{2} e^2 \\
+   & 0=\max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1}}{\exp (\hat{v}^\ell)} \right)^{1-\rho}-1\right] \\
+   & +\frac{\partial \hat{v}^\ell}{\partial \hat{k}}\left[\mu_k+\frac{i^k}{k}-\frac{\kappa}{2} \left(\frac{i^k}{k}\right)^2-\frac{\left|\sigma_k\right|^2}{2}+\sigma_k {h^k}\right]+\frac{\partial^2 \hat{v}^\ell }{\partial  \hat{k} \partial  \hat{k}'} \frac{\left|\sigma_k\right|^2}{2} \\
+   & +\frac{\partial \hat{v}^\ell}{\partial \hat{y}}\left(  \bar{\theta}+\varsigma {h^y}\right) e+\frac{\partial^2 \hat{v}^\ell}{\partial y \partial y'} \frac{|\varsigma|^2}{2} e^2 \\
    & -\left(\left[\lambda_1+\lambda_2 y+\lambda_3(y-\bar{y})\right]\left( \bar{\theta}+\varsigma {h^y}\right) e+\left(\lambda_2+\lambda_3\right) \frac{|\varsigma|^2}{2} e^2\right) \\
-   & +\frac{\partial \hat{V}^\ell}{\partial \hat{r} }\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 \hat{V}^\ell}{\partial \hat{r} \partial \hat{r}'}\frac{\left|\sigma_r\right|^2}{2} \\
-   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  g \left(\hat{V}^{\ell,L}-\hat{V}^\ell \right) \\
+   & +\frac{\partial \hat{v}^\ell}{\partial \hat{r} }\left(-\zeta+\psi_0\left(i^r\right)^{\psi_1} \exp \left(-\psi_1 \log r\right)-\frac{\left|\sigma_r\right|^2}{2}+\sigma_r {h^r}\right)+\frac{\partial^2 \hat{v}^\ell}{\partial \hat{r} \partial \hat{r}'}\frac{\left|\sigma_r\right|^2}{2} \\
+   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  g \left(\hat{v}^{\ell,L}-\hat{v}^\ell \right) \\
    & +\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}  \\
    &
    \end{align*}
 
 If :math:`\rho =1`, the first term of the HJB becomes
 
-.. math:: \delta \log ( \alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1} )  -   \delta \hat{V}^\ell
+.. math:: \delta \log ( \alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1} )  -   \delta \hat{v}^\ell
 
 1.1.4 Pre-tech-pre-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute :math:`V(x)` prior to any jumps occurring. This value function
-has two possible types of jumps, either a technology jump or a damage
-curvature jump. The continuation value for the technology jump is
-:math:`V^L(x)`, and the potential continuation values for the damage
-curvature jump are the set of :math:`V^{\ell}(x)` for
+Compute $:raw-latex:`\hat{v}` $ prior to any jumps occurring. This value
+function has two possible types of jumps, either a technology jump or a
+damage curvature jump. The continuation value for the technology jump is
+$:raw-latex:`\hat{v}`^L $, and the potential continuation values for the
+damage curvature jump are the set of
+$:raw-latex:`\hat{v}`^{:raw-latex:`\ell`} $ for
 :math:`\ell = 1,..., L-1.`
 
 .. math::
 
    \begin{align*}
-       X &= \{ k, y,r,n \}\\
+       x &= \{ k, y,r,n \}\\
        \Phi &= \{  i^k, i^r, e \}\\
        \Gamma &= \{{h^k}, {h^y}, {h^r}, g, f\}
    \end{align*}
@@ -191,13 +199,13 @@ common terms,
 .. math::
 
    \begin{align*}
-   0  = & \max_{i^k, i^r, e} \, \min_{h, g^{\ell}} \, \frac{\delta}{1-\rho} \left(\left(\frac{\alpha k-i^{k}-i^{r}-\alpha k \phi_0 \left(1-\frac{e}{\beta \alpha k}\right)^{\phi_1}}{\exp(\hat{V})} \right)^{1-\rho}-1 \right) \\
-   & + \frac{\partial \hat{V}}{\partial \hat{k}} \left( -\mu_{k}+ \frac{i^{k}}{k}-\frac{\kappa}{2}\left(\frac{I^{k}}{k}\right)^{2}-\frac{|\sigma_{k}|^{2}}{2} + \sigma_k h^k \right) +  \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}\frac{|\sigma_{k}|^{2}}{2} \\
-   & + \frac{\partial \hat{V}}{\partial y} e \left( \bar{\theta}+\varsigma h^y \right) + \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}\frac{|\varsigma|^{2}}{2}e^{2}  - \left( (\lambda_{1}+\lambda_{2}y) e \left( \bar{\theta}+\varsigma h^y \right) +\lambda_{2}\frac{|\varsigma|^{2}}{2}e^{2} \right) \\
-   & + \frac{\partial \hat{V}}{\partial \hat{r}} \left( -\zeta + \psi_{0}(i^{r})^{\psi_{1}}\exp( -\psi_{1} \hat{r})-\frac{|\sigma_{r}|^{2}}{2}+\sigma_{r} h^r \right) +\frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'}\frac{|\sigma_{r}|^{2}}{2} \\
-   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  \cdot g  \cdot \left(\hat{V}^L -\hat{V}\right) \\
+   0  = & \max_{i^k, i^r, e} \, \min_{{h^k}, {h^y}, {h^r}, g, f} \, \frac{\delta}{1-\rho} \left(\left(\frac{\alpha k-i^{k}-i^{r}-\alpha k \phi_0 \left(1-\frac{e}{\beta \alpha k}\right)^{\phi_1}}{\exp(\hat{v})} \right)^{1-\rho}-1 \right) \\
+   & + \frac{\partial \hat{v}}{\partial \hat{k}} \left( -\mu_{k}+ \frac{i^{k}}{k}-\frac{\kappa}{2}\left(\frac{I^{k}}{k}\right)^{2}-\frac{|\sigma_{k}|^{2}}{2} + \sigma_k h^k \right) +  \frac{\partial^2 \hat{v}}{\partial \hat{k} \, \partial \hat{k}'}\frac{|\sigma_{k}|^{2}}{2} \\
+   & + \frac{\partial \hat{v}}{\partial y} e \left( \bar{\theta}+\varsigma h^y \right) + \frac{\partial^2 \hat{v}}{\partial y \, \partial y'}\frac{|\varsigma|^{2}}{2}e^{2}  - \left( (\lambda_{1}+\lambda_{2}y) e \left( \bar{\theta}+\varsigma h^y \right) +\lambda_{2}\frac{|\varsigma|^{2}}{2}e^{2} \right) \\
+   & + \frac{\partial \hat{v}}{\partial \hat{r}} \left( -\zeta + \psi_{0}(i^{r})^{\psi_{1}}\exp( -\psi_{1} \hat{r})-\frac{|\sigma_{r}|^{2}}{2}+\sigma_{r} h^r \right) +\frac{\partial^2 \hat{v}}{\partial \hat{r} \, \partial \hat{r}'}\frac{|\sigma_{r}|^{2}}{2} \\
+   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  \cdot g  \cdot \left(\hat{v}^L -\hat{v}\right) \\
    &+\xi^d \mathcal{J}_n  \sum_{\ell} \pi^\ell  (1-f^\ell +f^\ell  \log f^\ell ) \\
-   &+\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell \cdot \left(\hat{V}^\ell-\hat{V}\right) \\
+   &+\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell \cdot \left(\hat{v}^\ell-\hat{v}\right) \\
    &+\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}
    \end{align*}
 
@@ -303,7 +311,7 @@ The Cobweb algorithm works by:
 For example, we update for :math:`i_k` for pre damage pre technology
 HJB, using the first-order condition:
 
-.. math:: \delta \left( \frac{\alpha k - i_k - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(\hat{v})} \right)^{-\rho} \frac{1}{\exp(\hat{v})} = \frac{\partial v}{\partial \log k} \left(1 - \kappa i_k\right)
+.. math:: \delta \left( \frac{\alpha k - i_k - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(\hat{v})} \right)^{-\rho} \frac{1}{\exp(\hat{v})} = \frac{\partial \hat{v}}{\partial \log k} \left(1 - \kappa i_k\right)
 
 Since this equation is highly non-linear and does not admit an
 analytical solution, we use the
@@ -314,29 +322,28 @@ algorithm to iteratively update the actions. For each iteration
 .. math::
 
    \begin{align}  
-   \hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(\hat{v})} \right)^{-\rho} \frac{1}{\exp(\hat{v})} \frac{1}{\frac{\partial v}{\partial \log k}}  \end{align}
+   \hat{i}_k^{n+1} = \frac{1}{\kappa}-\frac{1}{\kappa}\delta \left( \frac{\alpha k - i_k^n - i_j - \alpha k \phi_0(z) \left[1 - \frac{\mathcal{E}}{\beta_t \alpha k}\right]^{\phi_1}}{\exp(\hat{v})} \right)^{-\rho} \frac{1}{\exp(\hat{v})} \frac{1}{\frac{\partial \hat{v}}{\partial \log k}}  \end{align}
 
 The updated
 `action <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L250>`__
-:math:`i_k^{n+1}` is computed using a relaxation parameter
-:math:`\zeta`:
+:math:`i_k^{n+1}` is computed using a relaxation parameter :math:`\chi`:
 
-.. math:: i_k^{n+1} = \zeta i_k^n + (1 - \zeta) \hat{i}_k^{n+1}
+.. math:: i_k^{n+1} = \chi i_k^n + (1 - \chi) \hat{i}_k^{n+1}
 
-1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(V^n,\Phi^{n+1},\Gamma^{n} )`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.3 Updating Rules :math:`\Gamma^{n+1} = \Gamma(\hat{v}^n,\Phi^{n+1},\Gamma^{n} )`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Every distortion has analytical solution. For example, we solve for
 :math:`h_k`, and the same logic applies to :math:`h_y, h_j, g, f_l`. The
 first-order condition for :math:`h_k` is:
 
-.. math:: \frac{\partial v}{\partial \log k} \sigma_k = - \xi_k h_k
+.. math:: \frac{\partial \hat{v}}{\partial \log k} \sigma_k = - \xi_k h_k
 
 Given the value function :math:`v^n`, we
 `update <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/python/src/PreSolver_CRS2_new.py#L282>`__
 the distortion :math:`h_k^{n+1}` as follows:
 
-.. math:: h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial v^n}{\partial \log k} \sigma_k
+.. math:: h_k^{n+1} = - \frac{1}{\xi_k} \frac{\partial \hat{v}^n}{\partial \log k} \sigma_k
 
 1.2.4 Solve Linear PDE Equation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -353,18 +360,18 @@ write the HJB into the form:
 
 .. math::
 
-   A \hat{V} 
-   +B_{\hat{k}}  \frac{\partial \hat{V}}{\partial \hat{k}}
-   +B_{y}\frac{\partial \hat{V}}{\partial y}
-   +B_{\hat{r}} \frac{\partial \hat{V}}{\partial \hat{r}} 
-   +C_{\hat{k}} \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}
-   +C_{y} \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}
-   +C_{\hat{r}} \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} 
+   A \hat{v} 
+   +B_{\hat{k}}  \frac{\partial \hat{v}}{\partial \hat{k}}
+   +B_{y}\frac{\partial \hat{v}}{\partial y}
+   +B_{\hat{r}} \frac{\partial \hat{v}}{\partial \hat{r}} 
+   +C_{\hat{k}} \frac{\partial^2 \hat{v}}{\partial \hat{k} \, \partial \hat{k}'}
+   +C_{y} \frac{\partial^2 \hat{v}}{\partial y \, \partial y'}
+   +C_{\hat{r}} \frac{\partial^2 \hat{v}}{\partial \hat{r} \, \partial \hat{r}'} 
    +D =0
 
 First and Second order partial derivatives
 
-.. math:: \left\{\frac{\partial \hat{V}}{\partial \hat{k}},\frac{\partial \hat{V}}{\partial y}, \frac{\partial \hat{V}}{\partial \hat{r}}\right\}, \quad, \left\{ \frac{\partial^2 \hat{V}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{V}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{V}}{\partial \hat{r} \, \partial \hat{r}'} \right\}
+.. math:: \left\{\frac{\partial \hat{v}}{\partial \hat{k}},\frac{\partial \hat{v}}{\partial y}, \frac{\partial \hat{v}}{\partial \hat{r}}\right\}, \quad, \left\{ \frac{\partial^2 \hat{v}}{\partial \hat{k} \, \partial \hat{k}'}, \frac{\partial^2 \hat{v}}{\partial y \, \partial y'}, \frac{\partial^2 \hat{v}}{\partial \hat{r} \, \partial \hat{r}'} \right\}
 
 The coefficient before Value function:
 
@@ -385,11 +392,11 @@ Coefficient of second order partial derivatives:
 .. math::
 
    \begin{align*}
-   D = &  \frac{\delta}{1-\rho} \left(\left(\frac{\alpha k-i^{k}-i^{r}-\alpha k \phi_0 \left(1-\frac{e}{\beta \alpha k}\right)^{\phi_1}}{\exp(\hat{V})} \right)^{1-\rho}-1 \right)  \\
+   D = &  \frac{\delta}{1-\rho} \left(\left(\frac{\alpha k-i^{k}-i^{r}-\alpha k \phi_0 \left(1-\frac{e}{\beta \alpha k}\right)^{\phi_1}}{\exp(\hat{v})} \right)^{1-\rho}-1 \right)  \\
    &   - \left( (\lambda_{1}+\lambda_{2}y) e \left( \bar{\theta}+\varsigma h^y \right) +\lambda_{2}\frac{|\varsigma|^{2}}{2}e^{2} \right) \\
-   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  \cdot g  \cdot \hat{V}^L  \\
+   & +\xi^g \mathcal{J}_g (1-g +g  \log g )+\mathcal{J}_g  \cdot g  \cdot \hat{v}^L  \\
    &+\xi^d \mathcal{J}_n  \sum_{\ell} \pi^\ell  (1-f^\ell +f^\ell  \log f^\ell ) \\
-   &+\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell \cdot \hat{V}^\ell \\
+   &+\mathcal{J}_n \sum_{\ell  } \pi^\ell  f^\ell \cdot \hat{v}^\ell \\
    &+\xi^k \frac{\left|{h^k}\right|^2}{2}+\xi^c \frac{\left|{h^y}\right|^2}{2}+\xi^r \frac{\left|{h^r}\right|^2}{2}
    \end{align*}
 
