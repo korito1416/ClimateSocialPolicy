@@ -1161,11 +1161,14 @@ def Distorted_total_prob():
     # Define the relative paths to the CSV files
     file_path_1 = './data/figure6_phi00.1_rho1.0.csv'
     file_path_2 = './data/figure6_phi00.5_rho1.0.csv'
+    file_path_3 = './data/figure6_phi00.1_rho1.5.csv'
+    file_path_4 = './data/figure6_phi00.5_rho1.5.csv'
 
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
- 
+    data_3 = pd.read_csv(file_path_3)
+    data_4 = pd.read_csv(file_path_4)
 
 
     # Create a figure to hold both datasets
@@ -1186,16 +1189,39 @@ def Distorted_total_prob():
                             line=dict(width=4), visible=False))
     fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['neutrality'], mode='lines', name='Neutrality', 
                             line=dict(width=4), visible=False))
+    
+    # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4)))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4)))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4)))
 
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4), visible=False))
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Jump Probability"}]),
+        dict(label="φ₀ = 0.5,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}])
     ]
 
@@ -1204,7 +1230,6 @@ def Distorted_total_prob():
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
         title="Distorted Jump Probability",
         xaxis_title="Time",
-        yaxis_title="Values",
         xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker x-axis line
         yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
@@ -1218,10 +1243,13 @@ def Distorted_tech_jump_prob():
     # Define the relative paths to the CSV files
     file_path_1 = './data/figure7b_phi00.1_rho1.0.csv'
     file_path_2 = './data/figure7b_phi00.5_rho1.0.csv'
-
+    file_path_3 = './data/figure7b_phi00.1_rho1.5.csv'
+    file_path_4 = './data/figure7b_phi00.5_rho1.5.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
+    data_3 = pd.read_csv(file_path_3)
+    data_4 = pd.read_csv(file_path_4)
  
 
 
@@ -1243,16 +1271,37 @@ def Distorted_tech_jump_prob():
                             line=dict(width=4), visible=False))
     fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['neutrality'], mode='lines', name='Neutrality', 
                             line=dict(width=4), visible=False))
-
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4), visible=False))    
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4), visible=False))
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Technology Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Technology Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Technology Jump Probability"}]),
+        dict(label="φ₀ = 0.5,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}])
     ]
 
@@ -1261,7 +1310,6 @@ def Distorted_tech_jump_prob():
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
         title="Distorted Technology Jump Probability",
         xaxis_title="Time",
-        yaxis_title="Values",
         xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker x-axis line
         yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
@@ -1276,11 +1324,13 @@ def Distorted_damage_jump_prob():
     # Define the relative paths to the CSV files
     file_path_1 = './data/figure7a_phi00.1_rho1.0.csv'
     file_path_2 = './data/figure7a_phi00.5_rho1.0.csv'
-
+    file_path_3 = './data/figure7a_phi00.1_rho1.5.csv'
+    file_path_4 = './data/figure7a_phi00.5_rho1.5.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
- 
+    data_3 = pd.read_csv(file_path_3)
+    data_4 = pd.read_csv(file_path_4)
 
 
     # Create a figure to hold both datasets
@@ -1301,17 +1351,40 @@ def Distorted_damage_jump_prob():
                             line=dict(width=4), visible=False))
     fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['neutrality'], mode='lines', name='Neutrality ', 
                             line=dict(width=4), visible=False))
+    # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4)))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4)))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4)))
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4), visible=False))
 
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True]},  # Show traces from dataset 2
-                {"title": "Distorted Damage Jump Probability"}])
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=1.5",
+            method="update",
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),        
+        dict(label="φ₀ = 0.5,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
     ]
 
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
@@ -1319,7 +1392,6 @@ def Distorted_damage_jump_prob():
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
         title="Distorted Damage Jump Probability",
         xaxis_title="Time",
-        yaxis_title="Values",
         xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker x-axis line
         yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
