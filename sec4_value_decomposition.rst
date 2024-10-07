@@ -125,21 +125,10 @@ shows how we code it. Now we have every element in value decomposition.
 We also consider four different configurations of uncertainty aversion
 as a way to assess the different economic forces in play:
 
--  
-
-   a. pre-jump neutrality - post-jump neutrality;
-
--  
-
-   b. pre-jump neutrality - post-jump aversion;
-
--  
-
-   c. pre-jump aversion - post-jump neutrality;
-
--  
-
-   d. pre-jump aversion - post-jump aversion.
+-  pre-jump neutrality - post-jump neutrality;
+-  pre-jump neutrality - post-jump aversion;
+-  pre-jump aversion - post-jump neutrality;
+-  pre-jump aversion - post-jump aversion.
 
 `FeymannKacs_simulate_NewPlug.sh <https://github.com/korito1416/two-capital-climate-change/blob/306b1c5ee51eb6ad24e6267fe0d2b82ad5286e98/conduction/FeymannKacs_simulate_NewPlug.sh#L23>`__
 controls different :math:`\xi` for different channels.
