@@ -26,10 +26,10 @@
    \end{align*}
 
 :math:`k_t` is a potential realization of :math:`K_t`, and
-:math:`\hat{k_t}` is :math:`\log k_t`. Similarly, :math:`n_t` is a
-potential realization of :math:`N_t`, and :math:`\hat{n_t}` is
+:math:`\hat{k}_t` is :math:`\log k_t`. Similarly, :math:`n_t` is a
+potential realization of :math:`N_t`, and :math:`\hat{n}_t` is
 :math:`\log n_t`; :math:`r_t` is a potential realization of :math:`R_t`,
-and :math:`\hat{r_t}` is :math:`\log r_t`.
+and :math:`\hat{r}_t` is :math:`\log r_t`.
 
 **Controls**
 
@@ -82,12 +82,11 @@ space become
        \Gamma &= \{h^k\}
    \end{align*}
 
-Compute $:raw-latex:`\hat{v}`^{:raw-latex:`\ell`,L} $ for
-:math:`\ell = 1, ..., L-1` conditioned on both a technology jump and a
-damage jump occurring,by solving HJB equation
+Compute :math:`\hat{v}^{\ell,L}` for :math:`\ell = 1, ..., L-1`
+conditioned on both a technology jump and a damage jump occurring,by
+solving HJB equation
 
 .. math::
-
 
    \begin{align*}
    0= & \max_{i^k}\min_{{h^k}} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k}{\exp (\hat{v}^{\ell,L})} \right)^{1-\rho}-1\right] \\
@@ -135,14 +134,13 @@ We have HJB for post technology and post damage jump as follows
 1.1.3 Pre Technology and Post Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the values functions $:raw-latex:`\hat{v}`^{:raw-latex:`\ell`} $
-assuming that only a damage jump has been realized for
-:math:`\ell = 1,..., L-1.` These values functions depend on the entire
-state vector :math:`X` and have one possible jump state which is the
-technology discovery with intensity :math:`{\mathcal J}^L.` The
-continuation value for the jump is
-$:raw-latex:`\hat{v}`^{:raw-latex:`\ell`,L} $ viewed as a function of
-:math:`x` for :math:`\ell=1,...,L-1.`
+Compute the values functions :math:`\hat{v}^{\ell}` assuming that only a
+damage jump has been realized for :math:`\ell = 1,..., L-1.` These
+values functions depend on the entire state vector :math:`X` and have
+one possible jump state which is the technology discovery with intensity
+:math:`{\mathcal J}^L`. The continuation value for the jump is
+:math:`\hat{v}^{\ell,L}` viewed as a function of :math:`x` for
+:math:`\ell=1,...,L-1.`
 
 .. math::
 
@@ -177,12 +175,11 @@ If :math:`\rho =1`, the first term of the HJB becomes
 1.1.4 Pre-tech-pre-damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute $:raw-latex:`\hat{v}` $ prior to any jumps occurring. This value
+Compute :math:`\hat{v}` prior to any jumps occurring. This value
 function has two possible types of jumps, either a technology jump or a
 damage curvature jump. The continuation value for the technology jump is
-$:raw-latex:`\hat{v}`^L $, and the potential continuation values for the
-damage curvature jump are the set of
-$:raw-latex:`\hat{v}`^{:raw-latex:`\ell`} $ for
+:math:`\hat{v}^L`, and the potential continuation values for the damage
+curvature jump are the set of :math:`\hat{v}^{\ell}` for
 :math:`\ell = 1,..., L-1.`
 
 .. math::
