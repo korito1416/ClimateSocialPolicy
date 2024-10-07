@@ -1243,7 +1243,7 @@ def Distorted_total_prob():
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
         title="Distorted Jump Probability",
         xaxis_title="Time",
-        xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker x-axis line
+        xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False, range=[0, 60]),  # Thicker x-axis line
         yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
     )
@@ -1336,7 +1336,7 @@ def Distorted_tech_jump_prob():
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
         title="Distorted Technology Jump Probability",
         xaxis_title="Time",
-        xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker x-axis line
+        xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False, range=[0, 60]),  # Thicker x-axis line
         yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
     )
@@ -1429,7 +1429,7 @@ def Distorted_damage_jump_prob():
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
         title="Distorted Damage Jump Probability",
         xaxis_title="Time",
-        xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker x-axis line
+        xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False, range=[0, 60]),  # Thicker x-axis line
         yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
     )
