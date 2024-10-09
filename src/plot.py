@@ -1232,7 +1232,7 @@ def Distorted_total_prob():
             method="update",
             args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}]),
-        dict(label="φ₀ = 0.1,  ρ=0.6",
+        dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
             args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}])
@@ -1325,7 +1325,7 @@ def Distorted_tech_jump_prob():
             method="update",
             args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}]),
-        dict(label="φ₀ = 0.1,  ρ=0.6",
+        dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
             args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}])
@@ -1418,7 +1418,7 @@ def Distorted_damage_jump_prob():
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),
-        dict(label="φ₀ = 0.1,  ρ=0.6",
+        dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),
@@ -1444,10 +1444,17 @@ def Distorted_damage_jump_prob():
 
 def Optimal_Control_Capital():
     # Define the relative paths to the CSV files
-    file_path_1 = './data/CapitalInvestment_phi00.5_rho1.0.csv'
- 
+    file_path_1 = './data/CapitalInvestment_phi00.1_rho1.0.csv'
+    file_path_2 = './data/CapitalInvestment_phi00.5_rho1.0.csv'
+    file_path_3 = './data/CapitalInvestment_phi00.1_rho1.5.csv'
+    file_path_4 = './data/CapitalInvestment_phi00.5_rho1.5.csv'
+    file_path_5 = './data/CapitalInvestment_phi00.1_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
+    data_2 = pd.read_csv(file_path_2)
+    data_3 = pd.read_csv(file_path_3)
+    data_4 = pd.read_csv(file_path_4)
+    data_5 = pd.read_csv(file_path_5)
  
     # Create a figure to hold both datasets
     fig = go.Figure()
@@ -1459,12 +1466,58 @@ def Optimal_Control_Capital():
                             line=dict(width=4, color='red')))
     fig.add_trace(go.Scatter(x=data_1['time'], y=data_1['neutrality'], mode='lines', name='Neutrality', 
                             line=dict(width=4, color='green')))
- 
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4, color='blue')))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4, color='red')))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4, color='green')))
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Create buttons to toggle between the datasets
     buttons = [
+        dict(label="φ₀ = 0.1,  ρ=1",
+            method="update",
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True,  ]},  # Show traces from dataset 1
-                {"title": "Simulated Expected Pathways of Capital Investment"}]) 
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=1.5",
+            method="update",
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),        
+        dict(label="φ₀ = 0.5,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
     ]
 
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
@@ -1484,10 +1537,18 @@ def Optimal_Control_Capital():
 
 def Optimal_Control_Emission():
     # Define the relative paths to the CSV files
-    file_path_1 = './data/Emissions_phi00.5_rho1.0.csv'
  
+    file_path_1 = './data/Emissions_phi00.1_rho1.0.csv'
+    file_path_2 = './data/Emissions_phi00.5_rho1.0.csv'
+    file_path_3 = './data/Emissions_phi00.1_rho1.5.csv'
+    file_path_4 = './data/Emissions_phi00.5_rho1.5.csv'
+    file_path_5 = './data/Emissions_phi00.1_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
+    data_2 = pd.read_csv(file_path_2)
+    data_3 = pd.read_csv(file_path_3)
+    data_4 = pd.read_csv(file_path_4)
+    data_5 = pd.read_csv(file_path_5)
  
     # Create a figure to hold both datasets
     fig = go.Figure()
@@ -1499,12 +1560,58 @@ def Optimal_Control_Emission():
                             line=dict(width=4, color='red')))
     fig.add_trace(go.Scatter(x=data_1['time'], y=data_1['neutrality'], mode='lines', name='Neutrality', 
                             line=dict(width=4, color='green')))
- 
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4, color='blue')))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4, color='red')))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4, color='green')))
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Create buttons to toggle between the datasets
     buttons = [
+        dict(label="φ₀ = 0.1,  ρ=1",
+            method="update",
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True,  ]},  # Show traces from dataset 1
-                {"title": "Simulated Expected Pathways of Emissions"}]) 
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=1.5",
+            method="update",
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),        
+        dict(label="φ₀ = 0.5,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
     ]
 
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
@@ -1524,11 +1631,18 @@ def Optimal_Control_Emission():
 
 def Optimal_Control_RD():
     # Define the relative paths to the CSV files
-    file_path_1 = './data/RD_phi00.5_rho1.0.csv'
  
+    file_path_1 = './data/RD_phi00.1_rho1.0.csv'
+    file_path_2 = './data/RD_phi00.5_rho1.0.csv'
+    file_path_3 = './data/RD_phi00.1_rho1.5.csv'
+    file_path_4 = './data/RD_phi00.5_rho1.5.csv'
+    file_path_5 = './data/RD_phi00.1_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
- 
+    data_2 = pd.read_csv(file_path_2)
+    data_3 = pd.read_csv(file_path_3)
+    data_4 = pd.read_csv(file_path_4)
+    data_5 = pd.read_csv(file_path_5)
     # Create a figure to hold both datasets
     fig = go.Figure()
 
@@ -1539,14 +1653,59 @@ def Optimal_Control_RD():
                             line=dict(width=4, color='red')))
     fig.add_trace(go.Scatter(x=data_1['time'], y=data_1['neutrality'], mode='lines', name='Neutrality', 
                             line=dict(width=4, color='green')))
- 
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_2['time'], y=data_2['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4, color='blue')))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4, color='red')))
+    fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4, color='green')))
+
+    # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Create buttons to toggle between the datasets
     buttons = [
+        dict(label="φ₀ = 0.1,  ρ=1",
+            method="update",
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True,  ]},  # Show traces from dataset 1
-                {"title": "Simulated Expected Pathways of R&D Investment"}]) 
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=1.5",
+            method="update",
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),        
+        dict(label="φ₀ = 0.5,  ρ=1.5",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.1,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
     ]
-
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
     fig.update_layout(
         updatemenus=[dict(type="buttons", buttons=buttons, direction="down", x=1.15, y=0.5)],  # Buttons on the right side
