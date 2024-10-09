@@ -1501,23 +1501,23 @@ def Optimal_Control_Capital():
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
             args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Capital Investment"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
             args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Capital Investment"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
             args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),        
+                {"title": "Expected Pathways for The Optimal Capital Investment"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Capital Investment"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Capital Investment"}]),
     ]
 
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
@@ -1595,23 +1595,23 @@ def Optimal_Control_Emission():
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
             args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Emission"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
             args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Emission"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
             args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),        
+                {"title": "Expected Pathways for The Optimal Emission"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Emission"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal Emission"}]),
     ]
 
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
@@ -1688,23 +1688,23 @@ def Optimal_Control_RD():
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
             args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal R&D"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
             args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal R&D"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
             args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),        
+                {"title": "Expected Pathways for The Optimal R&D"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal R&D"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
             args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
-                {"title": "Distorted Damage Jump Probability"}]),
+                {"title": "Expected Pathways for The Optimal R&D"}]),
     ]
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
     fig.update_layout(
