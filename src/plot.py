@@ -1195,11 +1195,11 @@ def Distorted_total_prob():
     
     # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
-                            line=dict(width=4, color='blue')))
+                            line=dict(width=4, color='blue'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
-                            line=dict(width=4, color='red')))
+                            line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
-                            line=dict(width=4, color='green')))
+                            line=dict(width=4, color='green'), visible=False))
 
     # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
     fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion', 
@@ -1409,11 +1409,11 @@ def Distorted_damage_jump_prob():
                             line=dict(width=4, color='green'), visible=False))
     # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
-                            line=dict(width=4, color='blue')))
+                            line=dict(width=4, color='blue'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
-                            line=dict(width=4, color='red')))
+                            line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
-                            line=dict(width=4, color='green')))
+                            line=dict(width=4, color='green'), visible=False))
 
     # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
     fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
@@ -1519,11 +1519,11 @@ def Optimal_Control_Capital():
                             line=dict(width=4, color='green'), visible=False))
     # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
-                            line=dict(width=4, color='blue')))
+                            line=dict(width=4, color='blue'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
-                            line=dict(width=4, color='red')))
+                            line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
-                            line=dict(width=4, color='green')))
+                            line=dict(width=4, color='green'), visible=False))
 
     # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
     fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
@@ -1625,11 +1625,11 @@ def Optimal_Control_Emission():
                             line=dict(width=4, color='green'), visible=False))
     # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
-                            line=dict(width=4, color='blue')))
+                            line=dict(width=4, color='blue'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
-                            line=dict(width=4, color='red')))
+                            line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
-                            line=dict(width=4, color='green')))
+                            line=dict(width=4, color='green'), visible=False))
 
     # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
     fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
@@ -1686,7 +1686,7 @@ def Optimal_Control_Emission():
         title="Simulated Expected Pathways of Emissions",
         xaxis_title="Time",
         xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False, range=[0, 30]),  # Thicker x-axis line
-        yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False,range=[0, 20]),  # Thicker y-axis line
+        yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False,),  # Thicker y-axis line
         plot_bgcolor="white"
     )
 
@@ -1731,11 +1731,11 @@ def Optimal_Control_RD():
                             line=dict(width=4, color='green'), visible=False))
     # Add traces for the first dataset (Abatement Cost φ₀ = 0.1) with wider lines
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['more aversion'], mode='lines', name='More Aversion', 
-                            line=dict(width=4, color='blue')))
+                            line=dict(width=4, color='blue'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['less aversion'], mode='lines', name='Less Aversion', 
-                            line=dict(width=4, color='red')))
+                            line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_3['time'], y=data_3['neutrality'], mode='lines', name='Neutrality', 
-                            line=dict(width=4, color='green')))
+                            line=dict(width=4, color='green'), visible=False))
 
     # Add traces for the second dataset (Abatement Cost φ₀ = 0.5) with wider lines, initially hidden
     fig.add_trace(go.Scatter(x=data_4['time'], y=data_4['more aversion'], mode='lines', name='More Aversion ', 
@@ -1791,7 +1791,7 @@ def Optimal_Control_RD():
         title="Simulated Expected Pathways of R&D Investment",
         xaxis_title="Time",
         xaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False, range=[0, 30]),  # Thicker x-axis line
-        yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False,range=[0, 5]),  # Thicker y-axis line
+        yaxis=dict(showline=True, linewidth=3, showgrid=True, zeroline=False),  # Thicker y-axis line
         plot_bgcolor="white"
     )
 
