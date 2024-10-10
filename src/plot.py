@@ -1164,6 +1164,7 @@ def Distorted_total_prob():
     file_path_3 = './data/figure6_phi00.1_rho1.5.csv'
     file_path_4 = './data/figure6_phi00.5_rho1.5.csv'
     file_path_5 = './data/figure6_phi00.1_rho0.66.csv'
+    file_path_6 = './data/figure6_phi00.5_rho0.66.csv'
 
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
@@ -1171,6 +1172,7 @@ def Distorted_total_prob():
     data_3 = pd.read_csv(file_path_3)
     data_4 = pd.read_csv(file_path_4)
     data_5 = pd.read_csv(file_path_5)
+    data_6 = pd.read_csv(file_path_6)
 
     # Create a figure to hold both datasets
     fig = go.Figure()
@@ -1215,26 +1217,39 @@ def Distorted_total_prob():
                             line=dict(width=4, color='green'), visible=False))
     # Create buttons to toggle between the datasets
     
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4, color='green'), visible=False))
+    # Create buttons to toggle between the datasets
+    
+    
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False, False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
-            args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Jump Probability"}]),
+        dict(label="φ₀ = 0.5,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
                 {"title": "Distorted Jump Probability"}])
     ]
 
@@ -1259,12 +1274,14 @@ def Distorted_tech_jump_prob():
     file_path_3 = './data/figure7b_phi00.1_rho1.5.csv'
     file_path_4 = './data/figure7b_phi00.5_rho1.5.csv'
     file_path_5 = './data/figure7b_phi00.1_rho0.66.csv'
+    file_path_6 = './data/figure7b_phi00.5_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
     data_3 = pd.read_csv(file_path_3)
     data_4 = pd.read_csv(file_path_4)
     data_5 = pd.read_csv(file_path_5)
+    data_6 = pd.read_csv(file_path_6)
  
 
 
@@ -1307,27 +1324,37 @@ def Distorted_tech_jump_prob():
                             line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality', 
                             line=dict(width=4, color='green'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['more aversion'], mode='lines', name='More Aversion', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['less aversion'], mode='lines', name='Less Aversion', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['neutrality'], mode='lines', name='Neutrality', 
+                            line=dict(width=4, color='green'), visible=False))
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Technology Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False, False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
-            args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, True, True, True, False, False, False]},  # Show traces from dataset 2
+                {"title": "Distorted Technology Jump Probability"}]),
+        dict(label="φ₀ = 0.5,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, True, True, True]},  # Show traces from dataset 2
                 {"title": "Distorted Technology Jump Probability"}])
     ]
 
@@ -1353,12 +1380,14 @@ def Distorted_damage_jump_prob():
     file_path_3 = './data/figure7a_phi00.1_rho1.5.csv'
     file_path_4 = './data/figure7a_phi00.5_rho1.5.csv'
     file_path_5 = './data/figure7a_phi00.1_rho0.66.csv'
+    file_path_6 = './data/figure7a_phi00.5_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
     data_3 = pd.read_csv(file_path_3)
     data_4 = pd.read_csv(file_path_4)
     data_5 = pd.read_csv(file_path_5)
+    data_6 = pd.read_csv(file_path_6)
 
     # Create a figure to hold both datasets
     fig = go.Figure()
@@ -1400,27 +1429,39 @@ def Distorted_damage_jump_prob():
                             line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
                             line=dict(width=4, color='green'), visible=False))
+    
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
+    
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
-            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False , False, False, False]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+                {"title": "Distorted Damage Jump Probability"}]),
+        dict(label="φ₀ = 0.5,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
                 {"title": "Distorted Damage Jump Probability"}]),
     ]
 
@@ -1449,12 +1490,14 @@ def Optimal_Control_Capital():
     file_path_3 = './data/CapitalInvestment_phi00.1_rho1.5.csv'
     file_path_4 = './data/CapitalInvestment_phi00.5_rho1.5.csv'
     file_path_5 = './data/CapitalInvestment_phi00.1_rho0.66.csv'
+    file_path_6 = './data/CapitalInvestment_phi00.5_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
     data_3 = pd.read_csv(file_path_3)
     data_4 = pd.read_csv(file_path_4)
     data_5 = pd.read_csv(file_path_5)
+    data_6 = pd.read_csv(file_path_6)
  
     # Create a figure to hold both datasets
     fig = go.Figure()
@@ -1496,27 +1539,37 @@ def Optimal_Control_Capital():
                             line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
                             line=dict(width=4, color='green'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Capital Investment"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Expected Pathways for The Optimal Capital Investment"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
-            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Capital Investment"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False, False, False, False ]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Capital Investment"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+                {"title": "Expected Pathways for The Optimal Capital Investment"}]),
+        dict(label="φ₀ = 0.5,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Capital Investment"}]),
     ]
 
@@ -1543,12 +1596,14 @@ def Optimal_Control_Emission():
     file_path_3 = './data/Emissions_phi00.1_rho1.5.csv'
     file_path_4 = './data/Emissions_phi00.5_rho1.5.csv'
     file_path_5 = './data/Emissions_phi00.1_rho0.66.csv'
+    file_path_6  = './data/Emissions_phi00.5_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
     data_3 = pd.read_csv(file_path_3)
     data_4 = pd.read_csv(file_path_4)
     data_5 = pd.read_csv(file_path_5)
+    data_6 = pd.read_csv(file_path_6)
  
     # Create a figure to hold both datasets
     fig = go.Figure()
@@ -1590,27 +1645,38 @@ def Optimal_Control_Emission():
                             line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
                             line=dict(width=4, color='green'), visible=False))
+    
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Emission"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Expected Pathways for The Optimal Emission"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
-            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Emission"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False , False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Emission"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, False, False, False]},  # Show traces from dataset 1
+                {"title": "Expected Pathways for The Optimal Emission"}]),
+        dict(label="φ₀ = 0.5,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal Emission"}]),
     ]
 
@@ -1637,12 +1703,14 @@ def Optimal_Control_RD():
     file_path_3 = './data/RD_phi00.1_rho1.5.csv'
     file_path_4 = './data/RD_phi00.5_rho1.5.csv'
     file_path_5 = './data/RD_phi00.1_rho0.66.csv'
+    file_path_6 = './data/RD_phi00.5_rho0.66.csv'
     # Read the CSV files
     data_1 = pd.read_csv(file_path_1)
     data_2 = pd.read_csv(file_path_2)
     data_3 = pd.read_csv(file_path_3)
     data_4 = pd.read_csv(file_path_4)
     data_5 = pd.read_csv(file_path_5)
+    data_6 = pd.read_csv(file_path_6)
     # Create a figure to hold both datasets
     fig = go.Figure()
 
@@ -1683,27 +1751,38 @@ def Optimal_Control_RD():
                             line=dict(width=4, color='red'), visible=False))
     fig.add_trace(go.Scatter(x=data_5['time'], y=data_5['neutrality'], mode='lines', name='Neutrality ', 
                             line=dict(width=4, color='green'), visible=False))
+    
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['more aversion'], mode='lines', name='More Aversion ', 
+                            line=dict(width=4, color='blue'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['less aversion'], mode='lines', name='Less Aversion ', 
+                            line=dict(width=4, color='red'), visible=False))
+    fig.add_trace(go.Scatter(x=data_6['time'], y=data_6['neutrality'], mode='lines', name='Neutrality ', 
+                            line=dict(width=4, color='green'), visible=False))
     # Create buttons to toggle between the datasets
     buttons = [
         dict(label="φ₀ = 0.1,  ρ=1",
             method="update",
-            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal R&D"}]),
         dict(label="φ₀ = 0.5,  ρ=1",
             method="update",
-            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
+            args=[{"visible": [False, False, False, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 2
                 {"title": "Expected Pathways for The Optimal R&D"}]),
         dict(label="φ₀ = 0.1,  ρ=1.5",
             method="update",
-            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False]},  # Show traces from dataset 1
+            args=[{"visible": [ False, False, False, False, False, False,True, True, True, False, False, False, False, False, False, False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal R&D"}]),        
         dict(label="φ₀ = 0.5,  ρ=1.5",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False,True, True, True, False, False, False , False, False, False]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal R&D"}]),
         dict(label="φ₀ = 0.1,  ρ=0.66",
             method="update",
-            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False,True, True, True, False, False, False ]},  # Show traces from dataset 1
+                {"title": "Expected Pathways for The Optimal R&D"}]),
+        dict(label="φ₀ = 0.5,  ρ=0.66",
+            method="update",
+            args=[{"visible": [False, False, False,False, False, False,False, False, False, False, False, False, False, False, False,True, True, True, ]},  # Show traces from dataset 1
                 {"title": "Expected Pathways for The Optimal R&D"}]),
     ]
     # Add buttons to the layout (positioned to the right) and adjust axis and line width
