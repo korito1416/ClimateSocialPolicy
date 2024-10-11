@@ -101,9 +101,9 @@ If :math:`\rho =1`, the first term of the HJB becomes
 1.1.2 Post Technology and Pre Damage HJB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the value function $:raw-latex:`\hat{v}`^L $ assuming that only
-a technology jump has been realized. This value function incorporates
-the possibility of jumping to one of :math:`L-1` possible damage states,
+Compute the value function :math:`\hat{v}^L` assuming that only a
+technology jump has been realized. This value function incorporates the
+possibility of jumping to one of :math:`L-1` possible damage states,
 however, because the temperature anomaly remains constant at the point
 where any incremental curvature has no impact on the damages this damage
 curve realization is inconsequential. Therefore, we can ignore the
@@ -144,7 +144,6 @@ one possible jump state which is the technology discovery with intensity
 
 .. math::
 
-
    \begin{align*}
        x &= \{ \hat{k}, y, \hat{r}, \hat{n} \}\\
        \Phi &= \{  i^k, i^r, e \}\\
@@ -155,7 +154,6 @@ After plugging this simplification into our HJB equation and removing
 common terms, we are left with the following simplified HJB to solve:
 
 .. math::
-
 
    \begin{align*}
    & 0=\max_{i^k, i^r, e} \min_{{h^k}, {h^y}, {h^r}, g} \left(\frac{\delta}{1-\rho}\right)\left[\left(\frac{\alpha k -i^k-i^r-\alpha k \phi_0(z)\left[1-\frac{e}{\beta_t \alpha k }\right]^{\phi_1}}{\exp (\hat{v}^\ell)} \right)^{1-\rho}-1\right] \\
