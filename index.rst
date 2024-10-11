@@ -29,7 +29,6 @@ Check out our related work:
    sec2_distorted_probability.rst
    sec3_stochastic_simulation.rst
    sec4_value_decomposition.rst
-   Module.rst
 
 
    References <bib_file.rst>
